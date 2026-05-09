@@ -36,26 +36,26 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 ### Tests for Foundation
 
-- [ ] T004 [P] Write content validation tests for schema shape, 8 profiles, unique kebab-case slugs, sort order, pteranodon category, readable-unit limits, story length, and bilingual alt text in `StoryBook.Tests/Unit/DinosaurContentValidationTests.cs`
-- [ ] T005 [P] Write catalog service tests for JSON loading, ordering, slug lookup, unknown slug handling, field fallback behavior, logger calls, and cached lookup/search p95 under 200ms in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
-- [ ] T006 [P] Write language preference tests for `zh-TW`, `en`, invalid values, and `storybook.language` storage key behavior in `StoryBook.Tests/Unit/LanguagePreferenceServiceTests.cs`
-- [ ] T007 [P] Write integration test fixture using `WebApplicationFactory<Program>` and shared HTML helpers in `StoryBook.Tests/Integration/DinosaurPageTestFixture.cs`
+- [X] T004 [P] Write content validation tests for schema shape, 8 profiles, unique kebab-case slugs, sort order, pteranodon category, readable-unit limits, story length, and bilingual alt text in `StoryBook.Tests/Unit/DinosaurContentValidationTests.cs`
+- [X] T005 [P] Write catalog service tests for JSON loading, ordering, slug lookup, unknown slug handling, field fallback behavior, logger calls, and cached lookup/search p95 under 200ms in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
+- [X] T006 [P] Write language preference tests for `zh-TW`, `en`, invalid values, and `storybook.language` storage key behavior in `StoryBook.Tests/Unit/LanguagePreferenceServiceTests.cs`
+- [X] T007 [P] Write integration test fixture using `WebApplicationFactory<Program>` and shared HTML helpers in `StoryBook.Tests/Integration/DinosaurPageTestFixture.cs`
 
 ### Implementation for Foundation
 
-- [ ] T008 Create supported language enum and parsing helpers in `StoryBook/Models/LanguageCode.cs`
-- [ ] T009 Create localized text model with fallback accessors in `StoryBook/Models/DinosaurText.cs`
-- [ ] T010 Create illustration model with path, bilingual alt text, caption, and style tag fields in `StoryBook/Models/DinosaurIllustration.cs`
-- [ ] T011 Create dinosaur story model with title, body, and illustration fields in `StoryBook/Models/DinosaurStory.cs`
-- [ ] T012 Create dinosaur profile model with slug, category, sort order, localized facts, summary, main image, story, and keywords in `StoryBook/Models/DinosaurProfile.cs`
-- [ ] T013 Create catalog options for the JSON content path in `StoryBook/Services/DinosaurCatalogOptions.cs`
-- [ ] T014 Create content validation service for slug, language, readable-unit, pteranodon, story, image, and keyword rules in `StoryBook/Services/DinosaurContentValidator.cs`
-- [ ] T015 Create catalog service that loads `StoryBook/Data/dinosaurs.json`, validates content, caches sorted profiles, resolves slugs, searches fields, and logs validation failures, load failures, unknown slugs, and unexpected exceptions in `StoryBook/Services/DinosaurCatalogService.cs`
-- [ ] T016 Create language preference service with default `zh-TW`, supported-code parsing, and storage key metadata in `StoryBook/Services/LanguagePreferenceService.cs`
-- [ ] T017 Register catalog options, catalog service, validator, and language preference service in `StoryBook/Program.cs`
-- [ ] T018 Create complete bilingual catalog content for 暴龍、三角龍、劍龍、腕龍、迅猛龍、翼龍、甲龍、副櫛龍 in `StoryBook/Data/dinosaurs.json`
-- [ ] T019 Add child-friendly main illustration assets referenced by the catalog in `StoryBook/wwwroot/images/dinosaurs/tyrannosaurus-rex-main.png`, `StoryBook/wwwroot/images/dinosaurs/triceratops-main.png`, `StoryBook/wwwroot/images/dinosaurs/stegosaurus-main.png`, `StoryBook/wwwroot/images/dinosaurs/brachiosaurus-main.png`, `StoryBook/wwwroot/images/dinosaurs/velociraptor-main.png`, `StoryBook/wwwroot/images/dinosaurs/pteranodon-main.png`, `StoryBook/wwwroot/images/dinosaurs/ankylosaurus-main.png`, and `StoryBook/wwwroot/images/dinosaurs/parasaurolophus-main.png`
-- [ ] T020 Add child-friendly story illustration assets referenced by the catalog in `StoryBook/wwwroot/images/dinosaurs/tyrannosaurus-rex-story.png`, `StoryBook/wwwroot/images/dinosaurs/triceratops-story.png`, `StoryBook/wwwroot/images/dinosaurs/stegosaurus-story.png`, `StoryBook/wwwroot/images/dinosaurs/brachiosaurus-story.png`, `StoryBook/wwwroot/images/dinosaurs/velociraptor-story.png`, `StoryBook/wwwroot/images/dinosaurs/pteranodon-story.png`, `StoryBook/wwwroot/images/dinosaurs/ankylosaurus-story.png`, and `StoryBook/wwwroot/images/dinosaurs/parasaurolophus-story.png`
+- [X] T008 Create supported language enum and parsing helpers in `StoryBook/Models/LanguageCode.cs`
+- [X] T009 Create localized text model with fallback accessors in `StoryBook/Models/DinosaurText.cs`
+- [X] T010 Create illustration model with path, bilingual alt text, caption, and style tag fields in `StoryBook/Models/DinosaurIllustration.cs`
+- [X] T011 Create dinosaur story model with title, body, and illustration fields in `StoryBook/Models/DinosaurStory.cs`
+- [X] T012 Create dinosaur profile model with slug, category, sort order, localized facts, summary, main image, story, and keywords in `StoryBook/Models/DinosaurProfile.cs`
+- [X] T013 Create catalog options for the JSON content path in `StoryBook/Services/DinosaurCatalogOptions.cs`
+- [X] T014 Create content validation service for slug, language, readable-unit, pteranodon, story, image, and keyword rules in `StoryBook/Services/DinosaurContentValidator.cs`
+- [X] T015 Create catalog service that loads `StoryBook/Data/dinosaurs.json`, validates content, caches sorted profiles, resolves slugs, searches fields, and logs validation failures, load failures, unknown slugs, and unexpected exceptions in `StoryBook/Services/DinosaurCatalogService.cs`
+- [X] T016 Create language preference service with default `zh-TW`, supported-code parsing, and storage key metadata in `StoryBook/Services/LanguagePreferenceService.cs`
+- [X] T017 Register catalog options, catalog service, validator, and language preference service in `StoryBook/Program.cs`
+- [X] T018 Create complete bilingual catalog content for 暴龍、三角龍、劍龍、腕龍、迅猛龍、翼龍、甲龍、副櫛龍 in `StoryBook/Data/dinosaurs.json`
+- [X] T019 Add child-friendly main illustration assets referenced by the catalog in `StoryBook/wwwroot/images/dinosaurs/tyrannosaurus-rex-main.png`, `StoryBook/wwwroot/images/dinosaurs/triceratops-main.png`, `StoryBook/wwwroot/images/dinosaurs/stegosaurus-main.png`, `StoryBook/wwwroot/images/dinosaurs/brachiosaurus-main.png`, `StoryBook/wwwroot/images/dinosaurs/velociraptor-main.png`, `StoryBook/wwwroot/images/dinosaurs/pteranodon-main.png`, `StoryBook/wwwroot/images/dinosaurs/ankylosaurus-main.png`, and `StoryBook/wwwroot/images/dinosaurs/parasaurolophus-main.png`
+- [X] T020 Add child-friendly story illustration assets referenced by the catalog in `StoryBook/wwwroot/images/dinosaurs/tyrannosaurus-rex-story.png`, `StoryBook/wwwroot/images/dinosaurs/triceratops-story.png`, `StoryBook/wwwroot/images/dinosaurs/stegosaurus-story.png`, `StoryBook/wwwroot/images/dinosaurs/brachiosaurus-story.png`, `StoryBook/wwwroot/images/dinosaurs/velociraptor-story.png`, `StoryBook/wwwroot/images/dinosaurs/pteranodon-story.png`, `StoryBook/wwwroot/images/dinosaurs/ankylosaurus-story.png`, and `StoryBook/wwwroot/images/dinosaurs/parasaurolophus-story.png`
 
 **Checkpoint**: Foundation ready. `dotnet test StoryBook2.sln` should run and the foundational tests should pass before story work starts.
 

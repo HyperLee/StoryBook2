@@ -1,0 +1,569 @@
+{
+  "version": "1.0",
+  "profiles": [
+    {
+      "slug": "tyrannosaurus-rex",
+      "category": "dinosaur",
+      "sortOrder": 1,
+      "names": {
+        "zhTW": "暴龍",
+        "en": "Tyrannosaurus Rex"
+      },
+      "periods": {
+        "zhTW": "白堊紀晚期",
+        "en": "Late Cretaceous"
+      },
+      "diet": {
+        "zhTW": "肉食性",
+        "en": "Carnivore"
+      },
+      "discoveryLocations": {
+        "zhTW": "北美洲",
+        "en": "North America"
+      },
+      "sizeDescription": {
+        "zhTW": "像一輛大巴士那麼長，頭很大，後腿非常強壯。",
+        "en": "About as long as a large bus, with a huge head and powerful back legs."
+      },
+      "summary": {
+        "zhTW": "暴龍有強大的咬合力和粗壯尾巴，常被叫作恐龍之王。牠用靈敏嗅覺尋找食物，短短的前肢雖小，身體卻非常有力量。",
+        "en": "Tyrannosaurus Rex had a powerful bite and a strong tail, so many people call it the king of dinosaurs. Its short arms were small, but its body was strong and its sense of smell helped it find food."
+      },
+      "mainImage": {
+        "path": "/images/dinosaurs/tyrannosaurus-rex-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風暴龍站在綠色草地上張開微笑大嘴",
+          "en": "Cute storybook Tyrannosaurus Rex standing on green grass with a friendly open smile"
+        },
+        "caption": {
+          "zhTW": "暴龍看起來威風，也可以畫得很親切。",
+          "en": "Tyrannosaurus Rex can look mighty and friendly in a storybook."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "暴龍的大腳印",
+          "en": "The Big Footprint Parade"
+        },
+        "body": {
+          "zhTW": "早晨的森林還有亮亮露珠，暴龍阿雷小心踩在泥地上，留下像盤子一樣大的腳印。小甲蟲沿著腳印散步，松果滾進凹洞裡。阿雷發現大家把腳印當成遊戲場，就放慢腳步，帶朋友排成一條彎彎隊伍，走到陽光下分享甜甜果子。大家覺得今天的路真有趣。",
+          "en": "In the bright morning forest, Rexy the Tyrannosaurus walked slowly across soft mud. Each footstep made a round print as wide as a tray. A beetle marched around one print, and a pinecone rolled into another like a tiny ball. Rexy noticed the little animals using the prints as a playground, so he slowed down even more. He made a curving path toward the sunny meadow, then waited while everyone followed. At the end, Rexy shared sweet fallen fruit and promised to make a careful footprint trail whenever the mud was soft. The smallest beetle waved and called the path a happy map."
+        },
+        "illustration": {
+          "path": "/images/dinosaurs/tyrannosaurus-rex-story.png",
+          "altText": {
+            "zhTW": "暴龍和小動物在大腳印旁分享果子",
+            "en": "Tyrannosaurus Rex sharing fruit with small animals beside large footprints"
+          },
+          "caption": {
+            "zhTW": "大腳印也能變成朋友的小路。",
+            "en": "Big footprints can become a path for friends."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        { "zhTW": "暴龍", "en": "tyrannosaurus rex" },
+        { "zhTW": "恐龍之王", "en": "king of dinosaurs" },
+        { "zhTW": "肉食", "en": "meat eater" },
+        { "zhTW": "白堊紀", "en": "cretaceous" },
+        { "zhTW": "北美洲", "en": "north america" }
+      ]
+    },
+    {
+      "slug": "triceratops",
+      "category": "dinosaur",
+      "sortOrder": 2,
+      "names": {
+        "zhTW": "三角龍",
+        "en": "Triceratops"
+      },
+      "periods": {
+        "zhTW": "白堊紀晚期",
+        "en": "Late Cretaceous"
+      },
+      "diet": {
+        "zhTW": "草食性",
+        "en": "Herbivore"
+      },
+      "discoveryLocations": {
+        "zhTW": "北美洲",
+        "en": "North America"
+      },
+      "sizeDescription": {
+        "zhTW": "身體像小卡車，頭上有三隻角和一面大頭盾。",
+        "en": "About the size of a small truck, with three horns and a large frill."
+      },
+      "summary": {
+        "zhTW": "三角龍用堅固的嘴巴咬植物，三隻角和大頭盾讓牠很好辨認。牠可能成群活動，慢慢走過平原尋找低矮植物。",
+        "en": "Triceratops ate plants with a strong beak. Its three horns and wide frill make it easy to recognize. It may have moved in groups while looking for low plants across open plains."
+      },
+      "mainImage": {
+        "path": "/images/dinosaurs/triceratops-main.png",
+        "altText": {
+          "zhTW": "可愛三角龍在花草旁展示三隻角和大頭盾",
+          "en": "Cute Triceratops showing three horns and a wide frill beside flowers"
+        },
+        "caption": {
+          "zhTW": "三角龍的頭盾像一面大扇子。",
+          "en": "A Triceratops frill looks like a wide fan."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "三角龍的花圈",
+          "en": "Tara's Flower Crown"
+        },
+        "body": {
+          "zhTW": "三角龍塔塔喜歡在草原找新葉子。一天，風把好多小花吹到她的頭盾上，像彩色花圈。小鳥們停在旁邊唱歌，塔塔怕花掉下來，就慢慢低頭喝水。水面照出漂亮倒影，她把花分給朋友，大家把平原裝飾成柔軟花園。連小石頭旁也開心亮起來。",
+          "en": "Tara the Triceratops loved searching the plain for tender leaves. One breezy afternoon, small flowers floated through the air and landed on her broad frill. They looked like a bright crown. Birds perched nearby and sang a cheerful tune, so Tara walked very gently to keep the flowers in place. At the pond, she saw the colorful reflection and laughed softly. Instead of keeping the crown, Tara shared flowers with every friend. Soon the plain looked like a soft garden, and everyone munched lunch under petals. Even the quiet stones seemed bright and cheerful beside her. They remembered the gentle afternoon for many sunny days."
+        },
+        "illustration": {
+          "path": "/images/dinosaurs/triceratops-story.png",
+          "altText": {
+            "zhTW": "三角龍頭盾上戴著小花，朋友們圍在草原上",
+            "en": "Triceratops wearing small flowers on her frill while friends gather on the plain"
+          },
+          "caption": {
+            "zhTW": "分享花朵讓草原更漂亮。",
+            "en": "Sharing flowers made the plain brighter."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        { "zhTW": "三角龍", "en": "triceratops" },
+        { "zhTW": "三隻角", "en": "three horns" },
+        { "zhTW": "頭盾", "en": "frill" },
+        { "zhTW": "草食", "en": "plant eater" },
+        { "zhTW": "白堊紀", "en": "cretaceous" }
+      ]
+    },
+    {
+      "slug": "stegosaurus",
+      "category": "dinosaur",
+      "sortOrder": 3,
+      "names": {
+        "zhTW": "劍龍",
+        "en": "Stegosaurus"
+      },
+      "periods": {
+        "zhTW": "侏羅紀晚期",
+        "en": "Late Jurassic"
+      },
+      "diet": {
+        "zhTW": "草食性",
+        "en": "Herbivore"
+      },
+      "discoveryLocations": {
+        "zhTW": "北美洲",
+        "en": "North America"
+      },
+      "sizeDescription": {
+        "zhTW": "身體長而低，背上有一排大骨板，尾巴有尖刺。",
+        "en": "Long and low, with large plates along its back and spikes on its tail."
+      },
+      "summary": {
+        "zhTW": "劍龍最有名的是背上交錯排列的骨板。牠吃低矮植物，尾巴尖刺可以保護自己，慢慢走路的樣子像背著彩色旗子。",
+        "en": "Stegosaurus is famous for the plates along its back. It ate low plants and could use its spiked tail for protection. Its slow walk may have looked like a moving line of colorful flags."
+      },
+      "mainImage": {
+        "path": "/images/dinosaurs/stegosaurus-main.png",
+        "altText": {
+          "zhTW": "可愛劍龍背著彩色骨板在蕨類植物旁散步",
+          "en": "Cute Stegosaurus walking beside ferns with colorful back plates"
+        },
+        "caption": {
+          "zhTW": "劍龍的骨板讓牠像會走路的小山。",
+          "en": "Stegosaurus plates made it look like a walking little hill."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "劍龍的彩色骨板",
+          "en": "Sunny Plates"
+        },
+        "body": {
+          "zhTW": "劍龍豆豆背上的骨板在日光裡閃閃亮。小恐龍們想知道哪一片最暖，便把落葉放在骨板旁比較。豆豆安靜站著，像一座會呼吸的小山。等陽光變柔，他把溫暖的葉子推到陰涼處，讓小蝸牛也能舒服午睡。大家輕聲說晚安，不吵醒牠。",
+          "en": "Dodo the Stegosaurus had plates that glowed warmly in the sunlight. The smaller dinosaurs wondered which plate felt the coziest, so they placed fallen leaves near each one and compared the warmth. Dodo stood still and patient, like a breathing little hill. When the afternoon light grew soft, he nudged the warm leaves toward a shady patch. A tiny snail curled up there for a nap, and the little dinosaurs whispered thanks. Dodo smiled because his sunny plates had helped everyone rest. They tiptoed away softly so the sleepy snail could dream in peace. A warm leaf blanket waited beside it."
+        },
+        "illustration": {
+          "path": "/images/dinosaurs/stegosaurus-story.png",
+          "altText": {
+            "zhTW": "劍龍背上的骨板在陽光下發亮，小朋友般的恐龍觀察葉子",
+            "en": "Stegosaurus plates glowing in sunlight while small dinosaurs inspect warm leaves"
+          },
+          "caption": {
+            "zhTW": "陽光把骨板照得暖暖的。",
+            "en": "Sunshine warmed the plates."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        { "zhTW": "劍龍", "en": "stegosaurus" },
+        { "zhTW": "骨板", "en": "plates" },
+        { "zhTW": "尾刺", "en": "tail spikes" },
+        { "zhTW": "侏羅紀", "en": "jurassic" },
+        { "zhTW": "蕨類", "en": "ferns" }
+      ]
+    },
+    {
+      "slug": "brachiosaurus",
+      "category": "dinosaur",
+      "sortOrder": 4,
+      "names": {
+        "zhTW": "腕龍",
+        "en": "Brachiosaurus"
+      },
+      "periods": {
+        "zhTW": "侏羅紀晚期",
+        "en": "Late Jurassic"
+      },
+      "diet": {
+        "zhTW": "草食性",
+        "en": "Herbivore"
+      },
+      "discoveryLocations": {
+        "zhTW": "北美洲、非洲",
+        "en": "North America and Africa"
+      },
+      "sizeDescription": {
+        "zhTW": "非常高大，長脖子可以伸到樹頂吃葉子。",
+        "en": "Very tall, with a long neck that could reach leaves near treetops."
+      },
+      "summary": {
+        "zhTW": "腕龍的前腿比後腿長，脖子高高伸向樹冠。牠吃植物時像溫柔的高塔，能碰到許多其他恐龍吃不到的葉子。",
+        "en": "Brachiosaurus had front legs longer than its back legs and a neck that reached high into trees. It was like a gentle tower, eating leaves many other dinosaurs could not reach."
+      },
+      "mainImage": {
+        "path": "/images/dinosaurs/brachiosaurus-main.png",
+        "altText": {
+          "zhTW": "可愛腕龍伸長脖子吃高樹上的嫩葉",
+          "en": "Cute Brachiosaurus stretching a long neck to eat leaves from a tall tree"
+        },
+        "caption": {
+          "zhTW": "腕龍能看見很遠的森林。",
+          "en": "Brachiosaurus could see far across the forest."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "腕龍的高高早安",
+          "en": "A Very Tall Good Morning"
+        },
+        "body": {
+          "zhTW": "腕龍波波醒來時，雲朵剛好飄過他的鼻尖。他向樹梢說早安，也向地上的小花說早安。小恐龍找不到路，波波把長脖子伸高，看見遠方亮亮河面。他用尾巴指方向，陪大家慢慢走到清涼河邊喝水。河水映出每個安心笑臉，也映出藍天。",
+          "en": "Bobo the Brachiosaurus woke as a small cloud drifted past his nose. He said good morning to the treetops, then carefully bent down and said good morning to the flowers. A group of little dinosaurs could not find the river path, so Bobo stretched his long neck high above the leaves. Far away, he spotted a bright ribbon of water. He pointed with his tail and walked slowly beside the group. Soon everyone reached the cool river, drank together, and thanked Bobo for being a gentle lookout. Their smiling faces shimmered in the water below the blue sky, calm and bright."
+        },
+        "illustration": {
+          "path": "/images/dinosaurs/brachiosaurus-story.png",
+          "altText": {
+            "zhTW": "腕龍伸高脖子替小恐龍尋找河流",
+            "en": "Brachiosaurus lifting a long neck to help small dinosaurs find a river"
+          },
+          "caption": {
+            "zhTW": "高高的視野可以幫朋友找路。",
+            "en": "A tall view can help friends find the way."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        { "zhTW": "腕龍", "en": "brachiosaurus" },
+        { "zhTW": "長脖子", "en": "long neck" },
+        { "zhTW": "高處覓食", "en": "treetop feeding" },
+        { "zhTW": "非洲", "en": "africa" },
+        { "zhTW": "侏羅紀", "en": "jurassic" }
+      ]
+    },
+    {
+      "slug": "velociraptor",
+      "category": "dinosaur",
+      "sortOrder": 5,
+      "names": {
+        "zhTW": "迅猛龍",
+        "en": "Velociraptor"
+      },
+      "periods": {
+        "zhTW": "白堊紀晚期",
+        "en": "Late Cretaceous"
+      },
+      "diet": {
+        "zhTW": "肉食性",
+        "en": "Carnivore"
+      },
+      "discoveryLocations": {
+        "zhTW": "蒙古",
+        "en": "Mongolia"
+      },
+      "sizeDescription": {
+        "zhTW": "比電影裡常見的形象小，身體輕巧，跑得很快。",
+        "en": "Smaller than many movie versions, with a light body that could move quickly."
+      },
+      "summary": {
+        "zhTW": "迅猛龍是一種小型、敏捷的肉食恐龍，化石多在蒙古發現。科學家認為牠可能有羽毛，彎彎的爪子讓牠非常特別。",
+        "en": "Velociraptor was a small and agile meat-eating dinosaur found mostly in Mongolia. Scientists think it may have had feathers, and its curved claw makes it especially interesting."
+      },
+      "mainImage": {
+        "path": "/images/dinosaurs/velociraptor-main.png",
+        "altText": {
+          "zhTW": "可愛有羽毛的迅猛龍在沙地上輕快奔跑",
+          "en": "Cute feathered Velociraptor running lightly across sandy ground"
+        },
+        "caption": {
+          "zhTW": "迅猛龍可能披著羽毛外衣。",
+          "en": "Velociraptor may have worn a coat of feathers."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "迅猛龍的羽毛信",
+          "en": "The Feather Message"
+        },
+        "body": {
+          "zhTW": "迅猛龍妮妮跑步很快，卻最喜歡安靜觀察。她撿到一根柔軟羽毛，想把它送回主人。妮妮沿著沙地腳印前進，幫迷路的小蜥蜴找水，幫風中的葉子停下。最後她發現羽毛屬於自己，便把它插在小石頭旁當友情旗。旗子在夕陽裡輕輕點頭。",
+          "en": "Nini the Velociraptor could run very fast, but she liked quiet watching best. One morning she found a soft feather beside the sand and decided to return it. She followed tiny footprints, helped a lost lizard find a water cup made from a leaf, and tucked a tumbling seed under a stone so the wind would not carry it away. At sunset, Nini noticed the feather matched her own tail. She placed it beside a pebble as a friendship flag for anyone who needed help. The flag nodded softly in the evening light near her toes, bright with kindness for travelers."
+        },
+        "illustration": {
+          "path": "/images/dinosaurs/velociraptor-story.png",
+          "altText": {
+            "zhTW": "有羽毛的迅猛龍把羽毛放在小石頭旁",
+            "en": "Feathered Velociraptor placing a feather beside a small stone"
+          },
+          "caption": {
+            "zhTW": "小羽毛變成友情旗。",
+            "en": "A small feather became a friendship flag."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        { "zhTW": "迅猛龍", "en": "velociraptor" },
+        { "zhTW": "蒙古", "en": "mongolia" },
+        { "zhTW": "羽毛", "en": "feathers" },
+        { "zhTW": "敏捷", "en": "agile" },
+        { "zhTW": "肉食", "en": "meat eater" }
+      ]
+    },
+    {
+      "slug": "pteranodon",
+      "category": "prehistoric-flying-reptile",
+      "sortOrder": 6,
+      "names": {
+        "zhTW": "翼龍",
+        "en": "Pteranodon"
+      },
+      "periods": {
+        "zhTW": "白堊紀晚期",
+        "en": "Late Cretaceous"
+      },
+      "diet": {
+        "zhTW": "魚食性",
+        "en": "Fish eater"
+      },
+      "discoveryLocations": {
+        "zhTW": "北美洲",
+        "en": "North America"
+      },
+      "sizeDescription": {
+        "zhTW": "張開翅膀比許多大人還寬，頭後方有長長的冠。",
+        "en": "Its wings spread wider than many adults are tall, with a long crest behind the head."
+      },
+      "summary": {
+        "zhTW": "翼龍是史前飛行爬行類，不是真正恐龍。牠有寬大的翅膀，可能在海邊滑翔，尋找水面附近的魚。",
+        "en": "Pteranodon was a prehistoric flying reptile, not a true dinosaur. It had wide wings and may have glided near the sea while looking for fish close to the water."
+      },
+      "notDinosaurNote": {
+        "zhTW": "翼龍不是恐龍，而是和恐龍生活在同一時代的史前飛行爬行類。",
+        "en": "Pteranodon was not a dinosaur; it was a prehistoric flying reptile that lived during the dinosaur age."
+      },
+      "mainImage": {
+        "path": "/images/dinosaurs/pteranodon-main.png",
+        "altText": {
+          "zhTW": "可愛翼龍張開翅膀在海岸上方滑翔",
+          "en": "Cute Pteranodon gliding above a coast with wings open"
+        },
+        "caption": {
+          "zhTW": "翼龍會飛，但牠不是真正的恐龍。",
+          "en": "Pteranodon could fly, but it was not a true dinosaur."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "翼龍的海風練習",
+          "en": "Sea Breeze Practice"
+        },
+        "body": {
+          "zhTW": "翼龍皮皮不是恐龍，但他和恐龍朋友住在同一片古老天空下。海風吹來時，皮皮張開大翅膀練習滑翔。他沒有急著飛遠，而是繞著海灣畫圓圈，提醒小魚躲開浪花，也把漂亮貝殼影子指給岸上的朋友看。大家揮手謝謝空中的嚮導。",
+          "en": "Pip the Pteranodon was not a dinosaur, but he shared the ancient sky with dinosaur friends. When the sea breeze arrived, Pip opened his wide wings and practiced gentle gliding. He did not rush far away. Instead, he circled the bay in slow loops, warned little fish when waves grew splashy, and pointed out shiny shell shadows to friends on the shore. By evening, everyone knew the wind better, and Pip felt proud that careful flying could be helpful and kind. Everyone waved thanks to their guide in the sky above the water, then smiled together at sunset by shore."
+        },
+        "illustration": {
+          "path": "/images/dinosaurs/pteranodon-story.png",
+          "altText": {
+            "zhTW": "翼龍在海灣上空練習滑翔，岸邊朋友抬頭看",
+            "en": "Pteranodon practicing gliding above a bay while friends watch from shore"
+          },
+          "caption": {
+            "zhTW": "海風讓滑翔變得輕輕的。",
+            "en": "The sea breeze made gliding gentle."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        { "zhTW": "翼龍", "en": "pteranodon" },
+        { "zhTW": "史前飛行爬行類", "en": "prehistoric flying reptile" },
+        { "zhTW": "不是恐龍", "en": "not a dinosaur" },
+        { "zhTW": "魚食", "en": "fish eater" },
+        { "zhTW": "滑翔", "en": "gliding" }
+      ]
+    },
+    {
+      "slug": "ankylosaurus",
+      "category": "dinosaur",
+      "sortOrder": 7,
+      "names": {
+        "zhTW": "甲龍",
+        "en": "Ankylosaurus"
+      },
+      "periods": {
+        "zhTW": "白堊紀晚期",
+        "en": "Late Cretaceous"
+      },
+      "diet": {
+        "zhTW": "草食性",
+        "en": "Herbivore"
+      },
+      "discoveryLocations": {
+        "zhTW": "北美洲",
+        "en": "North America"
+      },
+      "sizeDescription": {
+        "zhTW": "身體低矮又結實，背上有裝甲，尾巴末端像大槌子。",
+        "en": "Low and sturdy, with body armor and a tail ending in a club."
+      },
+      "summary": {
+        "zhTW": "甲龍像穿著盔甲的草食恐龍，身上有硬硬骨板。牠的槌狀尾巴很有名，幫助牠在白堊紀世界保護自己。",
+        "en": "Ankylosaurus was a plant-eating dinosaur that looked as if it wore armor. Hard plates covered its body, and its famous club tail helped it protect itself in the Cretaceous world."
+      },
+      "mainImage": {
+        "path": "/images/dinosaurs/ankylosaurus-main.png",
+        "altText": {
+          "zhTW": "可愛甲龍背著圓圓裝甲，尾巴像小槌子",
+          "en": "Cute Ankylosaurus with rounded armor and a small club-like tail"
+        },
+        "caption": {
+          "zhTW": "甲龍像溫柔的裝甲小坦克。",
+          "en": "Ankylosaurus looked like a gentle armored little tank."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "甲龍的安全橋",
+          "en": "The Safe Bridge"
+        },
+        "body": {
+          "zhTW": "雨後的小溪變寬了，朋友們不敢跨過去。甲龍安安看見倒下的樹枝，便用結實身體慢慢推，把樹枝排成穩穩小橋。他沒有揮動尾槌，只用鼻子輕輕檢查。朋友一個個走過後，安安也吃到對岸最新鮮的嫩草。小橋旁傳來開心笑聲。",
+          "en": "After a rainy night, the little creek became too wide for the small dinosaurs to cross. Annie the Ankylosaurus saw fallen branches near the bank and pushed them carefully with her sturdy body. She arranged the branches into a steady bridge, then checked each piece with her nose. She did not swing her club tail, because gentle work was enough. One by one, the friends crossed safely. Annie crossed last and found the freshest green leaves waiting on the other side. Happy laughs bounced beside the new little bridge all afternoon under soft clouds nearby as friends rested together happily."
+        },
+        "illustration": {
+          "path": "/images/dinosaurs/ankylosaurus-story.png",
+          "altText": {
+            "zhTW": "甲龍用樹枝幫朋友搭出小橋",
+            "en": "Ankylosaurus arranging branches into a small bridge for friends"
+          },
+          "caption": {
+            "zhTW": "結實的身體也能做溫柔的事。",
+            "en": "A sturdy body can do gentle work."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        { "zhTW": "甲龍", "en": "ankylosaurus" },
+        { "zhTW": "裝甲", "en": "armor" },
+        { "zhTW": "槌狀尾巴", "en": "club tail" },
+        { "zhTW": "草食", "en": "plant eater" },
+        { "zhTW": "白堊紀", "en": "cretaceous" }
+      ]
+    },
+    {
+      "slug": "parasaurolophus",
+      "category": "dinosaur",
+      "sortOrder": 8,
+      "names": {
+        "zhTW": "副櫛龍",
+        "en": "Parasaurolophus"
+      },
+      "periods": {
+        "zhTW": "白堊紀晚期",
+        "en": "Late Cretaceous"
+      },
+      "diet": {
+        "zhTW": "草食性",
+        "en": "Herbivore"
+      },
+      "discoveryLocations": {
+        "zhTW": "北美洲",
+        "en": "North America"
+      },
+      "sizeDescription": {
+        "zhTW": "有長長的頭冠，身體像大型鴨嘴龍，能用四腳或兩腳移動。",
+        "en": "A large duck-billed dinosaur with a long head crest, able to move on four legs or two."
+      },
+      "summary": {
+        "zhTW": "副櫛龍的長頭冠可能像管子，能幫助牠發出低低聲音或辨認同伴。牠吃植物，外形非常有辨識度。",
+        "en": "Parasaurolophus had a long crest that may have worked like a tube, helping it make low sounds or recognize friends. It ate plants and had a very memorable shape."
+      },
+      "mainImage": {
+        "path": "/images/dinosaurs/parasaurolophus-main.png",
+        "altText": {
+          "zhTW": "可愛副櫛龍帶著長頭冠站在樹林旁",
+          "en": "Cute Parasaurolophus with a long head crest standing near trees"
+        },
+        "caption": {
+          "zhTW": "副櫛龍的頭冠像長長的號角。",
+          "en": "The crest of Parasaurolophus looked like a long horn."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "副櫛龍的森林低音",
+          "en": "The Forest Humming Song"
+        },
+        "body": {
+          "zhTW": "副櫛龍露露在森林裡練習低低的嗚聲。聲音穿過樹幹，像溫柔木笛。迷路的小朋友聽見聲音，順著節奏找到露露。她又吹出三個慢慢音，提醒大家集合。夕陽下，每隻恐龍都用腳掌打拍子，森林變成安靜樂團。晚風也跟著輕輕和唱。",
+          "en": "Lulu the Parasaurolophus practiced a low humming call in the forest. The sound moved between tree trunks like a gentle wooden flute. A little dinosaur who had wandered away heard the hum and followed the rhythm back to Lulu. She made three slow notes to tell everyone it was time to gather. Under the orange sunset, each dinosaur tapped a soft beat with their feet. The forest became a quiet band, and Lulu learned that one kind sound could guide friends home. Even the evening breeze joined the gentle song before bedtime, soft and slow for all nearby friends listening."
+        },
+        "illustration": {
+          "path": "/images/dinosaurs/parasaurolophus-story.png",
+          "altText": {
+            "zhTW": "副櫛龍在夕陽森林裡發出溫柔低音，朋友們圍成圈",
+            "en": "Parasaurolophus making a gentle low sound in a sunset forest while friends gather"
+          },
+          "caption": {
+            "zhTW": "溫柔的聲音能帶朋友回家。",
+            "en": "A gentle sound can guide friends home."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        { "zhTW": "副櫛龍", "en": "parasaurolophus" },
+        { "zhTW": "長頭冠", "en": "long crest" },
+        { "zhTW": "發聲", "en": "sound" },
+        { "zhTW": "鴨嘴龍", "en": "duck-billed dinosaur" },
+        { "zhTW": "草食", "en": "plant eater" }
+      ]
+    }
+  ]
+}

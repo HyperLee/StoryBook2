@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Update="Data\dinosaurs.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

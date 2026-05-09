@@ -1,3 +1,5 @@
+using StoryBook.Services;
+
 namespace StoryBook;
 
 public partial class Program
@@ -8,6 +10,11 @@ public partial class Program
 
         // Add services to the container.
         builder.Services.AddRazorPages();
+        builder.Services.Configure<DinosaurCatalogOptions>(
+            builder.Configuration.GetSection(DinosaurCatalogOptions.SectionName));
+        builder.Services.AddSingleton<DinosaurContentValidator>();
+        builder.Services.AddSingleton<DinosaurCatalogService>();
+        builder.Services.AddSingleton<LanguagePreferenceService>();
 
         var app = builder.Build();
 
