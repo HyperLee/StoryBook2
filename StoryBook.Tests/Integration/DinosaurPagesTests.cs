@@ -108,4 +108,15 @@ public sealed class DinosaurPagesTests : IClassFixture<DinosaurPageTestFixture>
         Assert.Contains("史前飛行爬行類", html);
         Assert.True(DinosaurPageTestFixture.HasLinkTo(html, "/dinosaurs/pteranodon"));
     }
+
+    [Fact]
+    public async Task Dinosaur_detail_displays_story_section_and_story_illustration()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/dinosaurs/tyrannosaurus-rex");
+
+        Assert.Contains("暴龍的大腳印", html);
+        Assert.Contains("早晨的森林還有亮亮露珠", html);
+        Assert.Contains("tyrannosaurus-rex-story.png", html);
+        Assert.Contains("暴龍和小動物在大腳印旁分享果子", html);
+    }
 }

@@ -60,6 +60,21 @@
                 {
                     <p class="dino-note">@Model.Profile.NotDinosaurNote.Get(LanguageCode.ZhTW)</p>
                 }
+                <section class="dino-story" aria-labelledby="dino-story-title">
+                    <div class="dino-story__text">
+                        <p class="dino-kicker">小故事</p>
+                        <h2 id="dino-story-title">@Model.Profile.Story.Title.Get(LanguageCode.ZhTW)</h2>
+                        <p>@Model.Profile.Story.Body.Get(LanguageCode.ZhTW)</p>
+                    </div>
+                    <figure class="dino-story__figure">
+                        <img src="@Model.Profile.Story.Illustration.Path"
+                             alt="@Model.Profile.Story.Illustration.AltText.Get(LanguageCode.ZhTW)" />
+                        @if (Model.Profile.Story.Illustration.Caption is not null)
+                        {
+                            <figcaption>@Model.Profile.Story.Illustration.Caption!.Get(LanguageCode.ZhTW)</figcaption>
+                        }
+                    </figure>
+                </section>
                 <nav class="dino-pager" aria-label="恐龍換頁">
                     @if (Model.PreviousProfile is null)
                     {

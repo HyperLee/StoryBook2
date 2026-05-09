@@ -248,6 +248,39 @@
     color: #66736f;
 }
 
+.dino-story {
+    align-items: start;
+    background: #fff8dc;
+    border: 1px solid #eadca6;
+    border-radius: 8px;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.6fr);
+    margin-top: 1.5rem;
+    padding: 1rem;
+}
+
+.dino-story__text p {
+    line-height: 1.75;
+}
+
+.dino-story__figure {
+    margin: 0;
+}
+
+.dino-story__figure img {
+    border-radius: 8px;
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+.dino-story__figure figcaption {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
 .dino-modal__image {
     border-radius: 8px;
     display: block;
@@ -263,7 +296,8 @@
 
 @media (max-width: 900px) {
     .dino-feature,
-    .dino-detail {
+    .dino-detail,
+    .dino-story {
         grid-template-columns: 1fr;
     }
 

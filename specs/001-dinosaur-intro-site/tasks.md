@@ -182,14 +182,14 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 ### Tests for User Story 6
 
-- [ ] T054 [P] [US6] Write integration tests for story title, story body, story illustration, and meaningful alt text on detail pages in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
-- [ ] T055 [P] [US6] Extend content validation tests for story tone markers, story body length, and story illustration style tag in `StoryBook.Tests/Unit/DinosaurContentValidationTests.cs`
+- [X] T054 [P] [US6] Write integration tests for story title, story body, story illustration, and meaningful alt text on detail pages in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
+- [X] T055 [P] [US6] Extend content validation tests for story tone markers, story body length, and story illustration style tag in `StoryBook.Tests/Unit/DinosaurContentValidationTests.cs`
 
 ### Implementation for User Story 6
 
-- [ ] T056 [US6] Render story title, body, illustration, caption, and accessible alt text in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T057 [US6] Add story section spacing, image sizing, and visual hierarchy styles in `StoryBook/wwwroot/css/dinosaurs.css`
-- [ ] T058 [US6] Verify all story image paths in catalog data match files under `StoryBook/wwwroot/images/dinosaurs/` from `StoryBook/Data/dinosaurs.json`
+- [X] T056 [US6] Render story title, body, illustration, caption, and accessible alt text in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T057 [US6] Add story section spacing, image sizing, and visual hierarchy styles in `StoryBook/wwwroot/css/dinosaurs.css`
+- [X] T058 [US6] Verify all story image paths in catalog data match files under `StoryBook/wwwroot/images/dinosaurs/` from `StoryBook/Data/dinosaurs.json`
 
 **Checkpoint**: P2 content enhancement is independently visible on every detail route.
 

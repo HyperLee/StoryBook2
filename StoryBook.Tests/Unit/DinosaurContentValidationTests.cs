@@ -61,6 +61,25 @@ public sealed class DinosaurContentValidationTests
         }
     }
 
+    [Fact]
+    public void Stories_keep_warm_tone_and_storybook_illustration_style()
+    {
+        DinosaurCatalog catalog = LoadCatalog();
+        string[] disallowedTone = ["血", "殺", "嚇", "scary", "kill", "blood"];
+        string[] warmToneMarkers = ["朋友", "大家", "小恐龍", "溫柔", "分享", "友情", "幫"];
+
+        foreach (DinosaurProfile profile in catalog.Profiles)
+        {
+            string zhStory = profile.Story.Body.ZhTW;
+            string enStory = profile.Story.Body.En;
+
+            Assert.Contains(warmToneMarkers, marker => zhStory.Contains(marker, StringComparison.OrdinalIgnoreCase));
+            Assert.DoesNotContain(disallowedTone, word => zhStory.Contains(word, StringComparison.OrdinalIgnoreCase));
+            Assert.DoesNotContain(disallowedTone, word => enStory.Contains(word, StringComparison.OrdinalIgnoreCase));
+            Assert.Equal("storybook-cute", profile.Story.Illustration.StyleTag);
+        }
+    }
+
     private static DinosaurCatalog LoadCatalog()
     {
         string path = Path.Combine(TestPaths.StoryBookRoot, "Data", "dinosaurs.json");
