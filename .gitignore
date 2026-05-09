@@ -482,3 +482,5 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+StoryBook/obj/Debug/net10.0/StoryBook.AssemblyInfo.cs
+StoryBook/obj/Debug/net10.0/StoryBook.AssemblyInfoInputs.cache
