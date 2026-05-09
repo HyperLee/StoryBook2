@@ -69,18 +69,18 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 ### Tests for User Story 1
 
-- [ ] T021 [P] [US1] Write integration tests for home entry, `/dinosaurs` first-profile content, and `/dinosaurs/tyrannosaurus-rex` required HTML fields in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
-- [ ] T022 [P] [US1] Write unit tests for first-profile selection and summary readable-unit limits in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
+- [X] T021 [P] [US1] Write integration tests for home entry, `/dinosaurs` first-profile content, and `/dinosaurs/tyrannosaurus-rex` required HTML fields in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
+- [X] T022 [P] [US1] Write unit tests for first-profile selection and summary readable-unit limits in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
 
 ### Implementation for User Story 1
 
-- [ ] T023 [US1] Add clear「恐龍介紹」entry link to `/dinosaurs` on the homepage in `StoryBook/Pages/Index.cshtml`
-- [ ] T024 [US1] Create dinosaur list PageModel that loads sorted profiles and exposes the first profile in `StoryBook/Pages/Dinosaurs/Index.cshtml.cs`
-- [ ] T025 [US1] Create dinosaur list Razor page showing the first profile and links to all profiles in `StoryBook/Pages/Dinosaurs/Index.cshtml`
-- [ ] T026 [US1] Create dinosaur details PageModel that resolves valid slugs and exposes friendly not-found state in `StoryBook/Pages/Dinosaurs/Details.cshtml.cs`
-- [ ] T027 [US1] Create dinosaur details Razor page with required profile fields, main image, and child-friendly empty/error messages in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T028 [US1] Add feature stylesheet link plus initial desktop/laptop and 768px-minimum responsive layout styles in `StoryBook/wwwroot/css/dinosaurs.css`
-- [ ] T029 [US1] Include `dinosaurs.css` for dinosaur pages without changing unrelated template pages in `StoryBook/Pages/Shared/_Layout.cshtml`
+- [X] T023 [US1] Add clear「恐龍介紹」entry link to `/dinosaurs` on the homepage in `StoryBook/Pages/Index.cshtml`
+- [X] T024 [US1] Create dinosaur list PageModel that loads sorted profiles and exposes the first profile in `StoryBook/Pages/Dinosaurs/Index.cshtml.cs`
+- [X] T025 [US1] Create dinosaur list Razor page showing the first profile and links to all profiles in `StoryBook/Pages/Dinosaurs/Index.cshtml`
+- [X] T026 [US1] Create dinosaur details PageModel that resolves valid slugs and exposes friendly not-found state in `StoryBook/Pages/Dinosaurs/Details.cshtml.cs`
+- [X] T027 [US1] Create dinosaur details Razor page with required profile fields, main image, and child-friendly empty/error messages in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T028 [US1] Add feature stylesheet link plus initial desktop/laptop and 768px-minimum responsive layout styles in `StoryBook/wwwroot/css/dinosaurs.css`
+- [X] T029 [US1] Include `dinosaurs.css` for dinosaur pages without changing unrelated template pages in `StoryBook/Pages/Shared/_Layout.cshtml`
 
 **Checkpoint**: User Story 1 is independently demoable from home to dinosaur content and direct detail URLs.
 

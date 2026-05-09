@@ -1,0 +1,56 @@
+@page "/dinosaurs/{slug}"
+@model StoryBook.Pages.Dinosaurs.DetailsModel
+@{
+    ViewData["Title"] = Model.Profile?.Names.Get(LanguageCode.ZhTW) ?? "找不到恐龍";
+}
+
+<section class="dino-page" aria-labelledby="dino-detail-title">
+    @if (Model.IsNotFound || Model.Profile is null)
+    {
+        <div class="dino-empty" role="status">
+            <h1 id="dino-detail-title">找不到這位史前朋友</h1>
+            <p>這個網址沒有對應的恐龍資料。你可以回到清單重新選一位朋友。</p>
+            <a class="dino-action" asp-page="/Dinosaurs/Index">回恐龍介紹</a>
+        </div>
+    }
+    else
+    {
+        <article class="dino-detail">
+            <div class="dino-detail__media">
+                <img src="@Model.Profile.MainImage.Path"
+                     alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
+                @if (Model.Profile.MainImage.Caption is not null)
+                {
+                    <p>@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</p>
+                }
+            </div>
+            <div class="dino-detail__body">
+                <p class="dino-kicker">史前朋友</p>
+                <h1 id="dino-detail-title">@Model.Profile.Names.Get(LanguageCode.ZhTW)</h1>
+                <dl class="dino-facts">
+                    <div>
+                        <dt>生活時期</dt>
+                        <dd>@Model.Profile.Periods.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                    <div>
+                        <dt>食性</dt>
+                        <dd>@Model.Profile.Diet.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                    <div>
+                        <dt>發現地點</dt>
+                        <dd>@Model.Profile.DiscoveryLocations.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                    <div>
+                        <dt>體型</dt>
+                        <dd>@Model.Profile.SizeDescription.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                </dl>
+                <p class="dino-summary">@Model.Profile.Summary.Get(LanguageCode.ZhTW)</p>
+                @if (Model.Profile.NotDinosaurNote is not null)
+                {
+                    <p class="dino-note">@Model.Profile.NotDinosaurNote.Get(LanguageCode.ZhTW)</p>
+                }
+            </div>
+        </article>
+    }
+</section>

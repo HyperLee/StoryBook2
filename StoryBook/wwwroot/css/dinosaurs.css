@@ -1,0 +1,155 @@
+.dino-page {
+    color: #25312f;
+}
+
+.dino-page__header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.dino-kicker {
+    color: #5a6f2d;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.dino-feature,
+.dino-detail {
+    align-items: center;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.85fr);
+}
+
+.dino-detail {
+    align-items: start;
+}
+
+.dino-feature__media,
+.dino-detail__media {
+    min-width: 0;
+}
+
+.dino-feature img,
+.dino-detail__media img,
+.dino-card img {
+    background: #fff8dc;
+    border: 2px solid #d9e8bb;
+    border-radius: 8px;
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.dino-feature__body,
+.dino-detail__body {
+    min-width: 0;
+}
+
+.dino-facts {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 1rem 0;
+}
+
+.dino-facts div {
+    background: #f4f8ed;
+    border: 1px solid #d9e8bb;
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+.dino-facts dt {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.dino-facts dd {
+    margin-bottom: 0;
+}
+
+.dino-summary,
+.dino-feature__body p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.dino-action {
+    align-items: center;
+    background: #246a73;
+    border-radius: 8px;
+    color: #fff;
+    display: inline-flex;
+    font-weight: 700;
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    text-decoration: none;
+}
+
+.dino-action:hover,
+.dino-action:focus {
+    background: #174950;
+    color: #fff;
+}
+
+.dino-action:focus-visible,
+.dino-card:focus-visible {
+    outline: 4px solid #f6c85f;
+    outline-offset: 3px;
+}
+
+.dino-directory {
+    margin-top: 2.5rem;
+}
+
+.dino-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.dino-card {
+    color: #25312f;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.dino-card span {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.dino-empty {
+    background: #f8f3df;
+    border: 1px solid #eadca6;
+    border-radius: 8px;
+    padding: 1.25rem;
+}
+
+.dino-note {
+    background: #e6f5f9;
+    border-left: 4px solid #246a73;
+    padding: 0.9rem 1rem;
+}
+
+@media (max-width: 900px) {
+    .dino-feature,
+    .dino-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .dino-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dino-facts,
+    .dino-grid {
+        grid-template-columns: 1fr;
+    }
+}

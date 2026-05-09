@@ -1,0 +1,66 @@
+@page "/dinosaurs"
+@model StoryBook.Pages.Dinosaurs.IndexModel
+@{
+    ViewData["Title"] = "恐龍介紹";
+}
+
+<section class="dino-page" aria-labelledby="dino-list-title">
+    <div class="dino-page__header">
+        <div>
+            <p class="dino-kicker">兒童恐龍介紹</p>
+            <h1 id="dino-list-title">恐龍介紹</h1>
+        </div>
+    </div>
+
+    @if (Model.FirstProfile is null)
+    {
+        <div class="dino-empty" role="status">
+            恐龍資料暫時睡著了，請稍後再回來看看。
+        </div>
+    }
+    else
+    {
+        <article class="dino-feature">
+            <div class="dino-feature__media">
+                <img src="@Model.FirstProfile.MainImage.Path"
+                     alt="@Model.FirstProfile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
+            </div>
+            <div class="dino-feature__body">
+                <p class="dino-kicker">第一位朋友</p>
+                <h2>@Model.FirstProfile.Names.Get(LanguageCode.ZhTW)</h2>
+                <dl class="dino-facts">
+                    <div>
+                        <dt>生活時期</dt>
+                        <dd>@Model.FirstProfile.Periods.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                    <div>
+                        <dt>食性</dt>
+                        <dd>@Model.FirstProfile.Diet.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                    <div>
+                        <dt>發現地點</dt>
+                        <dd>@Model.FirstProfile.DiscoveryLocations.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                </dl>
+                <p>@Model.FirstProfile.Summary.Get(LanguageCode.ZhTW)</p>
+                <a class="dino-action" asp-page="/Dinosaurs/Details" asp-route-slug="@Model.FirstProfile.Slug">
+                    閱讀 @Model.FirstProfile.Names.Get(LanguageCode.ZhTW)
+                </a>
+            </div>
+        </article>
+
+        <section class="dino-directory" aria-labelledby="dino-directory-title">
+            <h2 id="dino-directory-title">全部史前朋友</h2>
+            <div class="dino-grid">
+                @foreach (DinosaurProfile profile in Model.Profiles)
+                {
+                    <a class="dino-card" asp-page="/Dinosaurs/Details" asp-route-slug="@profile.Slug">
+                        <img src="@profile.MainImage.Path"
+                             alt="@profile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
+                        <span>@profile.Names.Get(LanguageCode.ZhTW)</span>
+                    </a>
+                }
+            </div>
+        </section>
+    }
+</section>

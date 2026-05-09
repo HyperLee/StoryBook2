@@ -32,7 +32,8 @@ public sealed class DinosaurPageTestFixture : IAsyncLifetime
         using HttpResponseMessage response = await Client.GetAsync(path);
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        return await response.Content.ReadAsStringAsync();
+        string html = await response.Content.ReadAsStringAsync();
+        return WebUtility.HtmlDecode(html);
     }
 
     public static bool HasLinkTo(string html, string href)

@@ -71,6 +71,19 @@ public sealed class DinosaurCatalogServiceTests
         Assert.True(p95 < 200, $"p95 was {p95}ms");
     }
 
+    [Fact]
+    public void GetFirstProfile_returns_lowest_sort_order_and_summaries_stay_readable()
+    {
+        DinosaurCatalogService service = CreateService();
+
+        DinosaurProfile first = service.GetFirstProfile();
+
+        Assert.Equal("tyrannosaurus-rex", first.Slug);
+        Assert.Equal(1, first.SortOrder);
+        Assert.InRange(DinosaurContentValidator.CountReadableUnits(first.Summary.ZhTW, LanguageCode.ZhTW), 1, 200);
+        Assert.InRange(DinosaurContentValidator.CountReadableUnits(first.Summary.En, LanguageCode.En), 1, 200);
+    }
+
     private static DinosaurCatalogService CreateService(RecordingLogger<DinosaurCatalogService>? logger = null)
     {
         return new DinosaurCatalogService(

@@ -43,6 +43,14 @@ public sealed class DinosaurCatalogService
     }
 
     /// <summary>
+    /// Gets the first profile by sort order.
+    /// </summary>
+    public DinosaurProfile GetFirstProfile()
+    {
+        return GetProfiles().First();
+    }
+
+    /// <summary>
     /// Attempts to resolve a profile by slug and logs unknown slugs.
     /// </summary>
     public bool TryGetBySlug(string? slug, out DinosaurProfile? profile)

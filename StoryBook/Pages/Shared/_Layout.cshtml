@@ -7,6 +7,10 @@
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @if (ViewData["UseDinosaurAssets"] as bool? == true)
+    {
+        <link rel="stylesheet" href="~/css/dinosaurs.css" asp-append-version="true" />
+    }
     <link rel="stylesheet" href="~/StoryBook.styles.css" asp-append-version="true" />
 </head>
 <body>
