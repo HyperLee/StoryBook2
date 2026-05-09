@@ -136,14 +136,14 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 ### Tests for User Story 4
 
-- [ ] T040 [P] [US4] Write integration tests for image button accessible name, Bootstrap modal markup, close control, and large-image alt text in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
+- [X] T040 [P] [US4] Write integration tests for image button accessible name, Bootstrap modal markup, close control, and large-image alt text in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
 
 ### Implementation for User Story 4
 
-- [ ] T041 [US4] Wrap the main image in a keyboard-focusable button and add Bootstrap modal markup in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T042 [US4] Implement native JavaScript for modal trigger focus tracking, Escape/backdrop handling, and focus restoration in `StoryBook/wwwroot/js/dinosaurs.js`
-- [ ] T043 [US4] Load `dinosaurs.js` only for dinosaur pages through the scripts section in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T044 [US4] Add modal, image button, and focus-visible styles in `StoryBook/wwwroot/css/dinosaurs.css`
+- [X] T041 [US4] Wrap the main image in a keyboard-focusable button and add Bootstrap modal markup in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T042 [US4] Implement native JavaScript for modal trigger focus tracking, Escape/backdrop handling, and focus restoration in `StoryBook/wwwroot/js/dinosaurs.js`
+- [X] T043 [US4] Load `dinosaurs.js` only for dinosaur pages through the scripts section in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T044 [US4] Add modal, image button, and focus-visible styles in `StoryBook/wwwroot/css/dinosaurs.css`
 
 **Checkpoint**: Image modal works independently of search and language switching.
 

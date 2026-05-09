@@ -76,4 +76,20 @@ public sealed class DinosaurPagesTests : IClassFixture<DinosaurPageTestFixture>
         Assert.True(DinosaurPageTestFixture.HasLinkTo(listHtml, "/"));
         Assert.True(DinosaurPageTestFixture.HasLinkTo(detailHtml, "/"));
     }
+
+    [Fact]
+    public async Task Dinosaur_detail_renders_accessible_image_modal_contract()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/dinosaurs/tyrannosaurus-rex");
+
+        Assert.Contains("dino-image-button", html);
+        Assert.Contains("aria-label=\"開啟暴龍大圖\"", html);
+        Assert.Contains("data-dino-modal-open=\"dino-image-modal\"", html);
+        Assert.Contains("id=\"dino-image-modal\"", html);
+        Assert.Contains("modal fade", html);
+        Assert.Contains("aria-label=\"關閉大圖\"", html);
+        Assert.Contains("dino-modal__image", html);
+        Assert.Contains("可愛繪本風暴龍站在綠色草地上張開微笑大嘴", html);
+        Assert.Contains("dinosaurs", html);
+    }
 }

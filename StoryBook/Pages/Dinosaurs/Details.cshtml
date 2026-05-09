@@ -22,8 +22,13 @@
     {
         <article class="dino-detail">
             <div class="dino-detail__media">
-                <img src="@Model.Profile.MainImage.Path"
-                     alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
+                <button class="dino-image-button"
+                        type="button"
+                        aria-label="@($"開啟{Model.Profile.Names.Get(LanguageCode.ZhTW)}大圖")"
+                        data-dino-modal-open="dino-image-modal">
+                    <img src="@Model.Profile.MainImage.Path"
+                         alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
+                </button>
                 @if (Model.Profile.MainImage.Caption is not null)
                 {
                     <p>@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</p>
@@ -80,5 +85,37 @@
                 </nav>
             </div>
         </article>
+
+        <div class="modal fade dino-modal"
+             id="dino-image-modal"
+             tabindex="-1"
+             aria-labelledby="dino-image-modal-title"
+             aria-hidden="true"
+             data-dino-modal>
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title fs-5" id="dino-image-modal-title">@Model.Profile.Names.Get(LanguageCode.ZhTW)大圖</h2>
+                        <button type="button"
+                                class="btn-close"
+                                aria-label="關閉大圖"
+                                data-dino-modal-close></button>
+                    </div>
+                    <div class="modal-body">
+                        <img class="dino-modal__image"
+                             src="@Model.Profile.MainImage.Path"
+                             alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
+                        @if (Model.Profile.MainImage.Caption is not null)
+                        {
+                            <p class="dino-modal__caption">@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </section>
+
+@section Scripts {
+    <script src="~/js/dinosaurs.js" asp-append-version="true"></script>
+}

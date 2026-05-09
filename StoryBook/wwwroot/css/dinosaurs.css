@@ -34,7 +34,7 @@
 }
 
 .dino-feature img,
-.dino-detail__media img,
+.dino-image-button img,
 .dino-card img {
     background: #fff8dc;
     border: 2px solid #d9e8bb;
@@ -42,6 +42,20 @@
     display: block;
     height: auto;
     max-width: 100%;
+}
+
+.dino-image-button {
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    display: block;
+    padding: 0;
+    text-align: left;
+}
+
+.dino-image-button:focus-visible {
+    outline: 4px solid #f6c85f;
+    outline-offset: 4px;
 }
 
 .dino-feature__body,
@@ -188,6 +202,19 @@
 .dino-page-link--disabled {
     border-color: #b8c4c0;
     color: #66736f;
+}
+
+.dino-modal__image {
+    border-radius: 8px;
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+.dino-modal__caption {
+    color: #25312f;
+    font-weight: 700;
+    margin: 0.8rem 0 0;
 }
 
 @media (max-width: 900px) {
