@@ -116,13 +116,13 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 ### Tests for User Story 3
 
-- [ ] T036 [P] [US3] Write integration tests that list and detail pages expose a visible home link targeting `/` in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
+- [X] T036 [P] [US3] Write integration tests that list and detail pages expose a visible home link targeting `/` in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
 
 ### Implementation for User Story 3
 
-- [ ] T037 [US3] Add visible home anchor to the dinosaur list page in `StoryBook/Pages/Dinosaurs/Index.cshtml`
-- [ ] T038 [US3] Add visible home anchor to the dinosaur details and not-found states in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T039 [US3] Style the home navigation control consistently with the dinosaur page actions in `StoryBook/wwwroot/css/dinosaurs.css`
+- [X] T037 [US3] Add visible home anchor to the dinosaur list page in `StoryBook/Pages/Dinosaurs/Index.cshtml`
+- [X] T038 [US3] Add visible home anchor to the dinosaur details and not-found states in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T039 [US3] Style the home navigation control consistently with the dinosaur page actions in `StoryBook/wwwroot/css/dinosaurs.css`
 
 **Checkpoint**: All P1 stories are complete and MVP can be validated end-to-end.
 

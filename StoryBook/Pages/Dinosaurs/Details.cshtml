@@ -5,11 +5,16 @@
 }
 
 <section class="dino-page" aria-labelledby="dino-detail-title">
+    <div class="dino-page__header">
+        <a class="dino-home-link" asp-page="/Index">回首頁</a>
+    </div>
+
     @if (Model.IsNotFound || Model.Profile is null)
     {
         <div class="dino-empty" role="status">
             <h1 id="dino-detail-title">找不到這位史前朋友</h1>
             <p>這個網址沒有對應的恐龍資料。你可以回到清單重新選一位朋友。</p>
+            <a class="dino-home-link" asp-page="/Index">回首頁</a>
             <a class="dino-action" asp-page="/Dinosaurs/Index">回恐龍介紹</a>
         </div>
     }

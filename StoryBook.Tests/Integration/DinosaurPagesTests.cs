@@ -64,4 +64,16 @@ public sealed class DinosaurPagesTests : IClassFixture<DinosaurPageTestFixture>
         Assert.Contains("下一頁", lastHtml);
         Assert.Contains("aria-disabled=\"true\"", lastHtml);
     }
+
+    [Fact]
+    public async Task Dinosaur_pages_expose_visible_home_link()
+    {
+        string listHtml = await _fixture.GetOkHtmlAsync("/dinosaurs");
+        string detailHtml = await _fixture.GetOkHtmlAsync("/dinosaurs/tyrannosaurus-rex");
+
+        Assert.Contains("回首頁", listHtml);
+        Assert.Contains("回首頁", detailHtml);
+        Assert.True(DinosaurPageTestFixture.HasLinkTo(listHtml, "/"));
+        Assert.True(DinosaurPageTestFixture.HasLinkTo(detailHtml, "/"));
+    }
 }
