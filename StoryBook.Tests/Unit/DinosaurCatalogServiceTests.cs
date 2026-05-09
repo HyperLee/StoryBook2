@@ -102,6 +102,20 @@ public sealed class DinosaurCatalogServiceTests
         Assert.Null(service.GetNextProfile("not-a-real-slug"));
     }
 
+    [Fact]
+    public void Search_matches_localized_fields_keywords_whitespace_punctuation_and_no_results()
+    {
+        DinosaurCatalogService service = CreateService();
+
+        Assert.Equal("tyrannosaurus-rex", Assert.Single(service.Search(" 暴，龍! ", LanguageCode.ZhTW)).Slug);
+        Assert.Contains(service.Search("Late Cretaceous", LanguageCode.En), profile => profile.Slug == "triceratops");
+        Assert.Contains(service.Search("North America", LanguageCode.En), profile => profile.Slug == "ankylosaurus");
+        Assert.Equal("ankylosaurus", Assert.Single(service.Search("club tail", LanguageCode.En)).Slug);
+        Assert.Equal("pteranodon", Assert.Single(service.Search("不是恐龍", LanguageCode.ZhTW)).Slug);
+        Assert.Empty(service.Search("沒有這種恐龍", LanguageCode.ZhTW));
+        Assert.Equal(8, service.Search("   ", LanguageCode.En).Count);
+    }
+
     private static DinosaurCatalogService CreateService(RecordingLogger<DinosaurCatalogService>? logger = null)
     {
         return new DinosaurCatalogService(

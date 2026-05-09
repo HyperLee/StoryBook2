@@ -157,18 +157,18 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 ### Tests for User Story 5
 
-- [ ] T045 [P] [US5] Write unit tests for catalog search across localized names, period, diet, locations, size, summary, keywords, whitespace, punctuation, and no-result input in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
-- [ ] T046 [P] [US5] Write integration tests for search input accessible name, result links, no-result message, clear control, and pteranodon category note on `/dinosaurs` in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
+- [X] T045 [P] [US5] Write unit tests for catalog search across localized names, period, diet, locations, size, summary, keywords, whitespace, punctuation, and no-result input in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
+- [X] T046 [P] [US5] Write integration tests for search input accessible name, result links, no-result message, clear control, and pteranodon category note on `/dinosaurs` in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
 
 ### Implementation for User Story 5
 
-- [ ] T047 [US5] Add search result projection model for list rendering and client filtering data in `StoryBook/Models/DinosaurSearchResult.cs`
-- [ ] T048 [US5] Extend catalog search normalization and result mapping in `StoryBook/Services/DinosaurCatalogService.cs`
-- [ ] T049 [US5] Expose searchable result data and friendly no-result text from the list PageModel in `StoryBook/Pages/Dinosaurs/Index.cshtml.cs`
-- [ ] T050 [US5] Add accessible search input, clear button, result list links, no-result region, and pteranodon category note in `StoryBook/Pages/Dinosaurs/Index.cshtml`
-- [ ] T051 [US5] Implement live filtering, clear search, special-character-safe matching, and result visibility updates in `StoryBook/wwwroot/js/dinosaurs.js`
-- [ ] T052 [US5] Load `dinosaurs.js` for the dinosaur list page through the scripts section in `StoryBook/Pages/Dinosaurs/Index.cshtml`
-- [ ] T053 [US5] Add search layout, result card, hidden/no-result, and clear-button focus styles in `StoryBook/wwwroot/css/dinosaurs.css`
+- [X] T047 [US5] Add search result projection model for list rendering and client filtering data in `StoryBook/Models/DinosaurSearchResult.cs`
+- [X] T048 [US5] Extend catalog search normalization and result mapping in `StoryBook/Services/DinosaurCatalogService.cs`
+- [X] T049 [US5] Expose searchable result data and friendly no-result text from the list PageModel in `StoryBook/Pages/Dinosaurs/Index.cshtml.cs`
+- [X] T050 [US5] Add accessible search input, clear button, result list links, no-result region, and pteranodon category note in `StoryBook/Pages/Dinosaurs/Index.cshtml`
+- [X] T051 [US5] Implement live filtering, clear search, special-character-safe matching, and result visibility updates in `StoryBook/wwwroot/js/dinosaurs.js`
+- [X] T052 [US5] Load `dinosaurs.js` for the dinosaur list page through the scripts section in `StoryBook/Pages/Dinosaurs/Index.cshtml`
+- [X] T053 [US5] Add search layout, result card, hidden/no-result, and clear-button focus styles in `StoryBook/wwwroot/css/dinosaurs.css`
 
 **Checkpoint**: Search can be validated without story display or language persistence.
 

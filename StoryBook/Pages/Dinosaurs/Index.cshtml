@@ -50,18 +50,44 @@
             </div>
         </article>
 
+        <section class="dino-search" aria-labelledby="dino-search-title">
+            <h2 id="dino-search-title">搜尋史前朋友</h2>
+            <div class="dino-search__controls">
+                <input class="form-control"
+                       type="search"
+                       aria-label="搜尋恐龍"
+                       placeholder="輸入名稱、時期、食性或地點"
+                       data-dino-search-input />
+                <button class="dino-clear-button" type="button" data-dino-clear-search>清除搜尋</button>
+            </div>
+            <p class="dino-no-results" data-dino-no-results hidden>沒有找到符合的史前朋友，清除搜尋再試一次。</p>
+        </section>
+
         <section class="dino-directory" aria-labelledby="dino-directory-title">
             <h2 id="dino-directory-title">全部史前朋友</h2>
             <div class="dino-grid">
-                @foreach (DinosaurProfile profile in Model.Profiles)
+                @foreach (DinosaurSearchResult result in Model.SearchResults)
                 {
-                    <a class="dino-card" asp-page="/Dinosaurs/Details" asp-route-slug="@profile.Slug">
-                        <img src="@profile.MainImage.Path"
-                             alt="@profile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
-                        <span>@profile.Names.Get(LanguageCode.ZhTW)</span>
+                    <a class="dino-card"
+                       asp-page="/Dinosaurs/Details"
+                       asp-route-slug="@result.Slug"
+                       data-dino-search-item
+                       data-dino-search-text="@result.SearchText">
+                        <img src="@result.ImagePath"
+                             alt="@result.ImageAltText" />
+                        <span>@result.Name</span>
+                        <small>@result.Summary</small>
+                        @if (!string.IsNullOrWhiteSpace(result.CategoryNote))
+                        {
+                            <em>@result.CategoryNote</em>
+                        }
                     </a>
                 }
             </div>
         </section>
     }
 </section>
+
+@section Scripts {
+    <script src="~/js/dinosaurs.js" asp-append-version="true"></script>
+}

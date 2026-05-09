@@ -135,8 +135,37 @@
     outline-offset: 3px;
 }
 
+.dino-search,
 .dino-directory {
     margin-top: 2.5rem;
+}
+
+.dino-search__controls {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.dino-clear-button {
+    background: #fff;
+    border: 2px solid #246a73;
+    border-radius: 8px;
+    color: #174950;
+    font-weight: 700;
+    min-height: 44px;
+    padding: 0.5rem 0.85rem;
+}
+
+.dino-clear-button:focus-visible {
+    outline: 4px solid #f6c85f;
+    outline-offset: 3px;
+}
+
+.dino-no-results {
+    background: #fff3cd;
+    border-radius: 8px;
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
 }
 
 .dino-grid {
@@ -154,6 +183,21 @@
 .dino-card span {
     display: block;
     margin-top: 0.5rem;
+}
+
+.dino-card small,
+.dino-card em {
+    display: block;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.45;
+    margin-top: 0.35rem;
+}
+
+.dino-card em {
+    color: #246a73;
+    font-weight: 700;
 }
 
 .dino-empty {
@@ -231,7 +275,8 @@
 @media (max-width: 768px) {
     .dino-facts,
     .dino-grid,
-    .dino-pager {
+    .dino-pager,
+    .dino-search__controls {
         grid-template-columns: 1fr;
     }
 }

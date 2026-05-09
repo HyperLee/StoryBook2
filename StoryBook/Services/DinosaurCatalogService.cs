@@ -115,6 +115,25 @@ public sealed class DinosaurCatalogService
             .ToList();
     }
 
+    /// <summary>
+    /// Maps sorted profiles into list-page search result projections for the selected language.
+    /// </summary>
+    public IReadOnlyList<DinosaurSearchResult> GetSearchResults(LanguageCode language)
+    {
+        return GetProfiles()
+            .Select(profile => new DinosaurSearchResult
+            {
+                Slug = profile.Slug,
+                Name = profile.Names.Get(language),
+                Summary = profile.Summary.Get(language),
+                ImagePath = profile.MainImage.Path,
+                ImageAltText = profile.MainImage.AltText.Get(language),
+                SearchText = BuildClientSearchText(profile),
+                CategoryNote = profile.NotDinosaurNote?.Get(language)
+            })
+            .ToList();
+    }
+
     private IReadOnlyList<DinosaurProfile> LoadProfiles()
     {
         string path = ResolveContentPath();
@@ -216,6 +235,35 @@ public sealed class DinosaurCatalogService
         });
 
         return NormalizeForSearch(string.Join(' ', fields.Concat(keywords)));
+    }
+
+    private static string BuildClientSearchText(DinosaurProfile profile)
+    {
+        IEnumerable<string> fields =
+        [
+            profile.Names.ZhTW,
+            profile.Names.En,
+            profile.Periods.ZhTW,
+            profile.Periods.En,
+            profile.Diet.ZhTW,
+            profile.Diet.En,
+            profile.DiscoveryLocations.ZhTW,
+            profile.DiscoveryLocations.En,
+            profile.SizeDescription.ZhTW,
+            profile.SizeDescription.En,
+            profile.Summary.ZhTW,
+            profile.Summary.En,
+            profile.NotDinosaurNote?.ZhTW ?? string.Empty,
+            profile.NotDinosaurNote?.En ?? string.Empty
+        ];
+
+        IEnumerable<string> keywords = profile.SearchKeywords.SelectMany(keyword => new[]
+        {
+            keyword.ZhTW,
+            keyword.En
+        });
+
+        return string.Join(' ', fields.Concat(keywords));
     }
 
     private static string NormalizeForSearch(string? value)

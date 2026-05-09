@@ -15,12 +15,15 @@ public sealed class IndexModel : PageModel
 
     public IReadOnlyList<DinosaurProfile> Profiles { get; private set; } = [];
 
+    public IReadOnlyList<DinosaurSearchResult> SearchResults { get; private set; } = [];
+
     public DinosaurProfile? FirstProfile { get; private set; }
 
     public void OnGet()
     {
         ViewData["UseDinosaurAssets"] = true;
         Profiles = _catalogService.GetProfiles();
+        SearchResults = _catalogService.GetSearchResults(LanguageCode.ZhTW);
         FirstProfile = Profiles.FirstOrDefault();
     }
 }

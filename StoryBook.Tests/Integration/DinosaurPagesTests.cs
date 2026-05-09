@@ -92,4 +92,20 @@ public sealed class DinosaurPagesTests : IClassFixture<DinosaurPageTestFixture>
         Assert.Contains("可愛繪本風暴龍站在綠色草地上張開微笑大嘴", html);
         Assert.Contains("dinosaurs", html);
     }
+
+    [Fact]
+    public async Task Dinosaur_list_renders_accessible_search_contract()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/dinosaurs");
+
+        Assert.Contains("aria-label=\"搜尋恐龍\"", html);
+        Assert.Contains("data-dino-search-input", html);
+        Assert.Contains("data-dino-search-item", html);
+        Assert.Contains("data-dino-search-text", html);
+        Assert.Contains("清除搜尋", html);
+        Assert.Contains("data-dino-clear-search", html);
+        Assert.Contains("沒有找到符合的史前朋友", html);
+        Assert.Contains("史前飛行爬行類", html);
+        Assert.True(DinosaurPageTestFixture.HasLinkTo(html, "/dinosaurs/pteranodon"));
+    }
 }
