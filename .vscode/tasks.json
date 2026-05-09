@@ -1,0 +1,73 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "restore",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "restore",
+        "${workspaceFolder}/StoryBook2.sln"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build StoryBook",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/StoryBook/StoryBook.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": "restore",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build solution",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/StoryBook2.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "group": "build",
+      "dependsOn": "restore",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "test",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "${workspaceFolder}/StoryBook2.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "group": "test",
+      "dependsOn": "build solution",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "watch StoryBook",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "watch",
+        "--project",
+        "${workspaceFolder}/StoryBook/StoryBook.csproj",
+        "run"
+      ],
+      "isBackground": true,
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}

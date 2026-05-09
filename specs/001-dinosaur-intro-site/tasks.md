@@ -222,10 +222,10 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 **Purpose**: 完成跨故事品質、驗收與交付檢查。
 
-- [ ] T066 [P] Add integration tests for `/dinosaurs/not-a-real-slug` friendly not-found status, home link, and list link in `StoryBook.Tests/Integration/RoutingAndFallbackTests.cs`
-- [ ] T067 [P] Add integration tests for canonical `/dinosaurs` and `/dinosaurs/{slug}` routes without JavaScript-only routing in `StoryBook.Tests/Integration/RoutingAndFallbackTests.cs`
-- [ ] T068 Review public XML documentation for reusable models, services, options, and helpers in `StoryBook/Models/DinosaurProfile.cs` and `StoryBook/Services/DinosaurCatalogService.cs`
-- [ ] T069 Run `dotnet restore StoryBook2.sln`, `dotnet build StoryBook2.sln`, and `dotnet test StoryBook2.sln` from the repository root described in `specs/001-dinosaur-intro-site/quickstart.md`
+- [X] T066 [P] Add integration tests for `/dinosaurs/not-a-real-slug` friendly not-found status, home link, and list link in `StoryBook.Tests/Integration/RoutingAndFallbackTests.cs`
+- [X] T067 [P] Add integration tests for canonical `/dinosaurs` and `/dinosaurs/{slug}` routes without JavaScript-only routing in `StoryBook.Tests/Integration/RoutingAndFallbackTests.cs`
+- [X] T068 Review public XML documentation for reusable models, services, options, and helpers in `StoryBook/Models/DinosaurProfile.cs` and `StoryBook/Services/DinosaurCatalogService.cs`
+- [X] T069 Run `dotnet restore StoryBook2.sln`, `dotnet build StoryBook2.sln`, and `dotnet test StoryBook2.sln` from the repository root described in `specs/001-dinosaur-intro-site/quickstart.md`
 - [ ] T070 Execute the manual keyboard, modal, search, browser history, language persistence, responsive layout, and not-found checklist in `specs/001-dinosaur-intro-site/quickstart.md`
 - [ ] T071 Check generated catalog and configuration for secrets, external data URLs, and unapproved dependencies in `StoryBook/Data/dinosaurs.json`
 - [ ] T072 Confirm no feature JavaScript depends on jQuery and no data file was placed under public `wwwroot` data paths in `StoryBook/wwwroot/js/dinosaurs.js`
