@@ -37,7 +37,7 @@ description: "兒童恐龍介紹網站實作任務清單"
 ### Tests for Foundation
 
 - [ ] T004 [P] Write content validation tests for schema shape, 8 profiles, unique kebab-case slugs, sort order, pteranodon category, readable-unit limits, story length, and bilingual alt text in `StoryBook.Tests/Unit/DinosaurContentValidationTests.cs`
-- [ ] T005 [P] Write catalog service tests for JSON loading, ordering, slug lookup, unknown slug handling, and field fallback behavior in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
+- [ ] T005 [P] Write catalog service tests for JSON loading, ordering, slug lookup, unknown slug handling, field fallback behavior, logger calls, and cached lookup/search p95 under 200ms in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
 - [ ] T006 [P] Write language preference tests for `zh-TW`, `en`, invalid values, and `storybook.language` storage key behavior in `StoryBook.Tests/Unit/LanguagePreferenceServiceTests.cs`
 - [ ] T007 [P] Write integration test fixture using `WebApplicationFactory<Program>` and shared HTML helpers in `StoryBook.Tests/Integration/DinosaurPageTestFixture.cs`
 
@@ -50,7 +50,7 @@ description: "兒童恐龍介紹網站實作任務清單"
 - [ ] T012 Create dinosaur profile model with slug, category, sort order, localized facts, summary, main image, story, and keywords in `StoryBook/Models/DinosaurProfile.cs`
 - [ ] T013 Create catalog options for the JSON content path in `StoryBook/Services/DinosaurCatalogOptions.cs`
 - [ ] T014 Create content validation service for slug, language, readable-unit, pteranodon, story, image, and keyword rules in `StoryBook/Services/DinosaurContentValidator.cs`
-- [ ] T015 Create catalog service that loads `StoryBook/Data/dinosaurs.json`, validates content, caches sorted profiles, resolves slugs, searches fields, and logs validation or load failures in `StoryBook/Services/DinosaurCatalogService.cs`
+- [ ] T015 Create catalog service that loads `StoryBook/Data/dinosaurs.json`, validates content, caches sorted profiles, resolves slugs, searches fields, and logs validation failures, load failures, unknown slugs, and unexpected exceptions in `StoryBook/Services/DinosaurCatalogService.cs`
 - [ ] T016 Create language preference service with default `zh-TW`, supported-code parsing, and storage key metadata in `StoryBook/Services/LanguagePreferenceService.cs`
 - [ ] T017 Register catalog options, catalog service, validator, and language preference service in `StoryBook/Program.cs`
 - [ ] T018 Create complete bilingual catalog content for 暴龍、三角龍、劍龍、腕龍、迅猛龍、翼龍、甲龍、副櫛龍 in `StoryBook/Data/dinosaurs.json`
@@ -79,7 +79,7 @@ description: "兒童恐龍介紹網站實作任務清單"
 - [ ] T025 [US1] Create dinosaur list Razor page showing the first profile and links to all profiles in `StoryBook/Pages/Dinosaurs/Index.cshtml`
 - [ ] T026 [US1] Create dinosaur details PageModel that resolves valid slugs and exposes friendly not-found state in `StoryBook/Pages/Dinosaurs/Details.cshtml.cs`
 - [ ] T027 [US1] Create dinosaur details Razor page with required profile fields, main image, and child-friendly empty/error messages in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T028 [US1] Add feature stylesheet link and initial desktop/laptop layout styles in `StoryBook/wwwroot/css/dinosaurs.css`
+- [ ] T028 [US1] Add feature stylesheet link plus initial desktop/laptop and 768px-minimum responsive layout styles in `StoryBook/wwwroot/css/dinosaurs.css`
 - [ ] T029 [US1] Include `dinosaurs.css` for dinosaur pages without changing unrelated template pages in `StoryBook/Pages/Shared/_Layout.cshtml`
 
 **Checkpoint**: User Story 1 is independently demoable from home to dinosaur content and direct detail URLs.
@@ -102,7 +102,7 @@ description: "兒童恐龍介紹網站實作任務清單"
 - [ ] T032 [US2] Add previous/next navigation result methods to the catalog service in `StoryBook/Services/DinosaurCatalogService.cs`
 - [ ] T033 [US2] Expose previous and next profile links from the details PageModel in `StoryBook/Pages/Dinosaurs/Details.cshtml.cs`
 - [ ] T034 [US2] Render child-friendly previous/next anchor controls with disabled boundary states in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T035 [US2] Add large, keyboard-visible navigation control styles in `StoryBook/wwwroot/css/dinosaurs.css`
+- [ ] T035 [US2] Add navigation control styles with visible focus states and at least 44x44 CSS px interactive targets in `StoryBook/wwwroot/css/dinosaurs.css`
 
 **Checkpoint**: User Story 2 can be validated without search, language switching, or modal behavior.
 
@@ -226,7 +226,7 @@ description: "兒童恐龍介紹網站實作任務清單"
 - [ ] T067 [P] Add integration tests for canonical `/dinosaurs` and `/dinosaurs/{slug}` routes without JavaScript-only routing in `StoryBook.Tests/Integration/RoutingAndFallbackTests.cs`
 - [ ] T068 Review public XML documentation for reusable models, services, options, and helpers in `StoryBook/Models/DinosaurProfile.cs` and `StoryBook/Services/DinosaurCatalogService.cs`
 - [ ] T069 Run `dotnet restore StoryBook2.sln`, `dotnet build StoryBook2.sln`, and `dotnet test StoryBook2.sln` from the repository root described in `specs/001-dinosaur-intro-site/quickstart.md`
-- [ ] T070 Execute the manual keyboard, modal, search, browser history, language persistence, and not-found checklist in `specs/001-dinosaur-intro-site/quickstart.md`
+- [ ] T070 Execute the manual keyboard, modal, search, browser history, language persistence, responsive layout, and not-found checklist in `specs/001-dinosaur-intro-site/quickstart.md`
 - [ ] T071 Check generated catalog and configuration for secrets, external data URLs, and unapproved dependencies in `StoryBook/Data/dinosaurs.json`
 - [ ] T072 Confirm no feature JavaScript depends on jQuery and no data file was placed under public `wwwroot` data paths in `StoryBook/wwwroot/js/dinosaurs.js`
 

@@ -42,6 +42,7 @@ Open the HTTPS or HTTP URL printed by `dotnet run`, then verify the routes below
 9. 重新整理頁面或開啟另一筆恐龍介紹，確認語言偏好保持。
 10. 開啟 `/dinosaurs/not-a-real-slug`，確認顯示友善找不到內容提示，並可返回首頁或完整清單。
 11. 使用鍵盤 Tab/Shift+Tab/Enter/Space 完成入口、搜尋、語言切換、上一頁/下一頁、開關大圖與回首頁流程。
+12. 在 1366x768 與 768px 寬度檢查主要介紹內容不需水平捲動，且上一頁、下一頁、回首頁、搜尋清除與語言切換控制項維持可見且容易操作。
 
 ## Content Validation
 
@@ -50,6 +51,7 @@ Open the HTTPS or HTTP URL printed by `dotnet run`, then verify the routes below
 - 8 筆 `slug` 唯一且符合 kebab-case。
 - 每筆都有 `zh-TW` 與 `en` 內容。
 - 每篇簡介符合 200 個可閱讀單位限制。
+- 快取後 slug lookup 與搜尋查詢 p95 低於 200ms。
 - 每則小故事符合 100-150 個可閱讀單位限制。
 - 翼龍 `category` 為 `prehistoric-flying-reptile` 且有非恐龍說明。
 - 每張主圖與故事插圖都有雙語 alt text。
