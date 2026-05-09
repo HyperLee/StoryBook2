@@ -84,6 +84,24 @@ public sealed class DinosaurCatalogServiceTests
         Assert.InRange(DinosaurContentValidator.CountReadableUnits(first.Summary.En, LanguageCode.En), 1, 200);
     }
 
+    [Fact]
+    public void Previous_and_next_navigation_handles_first_middle_last_and_unknown_slugs()
+    {
+        DinosaurCatalogService service = CreateService();
+
+        Assert.Null(service.GetPreviousProfile("tyrannosaurus-rex"));
+        Assert.Equal("triceratops", service.GetNextProfile("tyrannosaurus-rex")?.Slug);
+
+        Assert.Equal("tyrannosaurus-rex", service.GetPreviousProfile("triceratops")?.Slug);
+        Assert.Equal("stegosaurus", service.GetNextProfile("triceratops")?.Slug);
+
+        Assert.Equal("ankylosaurus", service.GetPreviousProfile("parasaurolophus")?.Slug);
+        Assert.Null(service.GetNextProfile("parasaurolophus"));
+
+        Assert.Null(service.GetPreviousProfile("not-a-real-slug"));
+        Assert.Null(service.GetNextProfile("not-a-real-slug"));
+    }
+
     private static DinosaurCatalogService CreateService(RecordingLogger<DinosaurCatalogService>? logger = null)
     {
         return new DinosaurCatalogService(

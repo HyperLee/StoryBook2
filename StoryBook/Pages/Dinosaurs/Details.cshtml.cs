@@ -15,6 +15,10 @@ public sealed class DetailsModel : PageModel
 
     public DinosaurProfile? Profile { get; private set; }
 
+    public DinosaurProfile? PreviousProfile { get; private set; }
+
+    public DinosaurProfile? NextProfile { get; private set; }
+
     public bool IsNotFound { get; private set; }
 
     public void OnGet(string slug)
@@ -24,6 +28,8 @@ public sealed class DetailsModel : PageModel
         if (_catalogService.TryGetBySlug(slug, out DinosaurProfile? profile))
         {
             Profile = profile;
+            PreviousProfile = _catalogService.GetPreviousProfile(slug);
+            NextProfile = _catalogService.GetNextProfile(slug);
             return;
         }
 

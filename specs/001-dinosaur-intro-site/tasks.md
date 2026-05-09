@@ -94,15 +94,15 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 ### Tests for User Story 2
 
-- [ ] T030 [P] [US2] Write unit tests for previous/next navigation at first, middle, last, and single-profile boundaries in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
-- [ ] T031 [P] [US2] Write integration tests for previous/next anchor hrefs and disabled boundary states in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
+- [X] T030 [P] [US2] Write unit tests for previous/next navigation at first, middle, last, and single-profile boundaries in `StoryBook.Tests/Unit/DinosaurCatalogServiceTests.cs`
+- [X] T031 [P] [US2] Write integration tests for previous/next anchor hrefs and disabled boundary states in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
 
 ### Implementation for User Story 2
 
-- [ ] T032 [US2] Add previous/next navigation result methods to the catalog service in `StoryBook/Services/DinosaurCatalogService.cs`
-- [ ] T033 [US2] Expose previous and next profile links from the details PageModel in `StoryBook/Pages/Dinosaurs/Details.cshtml.cs`
-- [ ] T034 [US2] Render child-friendly previous/next anchor controls with disabled boundary states in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T035 [US2] Add navigation control styles with visible focus states and at least 44x44 CSS px interactive targets in `StoryBook/wwwroot/css/dinosaurs.css`
+- [X] T032 [US2] Add previous/next navigation result methods to the catalog service in `StoryBook/Services/DinosaurCatalogService.cs`
+- [X] T033 [US2] Expose previous and next profile links from the details PageModel in `StoryBook/Pages/Dinosaurs/Details.cshtml.cs`
+- [X] T034 [US2] Render child-friendly previous/next anchor controls with disabled boundary states in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T035 [US2] Add navigation control styles with visible focus states and at least 44x44 CSS px interactive targets in `StoryBook/wwwroot/css/dinosaurs.css`
 
 **Checkpoint**: User Story 2 can be validated without search, language switching, or modal behavior.
 

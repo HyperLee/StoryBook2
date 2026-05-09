@@ -46,4 +46,22 @@ public sealed class DinosaurPagesTests : IClassFixture<DinosaurPageTestFixture>
         Assert.Contains("tyrannosaurus-rex-main.png", html);
         Assert.Contains("可愛繪本風暴龍", html);
     }
+
+    [Fact]
+    public async Task Dinosaur_detail_exposes_previous_next_anchor_navigation_and_disabled_boundaries()
+    {
+        string firstHtml = await _fixture.GetOkHtmlAsync("/dinosaurs/tyrannosaurus-rex");
+        Assert.Contains("上一頁", firstHtml);
+        Assert.Contains("aria-disabled=\"true\"", firstHtml);
+        Assert.True(DinosaurPageTestFixture.HasLinkTo(firstHtml, "/dinosaurs/triceratops"));
+
+        string middleHtml = await _fixture.GetOkHtmlAsync("/dinosaurs/triceratops");
+        Assert.True(DinosaurPageTestFixture.HasLinkTo(middleHtml, "/dinosaurs/tyrannosaurus-rex"));
+        Assert.True(DinosaurPageTestFixture.HasLinkTo(middleHtml, "/dinosaurs/stegosaurus"));
+
+        string lastHtml = await _fixture.GetOkHtmlAsync("/dinosaurs/parasaurolophus");
+        Assert.True(DinosaurPageTestFixture.HasLinkTo(lastHtml, "/dinosaurs/ankylosaurus"));
+        Assert.Contains("下一頁", lastHtml);
+        Assert.Contains("aria-disabled=\"true\"", lastHtml);
+    }
 }

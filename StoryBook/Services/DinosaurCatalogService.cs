@@ -51,6 +51,37 @@ public sealed class DinosaurCatalogService
     }
 
     /// <summary>
+    /// Gets the previous profile in sort order, or <see langword="null" /> at the first item or unknown slug.
+    /// </summary>
+    public DinosaurProfile? GetPreviousProfile(string? slug)
+    {
+        int index = FindProfileIndex(slug);
+
+        if (index <= 0)
+        {
+            return null;
+        }
+
+        return GetProfiles()[index - 1];
+    }
+
+    /// <summary>
+    /// Gets the next profile in sort order, or <see langword="null" /> at the last item or unknown slug.
+    /// </summary>
+    public DinosaurProfile? GetNextProfile(string? slug)
+    {
+        int index = FindProfileIndex(slug);
+        IReadOnlyList<DinosaurProfile> profiles = GetProfiles();
+
+        if (index < 0 || index >= profiles.Count - 1)
+        {
+            return null;
+        }
+
+        return profiles[index + 1];
+    }
+
+    /// <summary>
     /// Attempts to resolve a profile by slug and logs unknown slugs.
     /// </summary>
     public bool TryGetBySlug(string? slug, out DinosaurProfile? profile)
@@ -122,6 +153,22 @@ public sealed class DinosaurCatalogService
             _logger.LogError(exception, "Unexpected error while loading dinosaur content catalog from {Path}", path);
             throw;
         }
+    }
+
+    private int FindProfileIndex(string? slug)
+    {
+        string normalizedSlug = slug?.Trim().ToLowerInvariant() ?? string.Empty;
+        IReadOnlyList<DinosaurProfile> profiles = GetProfiles();
+
+        for (int index = 0; index < profiles.Count; index++)
+        {
+            if (profiles[index].Slug == normalizedSlug)
+            {
+                return index;
+            }
+        }
+
+        return -1;
     }
 
     private string ResolveContentPath()

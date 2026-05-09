@@ -136,6 +136,41 @@
     padding: 0.9rem 1rem;
 }
 
+.dino-pager {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1.5rem;
+}
+
+.dino-page-link {
+    align-items: center;
+    border: 2px solid #246a73;
+    border-radius: 8px;
+    color: #174950;
+    display: inline-flex;
+    font-weight: 700;
+    min-height: 44px;
+    padding: 0.65rem 0.9rem;
+    text-decoration: none;
+}
+
+.dino-page-link:hover,
+.dino-page-link:focus {
+    background: #e6f5f9;
+    color: #174950;
+}
+
+.dino-page-link:focus-visible {
+    outline: 4px solid #f6c85f;
+    outline-offset: 3px;
+}
+
+.dino-page-link--disabled {
+    border-color: #b8c4c0;
+    color: #66736f;
+}
+
 @media (max-width: 900px) {
     .dino-feature,
     .dino-detail {
@@ -149,7 +184,8 @@
 
 @media (max-width: 768px) {
     .dino-facts,
-    .dino-grid {
+    .dino-grid,
+    .dino-pager {
         grid-template-columns: 1fr;
     }
 }

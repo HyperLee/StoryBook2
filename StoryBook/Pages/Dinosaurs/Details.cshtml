@@ -50,6 +50,29 @@
                 {
                     <p class="dino-note">@Model.Profile.NotDinosaurNote.Get(LanguageCode.ZhTW)</p>
                 }
+                <nav class="dino-pager" aria-label="恐龍換頁">
+                    @if (Model.PreviousProfile is null)
+                    {
+                        <span class="dino-page-link dino-page-link--disabled" aria-disabled="true">上一頁</span>
+                    }
+                    else
+                    {
+                        <a class="dino-page-link" asp-page="/Dinosaurs/Details" asp-route-slug="@Model.PreviousProfile.Slug">
+                            上一頁：@Model.PreviousProfile.Names.Get(LanguageCode.ZhTW)
+                        </a>
+                    }
+
+                    @if (Model.NextProfile is null)
+                    {
+                        <span class="dino-page-link dino-page-link--disabled" aria-disabled="true">下一頁</span>
+                    }
+                    else
+                    {
+                        <a class="dino-page-link" asp-page="/Dinosaurs/Details" asp-route-slug="@Model.NextProfile.Slug">
+                            下一頁：@Model.NextProfile.Names.Get(LanguageCode.ZhTW)
+                        </a>
+                    }
+                </nav>
             </div>
         </article>
     }
