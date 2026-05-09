@@ -22,9 +22,9 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 **Purpose**: 建立測試專案與 ASP.NET Core 整合測試所需基礎。
 
-- [ ] T001 Create xUnit test project configuration with `Microsoft.NET.Test.Sdk`, `xunit`, `xunit.runner.visualstudio`, `coverlet.collector`, and `Microsoft.AspNetCore.Mvc.Testing` in `StoryBook.Tests/StoryBook.Tests.csproj`
-- [ ] T002 Add `StoryBook.Tests/StoryBook.Tests.csproj` to the solution in `StoryBook2.sln`
-- [ ] T003 Expose the top-level ASP.NET Core entry point for `WebApplicationFactory<Program>` by adding `public partial class Program` in `StoryBook/Program.cs`
+- [X] T001 Create xUnit test project configuration with `Microsoft.NET.Test.Sdk`, `xunit`, `xunit.runner.visualstudio`, `coverlet.collector`, and `Microsoft.AspNetCore.Mvc.Testing` in `StoryBook.Tests/StoryBook.Tests.csproj`
+- [X] T002 Add `StoryBook.Tests/StoryBook.Tests.csproj` to the solution in `StoryBook2.sln`
+- [X] T003 Expose the top-level ASP.NET Core entry point for `WebApplicationFactory<Program>` by adding `public partial class Program` in `StoryBook/Program.cs`
 
 ---
 

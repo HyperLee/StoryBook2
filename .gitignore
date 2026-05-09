@@ -5,6 +5,7 @@
 
 # dotenv files
 .env
+.env*
 
 # User-specific files
 *.rsuser
@@ -238,6 +239,11 @@ _pkginfo.txt
 # Others
 ClientBin/
 ~$*
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
 *~
 *.dbmdl
 *.dbproj.schemaview
