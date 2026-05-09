@@ -38,4 +38,23 @@ public sealed class LanguagePreferenceServiceTests
         Assert.Equal("zh-TW", service.ToStorageValue(LanguageCode.ZhTW));
         Assert.Equal("en", service.ToStorageValue(LanguageCode.En));
     }
+
+    [Fact]
+    public void Missing_localized_display_text_falls_back_without_blank_content()
+    {
+        DinosaurText missingEnglish = new()
+        {
+            ZhTW = "繁體中文",
+            En = ""
+        };
+
+        DinosaurText missingChinese = new()
+        {
+            ZhTW = "",
+            En = "English text"
+        };
+
+        Assert.Equal("繁體中文", missingEnglish.Get(LanguageCode.En));
+        Assert.Equal("English text", missingChinese.Get(LanguageCode.ZhTW));
+    }
 }

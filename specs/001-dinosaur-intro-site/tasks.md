@@ -203,16 +203,16 @@ description: "兒童恐龍介紹網站實作任務清單"
 
 ### Tests for User Story 7
 
-- [ ] T059 [P] [US7] Write integration tests that list and detail pages emit bilingual text attributes, language switch controls, and `storybook.language` metadata in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
-- [ ] T060 [P] [US7] Extend language preference unit tests for fallback display text and missing localized content behavior in `StoryBook.Tests/Unit/LanguagePreferenceServiceTests.cs`
+- [X] T059 [P] [US7] Write integration tests that list and detail pages emit bilingual text attributes, language switch controls, and `storybook.language` metadata in `StoryBook.Tests/Integration/DinosaurPagesTests.cs`
+- [X] T060 [P] [US7] Extend language preference unit tests for fallback display text and missing localized content behavior in `StoryBook.Tests/Unit/LanguagePreferenceServiceTests.cs`
 
 ### Implementation for User Story 7
 
-- [ ] T061 [US7] Add language switch controls and localized navigation text containers to the shared layout in `StoryBook/Pages/Shared/_Layout.cshtml`
-- [ ] T062 [US7] Add bilingual data attributes for list labels, search messages, result text, and category notes in `StoryBook/Pages/Dinosaurs/Index.cshtml`
-- [ ] T063 [US7] Add bilingual data attributes for detail facts, navigation labels, modal labels, story text, image alt/caption, and not-found messages in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T064 [US7] Implement localStorage language initialization, invalid-value fallback, text swapping, alt/caption swapping, and cross-page persistence in `StoryBook/wwwroot/js/dinosaurs.js`
-- [ ] T065 [US7] Add language switcher layout and visible focus states in `StoryBook/wwwroot/css/dinosaurs.css`
+- [X] T061 [US7] Add language switch controls and localized navigation text containers to the shared layout in `StoryBook/Pages/Shared/_Layout.cshtml`
+- [X] T062 [US7] Add bilingual data attributes for list labels, search messages, result text, and category notes in `StoryBook/Pages/Dinosaurs/Index.cshtml`
+- [X] T063 [US7] Add bilingual data attributes for detail facts, navigation labels, modal labels, story text, image alt/caption, and not-found messages in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T064 [US7] Implement localStorage language initialization, invalid-value fallback, text swapping, alt/caption swapping, and cross-page persistence in `StoryBook/wwwroot/js/dinosaurs.js`
+- [X] T065 [US7] Add language switcher layout and visible focus states in `StoryBook/wwwroot/css/dinosaurs.css`
 
 **Checkpoint**: P3 language switching is independently testable across list, detail, modal, and not-found states.
 

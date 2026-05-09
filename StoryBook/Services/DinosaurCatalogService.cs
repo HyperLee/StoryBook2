@@ -125,11 +125,19 @@ public sealed class DinosaurCatalogService
             {
                 Slug = profile.Slug,
                 Name = profile.Names.Get(language),
+                NameZhTW = profile.Names.Get(LanguageCode.ZhTW),
+                NameEn = profile.Names.Get(LanguageCode.En),
                 Summary = profile.Summary.Get(language),
+                SummaryZhTW = profile.Summary.Get(LanguageCode.ZhTW),
+                SummaryEn = profile.Summary.Get(LanguageCode.En),
                 ImagePath = profile.MainImage.Path,
                 ImageAltText = profile.MainImage.AltText.Get(language),
+                ImageAltTextZhTW = profile.MainImage.AltText.Get(LanguageCode.ZhTW),
+                ImageAltTextEn = profile.MainImage.AltText.Get(LanguageCode.En),
                 SearchText = BuildClientSearchText(profile),
-                CategoryNote = profile.NotDinosaurNote?.Get(language)
+                CategoryNote = profile.NotDinosaurNote?.Get(language),
+                CategoryNoteZhTW = profile.NotDinosaurNote?.Get(LanguageCode.ZhTW),
+                CategoryNoteEn = profile.NotDinosaurNote?.Get(LanguageCode.En)
             })
             .ToList();
     }

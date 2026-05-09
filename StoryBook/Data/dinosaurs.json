@@ -380,8 +380,8 @@
         "en": "Pteranodon was a prehistoric flying reptile, not a true dinosaur. It had wide wings and may have glided near the sea while looking for fish close to the water."
       },
       "notDinosaurNote": {
-        "zhTW": "翼龍不是恐龍，而是和恐龍生活在同一時代的史前飛行爬行類。",
-        "en": "Pteranodon was not a dinosaur; it was a prehistoric flying reptile that lived during the dinosaur age."
+        "zhTW": "史前飛行爬行類，不是真正恐龍；翼龍和恐龍生活在同一時代。",
+        "en": "Prehistoric flying reptile, not a true dinosaur; Pteranodon lived during the dinosaur age."
       },
       "mainImage": {
         "path": "/images/dinosaurs/pteranodon-main.png",

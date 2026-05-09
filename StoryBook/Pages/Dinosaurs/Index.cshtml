@@ -7,15 +7,15 @@
 <section class="dino-page" aria-labelledby="dino-list-title">
     <div class="dino-page__header">
         <div>
-            <p class="dino-kicker">兒童恐龍介紹</p>
-            <h1 id="dino-list-title">恐龍介紹</h1>
+            <p class="dino-kicker" data-i18n-zh-tw="兒童恐龍介紹" data-i18n-en="Dinosaur Guide">兒童恐龍介紹</p>
+            <h1 id="dino-list-title" data-i18n-zh-tw="恐龍介紹" data-i18n-en="Dinosaur Guide">恐龍介紹</h1>
         </div>
-        <a class="dino-home-link" asp-page="/Index">回首頁</a>
+        <a class="dino-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
     </div>
 
     @if (Model.FirstProfile is null)
     {
-        <div class="dino-empty" role="status">
+        <div class="dino-empty" role="status" data-i18n-zh-tw="恐龍資料暫時睡著了，請稍後再回來看看。" data-i18n-en="The dinosaur data is resting for now. Please come back later.">
             恐龍資料暫時睡著了，請稍後再回來看看。
         </div>
     }
@@ -24,47 +24,53 @@
         <article class="dino-feature">
             <div class="dino-feature__media">
                 <img src="@Model.FirstProfile.MainImage.Path"
-                     alt="@Model.FirstProfile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
+                     alt="@Model.FirstProfile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                     data-alt-zh-tw="@Model.FirstProfile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                     data-alt-en="@Model.FirstProfile.MainImage.AltText.Get(LanguageCode.En)" />
             </div>
             <div class="dino-feature__body">
-                <p class="dino-kicker">第一位朋友</p>
-                <h2>@Model.FirstProfile.Names.Get(LanguageCode.ZhTW)</h2>
+                <p class="dino-kicker" data-i18n-zh-tw="第一位朋友" data-i18n-en="First friend">第一位朋友</p>
+                <h2 data-i18n-zh-tw="@Model.FirstProfile.Names.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.FirstProfile.Names.Get(LanguageCode.En)">@Model.FirstProfile.Names.Get(LanguageCode.ZhTW)</h2>
                 <dl class="dino-facts">
                     <div>
-                        <dt>生活時期</dt>
-                        <dd>@Model.FirstProfile.Periods.Get(LanguageCode.ZhTW)</dd>
+                        <dt data-i18n-zh-tw="生活時期" data-i18n-en="Period">生活時期</dt>
+                        <dd data-i18n-zh-tw="@Model.FirstProfile.Periods.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.FirstProfile.Periods.Get(LanguageCode.En)">@Model.FirstProfile.Periods.Get(LanguageCode.ZhTW)</dd>
                     </div>
                     <div>
-                        <dt>食性</dt>
-                        <dd>@Model.FirstProfile.Diet.Get(LanguageCode.ZhTW)</dd>
+                        <dt data-i18n-zh-tw="食性" data-i18n-en="Diet">食性</dt>
+                        <dd data-i18n-zh-tw="@Model.FirstProfile.Diet.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.FirstProfile.Diet.Get(LanguageCode.En)">@Model.FirstProfile.Diet.Get(LanguageCode.ZhTW)</dd>
                     </div>
                     <div>
-                        <dt>發現地點</dt>
-                        <dd>@Model.FirstProfile.DiscoveryLocations.Get(LanguageCode.ZhTW)</dd>
+                        <dt data-i18n-zh-tw="發現地點" data-i18n-en="Found in">發現地點</dt>
+                        <dd data-i18n-zh-tw="@Model.FirstProfile.DiscoveryLocations.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.FirstProfile.DiscoveryLocations.Get(LanguageCode.En)">@Model.FirstProfile.DiscoveryLocations.Get(LanguageCode.ZhTW)</dd>
                     </div>
                 </dl>
-                <p>@Model.FirstProfile.Summary.Get(LanguageCode.ZhTW)</p>
+                <p data-i18n-zh-tw="@Model.FirstProfile.Summary.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.FirstProfile.Summary.Get(LanguageCode.En)">@Model.FirstProfile.Summary.Get(LanguageCode.ZhTW)</p>
                 <a class="dino-action" asp-page="/Dinosaurs/Details" asp-route-slug="@Model.FirstProfile.Slug">
-                    閱讀 @Model.FirstProfile.Names.Get(LanguageCode.ZhTW)
+                    <span data-i18n-zh-tw="閱讀 @Model.FirstProfile.Names.Get(LanguageCode.ZhTW)" data-i18n-en="Read @Model.FirstProfile.Names.Get(LanguageCode.En)">閱讀 @Model.FirstProfile.Names.Get(LanguageCode.ZhTW)</span>
                 </a>
             </div>
         </article>
 
         <section class="dino-search" aria-labelledby="dino-search-title">
-            <h2 id="dino-search-title">搜尋史前朋友</h2>
+            <h2 id="dino-search-title" data-i18n-zh-tw="搜尋史前朋友" data-i18n-en="Search prehistoric friends">搜尋史前朋友</h2>
             <div class="dino-search__controls">
                 <input class="form-control"
                        type="search"
                        aria-label="搜尋恐龍"
                        placeholder="輸入名稱、時期、食性或地點"
+                       data-aria-label-zh-tw="搜尋恐龍"
+                       data-aria-label-en="Search dinosaurs"
+                       data-placeholder-zh-tw="輸入名稱、時期、食性或地點"
+                       data-placeholder-en="Search by name, period, diet, or place"
                        data-dino-search-input />
-                <button class="dino-clear-button" type="button" data-dino-clear-search>清除搜尋</button>
+                <button class="dino-clear-button" type="button" data-dino-clear-search data-i18n-zh-tw="清除搜尋" data-i18n-en="Clear search">清除搜尋</button>
             </div>
-            <p class="dino-no-results" data-dino-no-results hidden>沒有找到符合的史前朋友，清除搜尋再試一次。</p>
+            <p class="dino-no-results" data-dino-no-results data-i18n-zh-tw="沒有找到符合的史前朋友，清除搜尋再試一次。" data-i18n-en="No prehistoric friend matched. Clear the search and try again." hidden>沒有找到符合的史前朋友，清除搜尋再試一次。</p>
         </section>
 
         <section class="dino-directory" aria-labelledby="dino-directory-title">
-            <h2 id="dino-directory-title">全部史前朋友</h2>
+            <h2 id="dino-directory-title" data-i18n-zh-tw="全部史前朋友" data-i18n-en="All prehistoric friends">全部史前朋友</h2>
             <div class="dino-grid">
                 @foreach (DinosaurSearchResult result in Model.SearchResults)
                 {
@@ -74,12 +80,14 @@
                        data-dino-search-item
                        data-dino-search-text="@result.SearchText">
                         <img src="@result.ImagePath"
-                             alt="@result.ImageAltText" />
-                        <span>@result.Name</span>
-                        <small>@result.Summary</small>
-                        @if (!string.IsNullOrWhiteSpace(result.CategoryNote))
+                             alt="@result.ImageAltTextZhTW"
+                             data-alt-zh-tw="@result.ImageAltTextZhTW"
+                             data-alt-en="@result.ImageAltTextEn" />
+                        <span data-i18n-zh-tw="@result.NameZhTW" data-i18n-en="@result.NameEn">@result.NameZhTW</span>
+                        <small data-i18n-zh-tw="@result.SummaryZhTW" data-i18n-en="@result.SummaryEn">@result.SummaryZhTW</small>
+                        @if (!string.IsNullOrWhiteSpace(result.CategoryNoteZhTW))
                         {
-                            <em>@result.CategoryNote</em>
+                            <em data-i18n-zh-tw="@result.CategoryNoteZhTW" data-i18n-en="@result.CategoryNoteEn">@result.CategoryNoteZhTW</em>
                         }
                     </a>
                 }

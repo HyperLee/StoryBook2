@@ -119,4 +119,26 @@ public sealed class DinosaurPagesTests : IClassFixture<DinosaurPageTestFixture>
         Assert.Contains("tyrannosaurus-rex-story.png", html);
         Assert.Contains("暴龍和小動物在大腳印旁分享果子", html);
     }
+
+    [Fact]
+    public async Task Dinosaur_pages_emit_language_switch_controls_and_bilingual_attributes()
+    {
+        string listHtml = await _fixture.GetOkHtmlAsync("/dinosaurs");
+        string detailHtml = await _fixture.GetOkHtmlAsync("/dinosaurs/tyrannosaurus-rex");
+
+        Assert.Contains("data-language-storage-key=\"storybook.language\"", listHtml);
+        Assert.Contains("data-language-option=\"en\"", listHtml);
+        Assert.Contains("data-language-option=\"zh-TW\"", listHtml);
+        Assert.Contains("data-i18n-en=\"Dinosaur Guide\"", listHtml);
+        Assert.Contains("data-placeholder-en=\"Search by name, period, diet, or place\"", listHtml);
+        Assert.Contains("data-alt-en=\"Cute storybook Tyrannosaurus Rex", listHtml);
+        Assert.Contains("data-i18n-en=\"Prehistoric flying reptile", listHtml);
+
+        Assert.Contains("data-i18n-en=\"Tyrannosaurus Rex\"", detailHtml);
+        Assert.Contains("data-i18n-en=\"Late Cretaceous\"", detailHtml);
+        Assert.Contains("data-aria-label-en=\"Open large image for Tyrannosaurus Rex\"", detailHtml);
+        Assert.Contains("data-alt-en=\"Cute storybook Tyrannosaurus Rex", detailHtml);
+        Assert.Contains("data-i18n-en=\"The Big Footprint Parade\"", detailHtml);
+        Assert.Contains("data-language-storage-key=\"storybook.language\"", detailHtml);
+    }
 }

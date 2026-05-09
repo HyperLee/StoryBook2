@@ -6,16 +6,16 @@
 
 <section class="dino-page" aria-labelledby="dino-detail-title">
     <div class="dino-page__header">
-        <a class="dino-home-link" asp-page="/Index">回首頁</a>
+        <a class="dino-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
     </div>
 
     @if (Model.IsNotFound || Model.Profile is null)
     {
         <div class="dino-empty" role="status">
-            <h1 id="dino-detail-title">找不到這位史前朋友</h1>
-            <p>這個網址沒有對應的恐龍資料。你可以回到清單重新選一位朋友。</p>
-            <a class="dino-home-link" asp-page="/Index">回首頁</a>
-            <a class="dino-action" asp-page="/Dinosaurs/Index">回恐龍介紹</a>
+            <h1 id="dino-detail-title" data-i18n-zh-tw="找不到這位史前朋友" data-i18n-en="This prehistoric friend was not found">找不到這位史前朋友</h1>
+            <p data-i18n-zh-tw="這個網址沒有對應的恐龍資料。你可以回到清單重新選一位朋友。" data-i18n-en="This address does not match a dinosaur profile. You can return to the list and choose another friend.">這個網址沒有對應的恐龍資料。你可以回到清單重新選一位朋友。</p>
+            <a class="dino-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+            <a class="dino-action" asp-page="/Dinosaurs/Index" data-i18n-zh-tw="回恐龍介紹" data-i18n-en="Back to dinosaurs">回恐龍介紹</a>
         </div>
     }
     else
@@ -25,75 +25,81 @@
                 <button class="dino-image-button"
                         type="button"
                         aria-label="@($"開啟{Model.Profile.Names.Get(LanguageCode.ZhTW)}大圖")"
+                        data-aria-label-zh-tw="@($"開啟{Model.Profile.Names.Get(LanguageCode.ZhTW)}大圖")"
+                        data-aria-label-en="@($"Open large image for {Model.Profile.Names.Get(LanguageCode.En)}")"
                         data-dino-modal-open="dino-image-modal">
                     <img src="@Model.Profile.MainImage.Path"
-                         alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
+                         alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                         data-alt-zh-tw="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                         data-alt-en="@Model.Profile.MainImage.AltText.Get(LanguageCode.En)" />
                 </button>
                 @if (Model.Profile.MainImage.Caption is not null)
                 {
-                    <p>@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</p>
+                    <p data-i18n-zh-tw="@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.MainImage.Caption.Get(LanguageCode.En)">@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</p>
                 }
             </div>
             <div class="dino-detail__body">
-                <p class="dino-kicker">史前朋友</p>
-                <h1 id="dino-detail-title">@Model.Profile.Names.Get(LanguageCode.ZhTW)</h1>
+                <p class="dino-kicker" data-i18n-zh-tw="史前朋友" data-i18n-en="Prehistoric friend">史前朋友</p>
+                <h1 id="dino-detail-title" data-i18n-zh-tw="@Model.Profile.Names.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Names.Get(LanguageCode.En)">@Model.Profile.Names.Get(LanguageCode.ZhTW)</h1>
                 <dl class="dino-facts">
                     <div>
-                        <dt>生活時期</dt>
-                        <dd>@Model.Profile.Periods.Get(LanguageCode.ZhTW)</dd>
+                        <dt data-i18n-zh-tw="生活時期" data-i18n-en="Period">生活時期</dt>
+                        <dd data-i18n-zh-tw="@Model.Profile.Periods.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Periods.Get(LanguageCode.En)">@Model.Profile.Periods.Get(LanguageCode.ZhTW)</dd>
                     </div>
                     <div>
-                        <dt>食性</dt>
-                        <dd>@Model.Profile.Diet.Get(LanguageCode.ZhTW)</dd>
+                        <dt data-i18n-zh-tw="食性" data-i18n-en="Diet">食性</dt>
+                        <dd data-i18n-zh-tw="@Model.Profile.Diet.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Diet.Get(LanguageCode.En)">@Model.Profile.Diet.Get(LanguageCode.ZhTW)</dd>
                     </div>
                     <div>
-                        <dt>發現地點</dt>
-                        <dd>@Model.Profile.DiscoveryLocations.Get(LanguageCode.ZhTW)</dd>
+                        <dt data-i18n-zh-tw="發現地點" data-i18n-en="Found in">發現地點</dt>
+                        <dd data-i18n-zh-tw="@Model.Profile.DiscoveryLocations.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.DiscoveryLocations.Get(LanguageCode.En)">@Model.Profile.DiscoveryLocations.Get(LanguageCode.ZhTW)</dd>
                     </div>
                     <div>
-                        <dt>體型</dt>
-                        <dd>@Model.Profile.SizeDescription.Get(LanguageCode.ZhTW)</dd>
+                        <dt data-i18n-zh-tw="體型" data-i18n-en="Size">體型</dt>
+                        <dd data-i18n-zh-tw="@Model.Profile.SizeDescription.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.SizeDescription.Get(LanguageCode.En)">@Model.Profile.SizeDescription.Get(LanguageCode.ZhTW)</dd>
                     </div>
                 </dl>
-                <p class="dino-summary">@Model.Profile.Summary.Get(LanguageCode.ZhTW)</p>
+                <p class="dino-summary" data-i18n-zh-tw="@Model.Profile.Summary.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Summary.Get(LanguageCode.En)">@Model.Profile.Summary.Get(LanguageCode.ZhTW)</p>
                 @if (Model.Profile.NotDinosaurNote is not null)
                 {
-                    <p class="dino-note">@Model.Profile.NotDinosaurNote.Get(LanguageCode.ZhTW)</p>
+                    <p class="dino-note" data-i18n-zh-tw="@Model.Profile.NotDinosaurNote.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.NotDinosaurNote.Get(LanguageCode.En)">@Model.Profile.NotDinosaurNote.Get(LanguageCode.ZhTW)</p>
                 }
                 <section class="dino-story" aria-labelledby="dino-story-title">
                     <div class="dino-story__text">
-                        <p class="dino-kicker">小故事</p>
-                        <h2 id="dino-story-title">@Model.Profile.Story.Title.Get(LanguageCode.ZhTW)</h2>
-                        <p>@Model.Profile.Story.Body.Get(LanguageCode.ZhTW)</p>
+                        <p class="dino-kicker" data-i18n-zh-tw="小故事" data-i18n-en="Story">小故事</p>
+                        <h2 id="dino-story-title" data-i18n-zh-tw="@Model.Profile.Story.Title.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Story.Title.Get(LanguageCode.En)">@Model.Profile.Story.Title.Get(LanguageCode.ZhTW)</h2>
+                        <p data-i18n-zh-tw="@Model.Profile.Story.Body.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Story.Body.Get(LanguageCode.En)">@Model.Profile.Story.Body.Get(LanguageCode.ZhTW)</p>
                     </div>
                     <figure class="dino-story__figure">
                         <img src="@Model.Profile.Story.Illustration.Path"
-                             alt="@Model.Profile.Story.Illustration.AltText.Get(LanguageCode.ZhTW)" />
+                             alt="@Model.Profile.Story.Illustration.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-zh-tw="@Model.Profile.Story.Illustration.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-en="@Model.Profile.Story.Illustration.AltText.Get(LanguageCode.En)" />
                         @if (Model.Profile.Story.Illustration.Caption is not null)
                         {
-                            <figcaption>@Model.Profile.Story.Illustration.Caption!.Get(LanguageCode.ZhTW)</figcaption>
+                            <figcaption data-i18n-zh-tw="@Model.Profile.Story.Illustration.Caption!.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Story.Illustration.Caption!.Get(LanguageCode.En)">@Model.Profile.Story.Illustration.Caption!.Get(LanguageCode.ZhTW)</figcaption>
                         }
                     </figure>
                 </section>
-                <nav class="dino-pager" aria-label="恐龍換頁">
+                <nav class="dino-pager" aria-label="恐龍換頁" data-aria-label-zh-tw="恐龍換頁" data-aria-label-en="Dinosaur navigation">
                     @if (Model.PreviousProfile is null)
                     {
-                        <span class="dino-page-link dino-page-link--disabled" aria-disabled="true">上一頁</span>
+                        <span class="dino-page-link dino-page-link--disabled" aria-disabled="true" data-i18n-zh-tw="上一頁" data-i18n-en="Previous">上一頁</span>
                     }
                     else
                     {
-                        <a class="dino-page-link" asp-page="/Dinosaurs/Details" asp-route-slug="@Model.PreviousProfile.Slug">
+                        <a class="dino-page-link" asp-page="/Dinosaurs/Details" asp-route-slug="@Model.PreviousProfile.Slug" data-i18n-zh-tw="上一頁：@Model.PreviousProfile.Names.Get(LanguageCode.ZhTW)" data-i18n-en="Previous: @Model.PreviousProfile.Names.Get(LanguageCode.En)">
                             上一頁：@Model.PreviousProfile.Names.Get(LanguageCode.ZhTW)
                         </a>
                     }
 
                     @if (Model.NextProfile is null)
                     {
-                        <span class="dino-page-link dino-page-link--disabled" aria-disabled="true">下一頁</span>
+                        <span class="dino-page-link dino-page-link--disabled" aria-disabled="true" data-i18n-zh-tw="下一頁" data-i18n-en="Next">下一頁</span>
                     }
                     else
                     {
-                        <a class="dino-page-link" asp-page="/Dinosaurs/Details" asp-route-slug="@Model.NextProfile.Slug">
+                        <a class="dino-page-link" asp-page="/Dinosaurs/Details" asp-route-slug="@Model.NextProfile.Slug" data-i18n-zh-tw="下一頁：@Model.NextProfile.Names.Get(LanguageCode.ZhTW)" data-i18n-en="Next: @Model.NextProfile.Names.Get(LanguageCode.En)">
                             下一頁：@Model.NextProfile.Names.Get(LanguageCode.ZhTW)
                         </a>
                     }
@@ -110,19 +116,23 @@
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title fs-5" id="dino-image-modal-title">@Model.Profile.Names.Get(LanguageCode.ZhTW)大圖</h2>
+                        <h2 class="modal-title fs-5" id="dino-image-modal-title" data-i18n-zh-tw="@($"{Model.Profile.Names.Get(LanguageCode.ZhTW)}大圖")" data-i18n-en="@($"Large image of {Model.Profile.Names.Get(LanguageCode.En)}")">@Model.Profile.Names.Get(LanguageCode.ZhTW)大圖</h2>
                         <button type="button"
                                 class="btn-close"
                                 aria-label="關閉大圖"
+                                data-aria-label-zh-tw="關閉大圖"
+                                data-aria-label-en="Close large image"
                                 data-dino-modal-close></button>
                     </div>
                     <div class="modal-body">
                         <img class="dino-modal__image"
                              src="@Model.Profile.MainImage.Path"
-                             alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)" />
+                             alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-zh-tw="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-en="@Model.Profile.MainImage.AltText.Get(LanguageCode.En)" />
                         @if (Model.Profile.MainImage.Caption is not null)
                         {
-                            <p class="dino-modal__caption">@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</p>
+                            <p class="dino-modal__caption" data-i18n-zh-tw="@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.MainImage.Caption.Get(LanguageCode.En)">@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</p>
                         }
                     </div>
                 </div>
