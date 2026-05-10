@@ -12,8 +12,12 @@ public partial class Program
         builder.Services.AddRazorPages();
         builder.Services.Configure<DinosaurCatalogOptions>(
             builder.Configuration.GetSection(DinosaurCatalogOptions.SectionName));
+        builder.Services.Configure<AquariumCatalogOptions>(
+            builder.Configuration.GetSection(AquariumCatalogOptions.SectionName));
         builder.Services.AddSingleton<DinosaurContentValidator>();
         builder.Services.AddSingleton<DinosaurCatalogService>();
+        builder.Services.AddSingleton<AquariumContentValidator>();
+        builder.Services.AddSingleton<AquariumCatalogService>();
         builder.Services.AddSingleton<LanguagePreferenceService>();
 
         var app = builder.Build();

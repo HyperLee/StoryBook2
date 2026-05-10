@@ -1,0 +1,1054 @@
+{
+  "version": "1.0",
+  "habitatCategories": [
+    {
+      "code": "freshwater",
+      "sortOrder": 1,
+      "displayName": {
+        "zhTW": "淡水",
+        "en": "Freshwater"
+      },
+      "description": {
+        "zhTW": "河流、湖泊與清澈池塘裡的家。",
+        "en": "Homes in rivers, lakes, and clear ponds."
+      }
+    },
+    {
+      "code": "saltwater",
+      "sortOrder": 2,
+      "displayName": {
+        "zhTW": "海水",
+        "en": "Saltwater"
+      },
+      "description": {
+        "zhTW": "寬廣海洋與海岸附近的家。",
+        "en": "Homes in wide oceans and near coasts."
+      }
+    },
+    {
+      "code": "deep-sea",
+      "sortOrder": 3,
+      "displayName": {
+        "zhTW": "深海",
+        "en": "Deep sea"
+      },
+      "description": {
+        "zhTW": "陽光很少到達的安靜深水區。",
+        "en": "Quiet deep waters where little sunlight reaches."
+      }
+    },
+    {
+      "code": "coral-reef",
+      "sortOrder": 4,
+      "displayName": {
+        "zhTW": "珊瑚礁",
+        "en": "Coral reef"
+      },
+      "description": {
+        "zhTW": "色彩豐富、躲藏角落很多的海底花園。",
+        "en": "Colorful underwater gardens with many hiding places."
+      }
+    },
+    {
+      "code": "polar",
+      "sortOrder": 5,
+      "displayName": {
+        "zhTW": "極地",
+        "en": "Polar"
+      },
+      "description": {
+        "zhTW": "冰冷海水、雪地與浮冰旁的家。",
+        "en": "Homes near cold seas, snow, and floating ice."
+      }
+    },
+    {
+      "code": "tide-pool",
+      "sortOrder": 6,
+      "displayName": {
+        "zhTW": "潮間帶",
+        "en": "Tide pool"
+      },
+      "description": {
+        "zhTW": "海浪退去後留下的小水池與岩石縫。",
+        "en": "Small pools and rock cracks left after waves pull back."
+      }
+    }
+  ],
+  "animals": [
+    {
+      "slug": "clownfish",
+      "habitatCategory": "coral-reef",
+      "sortOrder": 1,
+      "names": {
+        "zhTW": "小丑魚",
+        "en": "Clownfish"
+      },
+      "habitat": {
+        "zhTW": "住在溫暖珊瑚礁，常躲在海葵觸手之間。",
+        "en": "Lives on warm coral reefs, often between sea anemone tentacles."
+      },
+      "diet": {
+        "zhTW": "吃小型浮游生物、藻類和海葵旁的細小食物。",
+        "en": "Eats tiny plankton, algae, and small bits of food near anemones."
+      },
+      "discoveryLocations": {
+        "zhTW": "常見於印度洋與太平洋的熱帶礁區。",
+        "en": "Common in tropical reefs of the Indian and Pacific Oceans."
+      },
+      "summary": {
+        "zhTW": "小丑魚穿著橘白條紋外衣，會和海葵互相幫忙。海葵保護牠，小丑魚也把食物碎屑帶回家。",
+        "en": "Clownfish wear bright orange and white stripes. They live safely with sea anemones, sharing small food scraps while the anemone gives them a protected home."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/clownfish-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風小丑魚在珊瑚礁海葵旁游泳",
+          "en": "Cute storybook clownfish swimming beside an anemone on a coral reef"
+        },
+        "caption": {
+          "zhTW": "小丑魚和海葵是好鄰居。",
+          "en": "Clownfish and anemones are good neighbors."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "小丑魚的海葵門鈴",
+          "en": "The Anemone Doorbell"
+        },
+        "body": {
+          "zhTW": "早上海水亮亮的，小丑魚妮妮探出海葵家門，輕輕碰了碰柔軟觸手，像按下一個小門鈴。小蝦送來閃閃沙粒，藍色小魚帶來一片海草。妮妮把海草繞成圓圈，掛在門口說，今天是歡迎朋友日。大家輪流躲進海葵旁，聽浪花唱歌，也學會慢慢靠近別人的家。",
+          "en": "In the bright morning water, Nini the clownfish peeked from her anemone home and tapped a soft tentacle like a tiny doorbell. A little shrimp brought sparkling sand, and a blue fish carried a ribbon of sea grass. Nini curled the grass into a circle and hung it near the entrance. She called the day Welcome Friends Day. One by one, the reef neighbors rested beside the anemone, listened to the waves hum, and learned to come close slowly, kindly, and carefully when visiting another friend’s home. The reef felt brighter because every visitor had been welcomed with patience, smiles, and room to breathe."
+        },
+        "illustration": {
+          "path": "/images/aquarium/clownfish-story.png",
+          "altText": {
+            "zhTW": "小丑魚把海草圈掛在海葵門口歡迎朋友",
+            "en": "Clownfish hanging a sea grass wreath near an anemone to welcome friends"
+          },
+          "caption": {
+            "zhTW": "慢慢靠近，朋友會更安心。",
+            "en": "Gentle visits help friends feel safe."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "小丑魚 海葵 珊瑚礁 橘色 浮游生物",
+          "en": "clownfish anemone coral reef orange plankton"
+        }
+      ]
+    },
+    {
+      "slug": "seahorse",
+      "habitatCategory": "saltwater",
+      "sortOrder": 2,
+      "names": {
+        "zhTW": "海馬",
+        "en": "Seahorse"
+      },
+      "habitat": {
+        "zhTW": "喜歡海草床、珊瑚邊和水流較慢的淺海。",
+        "en": "Lives in seagrass beds, coral edges, and slow-moving shallow seas."
+      },
+      "diet": {
+        "zhTW": "用小嘴吸食小蝦、浮游動物和細小甲殼類。",
+        "en": "Sips tiny shrimp, zooplankton, and small crustaceans through its snout."
+      },
+      "discoveryLocations": {
+        "zhTW": "世界許多溫暖淺海都能看見海馬。",
+        "en": "Found in many warm shallow seas around the world."
+      },
+      "summary": {
+        "zhTW": "海馬用尾巴勾住海草，像慢慢跳舞的小騎士。牠游得不快，卻很會安靜等待食物靠近。",
+        "en": "Seahorses curl their tails around seagrass like tiny dancers holding a ribbon. They swim slowly, but they are patient hunters of small drifting snacks."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/seahorse-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風海馬用尾巴勾住綠色海草",
+          "en": "Cute storybook seahorse curling its tail around green seagrass"
+        },
+        "caption": {
+          "zhTW": "海馬會用尾巴抓住海草休息。",
+          "en": "A seahorse rests by holding seagrass with its tail."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "海馬慢慢郵差",
+          "en": "The Slow Mail Seahorse"
+        },
+        "body": {
+          "zhTW": "海草村今天有一封亮藍色信，要送到岩石後面的貝殼家。海馬米米把信夾在胸前，尾巴勾著每一株海草，慢慢前進。小魚急著問，為什麼不快一點？米米笑著說，信很重要，路也很重要。牠避開水流，問候小蝦，最後把信安全送到。貝殼打開，裡面是一張謝謝大家照顧海草村的卡片。",
+          "en": "A bright blue letter needed to travel across Seagrass Village to the shell house behind the rocks. Mimi the seahorse tucked it close and moved from stem to stem, curling her tail around each green post. A small fish asked why she did not hurry. Mimi smiled and said the letter was important, and the path was important too. She waited through gentle currents, greeted a shrimp, and delivered the letter safely. Inside the shell was a thank-you card for everyone who cared for the seagrass home. Mimi saved the ribbon from the letter to mark tomorrow’s calm and careful delivery route."
+        },
+        "illustration": {
+          "path": "/images/aquarium/seahorse-story.png",
+          "altText": {
+            "zhTW": "海馬郵差帶著藍色信穿過海草村",
+            "en": "Seahorse mail carrier carrying a blue letter through a seagrass village"
+          },
+          "caption": {
+            "zhTW": "慢慢走，也能把重要事情做好。",
+            "en": "Slow steps can still carry important things well."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "海馬 海草 海水 小蝦 慢慢游",
+          "en": "seahorse seagrass saltwater shrimp slow swimmer"
+        }
+      ]
+    },
+    {
+      "slug": "sea-turtle",
+      "habitatCategory": "saltwater",
+      "sortOrder": 3,
+      "names": {
+        "zhTW": "海龜",
+        "en": "Sea turtle"
+      },
+      "habitat": {
+        "zhTW": "在溫暖海洋、珊瑚礁和沙灘附近生活。",
+        "en": "Lives in warm oceans, around coral reefs, and near sandy beaches."
+      },
+      "diet": {
+        "zhTW": "依種類吃海草、水母、海綿或其他柔軟海中食物。",
+        "en": "Depending on the species, eats seagrass, jellyfish, sponges, or soft sea foods."
+      },
+      "discoveryLocations": {
+        "zhTW": "熱帶與亞熱帶海域常見海龜蹤影。",
+        "en": "Seen in tropical and subtropical seas around the world."
+      },
+      "summary": {
+        "zhTW": "海龜背著硬硬外殼，在海裡像慢速飛行。牠會記得回到沙灘，讓新的小海龜開始旅程。",
+        "en": "Sea turtles carry strong shells and glide through the water like slow flyers. Many remember nesting beaches where new baby turtles begin their journeys."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/sea-turtle-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風海龜在藍色海水中伸展前肢",
+          "en": "Cute storybook sea turtle stretching its front flippers in blue water"
+        },
+        "caption": {
+          "zhTW": "海龜像在海裡飛翔。",
+          "en": "Sea turtles look as if they fly through the sea."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "海龜的月光地圖",
+          "en": "The Moonlight Map"
+        },
+        "body": {
+          "zhTW": "夜晚的海面鋪著銀色月光，海龜阿綠慢慢浮上來，背殼像一座小島。牠想帶迷路的小魚回珊瑚礁，卻沒有紙地圖。阿綠請月亮照亮海草的方向，又請浪花指出溫暖水流。牠一步一步游，小魚跟在身旁數星星。到達礁石時，大家發現地圖其實藏在記憶、朋友和願意等待的心裡。",
+          "en": "Silver moonlight spread across the sea as Greenie the turtle rose for air, his shell looking like a tiny island. A small fish had lost the way back to the reef, but Greenie had no paper map. He asked the moon to brighten the seagrass, and he asked the waves to point toward the warm current. He swam one steady stroke at a time while the fish counted stars beside him. When the reef appeared, they learned that maps can live in memory, friendship, and a patient heart. Before sleeping, the fish drew a moon beside Greenie’s name in the sandy reef notebook."
+        },
+        "illustration": {
+          "path": "/images/aquarium/sea-turtle-story.png",
+          "altText": {
+            "zhTW": "海龜在月光下帶小魚游向珊瑚礁",
+            "en": "Sea turtle guiding a small fish toward a coral reef under moonlight"
+          },
+          "caption": {
+            "zhTW": "記得路，也記得照顧朋友。",
+            "en": "Remember the way, and remember your friends."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "海龜 海水 沙灘 海草 水母",
+          "en": "sea turtle ocean beach seagrass jellyfish"
+        }
+      ]
+    },
+    {
+      "slug": "jellyfish",
+      "habitatCategory": "deep-sea",
+      "sortOrder": 4,
+      "names": {
+        "zhTW": "水母",
+        "en": "Jellyfish"
+      },
+      "habitat": {
+        "zhTW": "在海洋各處漂浮，有些生活在較深或較暗的水域。",
+        "en": "Drifts through many ocean waters, including deeper and darker places."
+      },
+      "diet": {
+        "zhTW": "吃浮游生物、小魚和被觸手碰到的小型動物。",
+        "en": "Eats plankton, tiny fish, and small animals touched by its tentacles."
+      },
+      "discoveryLocations": {
+        "zhTW": "世界多數海域都可能看見不同水母。",
+        "en": "Different jellyfish can be found in many seas worldwide."
+      },
+      "summary": {
+        "zhTW": "水母身體柔軟透明，像漂在水中的小雨傘。牠沒有骨頭，靠著海流和輕輕收縮向前移動。",
+        "en": "Jellyfish have soft, see-through bodies like little umbrellas in the water. They have no bones and move by pulsing gently with the current."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/jellyfish-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風水母在深藍海水中發出柔光",
+          "en": "Cute storybook jellyfish glowing softly in deep blue water"
+        },
+        "caption": {
+          "zhTW": "水母像海裡的小燈籠。",
+          "en": "Jellyfish look like little lanterns in the sea."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "水母小燈籠",
+          "en": "The Little Lantern Jellyfish"
+        },
+        "body": {
+          "zhTW": "深藍色的水裡，水母露露像一盞柔軟小燈籠，慢慢亮起又慢慢變暗。小章魚找不到回家的洞口，心裡有點慌。露露沒有手可以牽牠，就用一下一下的光告訴方向。小章魚跟著亮光游過安靜水草，終於看見熟悉石洞。牠說謝謝，露露輕輕晃動傘帽，讓夜晚多了一圈溫柔亮光。",
+          "en": "In the deep blue water, Lulu the jellyfish glowed like a soft little lantern, brightening and dimming slowly. A young octopus could not find the rocky doorway home and felt worried. Lulu had no hands to hold, so she answered with gentle pulses of light that pointed the way. The octopus followed the glow past quiet sea grass and finally saw the familiar stone cave. He said thank you. Lulu bobbed her umbrella cap, adding one more circle of kindness to the dark water. Other sleepy animals watched the glow and remembered that quiet help can still be easy to see."
+        },
+        "illustration": {
+          "path": "/images/aquarium/jellyfish-story.png",
+          "altText": {
+            "zhTW": "發光水母用柔光帶小章魚回家",
+            "en": "Glowing jellyfish using soft light to guide a young octopus home"
+          },
+          "caption": {
+            "zhTW": "小小亮光也能幫上大忙。",
+            "en": "A small light can be a big help."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "水母 深海 透明 發光 浮游生物",
+          "en": "jellyfish deep sea transparent glow plankton"
+        }
+      ]
+    },
+    {
+      "slug": "octopus",
+      "habitatCategory": "saltwater",
+      "sortOrder": 5,
+      "names": {
+        "zhTW": "章魚",
+        "en": "Octopus"
+      },
+      "habitat": {
+        "zhTW": "住在海底岩洞、珊瑚縫和沙地附近。",
+        "en": "Lives in rocky dens, coral cracks, and sandy sea floors."
+      },
+      "diet": {
+        "zhTW": "吃螃蟹、蝦、小魚和貝類。",
+        "en": "Eats crabs, shrimp, small fish, and shellfish."
+      },
+      "discoveryLocations": {
+        "zhTW": "世界許多海洋都有不同章魚。",
+        "en": "Different octopuses live in many oceans around the world."
+      },
+      "summary": {
+        "zhTW": "章魚有八隻靈活手臂，會變換顏色，也會鑽進小洞。牠很聰明，能解開簡單的海底難題。",
+        "en": "Octopuses have eight flexible arms, can change color, and squeeze into small spaces. They are clever animals that solve simple underwater puzzles."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/octopus-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風章魚在岩石洞口伸出八隻手臂",
+          "en": "Cute storybook octopus stretching eight arms from a rocky den"
+        },
+        "caption": {
+          "zhTW": "章魚的手臂很會探索。",
+          "en": "An octopus explores with flexible arms."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "章魚的八隻幫忙手",
+          "en": "Eight Helping Arms"
+        },
+        "body": {
+          "zhTW": "章魚歐歐有八隻手臂，早上一起醒來時，每隻都想做不同事情。一隻整理貝殼，一隻刷岩石，一隻替小魚撿帽子。忽然海流把彩色珠子吹散，大家都急著追。歐歐請八隻手臂排成小圓圈，把珠子一顆一顆傳回籃子。朋友們鼓掌時，歐歐發現，手臂很多最棒的用法，就是一起幫忙。",
+          "en": "Ollie the octopus woke with eight arms, and each arm wanted a different job. One sorted shells, one brushed the rock, and one picked up a tiny hat for a fish. Suddenly a current scattered colorful beads across the sand. Everyone hurried after them. Ollie asked his arms to make a little circle and pass each bead back into the basket. When the friends clapped, Ollie discovered that having many arms was most wonderful when all of them worked together to help. He tucked the basket safely away and gave every busy arm a cheerful little rest under the den."
+        },
+        "illustration": {
+          "path": "/images/aquarium/octopus-story.png",
+          "altText": {
+            "zhTW": "章魚用八隻手臂把彩色珠子傳回籃子",
+            "en": "Octopus passing colorful beads back into a basket with eight arms"
+          },
+          "caption": {
+            "zhTW": "一起幫忙，事情變得輕鬆。",
+            "en": "Helping together makes work lighter."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "章魚 海水 八隻手臂 螃蟹 聰明",
+          "en": "octopus saltwater eight arms crab clever"
+        }
+      ]
+    },
+    {
+      "slug": "shark",
+      "habitatCategory": "saltwater",
+      "sortOrder": 6,
+      "names": {
+        "zhTW": "鯊魚",
+        "en": "Shark"
+      },
+      "habitat": {
+        "zhTW": "住在海洋中，從淺海到外海都有不同種類。",
+        "en": "Lives in oceans, with different kinds in shallow seas and open water."
+      },
+      "diet": {
+        "zhTW": "多數吃魚、魷魚或其他海中動物。",
+        "en": "Most eat fish, squid, or other ocean animals."
+      },
+      "discoveryLocations": {
+        "zhTW": "世界許多海域都能看見不同鯊魚。",
+        "en": "Different sharks are seen in many seas worldwide."
+      },
+      "summary": {
+        "zhTW": "鯊魚有流線身體和敏銳感覺，是海裡重要獵手。牠幫助海洋保持平衡，不只是故事裡的大嘴巴。",
+        "en": "Sharks have streamlined bodies and sharp senses. They are important ocean hunters that help keep sea life balanced, not just big mouths from stories."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/shark-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風鯊魚在藍色海水中溫和游過",
+          "en": "Cute storybook shark swimming gently through blue seawater"
+        },
+        "caption": {
+          "zhTW": "鯊魚是海洋平衡的重要成員。",
+          "en": "Sharks are important helpers in ocean balance."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "鯊魚守護巡邏隊",
+          "en": "The Shark Patrol"
+        },
+        "body": {
+          "zhTW": "鯊魚莎莎每天沿著藍色海路巡邏，檢查珊瑚旁有沒有破掉的網子。小魚一開始有點害怕，只敢遠遠看。莎莎發現一條海草被塑膠圈纏住，立刻用身體輕輕推開水流，讓海龜咬斷圈圈。小魚們看見後游近一些，送上泡泡花。莎莎說，強壯不是用來嚇人，是用來守護大家的海。",
+          "en": "Sasha the shark patrolled the blue sea road every day, checking whether broken nets had drifted near the coral. At first, the small fish watched from far away. Then Sasha found a strand of seagrass tangled in a plastic ring. She gently pushed the current aside so a turtle could bite the ring loose. The fish swam closer and offered bubble flowers. Sasha told them that being strong was not for frightening others. It was for guarding the sea that everyone shared. From then on, the smallest fish waved first whenever Sasha passed the bright reef corner at sunny noon."
+        },
+        "illustration": {
+          "path": "/images/aquarium/shark-story.png",
+          "altText": {
+            "zhTW": "鯊魚和海龜一起移開纏住海草的塑膠圈",
+            "en": "Shark and sea turtle helping remove a plastic ring from seagrass"
+          },
+          "caption": {
+            "zhTW": "強壯可以用來保護朋友。",
+            "en": "Strength can protect friends."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "鯊魚 海水 獵手 魚 魷魚",
+          "en": "shark saltwater hunter fish squid"
+        }
+      ]
+    },
+    {
+      "slug": "stingray",
+      "habitatCategory": "saltwater",
+      "sortOrder": 7,
+      "names": {
+        "zhTW": "魟魚",
+        "en": "Stingray"
+      },
+      "habitat": {
+        "zhTW": "常在溫暖淺海和沙地海底貼近地面游泳。",
+        "en": "Often swims close to sandy bottoms in warm shallow seas."
+      },
+      "diet": {
+        "zhTW": "吃藏在沙裡的貝類、蝦、螃蟹和小魚。",
+        "en": "Eats clams, shrimp, crabs, and small fish hiding in sand."
+      },
+      "discoveryLocations": {
+        "zhTW": "許多熱帶與溫帶海域都有魟魚。",
+        "en": "Found in many tropical and temperate seas."
+      },
+      "summary": {
+        "zhTW": "魟魚身體扁扁寬寬，像海底滑翔毯。牠會輕輕拍動身體，在沙地上優雅前進。",
+        "en": "Stingrays have wide, flat bodies like gliding blankets. They move gracefully over sandy bottoms by gently waving their fins."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/stingray-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風魟魚像毯子一樣在沙地上滑行",
+          "en": "Cute storybook stingray gliding like a blanket over sandy seabed"
+        },
+        "caption": {
+          "zhTW": "魟魚在沙地上優雅滑行。",
+          "en": "A stingray glides gracefully over sand."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "魟魚沙畫師",
+          "en": "The Sand Painter"
+        },
+        "body": {
+          "zhTW": "魟魚柔柔喜歡貼著沙地滑行，身後會留下彎彎線條。今天小螃蟹找不到自己的洞，只看到一大片被海流抹平的沙。柔柔慢慢拍動寬寬身體，在沙上畫出貝殼、海草和三個小箭頭。小螃蟹跟著沙畫前進，終於找到家門。牠請柔柔留下最後一筆，是一顆大大的心，送給會畫路的朋友。",
+          "en": "Rora the stingray loved gliding close to the sand, leaving soft curving lines behind her. One day a small crab could not find his burrow because the current had smoothed the whole seabed. Rora slowly waved her wide body and drew a shell, some seagrass, and three little arrows in the sand. The crab followed the sandy picture until his doorway appeared. He asked Rora to draw one final mark, a big heart for the friend who could paint a path. The next tide carried the picture away, but the crab remembered every kind curve in the warm golden sand."
+        },
+        "illustration": {
+          "path": "/images/aquarium/stingray-story.png",
+          "altText": {
+            "zhTW": "魟魚在沙地畫箭頭幫小螃蟹找家",
+            "en": "Stingray drawing arrows in sand to help a small crab find home"
+          },
+          "caption": {
+            "zhTW": "有些路標，是朋友畫出來的。",
+            "en": "Some signs are drawn by friends."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "魟魚 海水 沙地 貝類 蝦",
+          "en": "stingray saltwater sand clams shrimp"
+        }
+      ]
+    },
+    {
+      "slug": "penguin",
+      "habitatCategory": "polar",
+      "sortOrder": 8,
+      "names": {
+        "zhTW": "企鵝",
+        "en": "Penguin"
+      },
+      "habitat": {
+        "zhTW": "生活在南半球冷海和冰雪海岸附近。",
+        "en": "Lives near cold southern seas, icy shores, and snowy coasts."
+      },
+      "diet": {
+        "zhTW": "吃魚、磷蝦和小型海中動物。",
+        "en": "Eats fish, krill, and small sea animals."
+      },
+      "discoveryLocations": {
+        "zhTW": "南極與其他南半球海岸常見不同企鵝。",
+        "en": "Different penguins live around Antarctica and other southern coasts."
+      },
+      "summary": {
+        "zhTW": "企鵝穿著黑白外套，走路搖搖擺擺，游泳卻很快。牠用翅膀當鰭，在冷海裡追魚。",
+        "en": "Penguins wear black and white coats and waddle on land, but they swim quickly. Their wings work like flippers in cold water."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/penguin-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風企鵝站在雪地和藍色海邊",
+          "en": "Cute storybook penguin standing on snow beside a blue sea"
+        },
+        "caption": {
+          "zhTW": "企鵝在水裡是快速泳者。",
+          "en": "Penguins are speedy swimmers in the water."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "企鵝的圍巾隊伍",
+          "en": "The Scarf Line"
+        },
+        "body": {
+          "zhTW": "風把雪吹成白白旋轉，企鵝皮皮把紅圍巾拉得好長，請朋友們一隻接一隻抓住。小企鵝們要去海邊練習游泳，可是雪霧讓路看起來都一樣。皮皮走在最前面，圍巾像一條暖暖路線。大家安全到海邊後，把圍巾鋪在冰上當休息毯。皮皮說，排好隊不是為了快，是為了不讓誰落單。",
+          "en": "The wind spun the snow into white swirls, so Pippin the penguin stretched his red scarf into a long line and asked every friend to hold on. The young penguins needed to reach the sea for swimming practice, but the snowy air made every path look the same. Pippin waddled in front, and the scarf became a warm trail. When they arrived safely, they spread it on the ice as a resting blanket. Pippin said lining up was not about being fast. It was about leaving no one behind. Later, every penguin stitched a tiny snowflake patch onto the brave red scarf."
+        },
+        "illustration": {
+          "path": "/images/aquarium/penguin-story.png",
+          "altText": {
+            "zhTW": "企鵝們抓著紅圍巾排隊走過雪地",
+            "en": "Penguins holding a red scarf in a line while crossing snowy ground"
+          },
+          "caption": {
+            "zhTW": "排成一隊，大家都不落單。",
+            "en": "In a line, no one is left behind."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "企鵝 極地 冷海 魚 磷蝦",
+          "en": "penguin polar cold sea fish krill"
+        }
+      ]
+    },
+    {
+      "slug": "seal",
+      "habitatCategory": "polar",
+      "sortOrder": 9,
+      "names": {
+        "zhTW": "海豹",
+        "en": "Seal"
+      },
+      "habitat": {
+        "zhTW": "常在冷海、岩岸、浮冰和沙灘附近休息。",
+        "en": "Rests near cold seas, rocky shores, floating ice, and beaches."
+      },
+      "diet": {
+        "zhTW": "吃魚、魷魚和其他小型海中動物。",
+        "en": "Eats fish, squid, and other small sea animals."
+      },
+      "discoveryLocations": {
+        "zhTW": "南北半球許多寒冷海域都能看見海豹。",
+        "en": "Seen in many cold seas of both hemispheres."
+      },
+      "summary": {
+        "zhTW": "海豹身體圓滾滾，游泳時很靈活。牠會在水裡找食物，也會爬上冰面或岸邊休息。",
+        "en": "Seals have round bodies and swim with surprising grace. They hunt in water, then climb onto ice or shores to rest."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/seal-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風海豹趴在浮冰上看著海水",
+          "en": "Cute storybook seal resting on floating ice beside seawater"
+        },
+        "caption": {
+          "zhTW": "海豹會在冰上休息。",
+          "en": "Seals rest on ice after swimming."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "海豹的拍手歌",
+          "en": "The Seal Clapping Song"
+        },
+        "body": {
+          "zhTW": "海豹胖胖趴在浮冰上，聽見小企鵝練游泳前很緊張。胖胖用前肢拍出啪、啪、啪啪的節奏，像一首勇氣歌。小企鵝跟著節奏深呼吸，慢慢滑進水裡。每游一小段，胖胖就拍一次手，海面也跟著發亮。最後小企鵝游回冰邊，笑著說，原來勇敢不是不害怕，是有人陪你試一次。",
+          "en": "Pudgy the seal rested on floating ice and noticed a young penguin feeling nervous before swim practice. Pudgy tapped his front flippers in a clap, clap, clappy rhythm, like a song for courage. The penguin breathed with the beat and slipped slowly into the water. Each time the penguin swam a little farther, Pudgy clapped again, and the sea seemed to sparkle along. When the penguin returned to the ice, he smiled and said courage did not mean never being afraid. It meant trying once with someone beside you. Pudgy saved the rhythm for any friend who needed a beginning."
+        },
+        "illustration": {
+          "path": "/images/aquarium/seal-story.png",
+          "altText": {
+            "zhTW": "海豹在浮冰上拍手鼓勵小企鵝游泳",
+            "en": "Seal clapping on floating ice to encourage a young penguin swimming"
+          },
+          "caption": {
+            "zhTW": "鼓勵能讓第一次變容易。",
+            "en": "Encouragement makes first tries easier."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "海豹 極地 浮冰 魚 魷魚",
+          "en": "seal polar floating ice fish squid"
+        }
+      ]
+    },
+    {
+      "slug": "dolphin",
+      "habitatCategory": "saltwater",
+      "sortOrder": 10,
+      "names": {
+        "zhTW": "海豚",
+        "en": "Dolphin"
+      },
+      "habitat": {
+        "zhTW": "生活在海洋中，常在海岸附近或外海成群活動。",
+        "en": "Lives in oceans, often traveling in groups near coasts or offshore."
+      },
+      "diet": {
+        "zhTW": "吃魚、魷魚和其他會游動的小型海中動物。",
+        "en": "Eats fish, squid, and other small swimming sea animals."
+      },
+      "discoveryLocations": {
+        "zhTW": "世界許多溫暖和溫帶海域都有海豚。",
+        "en": "Found in many warm and temperate seas around the world."
+      },
+      "summary": {
+        "zhTW": "海豚愛成群游泳，會用聲音互相聯絡。牠們常躍出水面，看起來像在和浪花玩遊戲。",
+        "en": "Dolphins travel in groups and use sounds to stay connected. They often leap above the surface, looking as if they play with waves."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/dolphin-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風海豚跳出藍色浪花",
+          "en": "Cute storybook dolphin jumping through blue ocean waves"
+        },
+        "caption": {
+          "zhTW": "海豚常用聲音和同伴聯絡。",
+          "en": "Dolphins use sounds to keep in touch."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "海豚的泡泡訊息",
+          "en": "Bubble Messages"
+        },
+        "body": {
+          "zhTW": "海豚朵朵喜歡在浪花下吹出圓圓泡泡。今天小海龜要找媽媽，卻聽不清遠處聲音。朵朵和朋友排成一列，每隻海豚都發出清亮哨聲，再吹一串泡泡。泡泡一路飄向珊瑚礁，像白色小路標。海龜媽媽看見泡泡，立刻游來擁抱孩子。朵朵說，海裡的訊息可以很響，也可以很輕，只要能傳到心裡。",
+          "en": "Dora the dolphin loved blowing round bubbles under the waves. One day a young turtle needed to find his mother, but the faraway sounds were hard to hear. Dora and her pod formed a line. Each dolphin gave a clear whistle and sent a trail of bubbles ahead. The bubbles drifted toward the coral reef like white little signs. The turtle’s mother saw them and hurried over for a hug. Dora said messages in the sea could be loud or gentle, as long as they reached the heart. The turtle kept one bubble memory and named it the song of finding."
+        },
+        "illustration": {
+          "path": "/images/aquarium/dolphin-story.png",
+          "altText": {
+            "zhTW": "海豚們用泡泡和哨聲幫小海龜找媽媽",
+            "en": "Dolphins using bubbles and whistles to help a young turtle find its mother"
+          },
+          "caption": {
+            "zhTW": "好訊息會把朋友帶回身邊。",
+            "en": "Good messages bring friends close again."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "海豚 海水 魚 魷魚 聲音",
+          "en": "dolphin saltwater fish squid sounds"
+        }
+      ]
+    },
+    {
+      "slug": "starfish",
+      "habitatCategory": "tide-pool",
+      "sortOrder": 11,
+      "names": {
+        "zhTW": "海星",
+        "en": "Starfish"
+      },
+      "habitat": {
+        "zhTW": "住在潮間帶岩石、海草邊和淺海海底。",
+        "en": "Lives on tide-pool rocks, near seagrass, and on shallow sea floors."
+      },
+      "diet": {
+        "zhTW": "吃貝類、小型海中動物和海底細小食物。",
+        "en": "Eats shellfish, small sea animals, and tiny food from the seabed."
+      },
+      "discoveryLocations": {
+        "zhTW": "世界許多海岸和淺海都能看見海星。",
+        "en": "Found along many coasts and shallow seas worldwide."
+      },
+      "summary": {
+        "zhTW": "海星有星星形狀的身體，慢慢爬過岩石。牠沒有魚鰭，卻能用許多小管足一步步移動。",
+        "en": "Starfish have star-shaped bodies and creep slowly across rocks. They do not have fins, but many tiny tube feet help them move."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/starfish-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風海星趴在潮間帶岩石上",
+          "en": "Cute storybook starfish resting on a tide-pool rock"
+        },
+        "caption": {
+          "zhTW": "海星用小管足慢慢移動。",
+          "en": "A starfish moves slowly with tiny tube feet."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "海星找星星",
+          "en": "The Star Looking for Stars"
+        },
+        "body": {
+          "zhTW": "退潮後的小水池安靜閃亮，海星星星趴在岩石上，想知道天上的星星是不是海裡的親戚。小螃蟹說，等夜晚就知道。星星慢慢爬到水池中央，幫小蝦推開一片落葉，也替貝殼擦亮沙子。夜色來時，天空真的亮起許多星。海星看著倒影笑了，原來不管在天上或海裡，星星都可以照顧身邊的小世界。",
+          "en": "After low tide, the little pool shone quietly. Stella the starfish rested on a rock and wondered whether the stars in the sky were relatives from the sea. A crab said they would know at night. Stella slowly crawled to the middle of the pool, pushed a fallen leaf away from a shrimp, and brushed sand from a shell. When darkness arrived, many stars appeared above. Stella smiled at their reflections and learned that stars, in the sky or sea, can care for the small world around them. The tide pool glittered back, as if saying thank you in silver."
+        },
+        "illustration": {
+          "path": "/images/aquarium/starfish-story.png",
+          "altText": {
+            "zhTW": "海星在潮間帶水池中看著夜空星星倒影",
+            "en": "Starfish in a tide pool watching reflections of night stars"
+          },
+          "caption": {
+            "zhTW": "小小世界也需要溫柔照顧。",
+            "en": "Small worlds need gentle care too."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "海星 潮間帶 岩石 貝類 管足",
+          "en": "starfish tide pool rock shellfish tube feet"
+        }
+      ]
+    },
+    {
+      "slug": "crab",
+      "habitatCategory": "tide-pool",
+      "sortOrder": 12,
+      "names": {
+        "zhTW": "螃蟹",
+        "en": "Crab"
+      },
+      "habitat": {
+        "zhTW": "住在潮間帶岩石縫、沙灘洞穴和淺海底部。",
+        "en": "Lives in tide-pool cracks, sandy beach burrows, and shallow sea floors."
+      },
+      "diet": {
+        "zhTW": "吃藻類、碎屑、小貝類和其他容易找到的食物。",
+        "en": "Eats algae, scraps, small shellfish, and other easy-to-find foods."
+      },
+      "discoveryLocations": {
+        "zhTW": "世界許多海岸、沙灘和潮池都有螃蟹。",
+        "en": "Found on many coasts, beaches, and tide pools worldwide."
+      },
+      "summary": {
+        "zhTW": "螃蟹有硬殼和兩隻螯，常橫著走。牠會躲在洞裡，也會在退潮後忙著找食物。",
+        "en": "Crabs have hard shells and two claws, and many walk sideways. They hide in burrows and search for food after the tide goes out."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/crab-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風螃蟹舉著螯站在潮池旁",
+          "en": "Cute storybook crab raising its claws beside a tide pool"
+        },
+        "caption": {
+          "zhTW": "螃蟹常常橫著走路。",
+          "en": "Many crabs walk sideways."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "螃蟹橫走遊行",
+          "en": "The Sideways Parade"
+        },
+        "body": {
+          "zhTW": "螃蟹卡卡要帶潮池朋友辦遊行，可是大家都習慣往前走，只有牠橫著走。小魚笑說隊伍會歪掉，卡卡有點不好意思。這時一陣浪把小旗子吹進岩石縫，只有橫著走才拿得到。卡卡帶大家側身一步、再一步，順利取回旗子。遊行開始後，所有朋友都試著橫走一下，發現不同走法也能很快樂。",
+          "en": "Coco the crab wanted to lead a parade for the tide-pool friends, but everyone walked forward while Coco walked sideways. A small fish giggled that the line might become crooked, and Coco felt shy. Then a wave blew the little parade flag into a narrow rock crack, where only sideways steps could reach it. Coco guided everyone one side-step at a time and rescued the flag. When the parade began, each friend tried a sideways step and discovered that a different way of moving could be joyful too. The crooked line became the parade’s favorite dance across the sunny rocks."
+        },
+        "illustration": {
+          "path": "/images/aquarium/crab-story.png",
+          "altText": {
+            "zhTW": "螃蟹帶朋友們在潮池旁練習橫著走",
+            "en": "Crab leading friends in sideways steps beside a tide pool"
+          },
+          "caption": {
+            "zhTW": "不一樣的步伐也可以很棒。",
+            "en": "Different steps can be wonderful."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "螃蟹 潮間帶 沙灘 藻類 貝類",
+          "en": "crab tide pool beach algae shellfish"
+        }
+      ]
+    },
+    {
+      "slug": "coral",
+      "habitatCategory": "coral-reef",
+      "sortOrder": 13,
+      "names": {
+        "zhTW": "珊瑚",
+        "en": "Coral"
+      },
+      "habitat": {
+        "zhTW": "固定生活在溫暖清澈的淺海礁區。",
+        "en": "Lives fixed in warm, clear, shallow reef waters."
+      },
+      "diet": {
+        "zhTW": "依靠共生藻給能量，也捕捉漂過的小浮游生物。",
+        "en": "Gets energy from partner algae and catches tiny drifting plankton."
+      },
+      "discoveryLocations": {
+        "zhTW": "熱帶海域的清澈淺水常有珊瑚礁。",
+        "en": "Clear tropical shallows often hold coral reefs."
+      },
+      "summary": {
+        "zhTW": "珊瑚看起來像植物，其實是小動物一起蓋出的家。許多魚、蝦和螃蟹都在珊瑚礁找保護。",
+        "en": "Coral may look like plants, but it is made by tiny animals building together. Reefs give many fish, shrimp, and crabs safe places."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/coral-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風彩色珊瑚礁旁有小魚游動",
+          "en": "Cute storybook colorful coral reef with small fish swimming nearby"
+        },
+        "caption": {
+          "zhTW": "珊瑚礁是許多動物的家。",
+          "en": "Coral reefs are homes for many animals."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "珊瑚彩色公寓",
+          "en": "The Colorful Coral Apartments"
+        },
+        "body": {
+          "zhTW": "珊瑚奶奶住在礁石上，身上有粉紅、橘色和紫色小房間。小魚想搬進來，卻擔心自己太吵。珊瑚奶奶說，公寓需要不同聲音才熱鬧，只要大家溫柔。小蝦負責掃沙，小蟹守門，小魚每天唱短短早安歌。海流經過時，整座彩色公寓輕輕搖晃。大家明白，家不是只有牆壁，也是一起照顧的約定。",
+          "en": "Grandma Coral lived on the reef with pink, orange, and purple little rooms across her branches. A small fish wanted to move in but worried he might be too noisy. Grandma Coral said an apartment needed different sounds to feel alive, as long as everyone was gentle. Shrimp swept the sand, a crab watched the doorway, and the fish sang a short good-morning song each day. When the current passed, the colorful apartment swayed softly. Everyone learned that a home is not only walls. It is a promise to care together. Even the smallest room glowed when neighbors remembered to share space."
+        },
+        "illustration": {
+          "path": "/images/aquarium/coral-story.png",
+          "altText": {
+            "zhTW": "彩色珊瑚像公寓一樣讓小魚小蝦住在旁邊",
+            "en": "Colorful coral like apartments with small fish and shrimp living nearby"
+          },
+          "caption": {
+            "zhTW": "一起照顧，家就會閃亮。",
+            "en": "A cared-for home shines."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "珊瑚 珊瑚礁 浮游生物 共生藻 小魚",
+          "en": "coral coral reef plankton algae fish"
+        }
+      ]
+    },
+    {
+      "slug": "goldfish",
+      "habitatCategory": "freshwater",
+      "sortOrder": 14,
+      "names": {
+        "zhTW": "金魚",
+        "en": "Goldfish"
+      },
+      "habitat": {
+        "zhTW": "生活在淡水池塘、水族箱和水流平緩的水域。",
+        "en": "Lives in freshwater ponds, aquariums, and gentle waters."
+      },
+      "diet": {
+        "zhTW": "吃魚飼料、藻類、小昆蟲和植物碎片。",
+        "en": "Eats fish food, algae, small insects, and plant bits."
+      },
+      "discoveryLocations": {
+        "zhTW": "金魚由人們長久飼養，常見於水族箱與庭園池。",
+        "en": "Goldfish have been cared for by people for a long time and are common in tanks and garden ponds."
+      },
+      "summary": {
+        "zhTW": "金魚有閃亮鱗片和柔軟魚鰭，常在水族箱裡慢慢轉彎。牠需要乾淨淡水和適量食物。",
+        "en": "Goldfish have shiny scales and soft fins, often turning gently in aquariums. They need clean freshwater and the right amount of food."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/goldfish-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風金魚在淡水水草旁擺動尾巴",
+          "en": "Cute storybook goldfish swishing its tail beside freshwater plants"
+        },
+        "caption": {
+          "zhTW": "金魚需要乾淨的淡水。",
+          "en": "Goldfish need clean freshwater."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "金魚的泡泡日記",
+          "en": "The Bubble Diary"
+        },
+        "body": {
+          "zhTW": "金魚金金每天在水草旁吐三顆泡泡，當作日記。第一顆泡泡記錄早安，第二顆記錄午餐，第三顆記錄今天學到的事。有一天新來的小蝦不知道哪裡可以休息，金金吐出一串長泡泡，帶牠到圓石後面。晚上金金寫下第三顆泡泡，今天學到分享路線。泡泡升到水面，啪一聲變成小小快樂。",
+          "en": "Goldie the goldfish blew three bubbles beside the water plants every day as a diary. The first bubble meant good morning, the second remembered lunch, and the third saved something learned. One day a new shrimp did not know where to rest. Goldie blew a long trail of bubbles and led the shrimp behind a round stone. That night, Goldie made the third diary bubble and wrote, I learned to share a path. The bubble rose to the surface and popped into a tiny bit of happiness. Tomorrow, Goldie planned to save one bubble for a new hello at sunrise."
+        },
+        "illustration": {
+          "path": "/images/aquarium/goldfish-story.png",
+          "altText": {
+            "zhTW": "金魚用一串泡泡帶小蝦找到圓石後的休息處",
+            "en": "Goldfish using a trail of bubbles to guide a shrimp behind a round stone"
+          },
+          "caption": {
+            "zhTW": "小泡泡也能記住好事情。",
+            "en": "Tiny bubbles can remember good things."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "金魚 淡水 水族箱 藻類 飼料",
+          "en": "goldfish freshwater aquarium algae fish food"
+        }
+      ]
+    },
+    {
+      "slug": "axolotl",
+      "habitatCategory": "freshwater",
+      "sortOrder": 15,
+      "names": {
+        "zhTW": "六角恐龍",
+        "en": "Axolotl"
+      },
+      "habitat": {
+        "zhTW": "生活在淡水湖泊和水道，喜歡清涼安靜的水。",
+        "en": "Lives in freshwater lakes and canals, preferring cool, quiet water."
+      },
+      "diet": {
+        "zhTW": "吃小蟲、蠕蟲、小魚和其他水中小動物。",
+        "en": "Eats small insects, worms, tiny fish, and other little water animals."
+      },
+      "discoveryLocations": {
+        "zhTW": "原產於墨西哥城附近的淡水湖區。",
+        "en": "Native to freshwater lake areas near Mexico City."
+      },
+      "summary": {
+        "zhTW": "六角恐龍不是恐龍，而是一種可愛的蠑螈親戚。牠有像羽毛的外鰓，能在水中呼吸。",
+        "en": "Axolotls are not dinosaurs; they are charming salamander relatives. Their feathery outside gills help them breathe underwater."
+      },
+      "mainImage": {
+        "path": "/images/aquarium/axolotl-main.png",
+        "altText": {
+          "zhTW": "可愛繪本風粉色六角恐龍在淡水湖底微笑",
+          "en": "Cute storybook pink axolotl smiling on a freshwater lake bottom"
+        },
+        "caption": {
+          "zhTW": "六角恐龍其實不是恐龍。",
+          "en": "An axolotl is not actually a dinosaur."
+        },
+        "styleTag": "storybook-cute"
+      },
+      "story": {
+        "title": {
+          "zhTW": "六角恐龍的羽毛鰓",
+          "en": "The Feather Gills"
+        },
+        "body": {
+          "zhTW": "六角恐龍阿桃有一圈像羽毛的鰓，朋友們都說像小花冠。阿桃很害羞，總把鰓藏在水草後。一天池底水變得混濁，小蝌蚪找不到清水方向。阿桃鼓起勇氣，讓羽毛鰓輕輕擺動，感覺水流從哪裡來。牠帶大家游到清涼角落。小蝌蚪說，原來你的花冠會聽水說話。阿桃第一次覺得自己的樣子很有用。",
+          "en": "Peach the axolotl had feathery gills around her face, and friends said they looked like a tiny flower crown. Peach felt shy and often hid them behind water plants. One day the pond bottom became cloudy, and tadpoles could not tell where the clear water flowed. Peach gathered courage and let her gills wave softly, feeling the current’s direction. She guided everyone to a cool quiet corner. The tadpoles said her flower crown could listen to the water. For the first time, Peach felt that her special look was useful. She wore her gills proudly when the pond grew clear again."
+        },
+        "illustration": {
+          "path": "/images/aquarium/axolotl-story.png",
+          "altText": {
+            "zhTW": "六角恐龍用羽毛鰓感覺水流帶小蝌蚪到清水處",
+            "en": "Axolotl using feathery gills to sense water flow and guide tadpoles"
+          },
+          "caption": {
+            "zhTW": "特別的樣子也能成為力量。",
+            "en": "What makes you different can become a strength."
+          },
+          "styleTag": "storybook-cute"
+        }
+      },
+      "searchKeywords": [
+        {
+          "zhTW": "六角恐龍 淡水 蠑螈 外鰓 墨西哥",
+          "en": "axolotl freshwater salamander gills Mexico"
+        }
+      ]
+    }
+  ]
+}

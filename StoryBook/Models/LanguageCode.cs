@@ -1,7 +1,7 @@
 namespace StoryBook.Models;
 
 /// <summary>
-/// Supported display languages for dinosaur content.
+/// Supported display languages for storybook content.
 /// </summary>
 public enum LanguageCode
 {

@@ -3,7 +3,7 @@ using StoryBook.Models;
 namespace StoryBook.Services;
 
 /// <summary>
-/// Resolves and exposes supported language preference metadata.
+/// Resolves and exposes supported storybook language preference metadata.
 /// </summary>
 public sealed class LanguagePreferenceService
 {

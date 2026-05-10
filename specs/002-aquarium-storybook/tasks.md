@@ -30,20 +30,20 @@
 
 **Critical**: 此階段完成前，不應開始任何使用者故事實作。
 
-- [ ] T005 [P] Add aquarium integration test fixture in `StoryBook.Tests/Integration/AquariumPageTestFixture.cs`
-- [ ] T006 [P] Add failing catalog validation tests for 15 fixed animals, bilingual fields, at least 5 habitat categories, readable-unit limits, main/story image alt text, and schema-aligned paths in `StoryBook.Tests/Unit/AquariumContentValidationTests.cs`
-- [ ] T007 [P] Add failing catalog service tests for JSON loading, load-failure result/logging, caching, slug lookup, logging unknown slugs, normalized search, short-query handling, previous/next navigation, and p95 lookup/search timing in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
-- [ ] T008 [P] Create bilingual text and catalog root models in `StoryBook/Models/AquariumText.cs` and `StoryBook/Models/AquariumCatalog.cs`
-- [ ] T009 [P] Create habitat category and animal profile models in `StoryBook/Models/AquariumHabitatCategory.cs` and `StoryBook/Models/AquariumAnimalProfile.cs`
-- [ ] T010 [P] Create image and story models in `StoryBook/Models/AquariumImage.cs` and `StoryBook/Models/AquariumStory.cs`
-- [ ] T011 [P] Create list-page search projection model in `StoryBook/Models/AquariumSearchResult.cs`
-- [ ] T012 [P] Create validation result and options classes in `StoryBook/Services/AquariumContentValidationResult.cs` and `StoryBook/Services/AquariumCatalogOptions.cs`
-- [ ] T013 Implement aquarium content validation rules for fixed animals, at least 5 habitat categories, bilingual fields, readable-unit limits, main/story images, alt text, and schema paths in `StoryBook/Services/AquariumContentValidator.cs`
-- [ ] T014 Implement initial aquarium catalog loading, load-failure handling, caching, slug lookup, validation failure logging, unknown slug logging, and short-query classification in `StoryBook/Services/AquariumCatalogService.cs`
-- [ ] T015 Register aquarium options, validator, and catalog service in `StoryBook/Program.cs`
-- [ ] T016 Add complete 15-animal bilingual content catalog for `clownfish`, `seahorse`, `sea-turtle`, `jellyfish`, `octopus`, `shark`, `stingray`, `penguin`, `seal`, `dolphin`, `starfish`, `crab`, `coral`, `goldfish`, and `axolotl` in `StoryBook/Data/aquarium.json`
-- [ ] T017 Update language XML documentation from dinosaur-specific wording to shared storybook wording in `StoryBook/Models/LanguageCode.cs` and `StoryBook/Services/LanguagePreferenceService.cs`
-- [ ] T018 Run foundational tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumContentValidationTests` and `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` against `StoryBook.Tests/StoryBook.Tests.csproj`
+- [X] T005 [P] Add aquarium integration test fixture in `StoryBook.Tests/Integration/AquariumPageTestFixture.cs`
+- [X] T006 [P] Add failing catalog validation tests for 15 fixed animals, bilingual fields, at least 5 habitat categories, readable-unit limits, main/story image alt text, and schema-aligned paths in `StoryBook.Tests/Unit/AquariumContentValidationTests.cs`
+- [X] T007 [P] Add failing catalog service tests for JSON loading, load-failure result/logging, caching, slug lookup, logging unknown slugs, normalized search, short-query handling, previous/next navigation, and p95 lookup/search timing in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
+- [X] T008 [P] Create bilingual text and catalog root models in `StoryBook/Models/AquariumText.cs` and `StoryBook/Models/AquariumCatalog.cs`
+- [X] T009 [P] Create habitat category and animal profile models in `StoryBook/Models/AquariumHabitatCategory.cs` and `StoryBook/Models/AquariumAnimalProfile.cs`
+- [X] T010 [P] Create image and story models in `StoryBook/Models/AquariumImage.cs` and `StoryBook/Models/AquariumStory.cs`
+- [X] T011 [P] Create list-page search projection model in `StoryBook/Models/AquariumSearchResult.cs`
+- [X] T012 [P] Create validation result and options classes in `StoryBook/Services/AquariumContentValidationResult.cs` and `StoryBook/Services/AquariumCatalogOptions.cs`
+- [X] T013 Implement aquarium content validation rules for fixed animals, at least 5 habitat categories, bilingual fields, readable-unit limits, main/story images, alt text, and schema paths in `StoryBook/Services/AquariumContentValidator.cs`
+- [X] T014 Implement initial aquarium catalog loading, load-failure handling, caching, slug lookup, validation failure logging, unknown slug logging, and short-query classification in `StoryBook/Services/AquariumCatalogService.cs`
+- [X] T015 Register aquarium options, validator, and catalog service in `StoryBook/Program.cs`
+- [X] T016 Add complete 15-animal bilingual content catalog for `clownfish`, `seahorse`, `sea-turtle`, `jellyfish`, `octopus`, `shark`, `stingray`, `penguin`, `seal`, `dolphin`, `starfish`, `crab`, `coral`, `goldfish`, and `axolotl` in `StoryBook/Data/aquarium.json`
+- [X] T017 Update language XML documentation from dinosaur-specific wording to shared storybook wording in `StoryBook/Models/LanguageCode.cs` and `StoryBook/Services/LanguagePreferenceService.cs`
+- [X] T018 Run foundational tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumContentValidationTests` and `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` against `StoryBook.Tests/StoryBook.Tests.csproj`
 
 **Checkpoint**: Foundation ready. Aquarium content can be loaded, validated, searched, and resolved by slug through DI-backed services.
 
