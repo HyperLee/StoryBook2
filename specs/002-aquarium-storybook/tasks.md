@@ -211,14 +211,14 @@
 
 **Purpose**: 完成交付品質、手動驗收、文件同步與全 solution 驗證。
 
-- [ ] T065 [P] Audit public XML documentation on aquarium models, options, validators, services, and shared language types in `StoryBook/Models/AquariumText.cs`, `StoryBook/Models/AquariumCatalog.cs`, `StoryBook/Models/AquariumAnimalProfile.cs`, `StoryBook/Models/AquariumHabitatCategory.cs`, `StoryBook/Models/AquariumImage.cs`, `StoryBook/Models/AquariumStory.cs`, `StoryBook/Models/AquariumSearchResult.cs`, `StoryBook/Services/AquariumCatalogOptions.cs`, `StoryBook/Services/AquariumContentValidator.cs`, and `StoryBook/Services/AquariumCatalogService.cs`
-- [ ] T066 [P] Review child-friendly Traditional Chinese and English user-visible copy in `StoryBook/Pages/Aquarium/Index.cshtml`, `StoryBook/Pages/Aquarium/Details.cshtml`, and `StoryBook/Data/aquarium.json`
-- [ ] T067 [P] Review Aquarium content, at least 5 habitat categories, and asset references against `specs/002-aquarium-storybook/contracts/content-catalog.schema.json` and `StoryBook/Data/aquarium.json`
-- [ ] T068 [P] Inspect Aquarium files for placeholders or secrets in `StoryBook/Data/aquarium.json`, `StoryBook/wwwroot/js/aquarium.js`, `StoryBook/wwwroot/css/aquarium.css`, and `StoryBook/wwwroot/images/aquarium/`
-- [ ] T069 Run restore with `dotnet restore StoryBook2.sln` for `StoryBook2.sln`
-- [ ] T070 Run build with `dotnet build StoryBook2.sln` for `StoryBook2.sln`
-- [ ] T071 Run full tests with `dotnet test StoryBook2.sln` for `StoryBook2.sln`
-- [ ] T072 Complete the manual acceptance checklist, including data-load failure, short-query, rapid-operation, and <=1s search-update checks, and record any blocker or deviation in `specs/002-aquarium-storybook/quickstart.md`
+- [X] T065 [P] Audit public XML documentation on aquarium models, options, validators, services, and shared language types in `StoryBook/Models/AquariumText.cs`, `StoryBook/Models/AquariumCatalog.cs`, `StoryBook/Models/AquariumAnimalProfile.cs`, `StoryBook/Models/AquariumHabitatCategory.cs`, `StoryBook/Models/AquariumImage.cs`, `StoryBook/Models/AquariumStory.cs`, `StoryBook/Models/AquariumSearchResult.cs`, `StoryBook/Services/AquariumCatalogOptions.cs`, `StoryBook/Services/AquariumContentValidator.cs`, and `StoryBook/Services/AquariumCatalogService.cs`
+- [X] T066 [P] Review child-friendly Traditional Chinese and English user-visible copy in `StoryBook/Pages/Aquarium/Index.cshtml`, `StoryBook/Pages/Aquarium/Details.cshtml`, and `StoryBook/Data/aquarium.json`
+- [X] T067 [P] Review Aquarium content, at least 5 habitat categories, and asset references against `specs/002-aquarium-storybook/contracts/content-catalog.schema.json` and `StoryBook/Data/aquarium.json`
+- [X] T068 [P] Inspect Aquarium files for placeholders or secrets in `StoryBook/Data/aquarium.json`, `StoryBook/wwwroot/js/aquarium.js`, `StoryBook/wwwroot/css/aquarium.css`, and `StoryBook/wwwroot/images/aquarium/`
+- [X] T069 Run restore with `dotnet restore StoryBook2.sln` for `StoryBook2.sln`
+- [X] T070 Run build with `dotnet build StoryBook2.sln` for `StoryBook2.sln`
+- [X] T071 Run full tests with `dotnet test StoryBook2.sln` for `StoryBook2.sln`
+- [X] T072 Complete the manual acceptance checklist, including data-load failure, short-query, rapid-operation, and <=1s search-update checks, and record any blocker or deviation in `specs/002-aquarium-storybook/quickstart.md`
 
 ---
 

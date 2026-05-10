@@ -60,3 +60,16 @@ Open the HTTPS or HTTP URL printed by `dotnet run`, then verify the routes below
 - 繁體中文可閱讀單位以可見中文字元計算；英文以單字計算；空白與標點不計入。
 - 每張主圖與故事插圖都有雙語 alt text，且 alt text 不得只是檔名。
 - 快取後 slug lookup、previous/next 與搜尋查詢 p95 低於 200ms。
+
+## Phase 10 Acceptance Record
+
+Recorded on 2026-05-10 for branch `002-aquarium-storybook`.
+
+- `dotnet restore StoryBook2.sln`: PASS
+- `dotnet build StoryBook2.sln`: PASS, 0 warnings, 0 errors
+- `dotnet test StoryBook2.sln`: PASS, 56/56 tests
+- Route smoke checks on `http://localhost:5059`: `/`, `/aquarium`, `/aquarium/clownfish`, `/aquarium/axolotl` returned 200; `/aquarium/not-a-real-slug` returned 404.
+- Static asset smoke check: `/images/aquarium/clownfish-main.png` returned 200 `image/png`.
+- Content and asset audit: 15 fixed animals, 6 habitat categories, bilingual text, local image paths, generated aquarium-themed PNG assets, and no placeholder/secrets matches in Aquarium files.
+- Browser-only keyboard, modal focus return, localStorage persistence, and <=1s visible search update behavior are covered by integration contracts and `aquarium.js` implementation review in this pass; no Playwright suite is present in this repository.
+- No blocker or accepted deviation remains for the implemented scope.
