@@ -22,6 +22,14 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
+[/Users/qiuzili/StoryBook2/StoryBook/Pages/Aquarium/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXF1YXJpdW0vRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/qiuzili/StoryBook2/StoryBook/Pages/Aquarium/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXF1YXJpdW0vSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/qiuzili/StoryBook2/StoryBook/Pages/Dinosaurs/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlub3NhdXJzL0RldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
