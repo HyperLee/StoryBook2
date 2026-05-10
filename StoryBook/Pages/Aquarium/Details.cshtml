@@ -38,10 +38,17 @@
         <article class="aquarium-detail">
             <div class="aquarium-detail__media">
                 <figure class="aquarium-image-frame">
-                    <img src="@Model.Profile.MainImage.Path"
-                         alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
-                         data-alt-zh-tw="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
-                         data-alt-en="@Model.Profile.MainImage.AltText.Get(LanguageCode.En)" />
+                    <button class="aquarium-image-button"
+                            type="button"
+                            aria-label="@($"開啟{Model.Profile.Names.Get(LanguageCode.ZhTW)}大圖")"
+                            data-aria-label-zh-tw="@($"開啟{Model.Profile.Names.Get(LanguageCode.ZhTW)}大圖")"
+                            data-aria-label-en="@($"Open large image for {Model.Profile.Names.Get(LanguageCode.En)}")"
+                            data-aquarium-modal-open="aquarium-image-modal">
+                        <img src="@Model.Profile.MainImage.Path"
+                             alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-zh-tw="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-en="@Model.Profile.MainImage.AltText.Get(LanguageCode.En)" />
+                    </button>
                     @if (Model.Profile.MainImage.Caption is not null)
                     {
                         <figcaption data-i18n-zh-tw="@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.MainImage.Caption.Get(LanguageCode.En)">@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</figcaption>
@@ -116,6 +123,39 @@
                 </nav>
             </div>
         </article>
+
+        <div class="modal fade aquarium-modal"
+             id="aquarium-image-modal"
+             tabindex="-1"
+             aria-labelledby="aquarium-image-modal-title"
+             aria-hidden="true"
+             data-aquarium-modal>
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title fs-5" id="aquarium-image-modal-title" data-i18n-zh-tw="@($"{Model.Profile.Names.Get(LanguageCode.ZhTW)}大圖")" data-i18n-en="@($"Large image of {Model.Profile.Names.Get(LanguageCode.En)}")">@Model.Profile.Names.Get(LanguageCode.ZhTW)大圖</h2>
+                        <button type="button"
+                                class="btn-close"
+                                aria-label="關閉大圖"
+                                data-aria-label-zh-tw="關閉大圖"
+                                data-aria-label-en="Close large image"
+                                data-aquarium-modal-close></button>
+                    </div>
+                    <div class="modal-body">
+                        <img class="aquarium-modal__image"
+                             src="@Model.Profile.MainImage.Path"
+                             alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-zh-tw="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-en="@Model.Profile.MainImage.AltText.Get(LanguageCode.En)" />
+                        @if (Model.Profile.MainImage.Caption is not null)
+                        {
+                            <p class="aquarium-modal__caption" data-i18n-zh-tw="@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.MainImage.Caption.Get(LanguageCode.En)">@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</p>
+                        }
+                        <p class="aquarium-image-fallback" data-i18n-zh-tw="圖片暫時沒有游出來，請先讀文字認識牠。" data-i18n-en="The picture is not swimming out right now. Please meet this friend through the words.">圖片暫時沒有游出來，請先讀文字認識牠。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </section>
 

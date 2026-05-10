@@ -173,14 +173,14 @@
 
 ### Tests for User Story 6
 
-- [ ] T055 [P] [US6] Add failing integration tests for modal open button accessible name, modal markup, close control, bilingual modal labels, and image fallback contract in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [X] T055 [P] [US6] Add failing integration tests for modal open button accessible name, modal markup, close control, bilingual modal labels, and image fallback contract in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 
 ### Implementation for User Story 6
 
-- [ ] T056 [US6] Add main-image button, modal dialog markup, close control, caption, and friendly image fallback text to `StoryBook/Pages/Aquarium/Details.cshtml`
-- [ ] T057 [US6] Implement Aquarium modal open, close, Escape handling, backdrop close, and focus return logic in `StoryBook/wwwroot/js/aquarium.js`
-- [ ] T058 [US6] Add modal, image button, close control, and missing-image styles in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T059 [US6] Run US6 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify quickstart modal steps in `specs/002-aquarium-storybook/quickstart.md`
+- [X] T056 [US6] Add main-image button, modal dialog markup, close control, caption, and friendly image fallback text to `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T057 [US6] Implement Aquarium modal open, close, Escape handling, backdrop close, and focus return logic in `StoryBook/wwwroot/js/aquarium.js`
+- [X] T058 [US6] Add modal, image button, close control, and missing-image styles in `StoryBook/wwwroot/css/aquarium.css`
+- [X] T059 [US6] Run US6 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify quickstart modal steps in `specs/002-aquarium-storybook/quickstart.md`
 
 **Checkpoint**: User Story 6 image inspection works without trapping keyboard users.
 

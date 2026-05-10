@@ -159,4 +159,21 @@ public sealed class AquariumPagesTests : IClassFixture<AquariumPageTestFixture>
         Assert.Contains("data-aria-label-en=\"Aquarium navigation\"", detailHtml);
         Assert.Contains("js/aquarium.js", detailHtml);
     }
+
+    [Fact]
+    public async Task Aquarium_detail_renders_accessible_image_modal_contract()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/aquarium/clownfish");
+
+        Assert.Contains("aquarium-image-button", html);
+        Assert.Contains("aria-label=\"開啟小丑魚大圖\"", html);
+        Assert.Contains("data-aria-label-en=\"Open large image for Clownfish\"", html);
+        Assert.Contains("data-aquarium-modal-open=\"aquarium-image-modal\"", html);
+        Assert.Contains("id=\"aquarium-image-modal\"", html);
+        Assert.Contains("modal fade", html);
+        Assert.Contains("aria-label=\"關閉大圖\"", html);
+        Assert.Contains("data-aria-label-en=\"Close large image\"", html);
+        Assert.Contains("aquarium-modal__image", html);
+        Assert.Contains("圖片暫時沒有游出來", html);
+    }
 }

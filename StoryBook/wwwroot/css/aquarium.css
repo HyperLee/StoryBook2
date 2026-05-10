@@ -245,7 +245,7 @@
     margin: 0;
 }
 
-.aquarium-image-frame img,
+.aquarium-image-button img,
 .aquarium-story__figure img {
     background: #e7f8fb;
     border: 2px solid #b8e4eb;
@@ -253,6 +253,21 @@
     display: block;
     height: auto;
     width: 100%;
+}
+
+.aquarium-image-button {
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    display: block;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.aquarium-image-button:focus-visible {
+    outline: 4px solid #fbbf24;
+    outline-offset: 4px;
 }
 
 .aquarium-image-frame figcaption,
@@ -343,6 +358,19 @@
 .aquarium-page-link--disabled {
     border-color: #a7b8bc;
     color: #64777c;
+}
+
+.aquarium-modal__image {
+    border-radius: 8px;
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+.aquarium-modal__caption {
+    color: #115e59;
+    font-weight: 700;
+    margin: 0.8rem 0 0;
 }
 
 @media (max-width: 900px) {
