@@ -1,5 +1,6 @@
 .aquarium-page {
     color: #173f4f;
+    overflow-wrap: anywhere;
 }
 
 .aquarium-page__header {

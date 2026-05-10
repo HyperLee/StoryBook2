@@ -138,4 +138,25 @@ public sealed class AquariumPagesTests : IClassFixture<AquariumPageTestFixture>
         Assert.Contains("小丑魚", html);
         Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/aquarium/seahorse"));
     }
+
+    [Fact]
+    public async Task Aquarium_pages_emit_language_switch_controls_bilingual_attributes_and_feature_script()
+    {
+        string listHtml = await _fixture.GetOkHtmlAsync("/aquarium");
+        string detailHtml = await _fixture.GetOkHtmlAsync("/aquarium/clownfish");
+
+        Assert.Contains("data-language-storage-key=\"storybook.language\"", listHtml);
+        Assert.Contains("data-language-option=\"zh-TW\"", listHtml);
+        Assert.Contains("data-language-option=\"en\"", listHtml);
+        Assert.Contains("data-i18n-en=\"Aquarium Storybook\"", listHtml);
+        Assert.Contains("data-placeholder-en=\"Search by name, habitat, or diet\"", listHtml);
+        Assert.Contains("data-aria-label-en=\"Search aquarium animals\"", listHtml);
+        Assert.Contains("js/aquarium.js", listHtml);
+
+        Assert.Contains("data-i18n-en=\"Clownfish\"", detailHtml);
+        Assert.Contains("data-i18n-en=\"Coral reef\"", detailHtml);
+        Assert.Contains("data-alt-en=\"Cute storybook clownfish", detailHtml);
+        Assert.Contains("data-aria-label-en=\"Aquarium navigation\"", detailHtml);
+        Assert.Contains("js/aquarium.js", detailHtml);
+    }
 }

@@ -151,15 +151,15 @@
 
 ### Tests for User Story 5
 
-- [ ] T049 [P] [US5] Add or extend language fallback and `storybook.language` storage key tests in `StoryBook.Tests/Unit/LanguagePreferenceServiceTests.cs`
-- [ ] T050 [P] [US5] Add failing integration tests for bilingual `data-i18n-*`, `data-alt-*`, `data-aria-label-*`, `data-placeholder-*`, and shared language switch controls in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [X] T049 [P] [US5] Add or extend language fallback and `storybook.language` storage key tests in `StoryBook.Tests/Unit/LanguagePreferenceServiceTests.cs`
+- [X] T050 [P] [US5] Add failing integration tests for bilingual `data-i18n-*`, `data-alt-*`, `data-aria-label-*`, `data-placeholder-*`, and shared language switch controls in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 
 ### Implementation for User Story 5
 
-- [ ] T051 [US5] Add bilingual text, alt, aria-label, and placeholder data attributes across `StoryBook/Pages/Aquarium/Index.cshtml` and `StoryBook/Pages/Aquarium/Details.cshtml`
-- [ ] T052 [US5] Implement Aquarium language application, storage fallback, attribute updates, and `document.documentElement.lang` updates in `StoryBook/wwwroot/js/aquarium.js`
-- [ ] T053 [US5] Adjust language-sensitive spacing and responsive text wrapping in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T054 [US5] Run US5 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter LanguagePreferenceServiceTests` and `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` against `StoryBook.Tests/StoryBook.Tests.csproj`
+- [X] T051 [US5] Add bilingual text, alt, aria-label, and placeholder data attributes across `StoryBook/Pages/Aquarium/Index.cshtml` and `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T052 [US5] Implement Aquarium language application, storage fallback, attribute updates, and `document.documentElement.lang` updates in `StoryBook/wwwroot/js/aquarium.js`
+- [X] T053 [US5] Adjust language-sensitive spacing and responsive text wrapping in `StoryBook/wwwroot/css/aquarium.css`
+- [X] T054 [US5] Run US5 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter LanguagePreferenceServiceTests` and `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` against `StoryBook.Tests/StoryBook.Tests.csproj`
 
 **Checkpoint**: User Story 5 preserves shared storybook language preference without blank user-visible content.
 

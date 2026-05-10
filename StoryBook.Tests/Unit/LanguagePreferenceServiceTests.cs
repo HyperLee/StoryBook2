@@ -57,4 +57,17 @@ public sealed class LanguagePreferenceServiceTests
         Assert.Equal("繁體中文", missingEnglish.Get(LanguageCode.En));
         Assert.Equal("English text", missingChinese.Get(LanguageCode.ZhTW));
     }
+
+    [Fact]
+    public void Aquarium_text_uses_shared_storybook_language_fallback()
+    {
+        AquariumText missingEnglish = new()
+        {
+            ZhTW = "水族館朋友",
+            En = ""
+        };
+
+        Assert.Equal("水族館朋友", missingEnglish.Get(LanguageCode.En));
+        Assert.Equal("水族館朋友", missingEnglish.Get("invalid"));
+    }
 }
