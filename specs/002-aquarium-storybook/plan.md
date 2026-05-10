@@ -5,7 +5,7 @@
 
 ## Summary
 
-在既有 `StoryBook` ASP.NET Core Razor Pages 應用中新增「水族館動物介紹故事書」。核心作法是沿用恐龍故事書已建立的 Razor Pages、薄 PageModel、injectable services、本機 JSON 內容、Bootstrap 5 與原生 JavaScript 模式，新增 `/aquarium` 主頁與 `/aquarium/{slug}` 單一動物頁，固定提供 15 種水族館生物、生活區域分類、雙語內容、搜尋、上一頁/下一頁、圖片放大與回首頁導覽。內容資料放在 repository 內的 `StoryBook/Data/aquarium.json`，不放在公開 `wwwroot/data`，也不新增資料庫、外部 API、SPA router 或即時翻譯服務。
+在既有 `StoryBook` ASP.NET Core Razor Pages 應用中新增「水族館動物介紹故事書」。核心作法是沿用恐龍故事書已建立的 Razor Pages、薄 PageModel、injectable services、本機 JSON 內容、Bootstrap 5 與原生 JavaScript 模式，新增 `/aquarium` 主頁與 `/aquarium/{slug}` 單一動物頁，固定提供 15 種水族館生物、至少 5 種生活區域分類、雙語內容、搜尋、上一頁/下一頁、主要圖片放大、故事插圖、資料讀取失敗狀態與回首頁導覽。內容資料放在 repository 內的 `StoryBook/Data/aquarium.json`，不放在公開 `wwwroot/data`，也不新增資料庫、外部 API、SPA router 或即時翻譯服務。
 
 ## Technical Context
 
@@ -15,8 +15,8 @@
 **Testing**: 沿用既有 `StoryBook.Tests` 專案，使用 xUnit、`Microsoft.AspNetCore.Mvc.Testing` / `WebApplicationFactory<Program>`；服務規則使用單元測試，DI、路由、Razor Pages pipeline、404 與 HTML contract 使用整合測試，圖片 modal、鍵盤操作、語言切換與視覺流程依 `quickstart.md` 手動驗收。
 **Target Platform**: 本階段正式驗收為桌機瀏覽器 Chrome、Firefox、Safari、Edge；行動裝置深度最佳化不列入本次交付，但基本 Bootstrap 回應式版面不得造成主要內容水平捲動。
 **Project Type**: 單一 ASP.NET Core Razor Pages web application。
-**Performance Goals**: 首頁到 `/aquarium` 入口 3 秒內可理解如何開始閱讀；從 `/aquarium` 開始閱讀第一隻動物 5 秒內完成；搜尋結果或無結果提示 1 秒內更新；本機 catalog lookup/search p95 低於 200ms；語言切換 2 秒內更新主要可見文字。
-**Constraints**: 固定 15 種水族館生物；每篇簡介每種語言不超過 200 個可閱讀單位；每則故事每種語言 100-150 個可閱讀單位；繁體中文以可見中文字元計算，英文以單字計算，空白與標點不計入；所有互動控制項可鍵盤聚焦與啟用；語言偏好使用 `localStorage` key `storybook.language`；無效偏好或缺漏內容回退 `zh-TW`，不得顯示空白內容區塊。
+**Performance Goals**: 首頁到 `/aquarium` 入口 3 秒內可理解如何開始閱讀；從 `/aquarium` 開始閱讀第一隻動物 5 秒內完成；搜尋結果、過短搜尋提示或無結果提示需在輸入變更後 1 秒內更新到畫面；本機 catalog lookup/search p95 低於 200ms；語言切換 2 秒內更新主要可見文字。
+**Constraints**: 固定 15 種水族館生物；至少 5 種生活區域分類；每篇簡介每種語言不超過 200 個可閱讀單位；每則故事每種語言 100-150 個可閱讀單位；繁體中文以可見中文字元計算，英文以單字計算，空白與標點不計入；搜尋正規化後少於 2 個有效搜尋字元或英文字母數字時視為過短；所有互動控制項可鍵盤聚焦與啟用；語言偏好使用 `localStorage` key `storybook.language`；無效偏好或缺漏內容回退 `zh-TW`，不得顯示空白內容區塊。
 **Scale/Scope**: 15 筆內容、2 種語言、至少 5 種生活區域分類、首頁入口、水族館主頁、動物詳情頁、搜尋狀態、友善 404、圖片放大視圖；不含帳號、收藏、測驗、社群分享、後台管理或外部資料整合。
 **Observability/Logging**: 使用 ASP.NET Core 內建 `ILogger<T>` 記錄資料載入失敗、內容驗證錯誤、未知 slug、缺圖或非預期例外；暫不新增 Serilog，除非後續營運需求明確要求 file sink 或集中式結構化日誌並在 plan/tasks 中記錄理由。
 
@@ -104,8 +104,7 @@ StoryBook.Tests/
 │   ├── AquariumContentValidationTests.cs
 │   └── LanguagePreferenceServiceTests.cs
 └── Integration/
-    ├── AquariumPagesTests.cs
-    └── RoutingAndFallbackTests.cs
+    └── AquariumPagesTests.cs
 ```
 
 **Structure Decision**: 採用既有單一 Razor Pages web app，不新增 SPA、Blazor、MVC、資料庫或外部服務。水族館功能使用 `Pages/Aquarium/` feature folder，資料與規則放在 `Models/`、`Services/`，內容 JSON 放在非公開的 `StoryBook/Data/`，公開圖片、CSS、JavaScript 放在 `wwwroot` 下的 feature-specific 目錄。`LanguagePreferenceService` 與 `LanguageCode` 可沿用既有共享語言偏好邏輯；若實作時更新其 XML 註解，需讓描述從恐龍專用改為故事書通用。

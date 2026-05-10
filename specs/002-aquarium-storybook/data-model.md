@@ -7,7 +7,7 @@
 | Field | Type | Required | Validation |
 |-------|------|----------|------------|
 | `version` | string | Yes | 不得空白；用於內容審查與快取診斷。 |
-| `habitatCategories` | `AquariumHabitatCategory[]` | Yes | 至少 3 種；分類代碼唯一；每種分類需雙語名稱。 |
+| `habitatCategories` | `AquariumHabitatCategory[]` | Yes | 至少 5 種；分類代碼唯一；每種分類需雙語名稱。 |
 | `animals` | `AquariumAnimalProfile[]` | Yes | 必須剛好 15 筆；slug 與 sortOrder 唯一。 |
 
 ## Entity: AquariumHabitatCategory
@@ -105,7 +105,7 @@
 
 | Field | Type | Required | Validation |
 |-------|------|----------|------------|
-| `query` | string | Yes | trim 並合併多餘空白；空白、只有符號或過短時顯示友善提示或完整集合，不造成例外。 |
+| `query` | string | Yes | trim、合併多餘空白並忽略不影響語意的標點；空白、只有符號或正規化後少於 2 個有效搜尋字元/英文字母數字時顯示友善提示或完整集合，不造成例外。 |
 | `language` | `LanguagePreference` | Yes | 決定搜尋結果顯示語言與 fallback。 |
 | `matchingSlugs` | string[] | Yes | 只包含存在的 `AquariumAnimalProfile.slug`。 |
 | `hasResults` | bool | Yes | 無結果時顯示友善提示與清除搜尋控制項。 |

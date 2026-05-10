@@ -31,15 +31,15 @@
 **Critical**: 此階段完成前，不應開始任何使用者故事實作。
 
 - [ ] T005 [P] Add aquarium integration test fixture in `StoryBook.Tests/Integration/AquariumPageTestFixture.cs`
-- [ ] T006 [P] Add failing catalog validation tests for 15 fixed animals, bilingual fields, habitat categories, readable-unit limits, image alt text, and schema-aligned paths in `StoryBook.Tests/Unit/AquariumContentValidationTests.cs`
-- [ ] T007 [P] Add failing catalog service tests for JSON loading, caching, slug lookup, logging unknown slugs, normalized search, previous/next navigation, and p95 lookup/search timing in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
+- [ ] T006 [P] Add failing catalog validation tests for 15 fixed animals, bilingual fields, at least 5 habitat categories, readable-unit limits, main/story image alt text, and schema-aligned paths in `StoryBook.Tests/Unit/AquariumContentValidationTests.cs`
+- [ ] T007 [P] Add failing catalog service tests for JSON loading, load-failure result/logging, caching, slug lookup, logging unknown slugs, normalized search, short-query handling, previous/next navigation, and p95 lookup/search timing in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
 - [ ] T008 [P] Create bilingual text and catalog root models in `StoryBook/Models/AquariumText.cs` and `StoryBook/Models/AquariumCatalog.cs`
 - [ ] T009 [P] Create habitat category and animal profile models in `StoryBook/Models/AquariumHabitatCategory.cs` and `StoryBook/Models/AquariumAnimalProfile.cs`
 - [ ] T010 [P] Create image and story models in `StoryBook/Models/AquariumImage.cs` and `StoryBook/Models/AquariumStory.cs`
 - [ ] T011 [P] Create list-page search projection model in `StoryBook/Models/AquariumSearchResult.cs`
 - [ ] T012 [P] Create validation result and options classes in `StoryBook/Services/AquariumContentValidationResult.cs` and `StoryBook/Services/AquariumCatalogOptions.cs`
-- [ ] T013 Implement aquarium content validation rules in `StoryBook/Services/AquariumContentValidator.cs`
-- [ ] T014 Implement initial aquarium catalog loading, caching, slug lookup, validation failure logging, and unknown slug logging in `StoryBook/Services/AquariumCatalogService.cs`
+- [ ] T013 Implement aquarium content validation rules for fixed animals, at least 5 habitat categories, bilingual fields, readable-unit limits, main/story images, alt text, and schema paths in `StoryBook/Services/AquariumContentValidator.cs`
+- [ ] T014 Implement initial aquarium catalog loading, load-failure handling, caching, slug lookup, validation failure logging, unknown slug logging, and short-query classification in `StoryBook/Services/AquariumCatalogService.cs`
 - [ ] T015 Register aquarium options, validator, and catalog service in `StoryBook/Program.cs`
 - [ ] T016 Add complete 15-animal bilingual content catalog for `clownfish`, `seahorse`, `sea-turtle`, `jellyfish`, `octopus`, `shark`, `stingray`, `penguin`, `seal`, `dolphin`, `starfish`, `crab`, `coral`, `goldfish`, and `axolotl` in `StoryBook/Data/aquarium.json`
 - [ ] T017 Update language XML documentation from dinosaur-specific wording to shared storybook wording in `StoryBook/Models/LanguageCode.cs` and `StoryBook/Services/LanguagePreferenceService.cs`
@@ -57,15 +57,15 @@
 
 ### Tests for User Story 1
 
-- [ ] T019 [P] [US1] Add failing integration tests for homepage entry, `/aquarium` cover, 10-40 字歡迎文字, search entry, language switcher, and start-reading link in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [ ] T019 [P] [US1] Add failing integration tests for homepage entry, `/aquarium` cover, 10-40 字歡迎文字, search entry, language switcher, start-reading link, and Aquarium home data-load failure state with retry/home actions in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 
 ### Implementation for User Story 1
 
 - [ ] T020 [US1] Add visible Aquarium entry link to `StoryBook/Pages/Index.cshtml`
-- [ ] T021 [US1] Implement Aquarium list PageModel loading profiles, search projections, and first profile in `StoryBook/Pages/Aquarium/Index.cshtml.cs`
-- [ ] T022 [US1] Render Aquarium home cover, welcome text, start-reading anchor, language-aware labels, and initial 15-item directory shell in `StoryBook/Pages/Aquarium/Index.cshtml`
+- [ ] T021 [US1] Implement Aquarium list PageModel loading profiles, search projections, first profile, and catalog load-failure state in `StoryBook/Pages/Aquarium/Index.cshtml.cs`
+- [ ] T022 [US1] Render Aquarium home cover, welcome text, start-reading anchor, language-aware labels, initial 15-item directory shell, and friendly data-load failure state with retry/home actions in `StoryBook/Pages/Aquarium/Index.cshtml`
 - [ ] T023 [US1] Add child-friendly Aquarium cover, start action, and directory layout styles in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T024 [US1] Run US1 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify `/`, `/aquarium`, and `/aquarium/clownfish` route expectations in `specs/002-aquarium-storybook/quickstart.md`
+- [ ] T024 [US1] Run US1 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify `/`, `/aquarium`, `/aquarium/clownfish`, and data-load failure expectations in `specs/002-aquarium-storybook/quickstart.md`
 
 **Checkpoint**: User Story 1 is independently demoable from the homepage through first animal navigation.
 
@@ -79,18 +79,18 @@
 
 ### Tests for User Story 2
 
-- [ ] T025 [P] [US2] Add failing integration tests for direct slug details, required fields, story section, main image, story illustration, and bilingual alt text in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [ ] T025 [P] [US2] Add failing integration tests for direct slug details, required fields, story section, main image, story illustration, bilingual alt text, detail data-load failure state, and retry/home actions in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 - [ ] T026 [P] [US2] Add failing content validation tests for summary length, story length, required story illustration, and non-filename alt text in `StoryBook.Tests/Unit/AquariumContentValidationTests.cs`
 
 ### Implementation for User Story 2
 
-- [ ] T027 [US2] Implement Aquarium details PageModel slug lookup, profile property, not-found flag, and 404 status code in `StoryBook/Pages/Aquarium/Details.cshtml.cs`
-- [ ] T028 [US2] Render one-animal detail layout with facts, summary, story, main image, story illustration, and friendly missing-image text in `StoryBook/Pages/Aquarium/Details.cshtml`
+- [ ] T027 [US2] Implement Aquarium details PageModel slug lookup, profile property, catalog load-failure state, not-found flag, and 404 status code in `StoryBook/Pages/Aquarium/Details.cshtml.cs`
+- [ ] T028 [US2] Render one-animal detail layout with facts, summary, story, main image, story illustration, friendly missing-image text, and friendly data-load failure state with retry/home actions in `StoryBook/Pages/Aquarium/Details.cshtml`
 - [ ] T029 [P] [US2] Add coral-reef and freshwater main/story image assets at `StoryBook/wwwroot/images/aquarium/clownfish-main.png`, `StoryBook/wwwroot/images/aquarium/clownfish-story.png`, `StoryBook/wwwroot/images/aquarium/coral-main.png`, `StoryBook/wwwroot/images/aquarium/coral-story.png`, `StoryBook/wwwroot/images/aquarium/goldfish-main.png`, `StoryBook/wwwroot/images/aquarium/goldfish-story.png`, `StoryBook/wwwroot/images/aquarium/axolotl-main.png`, and `StoryBook/wwwroot/images/aquarium/axolotl-story.png`
 - [ ] T030 [P] [US2] Add saltwater main/story image assets at `StoryBook/wwwroot/images/aquarium/seahorse-main.png`, `StoryBook/wwwroot/images/aquarium/seahorse-story.png`, `StoryBook/wwwroot/images/aquarium/sea-turtle-main.png`, `StoryBook/wwwroot/images/aquarium/sea-turtle-story.png`, `StoryBook/wwwroot/images/aquarium/octopus-main.png`, `StoryBook/wwwroot/images/aquarium/octopus-story.png`, `StoryBook/wwwroot/images/aquarium/shark-main.png`, `StoryBook/wwwroot/images/aquarium/shark-story.png`, `StoryBook/wwwroot/images/aquarium/stingray-main.png`, `StoryBook/wwwroot/images/aquarium/stingray-story.png`, `StoryBook/wwwroot/images/aquarium/dolphin-main.png`, and `StoryBook/wwwroot/images/aquarium/dolphin-story.png`
 - [ ] T031 [P] [US2] Add deep-sea, polar, and tide-pool main/story image assets at `StoryBook/wwwroot/images/aquarium/jellyfish-main.png`, `StoryBook/wwwroot/images/aquarium/jellyfish-story.png`, `StoryBook/wwwroot/images/aquarium/penguin-main.png`, `StoryBook/wwwroot/images/aquarium/penguin-story.png`, `StoryBook/wwwroot/images/aquarium/seal-main.png`, `StoryBook/wwwroot/images/aquarium/seal-story.png`, `StoryBook/wwwroot/images/aquarium/starfish-main.png`, `StoryBook/wwwroot/images/aquarium/starfish-story.png`, `StoryBook/wwwroot/images/aquarium/crab-main.png`, and `StoryBook/wwwroot/images/aquarium/crab-story.png`
 - [ ] T032 [US2] Add detail-page, story-section, image, and missing-image responsive styles in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T033 [US2] Run US2 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify `/aquarium/clownfish`, `/aquarium/axolotl`, and `/aquarium/not-a-real-slug` against `specs/002-aquarium-storybook/quickstart.md`
+- [ ] T033 [US2] Run US2 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify `/aquarium/clownfish`, `/aquarium/axolotl`, `/aquarium/not-a-real-slug`, and data-load failure state against `specs/002-aquarium-storybook/quickstart.md`
 
 **Checkpoint**: User Story 2 is independently demoable by direct animal URL and friendly 404 URL.
 
@@ -104,8 +104,8 @@
 
 ### Tests for User Story 3
 
-- [ ] T034 [P] [US3] Add failing unit tests for first, middle, last, and unknown slug previous/next navigation in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
-- [ ] T035 [P] [US3] Add failing integration tests for pager anchor links and disabled first/last boundaries in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [ ] T034 [P] [US3] Add failing unit tests for first, middle, last, unknown slug, and rapid repeated previous/next navigation final-state expectations in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
+- [ ] T035 [P] [US3] Add failing integration tests for pager anchor links, disabled first/last boundaries, and rapid navigation acceptance markers in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 
 ### Implementation for User Story 3
 
@@ -113,7 +113,7 @@
 - [ ] T037 [US3] Add previous and next profile properties to `StoryBook/Pages/Aquarium/Details.cshtml.cs`
 - [ ] T038 [US3] Render previous/next anchor navigation and disabled boundary spans in `StoryBook/Pages/Aquarium/Details.cshtml`
 - [ ] T039 [US3] Add visible focus, disabled pager, and responsive pager styles in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T040 [US3] Run US3 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` and `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` against `StoryBook.Tests/StoryBook.Tests.csproj`
+- [ ] T040 [US3] Run US3 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` and `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests`, then verify rapid previous/next steps in `specs/002-aquarium-storybook/quickstart.md`
 
 **Checkpoint**: All P1 stories are independently functional and cover homepage entry, detail reading, and page navigation.
 
@@ -127,17 +127,17 @@
 
 ### Tests for User Story 4
 
-- [ ] T041 [P] [US4] Add failing unit tests for normalized Traditional Chinese and English search, whitespace trimming, punctuation removal, case-insensitive English matching, and empty-query behavior in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
-- [ ] T042 [P] [US4] Add failing integration tests for search input accessible name, clear button, no-result text, result card fields, and result anchor links in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [ ] T041 [P] [US4] Add failing unit tests for normalized Traditional Chinese and English search, whitespace trimming, punctuation removal, case-insensitive English matching, empty-query behavior, short-query handling below 2 effective characters, and rapid-query final-state behavior in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
+- [ ] T042 [P] [US4] Add failing integration tests for search input accessible name, clear button, too-short query text, no-result text, result card fields, result anchor links, and markup needed to verify <=1s client-visible updates in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 
 ### Implementation for User Story 4
 
-- [ ] T043 [US4] Implement normalized `Search`, `GetSearchResults`, and client search text projection in `StoryBook/Services/AquariumCatalogService.cs` and `StoryBook/Models/AquariumSearchResult.cs`
+- [ ] T043 [US4] Implement normalized `Search`, short-query classification, `GetSearchResults`, and client search text projection in `StoryBook/Services/AquariumCatalogService.cs` and `StoryBook/Models/AquariumSearchResult.cs`
 - [ ] T044 [US4] Populate search result projections on the Aquarium home PageModel in `StoryBook/Pages/Aquarium/Index.cshtml.cs`
-- [ ] T045 [US4] Render search input, clear button, no-result status, and linked result cards with `data-aquarium-search-*` attributes in `StoryBook/Pages/Aquarium/Index.cshtml`
-- [ ] T046 [US4] Implement native JavaScript search filtering, query normalization, no-result toggling, and clear-search focus behavior in `StoryBook/wwwroot/js/aquarium.js`
+- [ ] T045 [US4] Render search input, clear button, too-short query status, no-result status, and linked result cards with `data-aquarium-search-*` attributes in `StoryBook/Pages/Aquarium/Index.cshtml`
+- [ ] T046 [US4] Implement native JavaScript search filtering, query normalization, too-short query handling, no-result toggling, <=1s visible update timing, rapid-query final-state behavior, and clear-search focus behavior in `StoryBook/wwwroot/js/aquarium.js`
 - [ ] T047 [US4] Add search controls, result grid, no-result status, and keyboard focus styles in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T048 [US4] Run US4 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` and verify quickstart search steps in `specs/002-aquarium-storybook/quickstart.md`
+- [ ] T048 [US4] Run US4 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` and verify quickstart search steps, short-query behavior, rapid-query final state, and <=1s visible update timing in `specs/002-aquarium-storybook/quickstart.md`
 
 **Checkpoint**: User Story 4 can be demonstrated from `/aquarium` without changing route behavior or browser history.
 
@@ -213,12 +213,12 @@
 
 - [ ] T065 [P] Audit public XML documentation on aquarium models, options, validators, services, and shared language types in `StoryBook/Models/AquariumText.cs`, `StoryBook/Models/AquariumCatalog.cs`, `StoryBook/Models/AquariumAnimalProfile.cs`, `StoryBook/Models/AquariumHabitatCategory.cs`, `StoryBook/Models/AquariumImage.cs`, `StoryBook/Models/AquariumStory.cs`, `StoryBook/Models/AquariumSearchResult.cs`, `StoryBook/Services/AquariumCatalogOptions.cs`, `StoryBook/Services/AquariumContentValidator.cs`, and `StoryBook/Services/AquariumCatalogService.cs`
 - [ ] T066 [P] Review child-friendly Traditional Chinese and English user-visible copy in `StoryBook/Pages/Aquarium/Index.cshtml`, `StoryBook/Pages/Aquarium/Details.cshtml`, and `StoryBook/Data/aquarium.json`
-- [ ] T067 [P] Review Aquarium content and asset references against `specs/002-aquarium-storybook/contracts/content-catalog.schema.json` and `StoryBook/Data/aquarium.json`
+- [ ] T067 [P] Review Aquarium content, at least 5 habitat categories, and asset references against `specs/002-aquarium-storybook/contracts/content-catalog.schema.json` and `StoryBook/Data/aquarium.json`
 - [ ] T068 [P] Inspect Aquarium files for placeholders or secrets in `StoryBook/Data/aquarium.json`, `StoryBook/wwwroot/js/aquarium.js`, `StoryBook/wwwroot/css/aquarium.css`, and `StoryBook/wwwroot/images/aquarium/`
 - [ ] T069 Run restore with `dotnet restore StoryBook2.sln` for `StoryBook2.sln`
 - [ ] T070 Run build with `dotnet build StoryBook2.sln` for `StoryBook2.sln`
 - [ ] T071 Run full tests with `dotnet test StoryBook2.sln` for `StoryBook2.sln`
-- [ ] T072 Complete the manual acceptance checklist and record any blocker or deviation in `specs/002-aquarium-storybook/quickstart.md`
+- [ ] T072 Complete the manual acceptance checklist, including data-load failure, short-query, rapid-operation, and <=1s search-update checks, and record any blocker or deviation in `specs/002-aquarium-storybook/quickstart.md`
 
 ---
 
