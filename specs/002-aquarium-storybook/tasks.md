@@ -17,10 +17,10 @@
 
 **Purpose**: 建立水族館功能的檔案位置、靜態資產入口與設定骨架。
 
-- [ ] T001 Create Aquarium Razor Pages placeholders in `StoryBook/Pages/Aquarium/Index.cshtml`, `StoryBook/Pages/Aquarium/Index.cshtml.cs`, `StoryBook/Pages/Aquarium/Details.cshtml`, and `StoryBook/Pages/Aquarium/Details.cshtml.cs`
-- [ ] T002 [P] Create feature asset files `StoryBook/wwwroot/css/aquarium.css` and `StoryBook/wwwroot/js/aquarium.js`
-- [ ] T003 [P] Add `AquariumCatalog` content-path configuration defaults to `StoryBook/appsettings.json` and `StoryBook/appsettings.Development.json`
-- [ ] T004 [P] Add conditional `UseAquariumAssets` stylesheet loading to `StoryBook/Pages/Shared/_Layout.cshtml`
+- [X] T001 Create Aquarium Razor Pages placeholders in `StoryBook/Pages/Aquarium/Index.cshtml`, `StoryBook/Pages/Aquarium/Index.cshtml.cs`, `StoryBook/Pages/Aquarium/Details.cshtml`, and `StoryBook/Pages/Aquarium/Details.cshtml.cs`
+- [X] T002 [P] Create feature asset files `StoryBook/wwwroot/css/aquarium.css` and `StoryBook/wwwroot/js/aquarium.js`
+- [X] T003 [P] Add `AquariumCatalog` content-path configuration defaults to `StoryBook/appsettings.json` and `StoryBook/appsettings.Development.json`
+- [X] T004 [P] Add conditional `UseAquariumAssets` stylesheet loading to `StoryBook/Pages/Shared/_Layout.cshtml`
 
 ---
 

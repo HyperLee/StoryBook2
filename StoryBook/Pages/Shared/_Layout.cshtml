@@ -11,6 +11,10 @@
     {
         <link rel="stylesheet" href="~/css/dinosaurs.css" asp-append-version="true" />
     }
+    @if (ViewData["UseAquariumAssets"] as bool? == true)
+    {
+        <link rel="stylesheet" href="~/css/aquarium.css" asp-append-version="true" />
+    }
     <link rel="stylesheet" href="~/StoryBook.styles.css" asp-append-version="true" />
 </head>
 <body>
