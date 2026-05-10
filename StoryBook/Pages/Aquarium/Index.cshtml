@@ -1,10 +1,90 @@
 @page "/aquarium"
+@using StoryBook.Models
 @model StoryBook.Pages.Aquarium.IndexModel
 @{
     ViewData["Title"] = "水族館動物介紹";
 }
 
 <section class="aquarium-page" aria-labelledby="aquarium-list-title">
-    <h1 id="aquarium-list-title">水族館動物介紹</h1>
-    <p>水族館故事書正在準備中。</p>
+    <div class="aquarium-page__header">
+        <div>
+            <p class="aquarium-kicker" data-i18n-zh-tw="兒童水族館故事書" data-i18n-en="Aquarium Storybook">兒童水族館故事書</p>
+            <h1 id="aquarium-list-title" data-i18n-zh-tw="水族館故事書" data-i18n-en="Aquarium Storybook">水族館故事書</h1>
+        </div>
+        <a class="aquarium-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+    </div>
+
+    @if (Model.HasLoadFailure)
+    {
+        <div class="aquarium-empty" role="status">
+            <h2 data-i18n-zh-tw="水族館資料暫時游不出來" data-i18n-en="The aquarium data cannot swim out right now">水族館資料暫時游不出來</h2>
+            <p data-i18n-zh-tw="請重新試一次，或先回首頁選其他故事。" data-i18n-en="Please try again, or return home and choose another story.">請重新試一次，或先回首頁選其他故事。</p>
+            <div class="aquarium-actions">
+                <a class="aquarium-action" asp-page="/Aquarium/Index" data-i18n-zh-tw="重新嘗試" data-i18n-en="Try again">重新嘗試</a>
+                <a class="aquarium-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+            </div>
+        </div>
+    }
+    else if (Model.FirstProfile is null)
+    {
+        <div class="aquarium-empty" role="status" data-i18n-zh-tw="水族館朋友暫時躲起來了，請稍後再回來看看。" data-i18n-en="The aquarium friends are hiding for now. Please come back later.">
+            水族館朋友暫時躲起來了，請稍後再回來看看。
+        </div>
+    }
+    else
+    {
+        <article class="aquarium-cover" aria-labelledby="aquarium-cover-title">
+            <div class="aquarium-cover__scene" aria-hidden="true">
+                <span class="aquarium-cover__bubble aquarium-cover__bubble--one"></span>
+                <span class="aquarium-cover__bubble aquarium-cover__bubble--two"></span>
+                <span class="aquarium-cover__bubble aquarium-cover__bubble--three"></span>
+                <span class="aquarium-cover__reef"></span>
+            </div>
+            <div class="aquarium-cover__body">
+                <p class="aquarium-kicker" data-i18n-zh-tw="打開海底第一頁" data-i18n-en="Open the first ocean page">打開海底第一頁</p>
+                <h2 id="aquarium-cover-title" data-i18n-zh-tw="水族館故事書" data-i18n-en="Aquarium Storybook">水族館故事書</h2>
+                <p class="aquarium-cover__welcome"
+                   data-i18n-zh-tw="跟著海浪翻開故事書，一次認識一位水族館朋友。"
+                   data-i18n-en="Turn each page with the waves and meet one aquarium friend at a time.">跟著海浪翻開故事書，一次認識一位水族館朋友。</p>
+                <a class="aquarium-action" asp-page="/Aquarium/Details" asp-route-slug="@Model.FirstProfile.Slug">
+                    <span data-i18n-zh-tw="開始閱讀" data-i18n-en="Start reading">開始閱讀</span>
+                </a>
+            </div>
+        </article>
+
+        <section class="aquarium-search" aria-labelledby="aquarium-search-title">
+            <h2 id="aquarium-search-title" data-i18n-zh-tw="搜尋水族館朋友" data-i18n-en="Search aquarium friends">搜尋水族館朋友</h2>
+            <div class="aquarium-search__controls">
+                <input class="form-control"
+                       type="search"
+                       aria-label="搜尋水族館動物"
+                       placeholder="輸入名稱、生活環境或食性"
+                       data-aria-label-zh-tw="搜尋水族館動物"
+                       data-aria-label-en="Search aquarium animals"
+                       data-placeholder-zh-tw="輸入名稱、生活環境或食性"
+                       data-placeholder-en="Search by name, habitat, or diet"
+                       data-aquarium-search-input />
+                <button class="aquarium-clear-button" type="button" data-aquarium-clear-search data-i18n-zh-tw="清除搜尋" data-i18n-en="Clear search">清除搜尋</button>
+            </div>
+            <p class="aquarium-no-results" data-aquarium-no-results data-i18n-zh-tw="沒有找到符合的水族館朋友，清除搜尋再試一次。" data-i18n-en="No aquarium friend matched. Clear the search and try again." hidden>沒有找到符合的水族館朋友，清除搜尋再試一次。</p>
+        </section>
+
+        <section class="aquarium-directory" aria-labelledby="aquarium-directory-title">
+            <h2 id="aquarium-directory-title" data-i18n-zh-tw="全部水族館朋友" data-i18n-en="All aquarium friends">全部水族館朋友</h2>
+            <div class="aquarium-grid">
+                @foreach (AquariumSearchResult result in Model.SearchResults)
+                {
+                    <a class="aquarium-card"
+                       asp-page="/Aquarium/Details"
+                       asp-route-slug="@result.Slug"
+                       data-aquarium-search-item
+                       data-aquarium-search-text="@result.SearchText">
+                        <span class="aquarium-card__name" data-i18n-zh-tw="@result.NameZhTW" data-i18n-en="@result.NameEn">@result.NameZhTW</span>
+                        <span class="aquarium-card__category" data-i18n-zh-tw="@result.HabitatCategoryNameZhTW" data-i18n-en="@result.HabitatCategoryNameEn">@result.HabitatCategoryNameZhTW</span>
+                        <small data-i18n-zh-tw="@result.SummaryZhTW" data-i18n-en="@result.SummaryEn">@result.SummaryZhTW</small>
+                    </a>
+                }
+            </div>
+        </section>
+    }
 </section>

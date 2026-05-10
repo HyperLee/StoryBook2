@@ -57,15 +57,15 @@
 
 ### Tests for User Story 1
 
-- [ ] T019 [P] [US1] Add failing integration tests for homepage entry, `/aquarium` cover, 10-40 字歡迎文字, search entry, language switcher, start-reading link, and Aquarium home data-load failure state with retry/home actions in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [X] T019 [P] [US1] Add failing integration tests for homepage entry, `/aquarium` cover, 10-40 字歡迎文字, search entry, language switcher, start-reading link, and Aquarium home data-load failure state with retry/home actions in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 
 ### Implementation for User Story 1
 
-- [ ] T020 [US1] Add visible Aquarium entry link to `StoryBook/Pages/Index.cshtml`
-- [ ] T021 [US1] Implement Aquarium list PageModel loading profiles, search projections, first profile, and catalog load-failure state in `StoryBook/Pages/Aquarium/Index.cshtml.cs`
-- [ ] T022 [US1] Render Aquarium home cover, welcome text, start-reading anchor, language-aware labels, initial 15-item directory shell, and friendly data-load failure state with retry/home actions in `StoryBook/Pages/Aquarium/Index.cshtml`
-- [ ] T023 [US1] Add child-friendly Aquarium cover, start action, and directory layout styles in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T024 [US1] Run US1 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify `/`, `/aquarium`, `/aquarium/clownfish`, and data-load failure expectations in `specs/002-aquarium-storybook/quickstart.md`
+- [X] T020 [US1] Add visible Aquarium entry link to `StoryBook/Pages/Index.cshtml`
+- [X] T021 [US1] Implement Aquarium list PageModel loading profiles, search projections, first profile, and catalog load-failure state in `StoryBook/Pages/Aquarium/Index.cshtml.cs`
+- [X] T022 [US1] Render Aquarium home cover, welcome text, start-reading anchor, language-aware labels, initial 15-item directory shell, and friendly data-load failure state with retry/home actions in `StoryBook/Pages/Aquarium/Index.cshtml`
+- [X] T023 [US1] Add child-friendly Aquarium cover, start action, and directory layout styles in `StoryBook/wwwroot/css/aquarium.css`
+- [X] T024 [US1] Run US1 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify `/`, `/aquarium`, `/aquarium/clownfish`, and data-load failure expectations in `specs/002-aquarium-storybook/quickstart.md`
 
 **Checkpoint**: User Story 1 is independently demoable from the homepage through first animal navigation.
 
