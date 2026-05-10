@@ -52,7 +52,7 @@
             </div>
         </article>
 
-        <section class="aquarium-search" aria-labelledby="aquarium-search-title">
+        <section class="aquarium-search" aria-labelledby="aquarium-search-title" data-aquarium-search-updates-within-ms="1000">
             <h2 id="aquarium-search-title" data-i18n-zh-tw="搜尋水族館朋友" data-i18n-en="Search aquarium friends">搜尋水族館朋友</h2>
             <div class="aquarium-search__controls">
                 <input class="form-control"
@@ -66,6 +66,11 @@
                        data-aquarium-search-input />
                 <button class="aquarium-clear-button" type="button" data-aquarium-clear-search data-i18n-zh-tw="清除搜尋" data-i18n-en="Clear search">清除搜尋</button>
             </div>
+            <p class="aquarium-search-status"
+               data-aquarium-too-short
+               data-i18n-zh-tw="請輸入至少兩個字，這樣水族館朋友比較找得到。"
+               data-i18n-en="Please type at least two characters so aquarium friends are easier to find."
+               hidden>請輸入至少兩個字，這樣水族館朋友比較找得到。</p>
             <p class="aquarium-no-results" data-aquarium-no-results data-i18n-zh-tw="沒有找到符合的水族館朋友，清除搜尋再試一次。" data-i18n-en="No aquarium friend matched. Clear the search and try again." hidden>沒有找到符合的水族館朋友，清除搜尋再試一次。</p>
         </section>
 
@@ -88,3 +93,7 @@
         </section>
     }
 </section>
+
+@section Scripts {
+    <script src="~/js/aquarium.js" asp-append-version="true"></script>
+}

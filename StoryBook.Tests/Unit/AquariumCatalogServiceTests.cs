@@ -96,14 +96,35 @@ public sealed class AquariumCatalogServiceTests
         AquariumCatalogService service = CreateService();
 
         Assert.Equal("seahorse", Assert.Single(service.Search(" 海，馬! ", LanguageCode.ZhTW)).Slug);
+        Assert.Equal("seahorse", Assert.Single(service.Search(" 海 馬 ", LanguageCode.ZhTW)).Slug);
         Assert.Contains(service.Search("ReEf", LanguageCode.En), profile => profile.Slug == "clownfish");
+        Assert.Contains(service.Search("REEF!!!", LanguageCode.En), profile => profile.Slug == "coral");
         Assert.Contains(service.Search("plankton", LanguageCode.En), profile => profile.Slug == "jellyfish");
         Assert.Equal("axolotl", Assert.Single(service.Search("六角恐龍", LanguageCode.ZhTW)).Slug);
         Assert.Empty(service.Search("沒有這種動物", LanguageCode.ZhTW));
         Assert.Equal(15, service.Search("   ", LanguageCode.En).Count);
+        Assert.Empty(service.Search("a", LanguageCode.En));
+        Assert.Empty(service.Search("海", LanguageCode.ZhTW));
+        Assert.Empty(service.Search("！", LanguageCode.ZhTW));
         Assert.True(service.IsQueryTooShort("a"));
         Assert.True(service.IsQueryTooShort("！"));
         Assert.False(service.IsQueryTooShort("海馬"));
+    }
+
+    [Fact]
+    public void Rapid_search_queries_use_last_query_results()
+    {
+        AquariumCatalogService service = CreateService();
+        string[] queries = ["re", "reef", "axolotl"];
+        IReadOnlyList<AquariumAnimalProfile> results = [];
+
+        foreach (string query in queries)
+        {
+            results = service.Search(query, LanguageCode.En);
+        }
+
+        AquariumAnimalProfile result = Assert.Single(results);
+        Assert.Equal("axolotl", result.Slug);
     }
 
     [Fact]

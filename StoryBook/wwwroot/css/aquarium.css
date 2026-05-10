@@ -179,6 +179,7 @@
     padding: 0.5rem 0.85rem;
 }
 
+.aquarium-search-status,
 .aquarium-no-results {
     background: #fff7d6;
     border-radius: 8px;

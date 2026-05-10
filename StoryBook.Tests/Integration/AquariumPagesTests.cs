@@ -118,4 +118,24 @@ public sealed class AquariumPagesTests : IClassFixture<AquariumPageTestFixture>
         Assert.Contains("aria-disabled=\"true\"", lastHtml);
         Assert.Contains("data-aquarium-rapid-navigation", middleHtml);
     }
+
+    [Fact]
+    public async Task Aquarium_home_renders_accessible_search_contract_and_result_cards()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/aquarium");
+
+        Assert.Contains("aria-label=\"搜尋水族館動物\"", html);
+        Assert.Contains("data-aquarium-search-input", html);
+        Assert.Contains("data-aquarium-clear-search", html);
+        Assert.Contains("data-aquarium-too-short", html);
+        Assert.Contains("請輸入至少兩個字", html);
+        Assert.Contains("data-aquarium-no-results", html);
+        Assert.Contains("沒有找到符合的水族館朋友", html);
+        Assert.Contains("data-aquarium-search-updates-within-ms=\"1000\"", html);
+        Assert.Contains("data-aquarium-search-item", html);
+        Assert.Contains("data-aquarium-search-text", html);
+        Assert.Contains("珊瑚礁", html);
+        Assert.Contains("小丑魚", html);
+        Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/aquarium/seahorse"));
+    }
 }

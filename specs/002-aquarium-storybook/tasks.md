@@ -127,17 +127,17 @@
 
 ### Tests for User Story 4
 
-- [ ] T041 [P] [US4] Add failing unit tests for normalized Traditional Chinese and English search, whitespace trimming, punctuation removal, case-insensitive English matching, empty-query behavior, short-query handling below 2 effective characters, and rapid-query final-state behavior in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
-- [ ] T042 [P] [US4] Add failing integration tests for search input accessible name, clear button, too-short query text, no-result text, result card fields, result anchor links, and markup needed to verify <=1s client-visible updates in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [X] T041 [P] [US4] Add failing unit tests for normalized Traditional Chinese and English search, whitespace trimming, punctuation removal, case-insensitive English matching, empty-query behavior, short-query handling below 2 effective characters, and rapid-query final-state behavior in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
+- [X] T042 [P] [US4] Add failing integration tests for search input accessible name, clear button, too-short query text, no-result text, result card fields, result anchor links, and markup needed to verify <=1s client-visible updates in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 
 ### Implementation for User Story 4
 
-- [ ] T043 [US4] Implement normalized `Search`, short-query classification, `GetSearchResults`, and client search text projection in `StoryBook/Services/AquariumCatalogService.cs` and `StoryBook/Models/AquariumSearchResult.cs`
-- [ ] T044 [US4] Populate search result projections on the Aquarium home PageModel in `StoryBook/Pages/Aquarium/Index.cshtml.cs`
-- [ ] T045 [US4] Render search input, clear button, too-short query status, no-result status, and linked result cards with `data-aquarium-search-*` attributes in `StoryBook/Pages/Aquarium/Index.cshtml`
-- [ ] T046 [US4] Implement native JavaScript search filtering, query normalization, too-short query handling, no-result toggling, <=1s visible update timing, rapid-query final-state behavior, and clear-search focus behavior in `StoryBook/wwwroot/js/aquarium.js`
-- [ ] T047 [US4] Add search controls, result grid, no-result status, and keyboard focus styles in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T048 [US4] Run US4 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` and verify quickstart search steps, short-query behavior, rapid-query final state, and <=1s visible update timing in `specs/002-aquarium-storybook/quickstart.md`
+- [X] T043 [US4] Implement normalized `Search`, short-query classification, `GetSearchResults`, and client search text projection in `StoryBook/Services/AquariumCatalogService.cs` and `StoryBook/Models/AquariumSearchResult.cs`
+- [X] T044 [US4] Populate search result projections on the Aquarium home PageModel in `StoryBook/Pages/Aquarium/Index.cshtml.cs`
+- [X] T045 [US4] Render search input, clear button, too-short query status, no-result status, and linked result cards with `data-aquarium-search-*` attributes in `StoryBook/Pages/Aquarium/Index.cshtml`
+- [X] T046 [US4] Implement native JavaScript search filtering, query normalization, too-short query handling, no-result toggling, <=1s visible update timing, rapid-query final-state behavior, and clear-search focus behavior in `StoryBook/wwwroot/js/aquarium.js`
+- [X] T047 [US4] Add search controls, result grid, no-result status, and keyboard focus styles in `StoryBook/wwwroot/css/aquarium.css`
+- [X] T048 [US4] Run US4 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` and verify quickstart search steps, short-query behavior, rapid-query final state, and <=1s visible update timing in `specs/002-aquarium-storybook/quickstart.md`
 
 **Checkpoint**: User Story 4 can be demonstrated from `/aquarium` without changing route behavior or browser history.
 
