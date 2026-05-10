@@ -17,6 +17,10 @@ public sealed class DetailsModel : PageModel
 
     public AquariumHabitatCategory? HabitatCategory { get; private set; }
 
+    public AquariumAnimalProfile? PreviousProfile { get; private set; }
+
+    public AquariumAnimalProfile? NextProfile { get; private set; }
+
     public bool HasLoadFailure { get; private set; }
 
     public bool IsNotFound { get; private set; }
@@ -30,6 +34,8 @@ public sealed class DetailsModel : PageModel
             if (_catalogService.TryGetBySlug(slug, out AquariumAnimalProfile? profile) && profile is not null)
             {
                 Profile = profile;
+                PreviousProfile = _catalogService.GetPreviousProfile(slug);
+                NextProfile = _catalogService.GetNextProfile(slug);
                 HabitatCategory = _catalogService.GetHabitatCategories()
                     .FirstOrDefault(category => category.Code == profile.HabitatCategory);
                 return;

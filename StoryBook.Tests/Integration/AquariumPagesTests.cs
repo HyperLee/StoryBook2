@@ -99,4 +99,23 @@ public sealed class AquariumPagesTests : IClassFixture<AquariumPageTestFixture>
         Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/aquarium/clownfish"));
         Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/"));
     }
+
+    [Fact]
+    public async Task Aquarium_detail_exposes_previous_next_anchor_navigation_and_disabled_boundaries()
+    {
+        string firstHtml = await _fixture.GetOkHtmlAsync("/aquarium/clownfish");
+        Assert.Contains("上一頁", firstHtml);
+        Assert.Contains("aria-disabled=\"true\"", firstHtml);
+        Assert.True(AquariumPageTestFixture.HasLinkTo(firstHtml, "/aquarium/seahorse"));
+
+        string middleHtml = await _fixture.GetOkHtmlAsync("/aquarium/seahorse");
+        Assert.True(AquariumPageTestFixture.HasLinkTo(middleHtml, "/aquarium/clownfish"));
+        Assert.True(AquariumPageTestFixture.HasLinkTo(middleHtml, "/aquarium/sea-turtle"));
+
+        string lastHtml = await _fixture.GetOkHtmlAsync("/aquarium/axolotl");
+        Assert.True(AquariumPageTestFixture.HasLinkTo(lastHtml, "/aquarium/goldfish"));
+        Assert.Contains("下一頁", lastHtml);
+        Assert.Contains("aria-disabled=\"true\"", lastHtml);
+        Assert.Contains("data-aquarium-rapid-navigation", middleHtml);
+    }
 }

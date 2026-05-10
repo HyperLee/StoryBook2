@@ -104,16 +104,16 @@
 
 ### Tests for User Story 3
 
-- [ ] T034 [P] [US3] Add failing unit tests for first, middle, last, unknown slug, and rapid repeated previous/next navigation final-state expectations in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
-- [ ] T035 [P] [US3] Add failing integration tests for pager anchor links, disabled first/last boundaries, and rapid navigation acceptance markers in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [X] T034 [P] [US3] Add failing unit tests for first, middle, last, unknown slug, and rapid repeated previous/next navigation final-state expectations in `StoryBook.Tests/Unit/AquariumCatalogServiceTests.cs`
+- [X] T035 [P] [US3] Add failing integration tests for pager anchor links, disabled first/last boundaries, and rapid navigation acceptance markers in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 
 ### Implementation for User Story 3
 
-- [ ] T036 [US3] Implement `GetFirstProfile`, `GetPreviousProfile`, and `GetNextProfile` in `StoryBook/Services/AquariumCatalogService.cs`
-- [ ] T037 [US3] Add previous and next profile properties to `StoryBook/Pages/Aquarium/Details.cshtml.cs`
-- [ ] T038 [US3] Render previous/next anchor navigation and disabled boundary spans in `StoryBook/Pages/Aquarium/Details.cshtml`
-- [ ] T039 [US3] Add visible focus, disabled pager, and responsive pager styles in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T040 [US3] Run US3 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` and `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests`, then verify rapid previous/next steps in `specs/002-aquarium-storybook/quickstart.md`
+- [X] T036 [US3] Implement `GetFirstProfile`, `GetPreviousProfile`, and `GetNextProfile` in `StoryBook/Services/AquariumCatalogService.cs`
+- [X] T037 [US3] Add previous and next profile properties to `StoryBook/Pages/Aquarium/Details.cshtml.cs`
+- [X] T038 [US3] Render previous/next anchor navigation and disabled boundary spans in `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T039 [US3] Add visible focus, disabled pager, and responsive pager styles in `StoryBook/wwwroot/css/aquarium.css`
+- [X] T040 [US3] Run US3 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumCatalogServiceTests` and `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests`, then verify rapid previous/next steps in `specs/002-aquarium-storybook/quickstart.md`
 
 **Checkpoint**: All P1 stories are independently functional and cover homepage entry, detail reading, and page navigation.
 

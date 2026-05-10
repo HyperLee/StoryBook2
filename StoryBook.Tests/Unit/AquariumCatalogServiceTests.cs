@@ -70,6 +70,27 @@ public sealed class AquariumCatalogServiceTests
     }
 
     [Fact]
+    public void Repeated_previous_next_navigation_resolves_final_valid_profile()
+    {
+        AquariumCatalogService service = CreateService();
+        AquariumAnimalProfile current = service.GetFirstProfile();
+
+        for (int i = 0; i < 4; i++)
+        {
+            current = Assert.IsType<AquariumAnimalProfile>(service.GetNextProfile(current.Slug));
+        }
+
+        Assert.Equal("octopus", current.Slug);
+
+        for (int i = 0; i < 2; i++)
+        {
+            current = Assert.IsType<AquariumAnimalProfile>(service.GetPreviousProfile(current.Slug));
+        }
+
+        Assert.Equal("sea-turtle", current.Slug);
+    }
+
+    [Fact]
     public void Search_matches_localized_fields_keywords_whitespace_punctuation_and_short_queries()
     {
         AquariumCatalogService service = CreateService();

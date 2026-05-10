@@ -91,6 +91,29 @@
                         }
                     </figure>
                 </section>
+                <nav class="aquarium-pager" aria-label="水族館換頁" data-aria-label-zh-tw="水族館換頁" data-aria-label-en="Aquarium navigation" data-aquarium-rapid-navigation>
+                    @if (Model.PreviousProfile is null)
+                    {
+                        <span class="aquarium-page-link aquarium-page-link--disabled" aria-disabled="true" data-i18n-zh-tw="上一頁" data-i18n-en="Previous">上一頁</span>
+                    }
+                    else
+                    {
+                        <a class="aquarium-page-link" asp-page="/Aquarium/Details" asp-route-slug="@Model.PreviousProfile.Slug" data-i18n-zh-tw="上一頁：@Model.PreviousProfile.Names.Get(LanguageCode.ZhTW)" data-i18n-en="Previous: @Model.PreviousProfile.Names.Get(LanguageCode.En)">
+                            上一頁：@Model.PreviousProfile.Names.Get(LanguageCode.ZhTW)
+                        </a>
+                    }
+
+                    @if (Model.NextProfile is null)
+                    {
+                        <span class="aquarium-page-link aquarium-page-link--disabled" aria-disabled="true" data-i18n-zh-tw="下一頁" data-i18n-en="Next">下一頁</span>
+                    }
+                    else
+                    {
+                        <a class="aquarium-page-link" asp-page="/Aquarium/Details" asp-route-slug="@Model.NextProfile.Slug" data-i18n-zh-tw="下一頁：@Model.NextProfile.Names.Get(LanguageCode.ZhTW)" data-i18n-en="Next: @Model.NextProfile.Names.Get(LanguageCode.En)">
+                            下一頁：@Model.NextProfile.Names.Get(LanguageCode.ZhTW)
+                        </a>
+                    }
+                </nav>
             </div>
         </article>
     }
