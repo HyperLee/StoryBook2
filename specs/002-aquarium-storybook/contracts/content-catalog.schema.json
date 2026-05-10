@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storybook2.local/contracts/aquarium-content-catalog.schema.json",
+  "title": "StoryBook2 Aquarium Content Catalog",
+  "type": "object",
+  "required": ["version", "habitatCategories", "animals"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "habitatCategories": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "$ref": "#/$defs/habitatCategory" }
+    },
+    "animals": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "items": { "$ref": "#/$defs/aquariumAnimal" }
+    }
+  },
+  "$defs": {
+    "localizedText": {
+      "type": "object",
+      "required": ["zhTW", "en"],
+      "additionalProperties": false,
+      "properties": {
+        "zhTW": { "type": "string", "minLength": 1 },
+        "en": { "type": "string", "minLength": 1 }
+      }
+    },
+    "habitatCategory": {
+      "type": "object",
+      "required": ["code", "sortOrder", "displayName"],
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": ["freshwater", "saltwater", "deep-sea", "coral-reef", "polar", "tide-pool"]
+        },
+        "sortOrder": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "displayName": { "$ref": "#/$defs/localizedText" },
+        "description": { "$ref": "#/$defs/localizedText" }
+      }
+    },
+    "aquariumImage": {
+      "type": "object",
+      "required": ["path", "altText", "styleTag"],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^/images/aquarium/[a-z0-9-]+\\.(png|jpg|jpeg|webp)$"
+        },
+        "altText": { "$ref": "#/$defs/localizedText" },
+        "caption": { "$ref": "#/$defs/localizedText" },
+        "styleTag": {
+          "type": "string",
+          "const": "storybook-cute"
+        }
+      }
+    },
+    "aquariumStory": {
+      "type": "object",
+      "required": ["title", "body", "illustration"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "$ref": "#/$defs/localizedText" },
+        "body": { "$ref": "#/$defs/localizedText" },
+        "illustration": { "$ref": "#/$defs/aquariumImage" }
+      }
+    },
+    "aquariumAnimal": {
+      "type": "object",
+      "required": [
+        "slug",
+        "habitatCategory",
+        "sortOrder",
+        "names",
+        "habitat",
+        "diet",
+        "discoveryLocations",
+        "summary",
+        "mainImage",
+        "story",
+        "searchKeywords"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "slug": {
+          "type": "string",
+          "enum": [
+            "clownfish",
+            "seahorse",
+            "sea-turtle",
+            "jellyfish",
+            "octopus",
+            "shark",
+            "stingray",
+            "penguin",
+            "seal",
+            "dolphin",
+            "starfish",
+            "crab",
+            "coral",
+            "goldfish",
+            "axolotl"
+          ]
+        },
+        "habitatCategory": {
+          "type": "string",
+          "enum": ["freshwater", "saltwater", "deep-sea", "coral-reef", "polar", "tide-pool"]
+        },
+        "sortOrder": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 15
+        },
+        "names": { "$ref": "#/$defs/localizedText" },
+        "habitat": { "$ref": "#/$defs/localizedText" },
+        "diet": { "$ref": "#/$defs/localizedText" },
+        "discoveryLocations": { "$ref": "#/$defs/localizedText" },
+        "summary": { "$ref": "#/$defs/localizedText" },
+        "mainImage": { "$ref": "#/$defs/aquariumImage" },
+        "story": { "$ref": "#/$defs/aquariumStory" },
+        "searchKeywords": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/localizedText" }
+        }
+      }
+    }
+  }
+}

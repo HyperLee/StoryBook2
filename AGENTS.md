@@ -40,7 +40,7 @@
 
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
-shell commands, and other important information, read `specs/001-dinosaur-intro-site/plan.md`.
+shell commands, and other important information, read `specs/002-aquarium-storybook/plan.md`.
 <!-- SPECKIT END -->
 
 實作恐龍功能前，請同時閱讀並對齊：

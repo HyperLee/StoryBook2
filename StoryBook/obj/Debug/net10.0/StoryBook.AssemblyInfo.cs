@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StoryBook")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97b2d5f95f7463c3c184fbe42cb4bc0d66848293")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cbb4635a9f0ce000afe5bb7367e8cf7f24143888")]
 [assembly: System.Reflection.AssemblyProductAttribute("StoryBook")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StoryBook")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
