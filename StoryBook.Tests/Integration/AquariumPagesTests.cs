@@ -51,4 +51,52 @@ public sealed class AquariumPagesTests : IClassFixture<AquariumPageTestFixture>
         Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/aquarium"));
         Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/"));
     }
+
+    [Theory]
+    [InlineData("/aquarium/clownfish", "小丑魚", "珊瑚礁", "clownfish-main.png", "clownfish-story.png")]
+    [InlineData("/aquarium/axolotl", "六角恐龍", "淡水", "axolotl-main.png", "axolotl-story.png")]
+    public async Task Aquarium_detail_displays_required_profile_fields_for_direct_slug(
+        string path,
+        string name,
+        string category,
+        string mainImage,
+        string storyImage)
+    {
+        string html = await _fixture.GetOkHtmlAsync(path);
+
+        Assert.Contains(name, html);
+        Assert.Contains(category, html);
+        Assert.Contains("生活環境", html);
+        Assert.Contains("食性", html);
+        Assert.Contains("發現地點", html);
+        Assert.Contains("小故事", html);
+        Assert.Contains(mainImage, html);
+        Assert.Contains(storyImage, html);
+        Assert.Contains("data-alt-zh-tw=", html);
+        Assert.Contains("data-alt-en=", html);
+    }
+
+    [Fact]
+    public async Task Aquarium_detail_returns_friendly_404_for_unknown_slug()
+    {
+        string html = await _fixture.GetHtmlAsync("/aquarium/not-a-real-slug", HttpStatusCode.NotFound);
+
+        Assert.Contains("找不到這位水族館朋友", html);
+        Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/"));
+        Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/aquarium"));
+    }
+
+    [Fact]
+    public async Task Aquarium_detail_data_load_failure_displays_retry_and_home_actions()
+    {
+        using HttpClient client = _fixture.CreateClientWithCatalogPath("Data/not-found-aquarium.json");
+        using HttpResponseMessage response = await client.GetAsync("/aquarium/clownfish");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        string html = WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
+
+        Assert.Contains("水族館資料暫時游不出來", html);
+        Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/aquarium/clownfish"));
+        Assert.True(AquariumPageTestFixture.HasLinkTo(html, "/"));
+    }
 }

@@ -1,10 +1,97 @@
 @page "/aquarium/{slug}"
+@using StoryBook.Models
 @model StoryBook.Pages.Aquarium.DetailsModel
 @{
-    ViewData["Title"] = "水族館動物介紹";
+    ViewData["Title"] = Model.Profile?.Names.Get(LanguageCode.ZhTW) ?? "水族館動物介紹";
 }
 
 <section class="aquarium-page" aria-labelledby="aquarium-detail-title">
-    <h1 id="aquarium-detail-title">水族館動物介紹</h1>
-    <p>水族館動物頁面正在準備中。</p>
+    <div class="aquarium-page__header">
+        <a class="aquarium-home-link" asp-page="/Aquarium/Index" data-i18n-zh-tw="回水族館" data-i18n-en="Back to aquarium">回水族館</a>
+        <a class="aquarium-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+    </div>
+
+    @if (Model.HasLoadFailure)
+    {
+        <div class="aquarium-empty" role="status">
+            <h1 id="aquarium-detail-title" data-i18n-zh-tw="水族館資料暫時游不出來" data-i18n-en="The aquarium data cannot swim out right now">水族館資料暫時游不出來</h1>
+            <p data-i18n-zh-tw="請重新試一次，或先回首頁選其他故事。" data-i18n-en="Please try again, or return home and choose another story.">請重新試一次，或先回首頁選其他故事。</p>
+            <div class="aquarium-actions">
+                <a class="aquarium-action" href="@HttpContext.Request.Path" data-i18n-zh-tw="重新嘗試" data-i18n-en="Try again">重新嘗試</a>
+                <a class="aquarium-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+            </div>
+        </div>
+    }
+    else if (Model.IsNotFound || Model.Profile is null)
+    {
+        <div class="aquarium-empty" role="status">
+            <h1 id="aquarium-detail-title" data-i18n-zh-tw="找不到這位水族館朋友" data-i18n-en="This aquarium friend was not found">找不到這位水族館朋友</h1>
+            <p data-i18n-zh-tw="這個網址沒有對應的水族館動物。你可以回到水族館主頁重新選一位朋友。" data-i18n-en="This address does not match an aquarium animal. You can return to the aquarium home and choose another friend.">這個網址沒有對應的水族館動物。你可以回到水族館主頁重新選一位朋友。</p>
+            <div class="aquarium-actions">
+                <a class="aquarium-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+                <a class="aquarium-action" asp-page="/Aquarium/Index" data-i18n-zh-tw="回水族館" data-i18n-en="Back to aquarium">回水族館</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <article class="aquarium-detail">
+            <div class="aquarium-detail__media">
+                <figure class="aquarium-image-frame">
+                    <img src="@Model.Profile.MainImage.Path"
+                         alt="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                         data-alt-zh-tw="@Model.Profile.MainImage.AltText.Get(LanguageCode.ZhTW)"
+                         data-alt-en="@Model.Profile.MainImage.AltText.Get(LanguageCode.En)" />
+                    @if (Model.Profile.MainImage.Caption is not null)
+                    {
+                        <figcaption data-i18n-zh-tw="@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.MainImage.Caption.Get(LanguageCode.En)">@Model.Profile.MainImage.Caption.Get(LanguageCode.ZhTW)</figcaption>
+                    }
+                    <p class="aquarium-image-fallback" data-i18n-zh-tw="圖片暫時沒有游出來，請先讀文字認識牠。" data-i18n-en="The picture is not swimming out right now. Please meet this friend through the words.">圖片暫時沒有游出來，請先讀文字認識牠。</p>
+                </figure>
+            </div>
+            <div class="aquarium-detail__body">
+                <p class="aquarium-kicker" data-i18n-zh-tw="水族館朋友" data-i18n-en="Aquarium friend">水族館朋友</p>
+                <h1 id="aquarium-detail-title" data-i18n-zh-tw="@Model.Profile.Names.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Names.Get(LanguageCode.En)">@Model.Profile.Names.Get(LanguageCode.ZhTW)</h1>
+                <dl class="aquarium-facts">
+                    <div>
+                        <dt data-i18n-zh-tw="生活區域" data-i18n-en="Habitat zone">生活區域</dt>
+                        <dd data-i18n-zh-tw="@(Model.HabitatCategory?.DisplayName.Get(LanguageCode.ZhTW) ?? Model.Profile.HabitatCategory)" data-i18n-en="@(Model.HabitatCategory?.DisplayName.Get(LanguageCode.En) ?? Model.Profile.HabitatCategory)">@(Model.HabitatCategory?.DisplayName.Get(LanguageCode.ZhTW) ?? Model.Profile.HabitatCategory)</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n-zh-tw="生活環境" data-i18n-en="Habitat">生活環境</dt>
+                        <dd data-i18n-zh-tw="@Model.Profile.Habitat.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Habitat.Get(LanguageCode.En)">@Model.Profile.Habitat.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n-zh-tw="食性" data-i18n-en="Diet">食性</dt>
+                        <dd data-i18n-zh-tw="@Model.Profile.Diet.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Diet.Get(LanguageCode.En)">@Model.Profile.Diet.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n-zh-tw="發現地點" data-i18n-en="Found in">發現地點</dt>
+                        <dd data-i18n-zh-tw="@Model.Profile.DiscoveryLocations.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.DiscoveryLocations.Get(LanguageCode.En)">@Model.Profile.DiscoveryLocations.Get(LanguageCode.ZhTW)</dd>
+                    </div>
+                </dl>
+                <p class="aquarium-summary" data-i18n-zh-tw="@Model.Profile.Summary.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Summary.Get(LanguageCode.En)">@Model.Profile.Summary.Get(LanguageCode.ZhTW)</p>
+                <section class="aquarium-story" aria-labelledby="aquarium-story-title">
+                    <div class="aquarium-story__text">
+                        <p class="aquarium-kicker" data-i18n-zh-tw="小故事" data-i18n-en="Story">小故事</p>
+                        <h2 id="aquarium-story-title" data-i18n-zh-tw="@Model.Profile.Story.Title.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Story.Title.Get(LanguageCode.En)">@Model.Profile.Story.Title.Get(LanguageCode.ZhTW)</h2>
+                        <p data-i18n-zh-tw="@Model.Profile.Story.Body.Get(LanguageCode.ZhTW)" data-i18n-en="@Model.Profile.Story.Body.Get(LanguageCode.En)">@Model.Profile.Story.Body.Get(LanguageCode.ZhTW)</p>
+                    </div>
+                    <figure class="aquarium-story__figure">
+                        <img src="@Model.Profile.Story.Illustration.Path"
+                             alt="@Model.Profile.Story.Illustration.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-zh-tw="@Model.Profile.Story.Illustration.AltText.Get(LanguageCode.ZhTW)"
+                             data-alt-en="@Model.Profile.Story.Illustration.AltText.Get(LanguageCode.En)" />
+                        @{
+                            AquariumText? storyCaption = Model.Profile.Story.Illustration.Caption;
+                        }
+                        @if (storyCaption is not null)
+                        {
+                            <figcaption data-i18n-zh-tw="@storyCaption.Get(LanguageCode.ZhTW)" data-i18n-en="@storyCaption.Get(LanguageCode.En)">@storyCaption.Get(LanguageCode.ZhTW)</figcaption>
+                        }
+                    </figure>
+                </section>
+            </div>
+        </article>
+    }
 </section>
