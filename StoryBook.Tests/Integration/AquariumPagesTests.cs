@@ -176,4 +176,21 @@ public sealed class AquariumPagesTests : IClassFixture<AquariumPageTestFixture>
         Assert.Contains("aquarium-modal__image", html);
         Assert.Contains("圖片暫時沒有游出來", html);
     }
+
+    [Fact]
+    public async Task Aquarium_states_expose_return_home_links()
+    {
+        string homeHtml = await _fixture.GetOkHtmlAsync("/aquarium");
+        string detailHtml = await _fixture.GetOkHtmlAsync("/aquarium/clownfish");
+        string notFoundHtml = await _fixture.GetHtmlAsync("/aquarium/not-a-real-slug", HttpStatusCode.NotFound);
+
+        Assert.True(AquariumPageTestFixture.HasLinkTo(homeHtml, "/"));
+        Assert.True(AquariumPageTestFixture.HasLinkTo(detailHtml, "/"));
+        Assert.True(AquariumPageTestFixture.HasLinkTo(notFoundHtml, "/"));
+        Assert.True(AquariumPageTestFixture.HasLinkTo(notFoundHtml, "/aquarium"));
+        Assert.Contains("data-aquarium-search-input", homeHtml);
+        Assert.Contains("回首頁", homeHtml);
+        Assert.Contains("回首頁", detailHtml);
+        Assert.Contains("回首頁", notFoundHtml);
+    }
 }

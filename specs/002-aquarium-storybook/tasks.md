@@ -194,14 +194,14 @@
 
 ### Tests for User Story 7
 
-- [ ] T060 [P] [US7] Add failing integration tests for home links on Aquarium home, details, search-state markup, and not-found state in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
+- [X] T060 [P] [US7] Add failing integration tests for home links on Aquarium home, details, search-state markup, and not-found state in `StoryBook.Tests/Integration/AquariumPagesTests.cs`
 
 ### Implementation for User Story 7
 
-- [ ] T061 [US7] Add clear return-home anchors to Aquarium home and detail pages in `StoryBook/Pages/Aquarium/Index.cshtml` and `StoryBook/Pages/Aquarium/Details.cshtml`
-- [ ] T062 [US7] Ensure Aquarium not-found state returns HTTP 404 and includes links to `/` and `/aquarium` in `StoryBook/Pages/Aquarium/Details.cshtml.cs` and `StoryBook/Pages/Aquarium/Details.cshtml`
-- [ ] T063 [US7] Style return-home and Aquarium-home navigation actions in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T064 [US7] Run US7 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify return-home quickstart steps in `specs/002-aquarium-storybook/quickstart.md`
+- [X] T061 [US7] Add clear return-home anchors to Aquarium home and detail pages in `StoryBook/Pages/Aquarium/Index.cshtml` and `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T062 [US7] Ensure Aquarium not-found state returns HTTP 404 and includes links to `/` and `/aquarium` in `StoryBook/Pages/Aquarium/Details.cshtml.cs` and `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T063 [US7] Style return-home and Aquarium-home navigation actions in `StoryBook/wwwroot/css/aquarium.css`
+- [X] T064 [US7] Run US7 tests with `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter AquariumPagesTests` and verify return-home quickstart steps in `specs/002-aquarium-storybook/quickstart.md`
 
 **Checkpoint**: User Story 7 provides clear escape routes from every Aquarium state.
 
