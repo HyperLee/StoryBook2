@@ -126,12 +126,12 @@
 
 **Purpose**: Validate the complete feature against the quickstart, constitution quality gates, and project constraints.
 
-- [ ] T039 [P] Review child-friendly copy and fallback states against `specs/004-sitewide-explore-search/quickstart.md` and update `StoryBook/Pages/Explore/Index.cshtml`
-- [ ] T040 [P] Review no-new-dependency constraint in `StoryBook/StoryBook.csproj` and `StoryBook.Tests/StoryBook.Tests.csproj`
-- [ ] T041 Run `dotnet test StoryBook2.sln` for `StoryBook2.sln`
-- [ ] T042 Run `dotnet build StoryBook2.sln` for `StoryBook2.sln` and verify no new compile warnings
-- [ ] T043 Run the manual quickstart route, search, filter, language, theme, keyboard, responsive, and SC-001/SC-008 usability-sampling checks from `specs/004-sitewide-explore-search/quickstart.md`
-- [ ] T044 Review `StoryBook/Services/ExplorationCatalogService.cs`, `StoryBook/Services/ExplorationSearchService.cs`, `StoryBook/wwwroot/js/explore.js`, and `StoryBook/Pages/Explore/Index.cshtml` for no unresolved placeholders, no secrets, no user search-string logging, and zh-TW user-visible fallback text
+- [X] T039 [P] Review child-friendly copy and fallback states against `specs/004-sitewide-explore-search/quickstart.md` and update `StoryBook/Pages/Explore/Index.cshtml`
+- [X] T040 [P] Review no-new-dependency constraint in `StoryBook/StoryBook.csproj` and `StoryBook.Tests/StoryBook.Tests.csproj`
+- [X] T041 Run `dotnet test StoryBook2.sln` for `StoryBook2.sln`
+- [X] T042 Run `dotnet build StoryBook2.sln` for `StoryBook2.sln` and verify no new compile warnings
+- [X] T043 Run the manual quickstart route, search, filter, language, theme, keyboard, responsive, and SC-001/SC-008 usability-sampling checks from `specs/004-sitewide-explore-search/quickstart.md`
+- [X] T044 Review `StoryBook/Services/ExplorationCatalogService.cs`, `StoryBook/Services/ExplorationSearchService.cs`, `StoryBook/wwwroot/js/explore.js`, and `StoryBook/Pages/Explore/Index.cshtml` for no unresolved placeholders, no secrets, no user search-string logging, and zh-TW user-visible fallback text
 
 ---
 
