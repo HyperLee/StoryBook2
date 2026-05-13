@@ -61,6 +61,10 @@
                data-all-template-en="Showing {0} story friends."
                data-search-template-zh-tw="找到 {0} 位符合搜尋的故事朋友。"
                data-search-template-en="Found {0} story friends for your search."
+               data-filter-template-zh-tw="用分類找到 {0} 位故事朋友。"
+               data-filter-template-en="Found {0} story friends with filters."
+               data-intersection-template-zh-tw="搜尋和分類一起找到 {0} 位故事朋友。"
+               data-intersection-template-en="Search and filters found {0} story friends together."
                aria-live="polite">目前顯示 @Model.Items.Count 位故事朋友。</p>
             <p class="explore-search-message"
                data-explore-too-short
@@ -72,6 +76,47 @@
                data-i18n-zh-tw="沒有找到符合的故事朋友，清除搜尋再試一次。"
                data-i18n-en="No story friend matched. Clear the search and try again."
                hidden>沒有找到符合的故事朋友，清除搜尋再試一次。</p>
+        </section>
+
+        <section class="explore-filters" aria-labelledby="explore-filters-title" data-explore-filters>
+            <div class="explore-filters__header">
+                <div>
+                    <h2 id="explore-filters-title" data-i18n-zh-tw="用分類找故事" data-i18n-en="Find stories by filters">用分類找故事</h2>
+                    <p data-i18n-zh-tw="每一排選一個條件，不同排會一起縮小結果。" data-i18n-en="Choose one button per row. Different rows narrow the results together.">每一排選一個條件，不同排會一起縮小結果。</p>
+                </div>
+                <button class="explore-clear-button"
+                        type="button"
+                        data-explore-clear-filters
+                        data-i18n-zh-tw="清除分類"
+                        data-i18n-en="Clear filters">清除分類</button>
+            </div>
+
+            <div class="explore-filter-groups">
+                @foreach (ExplorationFacetGroup group in Model.FacetGroups)
+                {
+                    <fieldset class="explore-filter-group"
+                              data-explore-filter-group="@group.Code"
+                              data-explore-selection-mode="@group.SelectionMode">
+                        <legend data-i18n-zh-tw="@group.GetLabel(LanguageCode.ZhTW)" data-i18n-en="@group.GetLabel(LanguageCode.En)">
+                            @group.GetLabel(LanguageCode.ZhTW)
+                        </legend>
+                        <div class="explore-filter-values">
+                            @foreach (ExplorationFacetValue value in group.Values)
+                            {
+                                <button class="explore-filter-button"
+                                        type="button"
+                                        data-explore-filter-value="@value.ValueCode"
+                                        data-explore-filter-active="false"
+                                        aria-pressed="false"
+                                        data-i18n-zh-tw="@value.GetLabel(LanguageCode.ZhTW)"
+                                        data-i18n-en="@value.GetLabel(LanguageCode.En)">
+                                    @value.GetLabel(LanguageCode.ZhTW)
+                                </button>
+                            }
+                        </div>
+                    </fieldset>
+                }
+            </div>
         </section>
 
         <section class="explore-results" aria-labelledby="explore-results-title">

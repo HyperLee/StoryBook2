@@ -96,10 +96,10 @@
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Extend `ExplorationCatalogService` to build source, diet, living-area, period, and discovery-location facet groups and result facet values in `StoryBook/Services/ExplorationCatalogService.cs`
-- [ ] T032 [US3] Render grouped filter controls, active-state attributes, clear filters control, intersection status text, and `data-explore-facets` on result cards in `StoryBook/Pages/Explore/Index.cshtml`
-- [ ] T033 [US3] Implement single-select facet replacement, group-to-group AND filtering, search/filter intersection, clear filters, and visible count updates in `StoryBook/wwwroot/js/explore.js`
-- [ ] T034 [US3] Add filter group, filter button, active value, clear filters, and compact responsive filter layout styles in `StoryBook/wwwroot/css/explore.css`
+- [X] T031 [US3] Extend `ExplorationCatalogService` to build source, diet, living-area, period, and discovery-location facet groups and result facet values in `StoryBook/Services/ExplorationCatalogService.cs`
+- [X] T032 [US3] Render grouped filter controls, active-state attributes, clear filters control, intersection status text, and `data-explore-facets` on result cards in `StoryBook/Pages/Explore/Index.cshtml`
+- [X] T033 [US3] Implement single-select facet replacement, group-to-group AND filtering, search/filter intersection, clear filters, and visible count updates in `StoryBook/wwwroot/js/explore.js`
+- [X] T034 [US3] Add filter group, filter button, active value, clear filters, and compact responsive filter layout styles in `StoryBook/wwwroot/css/explore.css`
 
 **Checkpoint**: User Story 3 works independently with search and filtering composed correctly.
 
