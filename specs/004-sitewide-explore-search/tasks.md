@@ -113,10 +113,10 @@
 
 ### Implementation for User Story 4
 
-- [ ] T035 [US4] Add complete bilingual visible text, placeholders, accessible names, child-friendly status messages, and `aria-live="polite"` result status templates in `StoryBook/Pages/Explore/Index.cshtml`
-- [ ] T036 [US4] Extend Explore JavaScript to read `storybook.language`, apply bilingual labels/placeholders/aria labels/status text, fallback invalid or missing language to `zh-TW`, and preserve current search/filter state during language and theme-related DOM updates in `StoryBook/wwwroot/js/explore.js`
-- [ ] T037 [US4] Ensure Explore JavaScript never initializes from query string and never writes search/filter state to URL, history, `localStorage`, `sessionStorage`, cookies, or server state in `StoryBook/wwwroot/js/explore.js`
-- [ ] T038 [US4] Add light/dark theme-compatible tokens, visible focus states, 44x44 CSS px interactive targets, and responsive 375px/768px/1366px layout rules in `StoryBook/wwwroot/css/explore.css`
+- [X] T035 [US4] Add complete bilingual visible text, placeholders, accessible names, child-friendly status messages, and `aria-live="polite"` result status templates in `StoryBook/Pages/Explore/Index.cshtml`
+- [X] T036 [US4] Extend Explore JavaScript to read `storybook.language`, apply bilingual labels/placeholders/aria labels/status text, fallback invalid or missing language to `zh-TW`, and preserve current search/filter state during language and theme-related DOM updates in `StoryBook/wwwroot/js/explore.js`
+- [X] T037 [US4] Ensure Explore JavaScript never initializes from query string and never writes search/filter state to URL, history, `localStorage`, `sessionStorage`, cookies, or server state in `StoryBook/wwwroot/js/explore.js`
+- [X] T038 [US4] Add light/dark theme-compatible tokens, visible focus states, 44x44 CSS px interactive targets, and responsive 375px/768px/1366px layout rules in `StoryBook/wwwroot/css/explore.css`
 
 **Checkpoint**: User Story 4 keeps `/explore` consistent with existing site language, theme, and accessibility behavior.
 
