@@ -29,11 +29,11 @@
 
 **Critical**: No user story work should begin until this phase is complete.
 
-- [ ] T004 [P] Add failing unit tests for storage key `storybook.theme`, valid modes `light`/`dark`/`system`, default `system`, effective light fallback, and bilingual mode labels in `StoryBook.Tests/Unit/ThemePreferenceServiceTests.cs`
-- [ ] T005 Implement `ThemePreferenceService` with XML documentation, allowed mode parsing, default mode, storage key, safe effective-theme fallback constants, and bilingual mode metadata in `StoryBook/Services/ThemePreferenceService.cs`
-- [ ] T006 Register `ThemePreferenceService` as an injectable singleton in `StoryBook/Program.cs`
-- [ ] T007 [P] Add shared semantic CSS variable scaffolding for light theme, dark theme, surfaces, text, borders, controls, alerts, and focus rings in `StoryBook/wwwroot/css/site.css`
-- [ ] T008 Add reusable route HTML helpers and theme contract assertion helpers for upcoming tests in `StoryBook.Tests/Integration/ThemePagesTests.cs`
+- [X] T004 [P] Add failing unit tests for storage key `storybook.theme`, valid modes `light`/`dark`/`system`, default `system`, effective light fallback, and bilingual mode labels in `StoryBook.Tests/Unit/ThemePreferenceServiceTests.cs`
+- [X] T005 Implement `ThemePreferenceService` with XML documentation, allowed mode parsing, default mode, storage key, safe effective-theme fallback constants, and bilingual mode metadata in `StoryBook/Services/ThemePreferenceService.cs`
+- [X] T006 Register `ThemePreferenceService` as an injectable singleton in `StoryBook/Program.cs`
+- [X] T007 [P] Add shared semantic CSS variable scaffolding for light theme, dark theme, surfaces, text, borders, controls, alerts, and focus rings in `StoryBook/wwwroot/css/site.css`
+- [X] T008 Add reusable route HTML helpers and theme contract assertion helpers for upcoming tests in `StoryBook.Tests/Integration/ThemePagesTests.cs`
 
 **Checkpoint**: Shared theme metadata and base styling contracts are ready for user story implementation.
 
