@@ -16,8 +16,8 @@
   - `StoryBook/StoryBook.csproj`：ASP.NET Core Razor Pages web application
   - `StoryBook.Tests/StoryBook.Tests.csproj`：xUnit 測試專案，引用 `Microsoft.AspNetCore.Mvc.Testing`
 - 目前 target framework 是 `net10.0`，並已啟用 nullable 與 implicit usings。
-- `Program.cs` 使用現代 ASP.NET Core hosting model，註冊 Razor Pages、Dinosaur/Aquarium options、catalog services、content validators 與 `LanguagePreferenceService`，並使用 `MapStaticAssets()` 與 `MapRazorPages()`。
-- 目前已實作首頁、Privacy/Error 範本頁、恐龍故事書、水族館故事書、共用 layout 與全站語言切換。
+- `Program.cs` 使用現代 ASP.NET Core hosting model，註冊 Razor Pages、Dinosaur/Aquarium options、catalog services、content validators、`LanguagePreferenceService` 與 `ThemePreferenceService`，並使用 `MapStaticAssets()` 與 `MapRazorPages()`。
+- 目前已實作首頁、Privacy/Error 範本頁、恐龍故事書、水族館故事書、共用 layout、全站語言切換與首頁主題選擇/整站深色模式。
 - `StoryBook/bin/`、`StoryBook/obj/`、`StoryBook.Tests/bin/` 與 `StoryBook.Tests/obj/` 是建置產物，不要手動修改，也不要用大量刪除命令清理。若 build/test 造成已追蹤的 `obj` generated 檔出現差異，commit 時不得 staging 這些產物；必要時只針對明確單一路徑還原或另開清理任務。
 
 ## 專案架構準則
@@ -28,14 +28,17 @@
 - 內容資料放在 `StoryBook/Data/`，不要放在公開的 `wwwroot` 資料路徑。
 - 公開圖片放在 `StoryBook/wwwroot/images/<feature>/`；feature-specific CSS/JS 分別放在 `StoryBook/wwwroot/css/` 與 `StoryBook/wwwroot/js/`。
 - 現有 jQuery 與 validation assets 可保留給範本/驗證用途；新的故事書互動邏輯使用原生 JavaScript，不依賴 jQuery。
+- 跨站主題切換邏輯維持在 `StoryBook/wwwroot/js/theme.js` 與共用 layout/theme service；不要分散到恐龍或水族館 feature script。
 - 不引入資料庫、登入、外部 CMS、外部百科 API 或即時翻譯服務，除非 spec/plan 先更新並記錄理由。
 
 ## 主要目錄與責任
 
 - `StoryBook/Models/`：故事書資料模型、雙語文字型別、搜尋 projection 與 shared language enum/parser。
-- `StoryBook/Services/`：catalog options、JSON 載入/cache、content validation、搜尋、slug lookup、導覽與語言偏好服務。
+- `StoryBook/Services/`：catalog options、JSON 載入/cache、content validation、搜尋、slug lookup、導覽、語言偏好與主題偏好服務。
 - `StoryBook/Pages/Dinosaurs/`：恐龍主頁與詳情頁，canonical routes 為 `/dinosaurs` 與 `/dinosaurs/{slug}`。
 - `StoryBook/Pages/Aquarium/`：水族館主頁與詳情頁，canonical routes 為 `/aquarium` 與 `/aquarium/{slug}`。
+- `StoryBook/wwwroot/js/theme.js`：首頁主題 selector、`storybook.theme`、system mode、跨分頁同步與主題 label 狀態。
+- `StoryBook/wwwroot/css/site.css`：全站 theme tokens、layout、導覽、表單、卡牌、警示、modal 與焦點基礎樣式。
 - `StoryBook/Data/dinosaurs.json`：恐龍內容來源。
 - `StoryBook/Data/aquarium.json`：水族館內容來源。
 - `StoryBook.Tests/Unit/`：catalog service、content validation、language fallback 與導覽規則單元測試。
@@ -70,9 +73,12 @@ shell commands, and other important information, read the current plan:
 - 深色模式功能：
   - `specs/003-dark-mode/spec.md`
   - `specs/003-dark-mode/plan.md`
+  - `specs/003-dark-mode/research.md`
   - `specs/003-dark-mode/data-model.md`
   - `specs/003-dark-mode/contracts/theme-ui.md`
   - `specs/003-dark-mode/quickstart.md`
+  - `specs/003-dark-mode/tasks.md`
+  - `specs/003-dark-mode/checklists/requirements.md`
 
 如果 spec、plan 與目前程式碼不一致，回報時要明確區分「目前已存在」與「規格預期新增」。不要把 plan 中的目標目錄或舊狀態誤認為目前實作。
 
@@ -103,12 +109,25 @@ shell commands, and other important information, read the current plan:
 - 搜尋正規化後若少於 2 個有效搜尋字元或英文字母數字，應顯示友善提示並保留可探索內容，不得呈現誤導性的搜尋結果。
 - 水族館互動邏輯維持在 `StoryBook/wwwroot/js/aquarium.js`，樣式維持在 `StoryBook/wwwroot/css/aquarium.css`。
 
+## 深色模式功能約束
+
+- 主題模式偏好使用 `localStorage` key `storybook.theme`，只允許 `light`、`dark`、`system`；無效、缺漏或不可讀取時回退 `system`。
+- `system` 模式以 `prefers-color-scheme` 推導有效主題；無法判斷時使用 `light` 作為安全預設，不得持久化推導出的有效主題。
+- 首頁 `/` 是唯一可顯示主題選擇控制項的頁面；Privacy、Error、恐龍與水族館頁必須套用有效主題但不得提供 selector。
+- `_Layout.cshtml` 必須在主要 stylesheet 前或足夠早的位置執行 theme boot script，並維持 `<html>` 的 `data-bs-theme`、`data-storybook-theme-mode` 與 `data-storybook-effective-theme` 合約。
+- 主題切換只可改變視覺呈現與 selector 狀態，不得修改故事內容、圖片說明、搜尋輸入、語言偏好、路由、scroll position、modal 狀態或瀏覽器 history。
+- 主題 selector 文案需跟隨 `storybook.language`，支援 `zh-TW` 與 `en`；翻譯缺漏或語言值無效時回退繁體中文，不得顯示空白 label。
+- 亮色、深色與跟隨系統三種模式都需維持 WCAG 2.2 AA 對比、可見焦點、至少 44x44 CSS px 的可操作目標，並在 375px、768px、1366px 代表寬度下避免重疊或水平溢出。
+- 同站分頁與系統外觀偏好變更需在 2 秒內同步有效主題；固定 `light` 或 `dark` 選擇不得被系統偏好變更覆蓋。
+- 不新增 theme API、cookie preference endpoint、server-side 使用者偏好、資料庫、自訂色票、排程切換、帳號同步或每頁獨立主題，除非 spec/plan 先更新並記錄理由。
+
 ## 測試與驗證
 
 - 本專案憲章要求測試優先。涉及業務規則、資料轉換、資料讀取、PageModel handler、route 或跨頁流程時，先新增或更新失敗測試，再實作。
 - 單元測試使用 xUnit 覆蓋 catalog service、內容驗證、搜尋、語言 fallback 與導覽規則。
-- 整合測試使用 `Microsoft.AspNetCore.Mvc.Testing` / `WebApplicationFactory<Program>` 覆蓋 DI、routes、Razor Pages pipeline、找不到內容狀態與 HTML contract。
-- 鍵盤操作、大圖 modal、焦點回復、語言切換與視覺流程，至少依對應 feature 的 `quickstart.md` 做手動驗收；若回歸成本變高再補 Playwright for .NET。
+- 主題相關單元測試需覆蓋 `ThemePreferenceService` storage key、允許值、default/fallback、有效主題安全值與雙語 metadata。
+- 整合測試使用 `Microsoft.AspNetCore.Mvc.Testing` / `WebApplicationFactory<Program>` 覆蓋 DI、routes、Razor Pages pipeline、找不到內容狀態、theme layout contract、首頁 selector 與非首頁 selector absence。
+- 鍵盤操作、大圖 modal、焦點回復、語言切換、主題切換與視覺流程，至少依對應 feature 的 `quickstart.md` 做手動驗收；若回歸成本變高再補 Playwright for .NET。
 - 完成交付前至少執行相關 build/test。對跨功能或文件會影響開發指引的變更，優先執行 `dotnet test StoryBook2.sln`。
 
 ## 常用命令
@@ -140,5 +159,5 @@ dotnet run --project StoryBook/StoryBook.csproj
 - 使用既有 Bootstrap 5 與 layout，不建立新的前端 build pipeline。
 - 新互動邏輯放在 feature-specific JavaScript，保持小而可測；不要把單一功能互動塞進全域 `site.js`，除非是跨站共用行為。
 - 所有互動控制項必須可鍵盤聚焦與啟用，焦點狀態不可被移除。
-- 搜尋框、圖片按鈕、語言切換、大圖關閉、搜尋清除、上一頁與下一頁控制項必須有 accessible name。
+- 搜尋框、圖片按鈕、語言切換、主題 selector、大圖關閉、搜尋清除、上一頁與下一頁控制項必須有 accessible name。
 - 頁面主要內容要有明確 heading hierarchy，不要只靠顏色傳達狀態。
