@@ -79,17 +79,17 @@
 
 > Write these tests first and confirm they fail before implementation.
 
-- [ ] T021 [P] [US2] Add failing unit tests that invalid, missing, or unsupported saved theme values parse to `system` and never persist an effective theme value in `StoryBook.Tests/Unit/ThemePreferenceServiceTests.cs`
-- [ ] T022 [P] [US2] Add failing integration tests for bilingual selector labels, bilingual descriptions, and nonblank zh-TW fallback when language values are invalid in `StoryBook.Tests/Integration/ThemePagesTests.cs`
+- [X] T021 [P] [US2] Add failing unit tests that invalid, missing, or unsupported saved theme values parse to `system` and never persist an effective theme value in `StoryBook.Tests/Unit/ThemePreferenceServiceTests.cs`
+- [X] T022 [P] [US2] Add failing integration tests for bilingual selector labels, bilingual descriptions, and nonblank zh-TW fallback when language values are invalid in `StoryBook.Tests/Integration/ThemePagesTests.cs`
 
 ### Implementation for User Story 2
 
-- [ ] T023 [US2] Implement unavailable `localStorage`, invalid stored value recovery, and selected-mode-only persistence in `StoryBook/wwwroot/js/theme.js`
-- [ ] T024 [US2] Implement `system` mode resolution with `matchMedia('(prefers-color-scheme: dark)')`, guarded missing/throwing `matchMedia` fallback to the safe light effective theme, and effective theme updates within 2 seconds in `StoryBook/wwwroot/js/theme.js`
-- [ ] T025 [US2] Synchronize selector labels, descriptions, and selected-state text with `storybook.language`, including zh-TW fallback for invalid or missing language values, in `StoryBook/wwwroot/js/theme.js`
-- [ ] T026 [US2] Add any missing bilingual label and description data attributes consumed by `theme.js` to `StoryBook/Pages/Index.cshtml`
-- [ ] T027 [US2] Run `dotnet test StoryBook2.sln --filter "Theme"` using the persistence, system-mode, and language checks from `specs/003-dark-mode/quickstart.md`
-- [ ] T028 [US2] Run manual browser acceptance for persisted mode reloads, invalid storage recovery, unavailable `localStorage`, missing `matchMedia`, and system-preference changes using steps 4-7 in `specs/003-dark-mode/quickstart.md`
+- [X] T023 [US2] Implement unavailable `localStorage`, invalid stored value recovery, and selected-mode-only persistence in `StoryBook/wwwroot/js/theme.js`
+- [X] T024 [US2] Implement `system` mode resolution with `matchMedia('(prefers-color-scheme: dark)')`, guarded missing/throwing `matchMedia` fallback to the safe light effective theme, and effective theme updates within 2 seconds in `StoryBook/wwwroot/js/theme.js`
+- [X] T025 [US2] Synchronize selector labels, descriptions, and selected-state text with `storybook.language`, including zh-TW fallback for invalid or missing language values, in `StoryBook/wwwroot/js/theme.js`
+- [X] T026 [US2] Add any missing bilingual label and description data attributes consumed by `theme.js` to `StoryBook/Pages/Index.cshtml`
+- [X] T027 [US2] Run `dotnet test StoryBook2.sln --filter "Theme"` using the persistence, system-mode, and language checks from `specs/003-dark-mode/quickstart.md`
+- [X] T028 [US2] Run manual browser acceptance for persisted mode reloads, invalid storage recovery, unavailable `localStorage`, missing `matchMedia`, and system-preference changes using steps 4-7 in `specs/003-dark-mode/quickstart.md`
 
 **Checkpoint**: User Stories 1 and 2 both work independently, including reload and system-preference scenarios.
 

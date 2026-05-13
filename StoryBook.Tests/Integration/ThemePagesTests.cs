@@ -54,6 +54,26 @@ public sealed class ThemePagesTests : IClassFixture<DinosaurPageTestFixture>
         Assert.Contains("storybook.theme", html);
     }
 
+    [Fact]
+    public async Task Home_theme_selector_exposes_bilingual_text_and_language_fallback_contract()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/");
+
+        Assert.Contains("data-theme-language-storage-key=\"storybook.language\"", html);
+        Assert.Contains("data-theme-language-fallback=\"zh-TW\"", html);
+        Assert.Contains("data-theme-label-zh-tw=\"亮色模式\"", html);
+        Assert.Contains("data-theme-label-en=\"Light mode\"", html);
+        Assert.Contains("data-theme-label-zh-tw=\"深色模式\"", html);
+        Assert.Contains("data-theme-label-en=\"Dark mode\"", html);
+        Assert.Contains("data-theme-label-zh-tw=\"跟隨系統\"", html);
+        Assert.Contains("data-theme-label-en=\"Use system setting\"", html);
+        Assert.Equal(3, CountOccurrences(html, "data-theme-description-zh-tw="));
+        Assert.Equal(3, CountOccurrences(html, "data-theme-description-en="));
+        Assert.Contains("data-theme-selected-status", html);
+        Assert.DoesNotContain("data-theme-label-zh-tw=\"\"", html);
+        Assert.DoesNotContain("data-theme-description-zh-tw=\"\"", html);
+    }
+
     private static void AssertThemeAttributeContract(string html)
     {
         Assert.Contains("data-bs-theme", html);

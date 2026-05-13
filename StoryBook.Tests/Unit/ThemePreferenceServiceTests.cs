@@ -78,4 +78,30 @@ public sealed class ThemePreferenceServiceTests
         Assert.Equal("跟隨系統", system.GetLabel("invalid"));
         Assert.Equal(system.GetDescription("zh-TW"), system.GetDescription("invalid"));
     }
+
+    [Theory]
+    [InlineData("light", "light")]
+    [InlineData("dark", "dark")]
+    [InlineData("system", "system")]
+    [InlineData("invalid", "system")]
+    [InlineData(null, "system")]
+    public void ToStorageValue_persists_only_the_selected_mode_or_system_fallback(string? value, string expected)
+    {
+        ThemePreferenceService service = new();
+
+        Assert.Equal(expected, service.ToStorageValue(value));
+    }
+
+    [Fact]
+    public void System_mode_storage_value_stays_system_when_effective_theme_is_dark()
+    {
+        ThemePreferenceService service = new();
+
+        string selectedMode = service.ToStorageValue("system");
+        string effectiveTheme = service.ResolveEffectiveTheme(selectedMode, prefersDark: true);
+
+        Assert.Equal("system", selectedMode);
+        Assert.Equal("dark", effectiveTheme);
+        Assert.NotEqual(effectiveTheme, selectedMode);
+    }
 }

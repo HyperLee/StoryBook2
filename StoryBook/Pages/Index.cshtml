@@ -13,6 +13,8 @@
               data-theme-selector
               data-theme-storage-key="@Model.ThemeStorageKey"
               data-theme-default-mode="@Model.DefaultThemeMode"
+              data-theme-language-storage-key="storybook.language"
+              data-theme-language-fallback="zh-TW"
               aria-labelledby="theme-selector-title"
               aria-describedby="theme-selector-help">
         <legend id="theme-selector-title"
@@ -51,6 +53,11 @@
                 </div>
             }
         </div>
+        <p class="visually-hidden"
+           data-theme-selected-status
+           data-theme-selected-status-zh-tw="目前選取：{0}"
+           data-theme-selected-status-en="Selected: {0}"
+           aria-live="polite"></p>
     </fieldset>
 
     <div class="home-actions d-flex flex-wrap justify-content-center gap-3">

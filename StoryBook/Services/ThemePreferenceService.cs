@@ -63,6 +63,14 @@ public sealed class ThemePreferenceService
     }
 
     /// <summary>
+    /// Converts a selected mode to the browser storage value, never deriving from the effective theme.
+    /// </summary>
+    public string ToStorageValue(string? selectedMode)
+    {
+        return ParseMode(selectedMode);
+    }
+
+    /// <summary>
     /// Resolves the effective light or dark theme for a selected mode.
     /// </summary>
     public string ResolveEffectiveTheme(string? selectedMode, bool? prefersDark)
