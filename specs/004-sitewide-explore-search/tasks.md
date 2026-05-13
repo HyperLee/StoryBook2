@@ -78,11 +78,11 @@
 
 ### Implementation for User Story 2
 
-- [ ] T026 [US2] Implement `ExplorationSearchService` query normalization, bilingual matching, result mode selection, no-query-logging behavior, and stable source/order preservation in `StoryBook/Services/ExplorationSearchService.cs`
-- [ ] T027 [US2] Register `ExplorationSearchService` as a singleton in `StoryBook/Program.cs`
-- [ ] T028 [US2] Add search input, clear search control, result status live region, too-short message, no-results message, and `data-explore-search-text` attributes in `StoryBook/Pages/Explore/Index.cshtml`
-- [ ] T029 [US2] Implement client-side search, clear search, too-short handling, no-results handling, final-input-wins updates, and no URL/history/storage persistence in `StoryBook/wwwroot/js/explore.js`
-- [ ] T030 [US2] Add accessible search control, clear button, live status, too-short, and no-results styles in `StoryBook/wwwroot/css/explore.css`
+- [X] T026 [US2] Implement `ExplorationSearchService` query normalization, bilingual matching, result mode selection, no-query-logging behavior, and stable source/order preservation in `StoryBook/Services/ExplorationSearchService.cs`
+- [X] T027 [US2] Register `ExplorationSearchService` as a singleton in `StoryBook/Program.cs`
+- [X] T028 [US2] Add search input, clear search control, result status live region, too-short message, no-results message, and `data-explore-search-text` attributes in `StoryBook/Pages/Explore/Index.cshtml`
+- [X] T029 [US2] Implement client-side search, clear search, too-short handling, no-results handling, final-input-wins updates, and no URL/history/storage persistence in `StoryBook/wwwroot/js/explore.js`
+- [X] T030 [US2] Add accessible search control, clear button, live status, too-short, and no-results styles in `StoryBook/wwwroot/css/explore.css`
 
 **Checkpoint**: User Story 2 works independently with `/explore` and does not persist search state outside the current page lifecycle.
 

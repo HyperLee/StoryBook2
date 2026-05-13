@@ -37,6 +37,43 @@
             </div>
         }
 
+        <section class="explore-search" aria-labelledby="explore-search-title" data-explore-search-updates-within-ms="1000">
+            <h2 id="explore-search-title" data-i18n-zh-tw="搜尋全部故事" data-i18n-en="Search all stories">搜尋全部故事</h2>
+            <div class="explore-search__controls">
+                <input class="form-control"
+                       type="search"
+                       aria-label="搜尋全部故事"
+                       placeholder="輸入名稱、食性、生活區域、時期或地點"
+                       data-aria-label-zh-tw="搜尋全部故事"
+                       data-aria-label-en="Search all stories"
+                       data-placeholder-zh-tw="輸入名稱、食性、生活區域、時期或地點"
+                       data-placeholder-en="Search by name, diet, home, period, or place"
+                       data-explore-search-input />
+                <button class="explore-clear-button"
+                        type="button"
+                        data-explore-clear-search
+                        data-i18n-zh-tw="清除搜尋"
+                        data-i18n-en="Clear search">清除搜尋</button>
+            </div>
+            <p class="explore-result-status"
+               data-explore-result-status
+               data-all-template-zh-tw="目前顯示 {0} 位故事朋友。"
+               data-all-template-en="Showing {0} story friends."
+               data-search-template-zh-tw="找到 {0} 位符合搜尋的故事朋友。"
+               data-search-template-en="Found {0} story friends for your search."
+               aria-live="polite">目前顯示 @Model.Items.Count 位故事朋友。</p>
+            <p class="explore-search-message"
+               data-explore-too-short
+               data-i18n-zh-tw="請輸入至少兩個字，故事朋友比較找得到。"
+               data-i18n-en="Please type at least two characters so story friends are easier to find."
+               hidden>請輸入至少兩個字，故事朋友比較找得到。</p>
+            <p class="explore-search-message"
+               data-explore-no-results
+               data-i18n-zh-tw="沒有找到符合的故事朋友，清除搜尋再試一次。"
+               data-i18n-en="No story friend matched. Clear the search and try again."
+               hidden>沒有找到符合的故事朋友，清除搜尋再試一次。</p>
+        </section>
+
         <section class="explore-results" aria-labelledby="explore-results-title">
             <div class="explore-section-heading">
                 <h2 id="explore-results-title" data-i18n-zh-tw="全部故事朋友" data-i18n-en="All story friends">全部故事朋友</h2>
