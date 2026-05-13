@@ -125,11 +125,11 @@
 
 **Purpose**: Final consistency checks across specs, implementation, tests, and generated artifacts.
 
-- [ ] T037 [P] Review `specs/003-dark-mode/spec.md` for implementation drift found during delivery and update only if behavior changed
-- [ ] T038 [P] Review `specs/003-dark-mode/plan.md` for implementation drift, dependency changes, or architecture changes and update only if behavior changed
-- [ ] T039 Run `dotnet build StoryBook2.sln` and `dotnet test StoryBook2.sln`, confirm no new compiler warnings, and confirm no generated `StoryBook/obj` or `StoryBook.Tests/obj` artifacts are staged while validating `StoryBook2.sln`
-- [ ] T040 Run the full browser acceptance checklist in `specs/003-dark-mode/quickstart.md` and record any remaining follow-up directly in `specs/003-dark-mode/tasks.md`
-- [ ] T041 Review final constitution delivery gates for unresolved template markers, secrets/connection strings/API keys, user-visible zh-TW text, and required non-sensitive `ILogger<T>` coverage across `StoryBook/`, `StoryBook.Tests/`, and `specs/003-dark-mode/tasks.md`
+- [X] T037 [P] Review `specs/003-dark-mode/spec.md` for implementation drift found during delivery and update only if behavior changed
+- [X] T038 [P] Review `specs/003-dark-mode/plan.md` for implementation drift, dependency changes, or architecture changes and update only if behavior changed
+- [X] T039 Run `dotnet build StoryBook2.sln` and `dotnet test StoryBook2.sln`, confirm no new compiler warnings, and confirm no generated `StoryBook/obj` or `StoryBook.Tests/obj` artifacts are staged while validating `StoryBook2.sln`
+- [X] T040 Run the full browser acceptance checklist in `specs/003-dark-mode/quickstart.md` and record any remaining follow-up directly in `specs/003-dark-mode/tasks.md`
+- [X] T041 Review final constitution delivery gates for unresolved template markers, secrets/connection strings/API keys, user-visible zh-TW text, and required non-sensitive `ILogger<T>` coverage across `StoryBook/`, `StoryBook.Tests/`, and `specs/003-dark-mode/tasks.md`
 
 ---
 
