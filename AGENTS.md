@@ -49,7 +49,7 @@
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan:
-`specs/003-dark-mode/plan.md`
+`specs/004-sitewide-explore-search/plan.md`
 <!-- SPECKIT END -->
 
 開始相關功能前，依變更範圍閱讀並對齊：
