@@ -45,7 +45,8 @@
 
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+shell commands, and other important information, read the current plan:
+`specs/003-dark-mode/plan.md`
 <!-- SPECKIT END -->
 
 開始相關功能前，依變更範圍閱讀並對齊：
@@ -66,6 +67,12 @@ shell commands, and other important information, read the current plan
   - `specs/002-aquarium-storybook/contracts/content-catalog.schema.json`
   - `specs/002-aquarium-storybook/quickstart.md`
   - `specs/002-aquarium-storybook/tasks.md`
+- 深色模式功能：
+  - `specs/003-dark-mode/spec.md`
+  - `specs/003-dark-mode/plan.md`
+  - `specs/003-dark-mode/data-model.md`
+  - `specs/003-dark-mode/contracts/theme-ui.md`
+  - `specs/003-dark-mode/quickstart.md`
 
 如果 spec、plan 與目前程式碼不一致，回報時要明確區分「目前已存在」與「規格預期新增」。不要把 plan 中的目標目錄或舊狀態誤認為目前實作。
 
