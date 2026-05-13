@@ -59,6 +59,7 @@ StoryBook/
 │   ├── ExplorationFacetValue.cs
 │   ├── ExplorationItem.cs
 │   ├── ExplorationSearchState.cs
+│   ├── ExplorationSourceType.cs
 │   └── ExplorationSourceStatus.cs
 ├── Pages/
 │   ├── Explore/
@@ -82,7 +83,7 @@ StoryBook.Tests/
     └── ExplorationSearchServiceTests.cs
 ```
 
-**Structure Decision**: 使用現有單一 ASP.NET Core Razor Pages 應用。跨故事書 projection、搜尋與分類規則放在 injectable services；`PageModel` 只負責載入 view model、設定 feature asset flags 與呈現錯誤狀態。Feature-specific CSS/JS 放在 `wwwroot/css/explore.css` 與 `wwwroot/js/explore.js`，主題邏輯仍由既有 layout/theme service 與 `theme.js` 管理。
+**Structure Decision**: 使用現有單一 ASP.NET Core Razor Pages 應用。跨故事書 projection、搜尋與分類規則放在 injectable services；`PageModel` 只負責載入 view model、設定 feature asset flags 與呈現錯誤狀態。Feature-specific CSS/JS 放在 `wwwroot/css/explore.css` 與 `wwwroot/js/explore.js`，主題邏輯仍由既有 layout/theme service 與 `theme.js` 管理。來源 catalog 載入失敗、partial availability 與 all-failed 狀態必須由 `ExplorationCatalogService` 透過 `ILogger<ExplorationCatalogService>` 記錄可關聯事件，但不得記錄使用者搜尋字串、語言偏好之外的個人化資料或任何 secret。
 
 ## Complexity Tracking
 
