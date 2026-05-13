@@ -1,0 +1,265 @@
+# Tasks: 全站探索與分類搜尋
+
+**Input**: Design documents from `/specs/004-sitewide-explore-search/`
+**Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, `contracts/ui-routes.md`, `quickstart.md`
+**Tests**: Included because the specification marks user scenarios/tests as mandatory and the implementation plan/constitution require test-first coverage.
+**Feature**: `004-sitewide-explore-search`
+
+## Format: `[ID] [P?] [Story] Description`
+
+- **[P]**: Can run in parallel (different files, no dependency on incomplete tasks)
+- **[Story]**: User story label (`US1`, `US2`, `US3`, `US4`) for story-phase tasks only
+- Every task includes exact repository paths to modify or validate
+
+## Phase 1: Setup (Shared Infrastructure)
+
+**Purpose**: Add the empty feature surface and shared asset hooks needed by later story tasks.
+
+- [ ] T001 Create the Explore Razor Page shell in `StoryBook/Pages/Explore/Index.cshtml` and `StoryBook/Pages/Explore/Index.cshtml.cs`
+- [ ] T002 [P] Create feature asset files in `StoryBook/wwwroot/css/explore.css` and `StoryBook/wwwroot/js/explore.js`
+- [ ] T003 Add conditional Explore stylesheet loading for `ViewData["UseExploreAssets"]` in `StoryBook/Pages/Shared/_Layout.cshtml`
+
+---
+
+## Phase 2: Foundational (Blocking Prerequisites)
+
+**Purpose**: Shared projection, status, and test support that all user stories depend on.
+
+**CRITICAL**: No user story work should begin until these shared contracts compile and the failing tests exist.
+
+- [ ] T004 [P] Add failing projection and source-status unit tests in `StoryBook.Tests/Unit/ExplorationCatalogServiceTests.cs`
+- [ ] T005 [P] Add `ExplorationSourceType` with source order and route prefix metadata in `StoryBook/Models/ExplorationSourceType.cs`
+- [ ] T006 [P] Add `ExplorationFacetValue` model with bilingual labels and sort metadata in `StoryBook/Models/ExplorationFacetValue.cs`
+- [ ] T007 [P] Add `ExplorationFacetGroup` model with single-selection metadata in `StoryBook/Models/ExplorationFacetGroup.cs`
+- [ ] T008 [P] Add `ExplorationItem` projection model with stable id, detail href, bilingual text, search text, and facets in `StoryBook/Models/ExplorationItem.cs`
+- [ ] T009 [P] Add `ExplorationSearchState` model for raw query, normalized query, selected facets, result mode, language, and visible count in `StoryBook/Models/ExplorationSearchState.cs`
+- [ ] T010 [P] Add `ExplorationSourceStatus` model for available, partial-failure, and all-failed source reporting in `StoryBook/Models/ExplorationSourceStatus.cs`
+- [ ] T011 Implement `ExplorationCatalogService` to compose dinosaur and aquarium projections, stable ordering, bilingual search text, and partial/all source failure statuses in `StoryBook/Services/ExplorationCatalogService.cs`
+- [ ] T012 Register `ExplorationCatalogService` as a singleton in `StoryBook/Program.cs`
+- [ ] T013 Add Explore integration test fixture with configurable dinosaur and aquarium catalog paths in `StoryBook.Tests/Integration/ExplorePageTestFixture.cs`
+
+**Checkpoint**: Projection and source-status foundation is ready; story implementation can begin.
+
+---
+
+## Phase 3: User Story 1 - 從首頁進入全站探索頁 (Priority: P1) MVP
+
+**Goal**: Users can enter `/explore` from the homepage, see dinosaur and aquarium content, and open existing detail pages through normal links.
+
+**Independent Test**: From `/`, activate the "探索全部故事" entry, confirm `/explore` renders both source groups, then open one dinosaur and one aquarium result link.
+
+### Tests for User Story 1
+
+> Write these tests first and confirm they fail before implementation.
+
+- [ ] T014 [P] [US1] Add integration tests for homepage `/explore` link, `/explore` 200 OK, default `zh-TW` content, both source labels, and detail anchors in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+- [ ] T015 [P] [US1] Add integration tests for partial-source and all-source failure friendly states in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+
+### Implementation for User Story 1
+
+- [ ] T016 [US1] Implement `IndexModel` loading of exploration projection, source statuses, and `ViewData["UseExploreAssets"]` in `StoryBook/Pages/Explore/Index.cshtml.cs`
+- [ ] T017 [US1] Render `/explore` full-collection sections, result cards, source labels, images/alt text, detail anchors, home link, partial failure state, and all-failed state in `StoryBook/Pages/Explore/Index.cshtml`
+- [ ] T018 [US1] Add a bilingual "探索全部故事" / "Explore all stories" normal anchor to `/explore` in the homepage action area in `StoryBook/Pages/Index.cshtml`
+- [ ] T019 [US1] Add initial Explore page, source section, result card, image fallback, and friendly failure-state styles in `StoryBook/wwwroot/css/explore.css`
+
+**Checkpoint**: User Story 1 is independently functional and testable as the MVP.
+
+---
+
+## Phase 4: User Story 2 - 跨故事書搜尋內容 (Priority: P1)
+
+**Goal**: Users can search across both storybooks with Chinese or English terms, receive child-friendly status messages, and clear the query back to the full collection.
+
+**Independent Test**: On `/explore`, search `暴龍`, `海水`, `草食`, and `shark`; verify matching results remain visible, invalid/too-short searches keep available content with a friendly prompt, and clearing search restores all results without URL or history changes.
+
+### Tests for User Story 2
+
+> Write these tests first and confirm they fail before implementation.
+
+- [ ] T020 [P] [US2] Add failing normalization, bilingual matching, too-short, punctuation-only, no-results, and stable-order unit tests in `StoryBook.Tests/Unit/ExplorationSearchServiceTests.cs`
+- [ ] T021 [P] [US2] Add rendered search contract integration tests for search input, clear button, result status, too-short state, no-results state, bilingual search text, and no `pushState` or `replaceState` usage in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+
+### Implementation for User Story 2
+
+- [ ] T022 [US2] Implement `ExplorationSearchService` query normalization, bilingual matching, result mode selection, and stable source/order preservation in `StoryBook/Services/ExplorationSearchService.cs`
+- [ ] T023 [US2] Register `ExplorationSearchService` as a singleton in `StoryBook/Program.cs`
+- [ ] T024 [US2] Add search input, clear search control, result status live region, too-short message, no-results message, and `data-explore-search-text` attributes in `StoryBook/Pages/Explore/Index.cshtml`
+- [ ] T025 [US2] Implement client-side search, clear search, too-short handling, no-results handling, and final-input-wins updates in `StoryBook/wwwroot/js/explore.js`
+- [ ] T026 [US2] Add accessible search control, clear button, live status, too-short, and no-results styles in `StoryBook/wwwroot/css/explore.css`
+
+**Checkpoint**: User Story 2 works independently with `/explore` and does not persist search state outside the current page lifecycle.
+
+---
+
+## Phase 5: User Story 3 - 用分類快速篩選故事內容 (Priority: P2)
+
+**Goal**: Users can filter by source and available content attributes, with one selected value per group and AND behavior across groups.
+
+**Independent Test**: On `/explore`, select `恐龍`, `水族館`, diet, habitat/living area, period, and discovery-location filters; confirm same-group selections replace each other, different groups combine with AND, and clearing filters returns the full collection or current valid search results.
+
+### Tests for User Story 3
+
+> Write these tests first and confirm they fail before implementation.
+
+- [ ] T027 [P] [US3] Extend unit tests for single-selection facet state, AND filter matching, search/filter intersection, clear-filter behavior, and stable ordering in `StoryBook.Tests/Unit/ExplorationSearchServiceTests.cs`
+- [ ] T028 [P] [US3] Add rendered filter contract integration tests for `data-explore-filter-group`, `data-explore-filter-value`, source/diet/habitat/period/discovery facets, and `data-explore-facets` result metadata in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+
+### Implementation for User Story 3
+
+- [ ] T029 [US3] Extend `ExplorationCatalogService` to build source, diet, habitat/living-area, period, and discovery-location facet groups and result facet values in `StoryBook/Services/ExplorationCatalogService.cs`
+- [ ] T030 [US3] Render grouped filter controls, active-state attributes, clear filters control, intersection status text, and `data-explore-facets` on result cards in `StoryBook/Pages/Explore/Index.cshtml`
+- [ ] T031 [US3] Implement single-select facet replacement, group-to-group AND filtering, search/filter intersection, clear filters, and visible count updates in `StoryBook/wwwroot/js/explore.js`
+- [ ] T032 [US3] Add filter group, filter button, active value, clear filters, and compact responsive filter layout styles in `StoryBook/wwwroot/css/explore.css`
+
+**Checkpoint**: User Story 3 works independently with search and filtering composed correctly.
+
+---
+
+## Phase 6: User Story 4 - 保持雙語、主題與可及性一致 (Priority: P2)
+
+**Goal**: `/explore` follows existing language and theme rules, avoids a new theme selector, and remains keyboard-accessible and responsive.
+
+**Independent Test**: Switch between `zh-TW`, `en`, invalid language values, light/dark/system theme modes, keyboard navigation, and 375px/768px/1366px widths; verify labels, summaries, prompts, focus, targets, and layout remain valid.
+
+### Tests for User Story 4
+
+> Write these tests first and confirm they fail before implementation.
+
+- [ ] T033 [P] [US4] Add integration tests for bilingual `data-i18n`, `data-aria-label`, `data-placeholder`, effective theme layout attributes, and absence of `[data-theme-selector]` on `/explore` in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+- [ ] T034 [P] [US4] Add unit tests that every `ExplorationItem`, `ExplorationFacetGroup`, `ExplorationFacetValue`, and `ExplorationSourceStatus` has nonblank `zh-TW` fallback labels, summaries, source labels, and alt text in `StoryBook.Tests/Unit/ExplorationCatalogServiceTests.cs`
+
+### Implementation for User Story 4
+
+- [ ] T035 [US4] Add complete bilingual visible text, placeholders, accessible names, child-friendly status messages, and `aria-live="polite"` result status templates in `StoryBook/Pages/Explore/Index.cshtml`
+- [ ] T036 [US4] Extend Explore JavaScript to read `storybook.language`, apply bilingual labels/placeholders/aria labels/status text, fallback invalid or missing language to `zh-TW`, and preserve current search/filter state during language updates in `StoryBook/wwwroot/js/explore.js`
+- [ ] T037 [US4] Ensure Explore JavaScript never initializes from query string and never writes search/filter state to URL, history, `localStorage`, `sessionStorage`, cookies, or server state in `StoryBook/wwwroot/js/explore.js`
+- [ ] T038 [US4] Add light/dark theme-compatible tokens, visible focus states, 44x44 CSS px interactive targets, and responsive 375px/768px/1366px layout rules in `StoryBook/wwwroot/css/explore.css`
+
+**Checkpoint**: User Story 4 keeps `/explore` consistent with existing site language, theme, and accessibility behavior.
+
+---
+
+## Phase 7: Polish & Cross-Cutting Concerns
+
+**Purpose**: Validate the complete feature against the quickstart and project constraints.
+
+- [ ] T039 [P] Review child-friendly copy and fallback states against `specs/004-sitewide-explore-search/quickstart.md` and update `StoryBook/Pages/Explore/Index.cshtml`
+- [ ] T040 [P] Review no-new-dependency constraint in `StoryBook/StoryBook.csproj` and `StoryBook.Tests/StoryBook.Tests.csproj`
+- [ ] T041 Run `dotnet test StoryBook2.sln` for `StoryBook2.sln`
+- [ ] T042 Run the manual quickstart route, search, filter, language, theme, keyboard, and responsive checks from `specs/004-sitewide-explore-search/quickstart.md`
+
+---
+
+## Dependencies & Execution Order
+
+### Phase Dependencies
+
+- **Setup (Phase 1)**: No dependencies; can start immediately.
+- **Foundational (Phase 2)**: Depends on Setup; blocks all user stories.
+- **User Story 1 (Phase 3)**: Depends on Foundational; delivers MVP navigation and full collection rendering.
+- **User Story 2 (Phase 4)**: Depends on Foundational and can proceed alongside US1 with coordination on `StoryBook/Pages/Explore/Index.cshtml` and `StoryBook/wwwroot/js/explore.js`.
+- **User Story 3 (Phase 5)**: Depends on Foundational and the shared search/filter service contract; can proceed after US2 tests define `ExplorationSearchService`.
+- **User Story 4 (Phase 6)**: Depends on rendered Explore controls and result cards from US1-US3.
+- **Polish (Phase 7)**: Depends on all desired user stories being complete.
+
+### User Story Dependencies
+
+- **US1 (P1)**: First recommended increment after foundation; no dependency on other stories.
+- **US2 (P1)**: Uses the `/explore` page surface and projection; can be implemented after foundation if it owns the search-specific markup/script changes.
+- **US3 (P2)**: Builds on the search/filter service and result metadata, so implement after US2 or coordinate changes to `ExplorationSearchService` and `explore.js`.
+- **US4 (P2)**: Cross-cutting language/theme/accessibility pass after the controls and cards exist.
+
+### Within Each User Story
+
+- Write failing tests before implementation tasks.
+- Models and projection contracts precede services.
+- Services precede Razor PageModel and Razor markup.
+- Razor markup precedes feature JavaScript behavior.
+- CSS polish follows working controls and states.
+
+---
+
+## Parallel Opportunities
+
+- T002 can run in parallel with T003 after T001 establishes the page shell.
+- T004-T010 can run in parallel because they touch separate test/model files.
+- T014 and T015 can run in parallel because they are separate test scenarios in the same story phase, but coordinate edits in `StoryBook.Tests/Integration/ExplorePagesTests.cs`.
+- T020 and T021 can run in parallel because unit search rules and rendered search contract tests are independent.
+- T027 and T028 can run in parallel because unit filter rules and rendered filter contract tests are independent.
+- T033 and T034 can run in parallel because integration language/theme checks and projection fallback checks are independent.
+- T039 and T040 can run in parallel during polish.
+
+---
+
+## Parallel Example: User Story 1
+
+```bash
+Task: "T014 [US1] Add integration tests for homepage link and /explore rendered content in StoryBook.Tests/Integration/ExplorePagesTests.cs"
+Task: "T015 [US1] Add integration tests for partial-source and all-source failure states in StoryBook.Tests/Integration/ExplorePagesTests.cs"
+```
+
+---
+
+## Parallel Example: User Story 2
+
+```bash
+Task: "T020 [US2] Add search normalization and matching unit tests in StoryBook.Tests/Unit/ExplorationSearchServiceTests.cs"
+Task: "T021 [US2] Add rendered search contract integration tests in StoryBook.Tests/Integration/ExplorePagesTests.cs"
+```
+
+---
+
+## Parallel Example: User Story 3
+
+```bash
+Task: "T027 [US3] Extend search service unit tests for facet state and AND filtering in StoryBook.Tests/Unit/ExplorationSearchServiceTests.cs"
+Task: "T028 [US3] Add rendered filter contract tests in StoryBook.Tests/Integration/ExplorePagesTests.cs"
+```
+
+---
+
+## Parallel Example: User Story 4
+
+```bash
+Task: "T033 [US4] Add language/theme integration contract tests in StoryBook.Tests/Integration/ExplorePagesTests.cs"
+Task: "T034 [US4] Add nonblank fallback projection tests in StoryBook.Tests/Unit/ExplorationCatalogServiceTests.cs"
+```
+
+---
+
+## Implementation Strategy
+
+### MVP First (User Story 1 Only)
+
+1. Complete Phase 1 setup.
+2. Complete Phase 2 foundational projection and status handling.
+3. Complete Phase 3 User Story 1.
+4. Stop and validate: homepage link, `/explore` render, source cards, detail links, partial/all failure states.
+
+### Incremental Delivery
+
+1. Add US1 for a navigable all-content Explore MVP.
+2. Add US2 for cross-storybook search and clear behavior.
+3. Add US3 for grouped classification filters and search/filter intersection.
+4. Add US4 for language, theme, accessibility, and responsive hardening.
+5. Finish with full `dotnet test StoryBook2.sln` and quickstart validation.
+
+### Parallel Team Strategy
+
+1. Complete Setup and Foundational phases together.
+2. After foundation, split work by story while coordinating shared files:
+   - Developer A: US1 route, homepage entry, result cards.
+   - Developer B: US2 search service and client behavior.
+   - Developer C: US3 facet projection and filter behavior.
+   - Developer D: US4 language/theme/accessibility checks after controls exist.
+3. Merge by priority order and rerun the relevant unit/integration tests after each story.
+
+---
+
+## Notes
+
+- Do not add NuGet packages, JavaScript packages, external APIs, databases, cookies, login, or server-side preference endpoints for this feature.
+- Preserve canonical detail links: `/dinosaurs/{slug}` and `/aquarium/{slug}` only.
+- Do not add `/explore/{slug}` or any JavaScript-only router.
+- Search and filter state must remain page-local and reset on reload/re-entry.
+- Keep theme control only on the homepage; `/explore` must apply the existing effective theme without rendering a selector.
