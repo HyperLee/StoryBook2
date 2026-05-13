@@ -319,6 +319,118 @@
     margin: 0.8rem 0 0;
 }
 
+html[data-storybook-effective-theme="dark"] .dino-page {
+    color: var(--storybook-text);
+}
+
+html[data-storybook-effective-theme="dark"] .dino-kicker,
+html[data-storybook-effective-theme="dark"] .dino-card em {
+    color: #b9e184;
+}
+
+html[data-storybook-effective-theme="dark"] .dino-feature img,
+html[data-storybook-effective-theme="dark"] .dino-image-button img,
+html[data-storybook-effective-theme="dark"] .dino-card img,
+html[data-storybook-effective-theme="dark"] .dino-story__figure img {
+    background: #2f2b1e;
+    border-color: #6f7e54;
+}
+
+html[data-storybook-effective-theme="dark"] .dino-facts div,
+html[data-storybook-effective-theme="dark"] .dino-empty,
+html[data-storybook-effective-theme="dark"] .dino-story {
+    background: var(--storybook-surface);
+    border-color: var(--storybook-border);
+    color: var(--storybook-text);
+}
+
+html[data-storybook-effective-theme="dark"] .dino-note {
+    background: var(--storybook-surface-muted);
+    border-color: #8fd3ff;
+    color: var(--storybook-text);
+}
+
+html[data-storybook-effective-theme="dark"] .dino-no-results {
+    background: var(--storybook-alert-bg);
+    border: 1px solid var(--storybook-alert-border);
+    color: var(--storybook-alert-text);
+}
+
+html[data-storybook-effective-theme="dark"] .dino-card,
+html[data-storybook-effective-theme="dark"] .dino-modal__caption,
+html[data-storybook-effective-theme="dark"] .dino-story__figure figcaption {
+    color: var(--storybook-text);
+}
+
+html[data-storybook-effective-theme="dark"] .dino-action {
+    background: var(--storybook-link);
+    color: #08111d;
+}
+
+html[data-storybook-effective-theme="dark"] .dino-action:hover,
+html[data-storybook-effective-theme="dark"] .dino-action:focus {
+    background: var(--storybook-link-hover);
+    color: #08111d;
+}
+
+html[data-storybook-effective-theme="dark"] .dino-home-link,
+html[data-storybook-effective-theme="dark"] .dino-page-link,
+html[data-storybook-effective-theme="dark"] .dino-clear-button {
+    background: var(--storybook-control-bg);
+    border-color: var(--storybook-link);
+    color: var(--storybook-link);
+}
+
+html[data-storybook-effective-theme="dark"] .dino-home-link:hover,
+html[data-storybook-effective-theme="dark"] .dino-home-link:focus,
+html[data-storybook-effective-theme="dark"] .dino-page-link:hover,
+html[data-storybook-effective-theme="dark"] .dino-page-link:focus,
+html[data-storybook-effective-theme="dark"] .dino-clear-button:hover,
+html[data-storybook-effective-theme="dark"] .dino-clear-button:focus {
+    background: var(--storybook-surface-muted);
+    color: var(--storybook-link-hover);
+}
+
+html[data-storybook-effective-theme="dark"] .dino-page-link--disabled {
+    border-color: var(--storybook-border);
+    color: var(--storybook-text-muted);
+}
+
+@media (forced-colors: active) {
+    .dino-action,
+    .dino-home-link,
+    .dino-page-link,
+    .dino-clear-button,
+    .dino-card,
+    .dino-facts div,
+    .dino-empty,
+    .dino-note,
+    .dino-no-results,
+    .dino-story {
+        background: Canvas;
+        border: 2px solid ButtonText;
+        color: CanvasText;
+    }
+
+    .dino-feature img,
+    .dino-image-button img,
+    .dino-card img,
+    .dino-story__figure img {
+        background: Canvas;
+        border-color: ButtonText;
+    }
+
+    .dino-action:focus-visible,
+    .dino-card:focus-visible,
+    .dino-home-link:focus-visible,
+    .dino-page-link:focus-visible,
+    .dino-clear-button:focus-visible,
+    .dino-image-button:focus-visible {
+        outline: 3px solid Highlight;
+        outline-offset: 3px;
+    }
+}
+
 @media (max-width: 900px) {
     .dino-feature,
     .dino-detail,

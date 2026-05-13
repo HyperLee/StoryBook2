@@ -45,7 +45,7 @@ html[data-storybook-effective-theme="dark"] {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem var(--storybook-surface), 0 0 0 0.25rem var(--storybook-focus);
 }
 
 html {
@@ -100,6 +100,140 @@ a:focus {
 
 .home-actions {
   margin-top: 1.5rem;
+}
+
+.language-switcher {
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.language-switcher button {
+  background: var(--storybook-control-bg);
+  border: 2px solid var(--storybook-control-border);
+  border-radius: 8px;
+  color: var(--storybook-control-text);
+  font-weight: 700;
+  min-height: 44px;
+  padding: 0.45rem 0.75rem;
+}
+
+.language-switcher button[aria-pressed="true"] {
+  background: var(--storybook-link);
+  border-color: var(--storybook-link);
+  color: #ffffff;
+}
+
+html[data-storybook-effective-theme="dark"] .language-switcher button[aria-pressed="true"] {
+  color: #08111d;
+}
+
+.language-switcher button:focus-visible {
+  outline: 4px solid var(--storybook-focus);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background-color: var(--storybook-link);
+  border-color: var(--storybook-link);
+  color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--storybook-link-hover);
+  border-color: var(--storybook-link-hover);
+  color: #ffffff;
+}
+
+html[data-storybook-effective-theme="dark"] .btn-primary,
+html[data-storybook-effective-theme="dark"] .btn-primary:hover,
+html[data-storybook-effective-theme="dark"] .btn-primary:focus {
+  color: #08111d;
+}
+
+.btn-outline-primary {
+  border-color: var(--storybook-link);
+  color: var(--storybook-link);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: var(--storybook-link);
+  border-color: var(--storybook-link);
+  color: #ffffff;
+}
+
+html[data-storybook-effective-theme="dark"] .btn-outline-primary:hover,
+html[data-storybook-effective-theme="dark"] .btn-outline-primary:focus {
+  color: #08111d;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--storybook-control-bg);
+  border-color: var(--storybook-control-border);
+  color: var(--storybook-control-text);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--storybook-control-bg);
+  border-color: var(--storybook-link);
+  color: var(--storybook-control-text);
+  box-shadow: 0 0 0 0.25rem var(--storybook-focus-shadow);
+}
+
+.form-control::placeholder {
+  color: var(--storybook-text-muted);
+  opacity: 1;
+}
+
+.card,
+.modal-content {
+  background: var(--storybook-surface);
+  border-color: var(--storybook-border);
+  color: var(--storybook-text);
+}
+
+.modal-header,
+.modal-footer {
+  border-color: var(--storybook-border);
+}
+
+.btn-close:focus {
+  box-shadow: 0 0 0 0.25rem var(--storybook-focus-shadow);
+}
+
+.alert {
+  background: var(--storybook-alert-bg);
+  border-color: var(--storybook-alert-border);
+  color: var(--storybook-alert-text);
+}
+
+.text-muted {
+  color: var(--storybook-text-muted) !important;
+}
+
+.text-danger,
+.validation-summary-errors,
+.field-validation-error,
+.error-title {
+  color: #b42318;
+}
+
+html[data-storybook-effective-theme="dark"] .text-danger,
+html[data-storybook-effective-theme="dark"] .validation-summary-errors,
+html[data-storybook-effective-theme="dark"] .field-validation-error,
+html[data-storybook-effective-theme="dark"] .error-title {
+  color: #ffb4a8;
+}
+
+.input-validation-error {
+  border-color: #b42318;
+}
+
+html[data-storybook-effective-theme="dark"] .input-validation-error {
+  border-color: #ffb4a8;
 }
 
 .theme-selector {
@@ -179,6 +313,33 @@ a:focus {
 
 html[data-storybook-effective-theme="dark"] .theme-option__input:checked + .theme-option__label {
   color: #08111d;
+}
+
+:focus-visible {
+  outline-color: var(--storybook-focus);
+}
+
+@media (forced-colors: active) {
+  .btn,
+  .language-switcher button,
+  .theme-option__label,
+  .form-control,
+  .form-select,
+  .card,
+  .alert,
+  .modal-content {
+    border: 2px solid ButtonText;
+  }
+
+  .btn:focus-visible,
+  .language-switcher button:focus-visible,
+  .theme-option__input:focus-visible + .theme-option__label,
+  .form-control:focus,
+  .form-select:focus {
+    outline: 3px solid Highlight;
+    outline-offset: 3px;
+    box-shadow: none;
+  }
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {

@@ -1,5 +1,7 @@
 namespace StoryBook.Tests.Integration;
 
+using StoryBook.Tests.Support;
+
 public sealed class ThemePagesTests : IClassFixture<DinosaurPageTestFixture>
 {
     private readonly DinosaurPageTestFixture _fixture;
@@ -74,6 +76,44 @@ public sealed class ThemePagesTests : IClassFixture<DinosaurPageTestFixture>
         Assert.DoesNotContain("data-theme-description-zh-tw=\"\"", html);
     }
 
+    [Theory]
+    [InlineData("/", "/dinosaurs", "/aquarium")]
+    [InlineData("/Privacy", "/", "/Privacy")]
+    [InlineData("/Error", "/", "/Privacy")]
+    [InlineData("/dinosaurs", "/", "/dinosaurs/tyrannosaurus-rex")]
+    [InlineData("/dinosaurs/tyrannosaurus-rex", "/", "/dinosaurs")]
+    [InlineData("/aquarium", "/", "/aquarium/clownfish")]
+    [InlineData("/aquarium/clownfish", "/", "/aquarium")]
+    public async Task Themed_routes_keep_canonical_anchors_and_theme_assets(string route, string firstHref, string secondHref)
+    {
+        string html = await _fixture.GetOkHtmlAsync(route);
+
+        Assert.Contains("data-storybook-theme-boot", html);
+        Assert.Contains("/js/theme.js", html);
+        AssertThemeAttributeContract(html);
+        Assert.True(DinosaurPageTestFixture.HasLinkTo(html, firstHref), $"Expected {route} to link to {firstHref}.");
+        Assert.True(DinosaurPageTestFixture.HasLinkTo(html, secondHref), $"Expected {route} to link to {secondHref}.");
+        AssertNoThemeNavigationArtifacts(html);
+    }
+
+    [Fact]
+    public void Theme_script_syncs_storage_without_router_or_jquery_dependency()
+    {
+        string scriptPath = Path.Combine(TestPaths.StoryBookRoot, "wwwroot", "js", "theme.js");
+        string script = File.ReadAllText(scriptPath);
+
+        Assert.Contains("addEventListener(\"storage\"", script);
+        Assert.Contains("event.key", script);
+        Assert.Contains("scrollX", script);
+        Assert.Contains("scrollY", script);
+        Assert.DoesNotContain("pushState", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("replaceState", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("location.hash", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("data-js-router", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("jquery", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("$(", script, StringComparison.OrdinalIgnoreCase);
+    }
+
     private static void AssertThemeAttributeContract(string html)
     {
         Assert.Contains("data-bs-theme", html);
@@ -85,6 +125,16 @@ public sealed class ThemePagesTests : IClassFixture<DinosaurPageTestFixture>
     {
         Assert.DoesNotContain("data-theme-selector", html, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("data-theme-option=", html, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static void AssertNoThemeNavigationArtifacts(string html)
+    {
+        Assert.DoesNotContain("?theme=", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("#theme", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("pushState", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("replaceState", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("location.hash", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("data-js-router", html, StringComparison.OrdinalIgnoreCase);
     }
 
     private static int CountOccurrences(string value, string search)

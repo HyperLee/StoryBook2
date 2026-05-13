@@ -1,8 +1,11 @@
 ﻿@page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "隱私權說明";
 }
-<h1>@ViewData["Title"]</h1>
+<section class="privacy-page" aria-labelledby="privacy-title">
+    <h1 id="privacy-title">@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+    <p>StoryBook 是本機故事書範例網站，不會要求登入，也不會在頁面中收集孩子的個人資料。</p>
+    <p>語言與閱讀主題只會保存在這台瀏覽器的 localStorage，方便下次開啟時維持同樣的閱讀偏好。</p>
+</section>

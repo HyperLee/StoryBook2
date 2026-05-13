@@ -105,17 +105,17 @@
 
 > Write these tests first and confirm they fail before implementation.
 
-- [ ] T029 [US3] Add failing integration tests that themed routes keep canonical anchors, include theme assets, and do not add query-string, hash, `pushState`, or JavaScript-router markers in `StoryBook.Tests/Integration/ThemePagesTests.cs`
+- [X] T029 [US3] Add failing integration tests that themed routes keep canonical anchors, include theme assets, and do not add query-string, hash, `pushState`, or JavaScript-router markers in `StoryBook.Tests/Integration/ThemePagesTests.cs`
 
 ### Implementation for User Story 3
 
-- [ ] T030 [P] [US3] Add dark-mode and high-contrast overrides for dinosaur cards, search controls, pager links, empty states, image buttons, modal content, and focus states in `StoryBook/wwwroot/css/dinosaurs.css`
-- [ ] T031 [P] [US3] Add dark-mode and high-contrast overrides for aquarium cover, cards, search controls, pager links, empty states, image buttons, modal content, and focus states in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T032 [US3] Add global light/dark rules for body, navbar, footer, links, buttons, forms, cards, alerts, validation messages, modal surfaces, and focus indicators in `StoryBook/wwwroot/css/site.css`
-- [ ] T033 [US3] Implement guarded `storage` event cross-tab synchronization that updates only theme attributes when available and preserves route, scroll position, search inputs, language state, and open modal state in `StoryBook/wwwroot/js/theme.js`
-- [ ] T034 [US3] Review and adjust light-only classes, hard-coded backgrounds, or forced text colors in `StoryBook/Pages/Index.cshtml`, `StoryBook/Pages/Privacy.cshtml`, and `StoryBook/Pages/Error.cshtml`
-- [ ] T035 [US3] Run manual responsive, keyboard, contrast, cross-tab availability, and state-preservation checks from steps 8-13 in `specs/003-dark-mode/quickstart.md`
-- [ ] T036 [US3] Run `dotnet test StoryBook2.sln` after the US3 implementation using `StoryBook2.sln`
+- [X] T030 [P] [US3] Add dark-mode and high-contrast overrides for dinosaur cards, search controls, pager links, empty states, image buttons, modal content, and focus states in `StoryBook/wwwroot/css/dinosaurs.css`
+- [X] T031 [P] [US3] Add dark-mode and high-contrast overrides for aquarium cover, cards, search controls, pager links, empty states, image buttons, modal content, and focus states in `StoryBook/wwwroot/css/aquarium.css`
+- [X] T032 [US3] Add global light/dark rules for body, navbar, footer, links, buttons, forms, cards, alerts, validation messages, modal surfaces, and focus indicators in `StoryBook/wwwroot/css/site.css`
+- [X] T033 [US3] Implement guarded `storage` event cross-tab synchronization that updates only theme attributes when available and preserves route, scroll position, search inputs, language state, and open modal state in `StoryBook/wwwroot/js/theme.js`
+- [X] T034 [US3] Review and adjust light-only classes, hard-coded backgrounds, or forced text colors in `StoryBook/Pages/Index.cshtml`, `StoryBook/Pages/Privacy.cshtml`, and `StoryBook/Pages/Error.cshtml`
+- [X] T035 [US3] Run manual responsive, keyboard, contrast, cross-tab availability, and state-preservation checks from steps 8-13 in `specs/003-dark-mode/quickstart.md`
+- [X] T036 [US3] Run `dotnet test StoryBook2.sln` after the US3 implementation using `StoryBook2.sln`
 
 **Checkpoint**: All user stories are independently functional and the full themed experience is ready for final validation.
 

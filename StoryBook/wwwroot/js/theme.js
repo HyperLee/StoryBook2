@@ -24,6 +24,7 @@
 
         applyTheme(currentMode, selector);
         initializeSystemPreferenceSync(selector);
+        initializeCrossTabThemeSync(storageKey, selector);
         initializeThemeLanguage(selector);
 
         if (!selector) {
@@ -98,6 +99,32 @@
 
         if (typeof query.addListener === "function") {
             query.addListener(handleChange);
+        }
+    }
+
+    function initializeCrossTabThemeSync(storageKey, selector) {
+        if (typeof window.addEventListener !== "function") {
+            return;
+        }
+
+        window.addEventListener("storage", (event) => {
+            if (event.key !== storageKey) {
+                return;
+            }
+
+            const scrollX = window.scrollX;
+            const scrollY = window.scrollY;
+            currentMode = normalizeMode(event.newValue);
+            applyTheme(currentMode, selector);
+            restoreScrollPosition(scrollX, scrollY);
+        });
+    }
+
+    function restoreScrollPosition(scrollX, scrollY) {
+        try {
+            window.scrollTo(scrollX, scrollY);
+        } catch {
+            // Some embedded browsers can block scroll operations; theme sync should still complete.
         }
     }
 

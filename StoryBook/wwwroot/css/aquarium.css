@@ -373,6 +373,120 @@
     margin: 0.8rem 0 0;
 }
 
+html[data-storybook-effective-theme="dark"] .aquarium-page {
+    color: var(--storybook-text);
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-kicker,
+html[data-storybook-effective-theme="dark"] .aquarium-card__category,
+html[data-storybook-effective-theme="dark"] .aquarium-image-frame figcaption,
+html[data-storybook-effective-theme="dark"] .aquarium-story__figure figcaption,
+html[data-storybook-effective-theme="dark"] .aquarium-modal__caption {
+    color: #7ee0d1;
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-cover,
+html[data-storybook-effective-theme="dark"] .aquarium-card,
+html[data-storybook-effective-theme="dark"] .aquarium-facts div,
+html[data-storybook-effective-theme="dark"] .aquarium-story,
+html[data-storybook-effective-theme="dark"] .aquarium-empty,
+html[data-storybook-effective-theme="dark"] .aquarium-image-fallback {
+    background: var(--storybook-surface);
+    border-color: var(--storybook-border);
+    color: var(--storybook-text);
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-cover__scene {
+    background: linear-gradient(180deg, #155e75 0%, #083344 100%);
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-cover__bubble {
+    background: rgba(191, 232, 249, 0.4);
+    border-color: rgba(191, 232, 249, 0.78);
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-image-button img,
+html[data-storybook-effective-theme="dark"] .aquarium-story__figure img {
+    background: #0f3442;
+    border-color: #4f8794;
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-search-status,
+html[data-storybook-effective-theme="dark"] .aquarium-no-results {
+    background: var(--storybook-alert-bg);
+    border: 1px solid var(--storybook-alert-border);
+    color: var(--storybook-alert-text);
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-action {
+    background: var(--storybook-link);
+    color: #08111d;
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-action:hover,
+html[data-storybook-effective-theme="dark"] .aquarium-action:focus {
+    background: var(--storybook-link-hover);
+    color: #08111d;
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-home-link,
+html[data-storybook-effective-theme="dark"] .aquarium-page-link,
+html[data-storybook-effective-theme="dark"] .aquarium-clear-button {
+    background: var(--storybook-control-bg);
+    border-color: var(--storybook-link);
+    color: var(--storybook-link);
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-home-link:hover,
+html[data-storybook-effective-theme="dark"] .aquarium-home-link:focus,
+html[data-storybook-effective-theme="dark"] .aquarium-page-link:hover,
+html[data-storybook-effective-theme="dark"] .aquarium-page-link:focus,
+html[data-storybook-effective-theme="dark"] .aquarium-clear-button:hover,
+html[data-storybook-effective-theme="dark"] .aquarium-clear-button:focus {
+    background: var(--storybook-surface-muted);
+    color: var(--storybook-link-hover);
+}
+
+html[data-storybook-effective-theme="dark"] .aquarium-page-link--disabled {
+    border-color: var(--storybook-border);
+    color: var(--storybook-text-muted);
+}
+
+@media (forced-colors: active) {
+    .aquarium-cover,
+    .aquarium-action,
+    .aquarium-home-link,
+    .aquarium-page-link,
+    .aquarium-clear-button,
+    .aquarium-card,
+    .aquarium-facts div,
+    .aquarium-story,
+    .aquarium-empty,
+    .aquarium-search-status,
+    .aquarium-no-results,
+    .aquarium-image-fallback {
+        background: Canvas;
+        border: 2px solid ButtonText;
+        color: CanvasText;
+    }
+
+    .aquarium-image-button img,
+    .aquarium-story__figure img {
+        background: Canvas;
+        border-color: ButtonText;
+    }
+
+    .aquarium-action:focus-visible,
+    .aquarium-card:focus-visible,
+    .aquarium-home-link:focus-visible,
+    .aquarium-page-link:focus-visible,
+    .aquarium-clear-button:focus-visible,
+    .aquarium-image-button:focus-visible {
+        outline: 3px solid Highlight;
+        outline-offset: 3px;
+    }
+}
+
 @media (max-width: 900px) {
     .aquarium-cover,
     .aquarium-detail,
