@@ -18,16 +18,16 @@
 
 **CRITICAL**: Complete T001-T010 first and confirm the new tests fail for the expected missing behavior before starting Phase 2 implementation.
 
-- [ ] T001 Add Explore integration test fixture with configurable dinosaur and aquarium catalog paths in `StoryBook.Tests/Integration/ExplorePageTestFixture.cs`
-- [ ] T002 Add failing projection, source-status, partial/all failure, and `ILogger<ExplorationCatalogService>` no-sensitive-content unit tests in `StoryBook.Tests/Unit/ExplorationCatalogServiceTests.cs`
-- [ ] T003 [US1] Add failing integration tests for homepage `/explore` link, `/explore` 200 OK, default `zh-TW` content, both source labels, and detail anchors in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
-- [ ] T004 [US1] Add failing integration tests for partial-source and all-source failure friendly states in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
-- [ ] T005 [US2] Add failing normalization, bilingual matching, too-short, punctuation-only, no-results, and stable-order unit tests in `StoryBook.Tests/Unit/ExplorationSearchServiceTests.cs`
-- [ ] T006 [US2] Add failing rendered search contract integration tests for search input, clear button, result status, too-short state, no-results state, bilingual search text, and no `pushState` or `replaceState` usage in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
-- [ ] T007 [US3] Extend failing unit tests for single-selection facet state, AND filter matching, search/filter intersection, clear-filter behavior, and stable ordering in `StoryBook.Tests/Unit/ExplorationSearchServiceTests.cs`
-- [ ] T008 [US3] Add failing rendered filter contract integration tests for `data-explore-filter-group`, `data-explore-filter-value`, source/diet/living-area/period/discovery facets, and `data-explore-facets` result metadata in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
-- [ ] T009 [US4] Add failing integration tests for bilingual `data-i18n`, `data-aria-label`, `data-placeholder`, effective theme layout attributes, absence of `[data-theme-selector]`, and theme-change preservation of search/filter state on `/explore` in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
-- [ ] T010 [US4] Add failing unit tests that every `ExplorationItem`, `ExplorationFacetGroup`, `ExplorationFacetValue`, and `ExplorationSourceStatus` has nonblank `zh-TW` fallback labels, summaries, source labels, and alt text in `StoryBook.Tests/Unit/ExplorationCatalogServiceTests.cs`
+- [X] T001 Add Explore integration test fixture with configurable dinosaur and aquarium catalog paths in `StoryBook.Tests/Integration/ExplorePageTestFixture.cs`
+- [X] T002 Add failing projection, source-status, partial/all failure, and `ILogger<ExplorationCatalogService>` no-sensitive-content unit tests in `StoryBook.Tests/Unit/ExplorationCatalogServiceTests.cs`
+- [X] T003 [US1] Add failing integration tests for homepage `/explore` link, `/explore` 200 OK, default `zh-TW` content, both source labels, and detail anchors in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+- [X] T004 [US1] Add failing integration tests for partial-source and all-source failure friendly states in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+- [X] T005 [US2] Add failing normalization, bilingual matching, too-short, punctuation-only, no-results, and stable-order unit tests in `StoryBook.Tests/Unit/ExplorationSearchServiceTests.cs`
+- [X] T006 [US2] Add failing rendered search contract integration tests for search input, clear button, result status, too-short state, no-results state, bilingual search text, and no `pushState` or `replaceState` usage in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+- [X] T007 [US3] Extend failing unit tests for single-selection facet state, AND filter matching, search/filter intersection, clear-filter behavior, and stable ordering in `StoryBook.Tests/Unit/ExplorationSearchServiceTests.cs`
+- [X] T008 [US3] Add failing rendered filter contract integration tests for `data-explore-filter-group`, `data-explore-filter-value`, source/diet/living-area/period/discovery facets, and `data-explore-facets` result metadata in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+- [X] T009 [US4] Add failing integration tests for bilingual `data-i18n`, `data-aria-label`, `data-placeholder`, effective theme layout attributes, absence of `[data-theme-selector]`, and theme-change preservation of search/filter state on `/explore` in `StoryBook.Tests/Integration/ExplorePagesTests.cs`
+- [X] T010 [US4] Add failing unit tests that every `ExplorationItem`, `ExplorationFacetGroup`, `ExplorationFacetValue`, and `ExplorationSourceStatus` has nonblank `zh-TW` fallback labels, summaries, source labels, and alt text in `StoryBook.Tests/Unit/ExplorationCatalogServiceTests.cs`
 
 **Checkpoint**: Automated test contracts exist, fail for missing behavior, and cover the user stories before production changes.
 

@@ -238,6 +238,11 @@ _pkginfo.txt
 
 # Others
 ClientBin/
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
 
 ~$*
 .DS_Store
