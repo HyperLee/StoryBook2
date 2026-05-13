@@ -37,17 +37,17 @@
 
 **Purpose**: Add the production surface, shared projection contracts, source status handling, and service registration after the test baseline exists.
 
-- [ ] T011 Create the Explore Razor Page shell in `StoryBook/Pages/Explore/Index.cshtml` and `StoryBook/Pages/Explore/Index.cshtml.cs`
-- [ ] T012 [P] Create feature asset files in `StoryBook/wwwroot/css/explore.css` and `StoryBook/wwwroot/js/explore.js`
-- [ ] T013 Add conditional Explore stylesheet loading for `ViewData["UseExploreAssets"]` in `StoryBook/Pages/Shared/_Layout.cshtml`
-- [ ] T014 [P] Add `ExplorationSourceType` with source order and route prefix metadata in `StoryBook/Models/ExplorationSourceType.cs`
-- [ ] T015 [P] Add `ExplorationFacetValue` model with bilingual labels and sort metadata in `StoryBook/Models/ExplorationFacetValue.cs`
-- [ ] T016 [P] Add `ExplorationFacetGroup` model with single-selection metadata in `StoryBook/Models/ExplorationFacetGroup.cs`
-- [ ] T017 [P] Add `ExplorationItem` projection model with stable id, detail href, bilingual text, search text, and facets in `StoryBook/Models/ExplorationItem.cs`
-- [ ] T018 [P] Add `ExplorationSearchState` model for raw query, normalized query, selected facets, result mode, language, and visible count in `StoryBook/Models/ExplorationSearchState.cs`
-- [ ] T019 [P] Add `ExplorationSourceStatus` model for available, partial-failure, and all-failed source reporting in `StoryBook/Models/ExplorationSourceStatus.cs`
-- [ ] T020 Implement `ExplorationCatalogService` to compose dinosaur and aquarium projections, stable ordering, bilingual search text, source/failure statuses, and structured failure logging without recording user search strings or secrets in `StoryBook/Services/ExplorationCatalogService.cs`
-- [ ] T021 Register `ExplorationCatalogService` as a singleton in `StoryBook/Program.cs`
+- [X] T011 Create the Explore Razor Page shell in `StoryBook/Pages/Explore/Index.cshtml` and `StoryBook/Pages/Explore/Index.cshtml.cs`
+- [X] T012 [P] Create feature asset files in `StoryBook/wwwroot/css/explore.css` and `StoryBook/wwwroot/js/explore.js`
+- [X] T013 Add conditional Explore stylesheet loading for `ViewData["UseExploreAssets"]` in `StoryBook/Pages/Shared/_Layout.cshtml`
+- [X] T014 [P] Add `ExplorationSourceType` with source order and route prefix metadata in `StoryBook/Models/ExplorationSourceType.cs`
+- [X] T015 [P] Add `ExplorationFacetValue` model with bilingual labels and sort metadata in `StoryBook/Models/ExplorationFacetValue.cs`
+- [X] T016 [P] Add `ExplorationFacetGroup` model with single-selection metadata in `StoryBook/Models/ExplorationFacetGroup.cs`
+- [X] T017 [P] Add `ExplorationItem` projection model with stable id, detail href, bilingual text, search text, and facets in `StoryBook/Models/ExplorationItem.cs`
+- [X] T018 [P] Add `ExplorationSearchState` model for raw query, normalized query, selected facets, result mode, language, and visible count in `StoryBook/Models/ExplorationSearchState.cs`
+- [X] T019 [P] Add `ExplorationSourceStatus` model for available, partial-failure, and all-failed source reporting in `StoryBook/Models/ExplorationSourceStatus.cs`
+- [X] T020 Implement `ExplorationCatalogService` to compose dinosaur and aquarium projections, stable ordering, bilingual search text, source/failure statuses, and structured failure logging without recording user search strings or secrets in `StoryBook/Services/ExplorationCatalogService.cs`
+- [X] T021 Register `ExplorationCatalogService` as a singleton in `StoryBook/Program.cs`
 
 **Checkpoint**: Projection and source-status foundation is ready; story implementation can begin.
 

@@ -1,0 +1,23 @@
+@page "/explore"
+@model StoryBook.Pages.Explore.IndexModel
+@{
+    ViewData["Title"] = "全站探索";
+}
+
+<section class="explore-page" aria-labelledby="explore-title">
+    <div class="explore-page__header">
+        <div>
+            <p class="explore-kicker" data-i18n-zh-tw="全部故事朋友" data-i18n-en="All story friends">全部故事朋友</p>
+            <h1 id="explore-title" data-i18n-zh-tw="全站探索" data-i18n-en="Explore all stories">全站探索</h1>
+        </div>
+        <a class="explore-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+    </div>
+
+    <div class="explore-empty" role="status" data-i18n-zh-tw="探索頁正在準備故事卡片。" data-i18n-en="The explore page is getting story cards ready.">
+        探索頁正在準備故事卡片。
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/explore.js" asp-append-version="true"></script>
+}
