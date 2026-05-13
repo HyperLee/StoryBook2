@@ -15,7 +15,7 @@
 **Primary Dependencies**: ASP.NET Core Razor Pages、Tag Helpers、Bootstrap 5、原生 JavaScript；既有 jQuery 與 validation assets 保留給模板/驗證用途，本功能新互動邏輯不依賴 jQuery。
 **Storage**: 使用瀏覽器 `localStorage` 保存使用者主題模式，key 固定為 `storybook.theme`，值只允許 `light`、`dark`、`system`；不保存執行期間推導出的有效主題。本功能不修改 `StoryBook/Data/dinosaurs.json` 或 `StoryBook/Data/aquarium.json`，也不使用資料庫、登入、外部 CMS 或即時翻譯服務。
 **Testing**: 沿用 `StoryBook.Tests` xUnit 專案與 `Microsoft.AspNetCore.Mvc.Testing` / `WebApplicationFactory<Program>`；主題 metadata、允許值與 fallback 可用單元測試覆蓋，layout script ordering、首頁 selector、非首頁無 selector、主要 routes 輸出 theme contract 使用整合測試覆蓋；系統外觀變更、跨分頁同步、首次呈現閃爍、鍵盤操作、焦點與對比依 `quickstart.md` 手動驗收，若回歸成本升高再補 Playwright for .NET。
-**Target Platform**: 桌面與筆電瀏覽器 Chrome、Firefox、Safari、Edge；依 spec 也需檢查手機、平板與桌面寬度。手機深度最佳化不擴張成本，但 768px 以上寬度不得水平捲動，較小寬度仍需保持主要控制項可操作。
+**Target Platform**: 桌面與筆電瀏覽器 Chrome、Firefox、Safari、Edge；依 spec 與 quickstart 需檢查手機、平板與桌面寬度，代表寬度至少包含 375px、768px 與 1366px。所有檢查寬度下，主題控制項與主要頁面文字、按鈕、卡牌、圖片區塊與表單都不得重疊或水平溢出，且主要控制項必須可操作。
 **Project Type**: 單一 ASP.NET Core Razor Pages web application。
 **Performance Goals**: 頁面首次可見呈現前套用有效主題以避免相反主題可見閃爍；首頁切換主題後 1 秒內更新目前頁面與後續瀏覽頁面；選擇跟隨系統時，系統外觀偏好變更後 2 秒內更新；同站其他已開啟分頁在 2 秒內同步；主題切換不得讓故事搜尋、語言切換或圖片檢視狀態中斷。
 **Constraints**: 主題選項固定為亮色、深色、跟隨系統；首頁以外頁面必須套用有效主題但不得提供主題選擇控制項；互動目標至少 44x44 CSS px；所有互動控制項可鍵盤操作並有可見焦點；三種模式都需符合 WCAG 2.2 AA 對比與焦點指示；主題文字需跟隨 `storybook.language`，缺漏或無效語言回退繁體中文；主題切換不得修改故事內容、圖片說明、搜尋輸入、語言偏好、導覽位置或瀏覽器 history。

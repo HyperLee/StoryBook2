@@ -63,6 +63,7 @@
 - [ ] T017 [US1] Remove or replace light-only Bootstrap classes such as forced white navbar backgrounds and forced dark nav text in `StoryBook/Pages/Shared/_Layout.cshtml`
 - [ ] T018 [US1] Style the home theme selector, selected state, 44x44 CSS px target size, and visible focus state in `StoryBook/wwwroot/css/site.css`
 - [ ] T019 [US1] Run `dotnet test StoryBook2.sln --filter ThemePagesTests` against the route and selector expectations in `specs/003-dark-mode/contracts/theme-ui.md`
+- [ ] T020 [US1] Run manual browser acceptance for homepage selector, selected-state clarity, non-home selector absence, and cross-route theme application using steps 1-3 in `specs/003-dark-mode/quickstart.md`
 
 **Checkpoint**: User Story 1 is fully functional and testable as the MVP.
 
@@ -78,16 +79,17 @@
 
 > Write these tests first and confirm they fail before implementation.
 
-- [ ] T020 [P] [US2] Add failing unit tests that invalid, missing, or unsupported saved theme values parse to `system` and never persist an effective theme value in `StoryBook.Tests/Unit/ThemePreferenceServiceTests.cs`
-- [ ] T021 [P] [US2] Add failing integration tests for bilingual selector labels, bilingual descriptions, and nonblank zh-TW fallback when language values are invalid in `StoryBook.Tests/Integration/ThemePagesTests.cs`
+- [ ] T021 [P] [US2] Add failing unit tests that invalid, missing, or unsupported saved theme values parse to `system` and never persist an effective theme value in `StoryBook.Tests/Unit/ThemePreferenceServiceTests.cs`
+- [ ] T022 [P] [US2] Add failing integration tests for bilingual selector labels, bilingual descriptions, and nonblank zh-TW fallback when language values are invalid in `StoryBook.Tests/Integration/ThemePagesTests.cs`
 
 ### Implementation for User Story 2
 
-- [ ] T022 [US2] Implement unavailable `localStorage`, invalid stored value recovery, and selected-mode-only persistence in `StoryBook/wwwroot/js/theme.js`
-- [ ] T023 [US2] Implement `system` mode resolution with `matchMedia('(prefers-color-scheme: dark)')` and update the effective theme within 2 seconds when the system preference changes in `StoryBook/wwwroot/js/theme.js`
-- [ ] T024 [US2] Synchronize selector labels, descriptions, and selected-state text with `storybook.language`, including zh-TW fallback for invalid or missing language values, in `StoryBook/wwwroot/js/theme.js`
-- [ ] T025 [US2] Add any missing bilingual label and description data attributes consumed by `theme.js` to `StoryBook/Pages/Index.cshtml`
-- [ ] T026 [US2] Run `dotnet test StoryBook2.sln --filter "Theme"` using the persistence, system-mode, and language checks from `specs/003-dark-mode/quickstart.md`
+- [ ] T023 [US2] Implement unavailable `localStorage`, invalid stored value recovery, and selected-mode-only persistence in `StoryBook/wwwroot/js/theme.js`
+- [ ] T024 [US2] Implement `system` mode resolution with `matchMedia('(prefers-color-scheme: dark)')`, guarded missing/throwing `matchMedia` fallback to the safe light effective theme, and effective theme updates within 2 seconds in `StoryBook/wwwroot/js/theme.js`
+- [ ] T025 [US2] Synchronize selector labels, descriptions, and selected-state text with `storybook.language`, including zh-TW fallback for invalid or missing language values, in `StoryBook/wwwroot/js/theme.js`
+- [ ] T026 [US2] Add any missing bilingual label and description data attributes consumed by `theme.js` to `StoryBook/Pages/Index.cshtml`
+- [ ] T027 [US2] Run `dotnet test StoryBook2.sln --filter "Theme"` using the persistence, system-mode, and language checks from `specs/003-dark-mode/quickstart.md`
+- [ ] T028 [US2] Run manual browser acceptance for persisted mode reloads, invalid storage recovery, unavailable `localStorage`, missing `matchMedia`, and system-preference changes using steps 4-7 in `specs/003-dark-mode/quickstart.md`
 
 **Checkpoint**: User Stories 1 and 2 both work independently, including reload and system-preference scenarios.
 
@@ -103,17 +105,17 @@
 
 > Write these tests first and confirm they fail before implementation.
 
-- [ ] T027 [US3] Add failing integration tests that themed routes keep canonical anchors, include theme assets, and do not add query-string, hash, `pushState`, or JavaScript-router markers in `StoryBook.Tests/Integration/ThemePagesTests.cs`
+- [ ] T029 [US3] Add failing integration tests that themed routes keep canonical anchors, include theme assets, and do not add query-string, hash, `pushState`, or JavaScript-router markers in `StoryBook.Tests/Integration/ThemePagesTests.cs`
 
 ### Implementation for User Story 3
 
-- [ ] T028 [P] [US3] Add dark-mode and high-contrast overrides for dinosaur cards, search controls, pager links, empty states, image buttons, modal content, and focus states in `StoryBook/wwwroot/css/dinosaurs.css`
-- [ ] T029 [P] [US3] Add dark-mode and high-contrast overrides for aquarium cover, cards, search controls, pager links, empty states, image buttons, modal content, and focus states in `StoryBook/wwwroot/css/aquarium.css`
-- [ ] T030 [US3] Add global light/dark rules for body, navbar, footer, links, buttons, forms, cards, alerts, validation messages, modal surfaces, and focus indicators in `StoryBook/wwwroot/css/site.css`
-- [ ] T031 [US3] Implement `storage` event cross-tab synchronization that updates only theme attributes and preserves route, scroll position, search inputs, language state, and open modal state in `StoryBook/wwwroot/js/theme.js`
-- [ ] T032 [US3] Review and adjust light-only classes, hard-coded backgrounds, or forced text colors in `StoryBook/Pages/Index.cshtml`, `StoryBook/Pages/Privacy.cshtml`, and `StoryBook/Pages/Error.cshtml`
-- [ ] T033 [US3] Run manual responsive, keyboard, contrast, and state-preservation checks from steps 9-13 in `specs/003-dark-mode/quickstart.md`
-- [ ] T034 [US3] Run `dotnet test StoryBook2.sln` after the US3 implementation using `StoryBook2.sln`
+- [ ] T030 [P] [US3] Add dark-mode and high-contrast overrides for dinosaur cards, search controls, pager links, empty states, image buttons, modal content, and focus states in `StoryBook/wwwroot/css/dinosaurs.css`
+- [ ] T031 [P] [US3] Add dark-mode and high-contrast overrides for aquarium cover, cards, search controls, pager links, empty states, image buttons, modal content, and focus states in `StoryBook/wwwroot/css/aquarium.css`
+- [ ] T032 [US3] Add global light/dark rules for body, navbar, footer, links, buttons, forms, cards, alerts, validation messages, modal surfaces, and focus indicators in `StoryBook/wwwroot/css/site.css`
+- [ ] T033 [US3] Implement guarded `storage` event cross-tab synchronization that updates only theme attributes when available and preserves route, scroll position, search inputs, language state, and open modal state in `StoryBook/wwwroot/js/theme.js`
+- [ ] T034 [US3] Review and adjust light-only classes, hard-coded backgrounds, or forced text colors in `StoryBook/Pages/Index.cshtml`, `StoryBook/Pages/Privacy.cshtml`, and `StoryBook/Pages/Error.cshtml`
+- [ ] T035 [US3] Run manual responsive, keyboard, contrast, cross-tab availability, and state-preservation checks from steps 8-13 in `specs/003-dark-mode/quickstart.md`
+- [ ] T036 [US3] Run `dotnet test StoryBook2.sln` after the US3 implementation using `StoryBook2.sln`
 
 **Checkpoint**: All user stories are independently functional and the full themed experience is ready for final validation.
 
@@ -123,10 +125,11 @@
 
 **Purpose**: Final consistency checks across specs, implementation, tests, and generated artifacts.
 
-- [ ] T035 [P] Review `specs/003-dark-mode/spec.md` for implementation drift found during delivery and update only if behavior changed
-- [ ] T036 [P] Review `specs/003-dark-mode/plan.md` for implementation drift, dependency changes, or architecture changes and update only if behavior changed
-- [ ] T037 Run `dotnet build StoryBook2.sln` and `dotnet test StoryBook2.sln`, then confirm no generated `StoryBook/obj` or `StoryBook.Tests/obj` artifacts are staged while validating `StoryBook2.sln`
-- [ ] T038 Run the full browser acceptance checklist in `specs/003-dark-mode/quickstart.md` and record any remaining follow-up directly in `specs/003-dark-mode/tasks.md`
+- [ ] T037 [P] Review `specs/003-dark-mode/spec.md` for implementation drift found during delivery and update only if behavior changed
+- [ ] T038 [P] Review `specs/003-dark-mode/plan.md` for implementation drift, dependency changes, or architecture changes and update only if behavior changed
+- [ ] T039 Run `dotnet build StoryBook2.sln` and `dotnet test StoryBook2.sln`, confirm no new compiler warnings, and confirm no generated `StoryBook/obj` or `StoryBook.Tests/obj` artifacts are staged while validating `StoryBook2.sln`
+- [ ] T040 Run the full browser acceptance checklist in `specs/003-dark-mode/quickstart.md` and record any remaining follow-up directly in `specs/003-dark-mode/tasks.md`
+- [ ] T041 Review final constitution delivery gates for unresolved template markers, secrets/connection strings/API keys, user-visible zh-TW text, and required non-sensitive `ILogger<T>` coverage across `StoryBook/`, `StoryBook.Tests/`, and `specs/003-dark-mode/tasks.md`
 
 ---
 
@@ -153,15 +156,16 @@
 - Shared service metadata comes before Razor rendering.
 - Layout boot script comes before route-wide visual styling.
 - Browser behavior in `theme.js` comes before manual quickstart checks.
+- Manual or browser acceptance for the story must run before marking that story checkpoint complete.
 - Story validation should pass before moving to the next priority story.
 
 ### Parallel Opportunities
 
 - T002 and T003 can run in parallel during setup.
 - T004 and T007 can run in parallel during foundational work.
-- T020 and T021 can run in parallel at the start of US2.
-- T028 and T029 can run in parallel because dinosaur and aquarium CSS are separate files.
-- T035 and T036 can run in parallel during polish.
+- T021 and T022 can run in parallel at the start of US2.
+- T030 and T031 can run in parallel because dinosaur and aquarium CSS are separate files.
+- T037 and T038 can run in parallel during polish.
 
 ---
 

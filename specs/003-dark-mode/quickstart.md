@@ -41,6 +41,7 @@ Open the HTTPS or HTTP URL printed by `dotnet run`, then verify the routes below
 5. 將 `storybook.theme` 手動改成無效值，重新整理，確認系統回到「跟隨系統」行為且首頁 selector 不出現空白或未選取狀態。
 6. 在「跟隨系統」模式下，用 DevTools Rendering 或系統設定切換 prefers-color-scheme，確認頁面 2 秒內跟著變更。
 7. 在「亮色模式」或「深色模式」下切換系統外觀偏好，確認網站仍維持使用者明確選擇。
+   - 補充檢查：使用 DevTools snippet、測試 profile 或瀏覽器隱私設定模擬 `localStorage` 不可用、`matchMedia` 缺漏或丟出例外時，頁面仍需可操作、selector 不得空白，且有效主題需回到安全預設或可判斷的系統模式。
 8. 開兩個同站分頁，在第一個分頁首頁切換主題，確認第二個分頁 2 秒內同步有效主題且不改變所在 route。
 9. 在恐龍或水族館頁輸入搜尋、切換語言、開啟圖片大圖後改變主題，確認搜尋輸入、語言、圖片狀態、scroll position 與故事內容不被重置。
 10. 使用鍵盤 Tab/Shift+Tab/Arrow/Space/Enter 操作首頁主題 selector、語言切換、故事入口、搜尋、上一頁/下一頁與圖片檢視，確認焦點清楚可見。
@@ -58,3 +59,4 @@ Open the HTTPS or HTTP URL printed by `dotnet run`, then verify the routes below
 - `/Privacy`、`/Error`、`/dinosaurs`、`/dinosaurs/{slug}`、`/aquarium`、`/aquarium/{slug}` 不包含主題 selector。
 - 主題 selector label 同時包含 `data-i18n-zh-tw` 與 `data-i18n-en` 或等效 bilingual contract。
 - 主題 assets 不依賴 jQuery，且不新增 JavaScript-only router。
+- `theme.js` 對 `localStorage`、`matchMedia` 與 `storage` event listener 失敗情境有防護，不得讓頁面變成不可操作狀態。
