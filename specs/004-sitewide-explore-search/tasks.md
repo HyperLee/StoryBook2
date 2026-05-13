@@ -61,10 +61,10 @@
 
 ### Implementation for User Story 1
 
-- [ ] T022 [US1] Implement `IndexModel` loading of exploration projection, source statuses, and `ViewData["UseExploreAssets"]` in `StoryBook/Pages/Explore/Index.cshtml.cs`
-- [ ] T023 [US1] Render `/explore` full-collection sections, result cards, source labels, images/alt text, detail anchors, home link, partial failure state, and all-failed state in `StoryBook/Pages/Explore/Index.cshtml`
-- [ ] T024 [US1] Add a bilingual "探索全部故事" / "Explore all stories" normal anchor to `/explore` in the homepage action area in `StoryBook/Pages/Index.cshtml`
-- [ ] T025 [US1] Add initial Explore page, source section, result card, image fallback, and friendly failure-state styles in `StoryBook/wwwroot/css/explore.css`
+- [X] T022 [US1] Implement `IndexModel` loading of exploration projection, source statuses, and `ViewData["UseExploreAssets"]` in `StoryBook/Pages/Explore/Index.cshtml.cs`
+- [X] T023 [US1] Render `/explore` full-collection sections, result cards, source labels, images/alt text, detail anchors, home link, partial failure state, and all-failed state in `StoryBook/Pages/Explore/Index.cshtml`
+- [X] T024 [US1] Add a bilingual "探索全部故事" / "Explore all stories" normal anchor to `/explore` in the homepage action area in `StoryBook/Pages/Index.cshtml`
+- [X] T025 [US1] Add initial Explore page, source section, result card, image fallback, and friendly failure-state styles in `StoryBook/wwwroot/css/explore.css`
 
 **Checkpoint**: User Story 1 is independently functional and testable as the MVP.
 

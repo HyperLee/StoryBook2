@@ -1,4 +1,5 @@
 @page "/explore"
+@using StoryBook.Models
 @model StoryBook.Pages.Explore.IndexModel
 @{
     ViewData["Title"] = "全站探索";
@@ -13,9 +14,82 @@
         <a class="explore-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
     </div>
 
-    <div class="explore-empty" role="status" data-i18n-zh-tw="探索頁正在準備故事卡片。" data-i18n-en="The explore page is getting story cards ready.">
-        探索頁正在準備故事卡片。
-    </div>
+    @if (Model.HasAllSourcesFailed)
+    {
+        <div class="explore-empty" role="status" data-explore-all-failed>
+            <h2 data-i18n-zh-tw="故事資料暫時找不到" data-i18n-en="Story data cannot be found right now">故事資料暫時找不到</h2>
+            <p data-i18n-zh-tw="請先回首頁，等故事朋友整理好再回來探索。" data-i18n-en="Please return home and come back when the story friends are ready.">請先回首頁，等故事朋友整理好再回來探索。</p>
+            <a class="explore-action" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+        </div>
+    }
+    else
+    {
+        @if (Model.HasPartialFailure)
+        {
+            <div class="explore-alert" role="status" data-explore-partial-failure>
+                <strong data-i18n-zh-tw="有一些故事暫時躲起來了" data-i18n-en="Some stories are hiding for now">有一些故事暫時躲起來了</strong>
+                @foreach (ExplorationSourceStatus status in Model.SourceStatuses.Where(status => !status.IsAvailable))
+                {
+                    <p data-i18n-zh-tw="@status.GetFriendlyMessage(LanguageCode.ZhTW)" data-i18n-en="@status.GetFriendlyMessage(LanguageCode.En)">
+                        @status.GetFriendlyMessage(LanguageCode.ZhTW)
+                    </p>
+                }
+            </div>
+        }
+
+        <section class="explore-results" aria-labelledby="explore-results-title">
+            <div class="explore-section-heading">
+                <h2 id="explore-results-title" data-i18n-zh-tw="全部故事朋友" data-i18n-en="All story friends">全部故事朋友</h2>
+                <p data-i18n-zh-tw="先依故事書分組，再照原本故事順序排列。" data-i18n-en="Grouped by storybook, then kept in the original story order.">先依故事書分組，再照原本故事順序排列。</p>
+            </div>
+
+            @foreach (IGrouping<ExplorationSourceType, ExplorationItem> sourceGroup in Model.Items.GroupBy(item => item.Source).OrderBy(group => group.Key.GetSortOrder()))
+            {
+                string sourceCode = sourceGroup.Key.ToCode();
+                <section class="explore-source-section" aria-labelledby="explore-source-@sourceCode">
+                    <h3 id="explore-source-@sourceCode" data-i18n-zh-tw="@sourceGroup.Key.GetLabel(LanguageCode.ZhTW)" data-i18n-en="@sourceGroup.Key.GetLabel(LanguageCode.En)">
+                        @sourceGroup.Key.GetLabel(LanguageCode.ZhTW)
+                    </h3>
+                    <div class="explore-grid">
+                        @foreach (ExplorationItem item in sourceGroup.OrderBy(item => item.SortOrder))
+                        {
+                            string facetMetadata = string.Join(" ", item.Facets.Select(facet => $"{facet.GroupCode}:{facet.ValueCode}"));
+
+                            <article class="explore-card"
+                                     data-explore-result-item
+                                     data-explore-source="@item.Source.ToCode()"
+                                     data-explore-search-text="@item.SearchText"
+                                     data-explore-facets="@facetMetadata">
+                                <a class="explore-card__link" href="@item.DetailHref">
+                                    <span class="explore-card__media">
+                                        <img src="@item.ImagePath"
+                                             alt="@item.GetImageAltText(LanguageCode.ZhTW)"
+                                             data-alt-zh-tw="@item.GetImageAltText(LanguageCode.ZhTW)"
+                                             data-alt-en="@item.GetImageAltText(LanguageCode.En)" />
+                                        <span class="explore-card__image-fallback"
+                                              data-i18n-zh-tw="圖片暫時沒有出現，但故事還在。"
+                                              data-i18n-en="The picture is not here right now, but the story is ready.">圖片暫時沒有出現，但故事還在。</span>
+                                    </span>
+                                    <span class="explore-card__body">
+                                        <span class="explore-card__source"
+                                              data-i18n-zh-tw="@item.GetSourceLabel(LanguageCode.ZhTW)"
+                                              data-i18n-en="@item.GetSourceLabel(LanguageCode.En)">@item.GetSourceLabel(LanguageCode.ZhTW)</span>
+                                        <span class="explore-card__title"
+                                              data-i18n-zh-tw="@item.GetName(LanguageCode.ZhTW)"
+                                              data-i18n-en="@item.GetName(LanguageCode.En)">@item.GetName(LanguageCode.ZhTW)</span>
+                                        <span class="explore-card__summary"
+                                              data-i18n-zh-tw="@item.GetSummary(LanguageCode.ZhTW)"
+                                              data-i18n-en="@item.GetSummary(LanguageCode.En)">@item.GetSummary(LanguageCode.ZhTW)</span>
+                                        <span class="explore-card__action" data-i18n-zh-tw="閱讀故事" data-i18n-en="Read story">閱讀故事</span>
+                                    </span>
+                                </a>
+                            </article>
+                        }
+                    </div>
+                </section>
+            }
+        </section>
+    }
 </section>
 
 @section Scripts {
