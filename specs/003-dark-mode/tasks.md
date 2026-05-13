@@ -49,21 +49,21 @@
 
 > Write these tests first and confirm they fail before implementation.
 
-- [ ] T009 [US1] Add failing integration tests that `/` renders exactly one accessible theme selector with `data-theme-storage-key="storybook.theme"` and three `data-theme-option` values in `StoryBook.Tests/Integration/ThemePagesTests.cs`
-- [ ] T010 [US1] Add failing integration tests that `/Privacy`, `/Error`, `/dinosaurs`, `/dinosaurs/tyrannosaurus-rex`, `/aquarium`, and `/aquarium/clownfish` do not render the theme selector in `StoryBook.Tests/Integration/ThemePagesTests.cs`
-- [ ] T011 [US1] Add failing integration tests that the shared layout emits an early theme boot script before the main stylesheets and exposes the required `data-bs-theme`, `data-storybook-theme-mode`, and `data-storybook-effective-theme` contract path in `StoryBook.Tests/Integration/ThemePagesTests.cs`
+- [X] T009 [US1] Add failing integration tests that `/` renders exactly one accessible theme selector with `data-theme-storage-key="storybook.theme"` and three `data-theme-option` values in `StoryBook.Tests/Integration/ThemePagesTests.cs`
+- [X] T010 [US1] Add failing integration tests that `/Privacy`, `/Error`, `/dinosaurs`, `/dinosaurs/tyrannosaurus-rex`, `/aquarium`, and `/aquarium/clownfish` do not render the theme selector in `StoryBook.Tests/Integration/ThemePagesTests.cs`
+- [X] T011 [US1] Add failing integration tests that the shared layout emits an early theme boot script before the main stylesheets and exposes the required `data-bs-theme`, `data-storybook-theme-mode`, and `data-storybook-effective-theme` contract path in `StoryBook.Tests/Integration/ThemePagesTests.cs`
 
 ### Implementation for User Story 1
 
-- [ ] T012 [US1] Render the accessible segmented radio theme selector with three mutually exclusive options and bilingual data attributes in `StoryBook/Pages/Index.cshtml`
-- [ ] T013 [US1] Expose theme mode metadata from `ThemePreferenceService` to the home Razor view through `StoryBook/Pages/Index.cshtml.cs`
-- [ ] T014 [US1] Add the minimal synchronous theme boot script in the `<head>` before stylesheet links in `StoryBook/Pages/Shared/_Layout.cshtml`
-- [ ] T015 [US1] Reference `StoryBook/wwwroot/js/theme.js` from `StoryBook/Pages/Shared/_Layout.cshtml` while preserving existing Bootstrap, `site.js`, and language-switcher script behavior
-- [ ] T016 [US1] Implement initial mode resolution, selector checked-state updates, `localStorage` writes, and `<html>` data attribute updates in `StoryBook/wwwroot/js/theme.js`
-- [ ] T017 [US1] Remove or replace light-only Bootstrap classes such as forced white navbar backgrounds and forced dark nav text in `StoryBook/Pages/Shared/_Layout.cshtml`
-- [ ] T018 [US1] Style the home theme selector, selected state, 44x44 CSS px target size, and visible focus state in `StoryBook/wwwroot/css/site.css`
-- [ ] T019 [US1] Run `dotnet test StoryBook2.sln --filter ThemePagesTests` against the route and selector expectations in `specs/003-dark-mode/contracts/theme-ui.md`
-- [ ] T020 [US1] Run manual browser acceptance for homepage selector, selected-state clarity, non-home selector absence, and cross-route theme application using steps 1-3 in `specs/003-dark-mode/quickstart.md`
+- [X] T012 [US1] Render the accessible segmented radio theme selector with three mutually exclusive options and bilingual data attributes in `StoryBook/Pages/Index.cshtml`
+- [X] T013 [US1] Expose theme mode metadata from `ThemePreferenceService` to the home Razor view through `StoryBook/Pages/Index.cshtml.cs`
+- [X] T014 [US1] Add the minimal synchronous theme boot script in the `<head>` before stylesheet links in `StoryBook/Pages/Shared/_Layout.cshtml`
+- [X] T015 [US1] Reference `StoryBook/wwwroot/js/theme.js` from `StoryBook/Pages/Shared/_Layout.cshtml` while preserving existing Bootstrap, `site.js`, and language-switcher script behavior
+- [X] T016 [US1] Implement initial mode resolution, selector checked-state updates, `localStorage` writes, and `<html>` data attribute updates in `StoryBook/wwwroot/js/theme.js`
+- [X] T017 [US1] Remove or replace light-only Bootstrap classes such as forced white navbar backgrounds and forced dark nav text in `StoryBook/Pages/Shared/_Layout.cshtml`
+- [X] T018 [US1] Style the home theme selector, selected state, 44x44 CSS px target size, and visible focus state in `StoryBook/wwwroot/css/site.css`
+- [X] T019 [US1] Run `dotnet test StoryBook2.sln --filter ThemePagesTests` against the route and selector expectations in `specs/003-dark-mode/contracts/theme-ui.md`
+- [X] T020 [US1] Run manual browser acceptance for homepage selector, selected-state clarity, non-home selector absence, and cross-route theme application using steps 1-3 in `specs/003-dark-mode/quickstart.md`
 
 **Checkpoint**: User Story 1 is fully functional and testable as the MVP.
 

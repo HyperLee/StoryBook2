@@ -59,6 +59,128 @@ body {
   color: var(--storybook-text);
 }
 
+a {
+  color: var(--storybook-link);
+}
+
+a:hover,
+a:focus {
+  color: var(--storybook-link-hover);
+}
+
+.navbar,
+.footer {
+  background: var(--storybook-surface);
+  color: var(--storybook-text-muted);
+}
+
+.navbar {
+  border-color: var(--storybook-border) !important;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: var(--storybook-text);
+}
+
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus,
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: var(--storybook-link-hover);
+}
+
+.footer {
+  border-color: var(--storybook-border) !important;
+}
+
+.home-hero {
+  color: var(--storybook-text);
+}
+
+.home-actions {
+  margin-top: 1.5rem;
+}
+
+.theme-selector {
+  border: 1px solid var(--storybook-border);
+  border-radius: 8px;
+  margin: 2rem auto 0;
+  max-width: 56rem;
+  padding: 1rem;
+  text-align: left;
+}
+
+.theme-selector legend {
+  color: var(--storybook-text);
+  float: none;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  width: auto;
+}
+
+.theme-selector p {
+  color: var(--storybook-text-muted);
+  margin-bottom: 1rem;
+}
+
+.theme-options {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.theme-option {
+  min-width: 0;
+  position: relative;
+}
+
+.theme-option__input {
+  opacity: 0;
+  position: absolute;
+}
+
+.theme-option__label {
+  background: var(--storybook-control-bg);
+  border: 2px solid var(--storybook-control-border);
+  border-radius: 8px;
+  color: var(--storybook-control-text);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.75rem 0.9rem;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  width: 100%;
+}
+
+.theme-option__input:checked + .theme-option__label {
+  background: var(--storybook-link);
+  border-color: var(--storybook-link);
+  color: #ffffff;
+}
+
+.theme-option__input:focus-visible + .theme-option__label {
+  outline: 4px solid var(--storybook-focus);
+  outline-offset: 3px;
+}
+
+.theme-option__title {
+  font-weight: 800;
+}
+
+.theme-option__description {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+html[data-storybook-effective-theme="dark"] .theme-option__input:checked + .theme-option__label {
+  color: #08111d;
+}
+
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
   text-align: end;

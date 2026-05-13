@@ -1,9 +1,54 @@
-﻿<!DOCTYPE html>
-<html lang="zh-TW">
+﻿@inject StoryBook.Services.ThemePreferenceService ThemePreferences
+<!DOCTYPE html>
+<html lang="zh-TW" data-bs-theme="light" data-storybook-theme-mode="system" data-storybook-effective-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StoryBook</title>
+    <script data-storybook-theme-boot>
+        (function () {
+            var storageKey = "@ThemePreferences.StorageKey";
+            var defaultMode = "@ThemePreferences.DefaultMode";
+            var safeEffectiveTheme = "@ThemePreferences.SafeEffectiveTheme";
+            var allowedModes = ["light", "dark", "system"];
+            var root = document.documentElement;
+
+            function normalizeMode(value) {
+                var normalized = String(value || "").trim().toLowerCase();
+                return allowedModes.indexOf(normalized) >= 0 ? normalized : defaultMode;
+            }
+
+            function readStoredMode() {
+                try {
+                    return normalizeMode(window.localStorage.getItem(storageKey));
+                } catch (error) {
+                    return defaultMode;
+                }
+            }
+
+            function prefersDark() {
+                try {
+                    return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+                } catch (error) {
+                    return false;
+                }
+            }
+
+            function resolveEffectiveTheme(mode) {
+                if (mode === "light" || mode === "dark") {
+                    return mode;
+                }
+
+                return prefersDark() ? "dark" : safeEffectiveTheme;
+            }
+
+            var selectedMode = readStoredMode();
+            var effectiveTheme = resolveEffectiveTheme(selectedMode);
+            root.setAttribute("data-bs-theme", effectiveTheme);
+            root.setAttribute("data-storybook-theme-mode", selectedMode);
+            root.setAttribute("data-storybook-effective-theme", effectiveTheme);
+        })();
+    </script>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -19,7 +64,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">StoryBook</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -29,10 +74,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index" data-i18n-zh-tw="首頁" data-i18n-en="Home">首頁</a>
+                            <a class="nav-link" asp-area="" asp-page="/Index" data-i18n-zh-tw="首頁" data-i18n-en="Home">首頁</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy" data-i18n-zh-tw="隱私" data-i18n-en="Privacy">隱私</a>
+                            <a class="nav-link" asp-area="" asp-page="/Privacy" data-i18n-zh-tw="隱私" data-i18n-en="Privacy">隱私</a>
                         </li>
                     </ul>
                     <div class="language-switcher" data-language-storage-key="storybook.language" aria-label="語言切換">
@@ -58,6 +103,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/theme.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
