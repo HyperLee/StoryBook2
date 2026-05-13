@@ -17,9 +17,9 @@
 
 **Purpose**: Prepare the existing Razor Pages solution for the dark-mode implementation without adding new packages or changing architecture.
 
-- [ ] T001 Verify `StoryBook/StoryBook.csproj` and `StoryBook.Tests/StoryBook.Tests.csproj` still need no new NuGet or JavaScript package references for the planned Razor Pages, Bootstrap 5, native JavaScript, and xUnit implementation
-- [ ] T002 [P] Create the browser theme asset file `StoryBook/wwwroot/js/theme.js` as the dedicated native JavaScript entry point for theme behavior
-- [ ] T003 [P] Create the integration test file `StoryBook.Tests/Integration/ThemePagesTests.cs` for theme HTML, route, and layout contract coverage
+- [X] T001 Verify `StoryBook/StoryBook.csproj` and `StoryBook.Tests/StoryBook.Tests.csproj` still need no new NuGet or JavaScript package references for the planned Razor Pages, Bootstrap 5, native JavaScript, and xUnit implementation
+- [X] T002 [P] Create the browser theme asset file `StoryBook/wwwroot/js/theme.js` as the dedicated native JavaScript entry point for theme behavior
+- [X] T003 [P] Create the integration test file `StoryBook.Tests/Integration/ThemePagesTests.cs` for theme HTML, route, and layout contract coverage
 
 ---
 
