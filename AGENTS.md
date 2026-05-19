@@ -47,8 +47,10 @@
 ## Spec Kit 文件
 
 <!-- SPECKIT START -->
+Current feature plan: `specs/005-story-friend-compare/plan.md`.
+
 For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+shell commands, and other important information, read the current plan.
 <!-- SPECKIT END -->
 
 開始相關功能前，依變更範圍閱讀並對齊：
