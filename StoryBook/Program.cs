@@ -19,6 +19,9 @@ public partial class Program
         builder.Services.AddSingleton<AquariumContentValidator>();
         builder.Services.AddSingleton<AquariumCatalogService>();
         builder.Services.AddSingleton<ExplorationCatalogService>();
+        builder.Services.AddSingleton<ComparisonCatalogService>();
+        builder.Services.AddSingleton<IComparisonCatalogService>(provider =>
+            provider.GetRequiredService<ComparisonCatalogService>());
         builder.Services.AddSingleton<ExplorationSearchService>();
         builder.Services.AddSingleton<LanguagePreferenceService>();
         builder.Services.AddSingleton<ThemePreferenceService>();

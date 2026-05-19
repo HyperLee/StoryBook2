@@ -64,6 +64,10 @@
     {
         <link rel="stylesheet" href="~/css/explore.css" asp-append-version="true" />
     }
+    @if (ViewData["UseCompareAssets"] as bool? == true)
+    {
+        <link rel="stylesheet" href="~/css/compare.css" asp-append-version="true" />
+    }
     <link rel="stylesheet" href="~/StoryBook.styles.css" asp-append-version="true" />
 </head>
 <body>

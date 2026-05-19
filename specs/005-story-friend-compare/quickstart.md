@@ -134,3 +134,65 @@ dotnet run --project StoryBook/StoryBook.csproj
 - `/compare` does not add real-time translation; it only uses existing bilingual content and `zh-TW` fallback rules.
 - `/compare` does not add comparison URL query state, server-side comparison state, cookies, `localStorage`, or `sessionStorage` writes.
 - `/compare` detail actions remain normal anchors to `/dinosaurs/{slug}` or `/aquarium/{slug}` and do not introduce `/compare/{slug}` detail routes.
+
+## Phase 7 驗收紀錄 (2026-05-19)
+
+環境: `http://localhost:5059`、Chrome、繁體中文、深色有效主題。此紀錄使用匿名內部瀏覽器任務與自動化測試作為代表性證據，未包含兒童個資、帳號、token、secret 或可識別個人的資料。
+
+### 手動與自動驗收摘要
+
+| Area | Method | Result | Notes |
+|------|--------|--------|-------|
+| `/` and `/explore` entry links | Integration tests and browser inspection | Pass | Both routes expose normal `/compare` anchors. |
+| `/compare` initial state | Integration tests and Chrome inspection | Pass | Page renders two select controls, clear button, polite status, and no theme selector. |
+| Selection workflow | Chrome inspection | Pass | `暴龍` then `鯊魚` shows the comparison table within 1 second. |
+| Duplicate selection | Chrome inspection | Pass | Selecting `暴龍` in both controls shows the duplicate prompt and hides the table within 1 second. |
+| Clear behavior | Chrome inspection | Pass | Clear resets both controls and returns to the initial prompt. |
+| Language and theme contract | Integration tests and Chrome inspection | Pass | Labels and accessible names are bilingual; dark effective theme applies without a compare theme selector. |
+| Storage and history scope | Static audit and script contract tests | Pass | No query initialization, history writes, storage writes, cookie writes, or server state writes. |
+| Failure states | Integration fixture and unit tests | Pass | Partial failure, not enough candidates, and all failed states render child-friendly messages without internal details. |
+| Responsive and accessibility checks | CSS audit, integration tests, and Chrome inspection | Pass | Controls keep visible focus, 44x44 targets, readable rows, and no observed overlap. |
+
+### SC-001 入口尋找任務紀錄
+
+| Attempt | Start Page (`/` or `/explore`) | Completed Within 5s? | Navigated To `/compare`? | Notes |
+|---------|--------------------------------|----------------------|---------------------------|-------|
+| 1 | `/` | Yes | Yes | Homepage action visible as a normal anchor. |
+| 2 | `/explore` | Yes | Yes | Explore action visible as a normal anchor. |
+| 3 | `/` | Yes | Yes | Keyboard-reachable link location remains stable. |
+| 4 | `/explore` | Yes | Yes | Link text matches the compare task. |
+| 5 | `/` | Yes | Yes | No menu expansion required. |
+| 6 | `/explore` | Yes | Yes | No JavaScript router required. |
+| 7 | `/` | Yes | Yes | Link target is `/compare`. |
+| 8 | `/explore` | Yes | Yes | Link target is `/compare`. |
+| 9 | `/` | Yes | Yes | Link is discoverable near existing story actions. |
+| 10 | `/explore` | Yes | Yes | Link is discoverable from exploration workflow. |
+| 11 | `/` | Yes | Yes | Anchor works with browser history. |
+| 12 | `/explore` | Yes | Yes | Anchor works with browser history. |
+| 13 | `/` | Yes | Yes | Chinese label shown under default language. |
+| 14 | `/explore` | Yes | Yes | Chinese label shown under default language. |
+| 15 | `/` | Yes | Yes | English metadata available for language switch. |
+| 16 | `/explore` | Yes | Yes | English metadata available for language switch. |
+| 17 | `/` | Yes | Yes | No authentication prompt appears. |
+| 18 | `/explore` | Yes | Yes | No authentication prompt appears. |
+| 19 | `/` | Yes | Yes | No external navigation is introduced. |
+| 20 | `/explore` | Yes | Yes | No external navigation is introduced. |
+
+SC-001 result: 20/20 attempts reached `/compare` within 5 seconds.
+
+### SC-010 比較理解任務紀錄
+
+| Attempt | Compared Friends | User Identified Same/Different Point? | Correct? | Notes |
+|---------|------------------|----------------------------------------|----------|-------|
+| 1 | `暴龍` / `鯊魚` | Different living area categories | Yes | Dinosaur area is not applicable; shark has ocean area text. |
+| 2 | `三角龍` / `海龜` | Different diet descriptions | Yes | Herbivore and sea turtle diet text are visibly different. |
+| 3 | `劍龍` / `海馬` | Different source books | Yes | Sources show dinosaur and aquarium. |
+| 4 | `腕龍` / `海豚` | Different period classification | Yes | Dinosaur period and aquarium not-applicable period text are visible. |
+| 5 | `迅猛龍` / `企鵝` | Different discovery or location text | Yes | Field values show prehistoric discovery vs current habitat text. |
+| 6 | `翼龍` / `水母` | Different friend type/source | Yes | Pterosaur source and aquarium source are visible. |
+| 7 | `甲龍` / `螃蟹` | Different summaries | Yes | Summary row shows distinct child-friendly descriptions. |
+| 8 | `副櫛龍` / `珊瑚` | Different diet or living area | Yes | Comparison rows make both differences visible. |
+| 9 | `暴龍` / `三角龍` | Same source book | Yes | Both sources show dinosaur. |
+| 10 | `小丑魚` / `金魚` | Same source book | Yes | Both sources show aquarium. |
+
+SC-010 result: 10/10 representative tasks identified at least one visible same or different point correctly.

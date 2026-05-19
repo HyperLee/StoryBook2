@@ -1,0 +1,203 @@
+.compare-page {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.compare-page__header,
+.compare-controls,
+.compare-status-group,
+.compare-table-wrap,
+.compare-alert,
+.compare-empty {
+    border: 1px solid var(--storybook-border, #d8dee9);
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--storybook-surface, #ffffff);
+    color: #1f2937;
+}
+
+.compare-page__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.compare-kicker {
+    margin: 0 0 .25rem;
+    font-weight: 700;
+}
+
+.compare-home-link,
+.compare-clear-button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    padding: .625rem 1rem;
+}
+
+.compare-home-link {
+    color: #0f5f8c;
+}
+
+.compare-select-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.compare-select-field {
+    display: grid;
+    gap: .4rem;
+}
+
+.compare-select-field label {
+    font-weight: 700;
+}
+
+.compare-select-field select {
+    min-height: 44px;
+}
+
+.compare-clear-button {
+    border: 0;
+    margin-top: 1rem;
+    background: #2f6f73;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.compare-status {
+    margin: 0;
+}
+
+.compare-alert {
+    border-color: var(--storybook-alert-border, #b7791f);
+    background: var(--storybook-alert-bg, #fff8e6);
+    color: var(--storybook-alert-text, #4d3b00);
+}
+
+html[data-bs-theme="dark"] .compare-page__header,
+html[data-bs-theme="dark"] .compare-controls,
+html[data-bs-theme="dark"] .compare-status-group,
+html[data-bs-theme="dark"] .compare-table-wrap,
+html[data-storybook-effective-theme="dark"] .compare-page__header,
+html[data-storybook-effective-theme="dark"] .compare-controls,
+html[data-storybook-effective-theme="dark"] .compare-status-group,
+html[data-storybook-effective-theme="dark"] .compare-table-wrap {
+    background: #182233;
+    border-color: #41516a;
+    color: #f3f7fb;
+}
+
+html[data-bs-theme="dark"] .compare-alert,
+html[data-storybook-effective-theme="dark"] .compare-alert {
+    background: #3a2f12;
+    border-color: #caa947;
+    color: #fff3c4;
+}
+
+html[data-bs-theme="dark"] .compare-home-link,
+html[data-storybook-effective-theme="dark"] .compare-home-link {
+    color: #8fd3ff;
+}
+
+@media (prefers-color-scheme: dark) {
+    .compare-page__header,
+    .compare-controls,
+    .compare-status-group,
+    .compare-table-wrap {
+        background: #182233 !important;
+        border-color: #41516a !important;
+        color: #f3f7fb !important;
+    }
+
+    .compare-home-link {
+        color: #8fd3ff !important;
+    }
+
+    html[data-storybook-theme-mode="light"] .compare-page__header,
+    html[data-storybook-theme-mode="light"] .compare-controls,
+    html[data-storybook-theme-mode="light"] .compare-status-group,
+    html[data-storybook-theme-mode="light"] .compare-table-wrap {
+        background: #ffffff !important;
+        color: #1f2937 !important;
+    }
+
+    html[data-storybook-theme-mode="light"] .compare-home-link {
+        color: #0f5f8c !important;
+    }
+}
+
+.compare-alert p,
+.compare-empty p {
+    margin-bottom: 0;
+}
+
+.compare-empty {
+    display: grid;
+    gap: .75rem;
+}
+
+.compare-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.compare-table th,
+.compare-table td {
+    vertical-align: top;
+    padding: .75rem;
+    border-bottom: 1px solid var(--storybook-border, #d8dee9);
+}
+
+.compare-page a:focus-visible,
+.compare-page button:focus-visible,
+.compare-page select:focus-visible {
+    outline: 3px solid #f2b84b;
+    outline-offset: 3px;
+}
+
+.compare-table a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+@media (max-width: 575.98px) {
+    .compare-page__header,
+    .compare-select-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .compare-page__header {
+        display: grid;
+    }
+
+    .compare-table,
+    .compare-table tbody,
+    .compare-table tr,
+    .compare-table th,
+    .compare-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .compare-table tr {
+        border-bottom: 1px solid var(--storybook-border, #d8dee9);
+        padding: .75rem 0;
+    }
+
+    .compare-table th,
+    .compare-table td {
+        border-bottom: 0;
+        padding: .35rem 0;
+    }
+
+    .compare-table td {
+        overflow-wrap: anywhere;
+    }
+}

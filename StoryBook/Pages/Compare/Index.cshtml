@@ -1,0 +1,187 @@
+@page "/compare"
+@using StoryBook.Models
+@model StoryBook.Pages.Compare.IndexModel
+@{
+    ViewData["Title"] = "比較故事朋友";
+}
+
+<section class="compare-page"
+         aria-labelledby="compare-title"
+         data-compare-preserve-state-on-theme-change="true"
+         data-compare-failure-update-within-ms="1000">
+    <div class="compare-page__header">
+        <div>
+            <p class="compare-kicker" data-i18n-zh-tw="一起找相同和不同" data-i18n-en="Find what is same and different">一起找相同和不同</p>
+            <h1 id="compare-title" data-i18n-zh-tw="比較故事朋友" data-i18n-en="Compare story friends">比較故事朋友</h1>
+        </div>
+        <a class="compare-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+    </div>
+
+    @if (Model.HasAllSourcesFailed)
+    {
+        <div class="compare-empty" role="status" data-compare-all-failed>
+            <h2 data-i18n-zh-tw="故事資料暫時找不到" data-i18n-en="Story data cannot be found right now">故事資料暫時找不到</h2>
+            <p data-i18n-zh-tw="請先回首頁，等故事朋友整理好再回來比較。" data-i18n-en="Please return home and come back when the story friends are ready to compare.">請先回首頁，等故事朋友整理好再回來比較。</p>
+            <a class="compare-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+        </div>
+    }
+
+    @if (Model.HasPartialFailure)
+    {
+        <div class="compare-alert" role="status" data-compare-partial-failure>
+            <strong data-i18n-zh-tw="有一些故事朋友暫時躲起來了" data-i18n-en="Some story friends are hiding for now">有一些故事朋友暫時躲起來了</strong>
+            @foreach (ComparisonSourceStatus status in Model.SourceStatuses.Where(status => !status.IsAvailable))
+            {
+                <p data-i18n-zh-tw="@status.GetFriendlyMessage(LanguageCode.ZhTW)" data-i18n-en="@status.GetFriendlyMessage(LanguageCode.En)">
+                    @status.GetFriendlyMessage(LanguageCode.ZhTW)
+                </p>
+            }
+        </div>
+    }
+
+    <div class="compare-controls" aria-labelledby="compare-controls-title">
+        <div>
+            <h2 id="compare-controls-title" data-i18n-zh-tw="選擇兩位朋友" data-i18n-en="Choose two friends">選擇兩位朋友</h2>
+            <p data-i18n-zh-tw="選兩位不同的故事朋友，再看看牠們的資料。" data-i18n-en="Choose two different story friends, then compare their facts.">選兩位不同的故事朋友，再看看牠們的資料。</p>
+        </div>
+
+        <div class="compare-select-grid">
+            <div class="compare-select-field">
+                <label for="compare-first-select" data-i18n-zh-tw="第一位故事朋友" data-i18n-en="First story friend">第一位故事朋友</label>
+                <select id="compare-first-select"
+                        class="form-select"
+                        aria-label="選擇第一位故事朋友"
+                        data-aria-label-zh-tw="選擇第一位故事朋友"
+                        data-aria-label-en="Choose the first story friend"
+                        data-compare-first-select>
+                    <option value="" data-i18n-zh-tw="請選擇第一位" data-i18n-en="Choose the first friend">請選擇第一位</option>
+                    @foreach (ComparisonCandidate candidate in Model.Candidates)
+                    {
+                        <option value="@candidate.StableId"
+                                data-option-name-zh-tw="@candidate.GetName(LanguageCode.ZhTW)"
+                                data-option-name-en="@candidate.GetName(LanguageCode.En)">
+                            @candidate.GetName(LanguageCode.ZhTW)
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="compare-select-field">
+                <label for="compare-second-select" data-i18n-zh-tw="第二位故事朋友" data-i18n-en="Second story friend">第二位故事朋友</label>
+                <select id="compare-second-select"
+                        class="form-select"
+                        aria-label="選擇第二位故事朋友"
+                        data-aria-label-zh-tw="選擇第二位故事朋友"
+                        data-aria-label-en="Choose the second story friend"
+                        data-compare-second-select>
+                    <option value="" data-i18n-zh-tw="請選擇第二位" data-i18n-en="Choose the second friend">請選擇第二位</option>
+                    @foreach (ComparisonCandidate candidate in Model.Candidates)
+                    {
+                        <option value="@candidate.StableId"
+                                data-option-name-zh-tw="@candidate.GetName(LanguageCode.ZhTW)"
+                                data-option-name-en="@candidate.GetName(LanguageCode.En)">
+                            @candidate.GetName(LanguageCode.ZhTW)
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <button class="compare-clear-button"
+                type="button"
+                aria-label="清除選擇"
+                data-aria-label-zh-tw="清除選擇"
+                data-aria-label-en="Clear selection"
+                data-compare-clear-selection
+                data-i18n-zh-tw="清除選擇"
+                data-i18n-en="Clear selection">清除選擇</button>
+    </div>
+
+    <div class="compare-status-group">
+        <p class="compare-status"
+           data-compare-status
+           data-i18n-zh-tw="先選第一位故事朋友，再選第二位。"
+           data-i18n-en="Choose the first story friend, then choose the second."
+           hidden="@(!Model.HasEnoughCandidates || Model.HasAllSourcesFailed)"
+           aria-live="polite">先選第一位故事朋友，再選第二位。</p>
+        <p class="compare-status"
+           data-compare-one-selected-message
+           data-i18n-zh-tw="再選一位不同的故事朋友就能比較。"
+           data-i18n-en="Choose one more different story friend to compare."
+           hidden>再選一位不同的故事朋友就能比較。</p>
+        <p class="compare-status"
+           data-compare-duplicate-message
+           data-i18n-zh-tw="請選兩位不同的故事朋友，這樣比較才有趣。"
+           data-i18n-en="Please choose two different story friends so the comparison is useful."
+           hidden>請選兩位不同的故事朋友，這樣比較才有趣。</p>
+        <p class="compare-status"
+           data-compare-not-enough
+           data-i18n-zh-tw="需要至少兩位故事朋友才能比較。"
+           data-i18n-en="At least two story friends are needed for comparing."
+           hidden="@(Model.HasEnoughCandidates || Model.HasAllSourcesFailed)">需要至少兩位故事朋友才能比較。</p>
+        <p class="compare-status"
+           data-compare-ready-message
+           data-i18n-zh-tw="比較表準備好了，可以看看相同和不同。"
+           data-i18n-en="The comparison table is ready. Look for what is same and different."
+           hidden>比較表準備好了，可以看看相同和不同。</p>
+    </div>
+
+    <div class="compare-candidate-metadata" hidden>
+        @foreach (ComparisonCandidate candidate in Model.Candidates)
+        {
+            ComparisonFieldValue livingArea = candidate.GetFieldValue("living-area");
+            ComparisonFieldValue period = candidate.GetFieldValue("period");
+            ComparisonFieldValue detailLink = candidate.GetFieldValue("detail-link");
+
+            <article data-compare-candidate
+                     data-candidate-id="@candidate.StableId"
+                     data-compare-source="@candidate.Source.ToCode()"
+                     data-slug="@candidate.Slug"
+                     data-source-zh-tw="@candidate.GetSourceLabel(LanguageCode.ZhTW)"
+                     data-source-en="@candidate.GetSourceLabel(LanguageCode.En)"
+                     data-name-zh-tw="@candidate.GetName(LanguageCode.ZhTW)"
+                     data-name-en="@candidate.GetName(LanguageCode.En)"
+                     data-diet-zh-tw="@candidate.GetDiet(LanguageCode.ZhTW)"
+                     data-diet-en="@candidate.GetDiet(LanguageCode.En)"
+                     data-living-area-zh-tw="@livingArea.GetText(LanguageCode.ZhTW)"
+                     data-living-area-en="@livingArea.GetText(LanguageCode.En)"
+                     data-period-zh-tw="@period.GetText(LanguageCode.ZhTW)"
+                     data-period-en="@period.GetText(LanguageCode.En)"
+                     data-discovery-location-zh-tw="@candidate.GetDiscoveryLocations(LanguageCode.ZhTW)"
+                     data-discovery-location-en="@candidate.GetDiscoveryLocations(LanguageCode.En)"
+                     data-summary-zh-tw="@candidate.GetSummary(LanguageCode.ZhTW)"
+                     data-summary-en="@candidate.GetSummary(LanguageCode.En)"
+                     data-detail-text-zh-tw="@detailLink.GetText(LanguageCode.ZhTW)"
+                     data-detail-text-en="@detailLink.GetText(LanguageCode.En)"
+                     data-detail-href="@candidate.DetailHref">
+                <a href="@candidate.DetailHref"
+                   data-i18n-zh-tw="@detailLink.GetText(LanguageCode.ZhTW)"
+                   data-i18n-en="@detailLink.GetText(LanguageCode.En)">
+                    @detailLink.GetText(LanguageCode.ZhTW)
+                </a>
+            </article>
+        }
+    </div>
+
+    <div class="compare-table-wrap" data-compare-table hidden>
+        <table class="compare-table">
+            <caption data-i18n-zh-tw="兩位故事朋友的比較表" data-i18n-en="Comparison table for two story friends">兩位故事朋友的比較表</caption>
+            <tbody>
+                @foreach (ComparisonFieldDefinition field in Model.FieldDefinitions)
+                {
+                    <tr data-compare-field="@field.Code">
+                        <th scope="row" data-i18n-zh-tw="@field.GetLabel(LanguageCode.ZhTW)" data-i18n-en="@field.GetLabel(LanguageCode.En)">
+                            @field.GetLabel(LanguageCode.ZhTW)
+                        </th>
+                        <td data-compare-first-value></td>
+                        <td data-compare-second-value></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/compare.js" asp-append-version="true"></script>
+}

@@ -11,7 +11,10 @@
             <p class="explore-kicker" data-i18n-zh-tw="全部故事朋友" data-i18n-en="All story friends">全部故事朋友</p>
             <h1 id="explore-title" data-i18n-zh-tw="全站探索" data-i18n-en="Explore all stories">全站探索</h1>
         </div>
-        <a class="explore-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+        <div class="explore-page__actions">
+            <a class="explore-home-link" asp-page="/Compare/Index" data-i18n-zh-tw="比較故事朋友" data-i18n-en="Compare story friends">比較故事朋友</a>
+            <a class="explore-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+        </div>
     </div>
 
     @if (Model.HasAllSourcesFailed)
