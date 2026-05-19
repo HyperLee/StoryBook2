@@ -48,8 +48,7 @@
 
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan:
-`specs/004-sitewide-explore-search/plan.md`
+shell commands, and other important information, read the current plan
 <!-- SPECKIT END -->
 
 開始相關功能前，依變更範圍閱讀並對齊：
