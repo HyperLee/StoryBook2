@@ -4,9 +4,9 @@
 
 **Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, `contracts/ui-routes.md`, `quickstart.md`
 
-**Tests**: 本功能規格與專案憲章明確要求測試優先；每個使用者故事先新增失敗測試，再實作並使測試通過。
+**Tests**: 本功能規格與專案憲章明確要求測試優先；Phase 1 先定義失敗測試、靜態合約測試與人工驗收紀錄要求，再進入任何 production implementation task。
 
-**Organization**: Tasks are grouped by user story so each story can be independently implemented and verified.
+**Organization**: Phase 1 groups all failing tests and validation-definition work first; later phases group implementation by user story so each story can be independently implemented and verified.
 
 ## Format: `[ID] [P?] [Story] Description`
 
@@ -14,30 +14,45 @@
 - **[Story]**: 使用者故事標籤，僅用於使用者故事階段
 - 每個任務描述都包含明確檔案路徑
 
-## Phase 1: Setup (Shared Infrastructure)
+## Phase 1: Test & Validation Definition (Failing First)
 
-**Purpose**: 建立比較器需要的測試與前端資產檔案骨架，不改變既有功能行為。
+**Purpose**: 先建立可執行或可審查的測試、靜態合約測試與人工驗收紀錄要求，確保後續 implementation task 皆由測試或驗收契約驅動。
+
+**CRITICAL**: No production implementation task can begin until this phase is complete and the automated tests have been observed failing or not compiling for the expected missing implementation.
 
 - [ ] T001 [P] Create compare integration test fixture scaffold in `StoryBook.Tests/Integration/ComparePageTestFixture.cs`.
-- [ ] T002 [P] Create compare stylesheet scaffold in `StoryBook/wwwroot/css/compare.css`.
-- [ ] T003 [P] Create compare page script scaffold in `StoryBook/wwwroot/js/compare.js`.
+- [ ] T002 [US1] Add failing integration tests for `GET /compare`, default `zh-TW` text, first/second select controls, clear button, status region, and absence of theme selector in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
+- [ ] T003 [US1] Add failing integration tests that homepage `/` and `/explore` expose normal anchor links to `/compare` in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
+- [ ] T004 [US2] Add failing unit tests for full 23-candidate projection, stable id format, source ordering, source `SortOrder`, and detail hrefs in `StoryBook.Tests/Unit/ComparisonCatalogServiceTests.cs`.
+- [ ] T005 [P] [US2] Add failing static client script contract tests for duplicate/clear message hooks, required page-local selection hooks, no history writes, and no storage writes in `StoryBook.Tests/Unit/CompareScriptContractTests.cs`.
+- [ ] T006 [US2] Add failing integration tests for candidate metadata, comparison table rows, normal detail links, and hidden table initial state in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
+- [ ] T007 [US3] Add failing integration tests for bilingual page text, bilingual accessible names, theme boot attributes, no compare theme selector, and preserve-state theme contract in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
+- [ ] T008 [P] [US3] Add failing unit tests for localized comparison field/value fallback and nonblank `zh-TW` fallback values in `StoryBook.Tests/Unit/ComparisonCatalogServiceTests.cs`.
+- [ ] T009 [US4] Extend catalog path override and limited-candidate helper support for compare integration tests in `StoryBook.Tests/Integration/ComparePageTestFixture.cs`.
+- [ ] T010 [US4] Add failing unit tests for partial source failure, all-source failure, fewer-than-two candidates, friendly statuses, and sanitized logging in `StoryBook.Tests/Unit/ComparisonCatalogServiceTests.cs`.
+- [ ] T011 [US4] Add failing integration tests for partial failure, not-enough-candidates, all-failed, home link, no internal error details, and 1-second friendly failure-state expectation in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
+- [ ] T012 [P] Define representative usability evidence log format for SC-001 and SC-010, including 20 entry-finding attempts and 10 compare-understanding attempts, in `specs/005-story-friend-compare/quickstart.md`.
+- [ ] T013 [P] Define manual browser validation checklist for duplicate selection, clear behavior, theme-preserved selected candidates, and 1-second failure-state display in `specs/005-story-friend-compare/quickstart.md`.
+- [ ] T014 [P] Define negative-scope audit checklist for no authentication requirement, no external website search, no real-time translation, and no new external content source in `specs/005-story-friend-compare/quickstart.md`.
 
 ---
 
-## Phase 2: Foundational (Blocking Prerequisites)
+## Phase 2: Setup & Foundational (Blocking Prerequisites)
 
-**Purpose**: 建立所有使用者故事共用的比較 projection DTO、service skeleton 與 DI 註冊。
+**Purpose**: 建立比較器需要的前端資產檔案骨架、共用 projection DTO、service skeleton 與 DI 註冊。
 
 **CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T004 [P] Create `ComparisonFieldValue` model with XML docs and localized fallback helpers in `StoryBook/Models/ComparisonFieldValue.cs`.
-- [ ] T005 [P] Create `ComparisonFieldDefinition` model with XML docs and localized label/not-applicable helpers in `StoryBook/Models/ComparisonFieldDefinition.cs`.
-- [ ] T006 [P] Create `ComparisonCandidate` model with XML docs, stable id, detail href, source labels, bilingual fields, and field values in `StoryBook/Models/ComparisonCandidate.cs`.
-- [ ] T007 [P] Create `ComparisonSourceStatus` model with XML docs, availability count, and friendly bilingual message helpers in `StoryBook/Models/ComparisonSourceStatus.cs`.
-- [ ] T008 Create `ComparisonCatalogSnapshot` model with candidates, field definitions, source statuses, and computed failure flags in `StoryBook/Models/ComparisonCatalogSnapshot.cs`.
-- [ ] T009 [P] Create `ComparisonSelectionState` model documenting page-local statuses in `StoryBook/Models/ComparisonSelectionState.cs`.
-- [ ] T010 Create `ComparisonCatalogService` skeleton that injects dinosaur/aquarium catalog services and logger in `StoryBook/Services/ComparisonCatalogService.cs`.
-- [ ] T011 Register `ComparisonCatalogService` with singleton lifetime in `StoryBook/Program.cs`.
+- [ ] T015 [P] Create compare stylesheet scaffold in `StoryBook/wwwroot/css/compare.css`.
+- [ ] T016 [P] Create compare page script scaffold in `StoryBook/wwwroot/js/compare.js`.
+- [ ] T017 [P] Create `ComparisonFieldValue` model with XML docs and localized fallback helpers in `StoryBook/Models/ComparisonFieldValue.cs`.
+- [ ] T018 [P] Create `ComparisonFieldDefinition` model with XML docs and localized label/not-applicable helpers in `StoryBook/Models/ComparisonFieldDefinition.cs`.
+- [ ] T019 [P] Create `ComparisonCandidate` model with XML docs, stable id, detail href, source labels, bilingual fields, and field values in `StoryBook/Models/ComparisonCandidate.cs`.
+- [ ] T020 [P] Create `ComparisonSourceStatus` model with XML docs, availability count, and friendly bilingual message helpers in `StoryBook/Models/ComparisonSourceStatus.cs`.
+- [ ] T021 Create `ComparisonCatalogSnapshot` model with candidates, field definitions, source statuses, and computed failure flags in `StoryBook/Models/ComparisonCatalogSnapshot.cs`.
+- [ ] T022 [P] Create `ComparisonSelectionState` model documenting page-local statuses in `StoryBook/Models/ComparisonSelectionState.cs`.
+- [ ] T023 Create `ComparisonCatalogService` skeleton that injects dinosaur/aquarium catalog services and logger in `StoryBook/Services/ComparisonCatalogService.cs`.
+- [ ] T024 Register `ComparisonCatalogService` with singleton lifetime in `StoryBook/Program.cs`.
 
 **Checkpoint**: 共用模型與 service skeleton 可編譯，使用者故事可開始以測試優先方式實作。
 
@@ -51,20 +66,17 @@
 
 ### Tests for User Story 1
 
-> Write these tests FIRST and confirm they fail before implementation.
-
-- [ ] T012 [US1] Add failing integration tests for `GET /compare`, default `zh-TW` text, first/second select controls, clear button, status region, and absence of theme selector in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
-- [ ] T013 [US1] Add failing integration tests that homepage `/` and `/explore` expose normal anchor links to `/compare` in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
+> Covered by Phase 1 tasks T002 and T003. Confirm they fail before starting the implementation tasks below.
 
 ### Implementation for User Story 1
 
-- [ ] T014 [US1] Implement thin Compare PageModel that sets `UseCompareAssets`, loads `ComparisonCatalogSnapshot`, and exposes page state in `StoryBook/Pages/Compare/Index.cshtml.cs`.
-- [ ] T015 [US1] Implement canonical `/compare` Razor page with heading, home link, two select controls, clear button, polite status region, and empty initial state in `StoryBook/Pages/Compare/Index.cshtml`.
-- [ ] T016 [US1] Add a discoverable "比較故事朋友" / "Compare story friends" homepage action anchor to `/compare` in `StoryBook/Pages/Index.cshtml`.
-- [ ] T017 [US1] Add a discoverable "比較故事朋友" / "Compare story friends" exploration page action anchor to `/compare` in `StoryBook/Pages/Explore/Index.cshtml`.
-- [ ] T018 [US1] Add conditional compare stylesheet loading based on `ViewData["UseCompareAssets"]` in `StoryBook/Pages/Shared/_Layout.cshtml`.
-- [ ] T019 [US1] Style the initial compare page controls, status region, and entry layout without horizontal overflow in `StoryBook/wwwroot/css/compare.css`.
-- [ ] T020 [US1] Run `dotnet test StoryBook2.sln --filter ComparePagesTests` and fix failures related to User Story 1 in `StoryBook2.sln`.
+- [ ] T025 [US1] Implement thin Compare PageModel that sets `UseCompareAssets`, loads `ComparisonCatalogSnapshot`, and exposes page state in `StoryBook/Pages/Compare/Index.cshtml.cs`.
+- [ ] T026 [US1] Implement canonical `/compare` Razor page with heading, home link, two select controls, clear button, polite status region, and empty initial state in `StoryBook/Pages/Compare/Index.cshtml`.
+- [ ] T027 [US1] Add a discoverable "比較故事朋友" / "Compare story friends" homepage action anchor to `/compare` in `StoryBook/Pages/Index.cshtml`.
+- [ ] T028 [US1] Add a discoverable "比較故事朋友" / "Compare story friends" exploration page action anchor to `/compare` in `StoryBook/Pages/Explore/Index.cshtml`.
+- [ ] T029 [US1] Add conditional compare stylesheet loading based on `ViewData["UseCompareAssets"]` in `StoryBook/Pages/Shared/_Layout.cshtml`.
+- [ ] T030 [US1] Style the initial compare page controls, status region, and entry layout without horizontal overflow in `StoryBook/wwwroot/css/compare.css`.
+- [ ] T031 [US1] Run `dotnet test StoryBook2.sln --filter ComparePagesTests` and fix failures related to User Story 1 in `StoryBook2.sln`.
 
 **Checkpoint**: User Story 1 is independently functional and testable.
 
@@ -78,21 +90,17 @@
 
 ### Tests for User Story 2
 
-> Write these tests FIRST and confirm they fail before implementation.
-
-- [ ] T021 [US2] Add failing unit tests for full 23-candidate projection, stable id format, source ordering, source `SortOrder`, and detail hrefs in `StoryBook.Tests/Unit/ComparisonCatalogServiceTests.cs`.
-- [ ] T022 [P] [US2] Add failing client script contract tests for duplicate selection, clear behavior, no history writes, and no storage writes in `StoryBook.Tests/Unit/CompareScriptContractTests.cs`.
-- [ ] T023 [US2] Add failing integration tests for candidate metadata, comparison table rows, normal detail links, and hidden table initial state in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
+> Covered by Phase 1 tasks T004, T005, and T006. Confirm they fail before starting the implementation tasks below.
 
 ### Implementation for User Story 2
 
-- [ ] T024 [US2] Implement dinosaur comparison candidate projection from `DinosaurCatalogService` in `StoryBook/Services/ComparisonCatalogService.cs`.
-- [ ] T025 [US2] Implement aquarium comparison candidate projection and source/group ordering from `AquariumCatalogService` in `StoryBook/Services/ComparisonCatalogService.cs`.
-- [ ] T026 [US2] Implement fixed comparison field definitions and child-friendly not-applicable values in `StoryBook/Services/ComparisonCatalogService.cs`.
-- [ ] T027 [US2] Render candidate options, bilingual metadata, hidden comparison rows, and normal detail anchors in `StoryBook/Pages/Compare/Index.cshtml`.
-- [ ] T028 [US2] Implement page-local first/second selection, one-selected prompt, duplicate prompt, ready state, and clear selection behavior in `StoryBook/wwwroot/js/compare.js`.
-- [ ] T029 [US2] Add responsive comparison table/card layout for mobile, tablet, and desktop in `StoryBook/wwwroot/css/compare.css`.
-- [ ] T030 [US2] Run `dotnet test StoryBook2.sln --filter "ComparisonCatalogServiceTests|ComparePagesTests|CompareScriptContractTests"` and fix User Story 2 failures in `StoryBook2.sln`.
+- [ ] T032 [US2] Implement dinosaur comparison candidate projection from `DinosaurCatalogService` in `StoryBook/Services/ComparisonCatalogService.cs`.
+- [ ] T033 [US2] Implement aquarium comparison candidate projection and source/group ordering from `AquariumCatalogService` in `StoryBook/Services/ComparisonCatalogService.cs`.
+- [ ] T034 [US2] Implement fixed comparison field definitions and child-friendly not-applicable values in `StoryBook/Services/ComparisonCatalogService.cs`.
+- [ ] T035 [US2] Render candidate options, bilingual metadata, hidden comparison rows, and normal detail anchors in `StoryBook/Pages/Compare/Index.cshtml`.
+- [ ] T036 [US2] Implement page-local first/second selection, one-selected prompt, duplicate prompt, ready state, and clear selection behavior in `StoryBook/wwwroot/js/compare.js`.
+- [ ] T037 [US2] Add responsive comparison table/card layout for mobile, tablet, and desktop in `StoryBook/wwwroot/css/compare.css`.
+- [ ] T038 [US2] Run `dotnet test StoryBook2.sln --filter "ComparisonCatalogServiceTests|ComparePagesTests|CompareScriptContractTests"` and fix User Story 2 failures in `StoryBook2.sln`.
 
 **Checkpoint**: User Stories 1 and 2 provide the core P1 comparison workflow.
 
@@ -106,17 +114,14 @@
 
 ### Tests for User Story 3
 
-> Write these tests FIRST and confirm they fail before implementation.
-
-- [ ] T031 [US3] Add failing integration tests for bilingual page text, bilingual accessible names, theme boot attributes, no compare theme selector, and preserve-state theme contract in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
-- [ ] T032 [P] [US3] Add failing unit tests for localized comparison field/value fallback and nonblank `zh-TW` fallback values in `StoryBook.Tests/Unit/ComparisonCatalogServiceTests.cs`.
+> Covered by Phase 1 tasks T007 and T008. Confirm they fail before starting the implementation tasks below.
 
 ### Implementation for User Story 3
 
-- [ ] T033 [US3] Add `data-i18n-*`, `data-aria-label-*`, and nonblank fallback attributes for compare controls, messages, field labels, not-applicable text, and detail actions in `StoryBook/Pages/Compare/Index.cshtml`.
-- [ ] T034 [US3] Update compare script to use localized candidate metadata and preserve selected candidates across language/theme DOM updates without writing storage in `StoryBook/wwwroot/js/compare.js`.
-- [ ] T035 [US3] Add visible focus, 44x44 CSS px targets, and no-overlap responsive rules for 375px, 768px, and 1366px widths in `StoryBook/wwwroot/css/compare.css`.
-- [ ] T036 [US3] Run `dotnet test StoryBook2.sln --filter "ComparisonCatalogServiceTests|ComparePagesTests|CompareScriptContractTests"` and fix User Story 3 failures in `StoryBook2.sln`.
+- [ ] T039 [US3] Add `data-i18n-*`, `data-aria-label-*`, and nonblank fallback attributes for compare controls, messages, field labels, not-applicable text, and detail actions in `StoryBook/Pages/Compare/Index.cshtml`.
+- [ ] T040 [US3] Update compare script to use localized candidate metadata and preserve selected candidates across language/theme DOM updates without writing storage in `StoryBook/wwwroot/js/compare.js`.
+- [ ] T041 [US3] Add visible focus, 44x44 CSS px targets, and no-overlap responsive rules for 375px, 768px, and 1366px widths in `StoryBook/wwwroot/css/compare.css`.
+- [ ] T042 [US3] Run `dotnet test StoryBook2.sln --filter "ComparisonCatalogServiceTests|ComparePagesTests|CompareScriptContractTests"` and fix User Story 3 failures in `StoryBook2.sln`.
 
 **Checkpoint**: Comparison experience is consistent with existing language, theme, and accessibility rules.
 
@@ -130,18 +135,14 @@
 
 ### Tests for User Story 4
 
-> Write these tests FIRST and confirm they fail before implementation.
-
-- [ ] T037 [US4] Extend catalog path override and limited-candidate helper support for compare integration tests in `StoryBook.Tests/Integration/ComparePageTestFixture.cs`.
-- [ ] T038 [US4] Add failing unit tests for partial source failure, all-source failure, fewer-than-two candidates, friendly statuses, and sanitized logging in `StoryBook.Tests/Unit/ComparisonCatalogServiceTests.cs`.
-- [ ] T039 [US4] Add failing integration tests for partial failure, not-enough-candidates, all-failed, home link, and no internal error details in `StoryBook.Tests/Integration/ComparePagesTests.cs`.
+> Covered by Phase 1 tasks T009, T010, and T011. Confirm they fail before starting the implementation tasks below.
 
 ### Implementation for User Story 4
 
-- [ ] T040 [US4] Implement source-level try/catch, `ILogger<ComparisonCatalogService>` warning logs, partial failure flags, all-failed flags, and not-enough candidate detection in `StoryBook/Services/ComparisonCatalogService.cs`.
-- [ ] T041 [US4] Render partial failure, not-enough-candidates, and all-failed states with polite live regions and home action in `StoryBook/Pages/Compare/Index.cshtml`.
-- [ ] T042 [US4] Ensure compare page output never renders exception type, stack trace, catalog path, `null`, `undefined`, or blank source/status labels in `StoryBook/Pages/Compare/Index.cshtml`.
-- [ ] T043 [US4] Run `dotnet test StoryBook2.sln --filter "ComparisonCatalogServiceTests|ComparePagesTests"` and fix User Story 4 failures in `StoryBook2.sln`.
+- [ ] T043 [US4] Implement source-level try/catch, `ILogger<ComparisonCatalogService>` warning logs, partial failure flags, all-failed flags, and not-enough candidate detection in `StoryBook/Services/ComparisonCatalogService.cs`.
+- [ ] T044 [US4] Render partial failure, not-enough-candidates, and all-failed states with polite live regions and home action in `StoryBook/Pages/Compare/Index.cshtml`.
+- [ ] T045 [US4] Ensure compare page output never renders exception type, stack trace, catalog path, `null`, `undefined`, or blank source/status labels in `StoryBook/Pages/Compare/Index.cshtml`.
+- [ ] T046 [US4] Run `dotnet test StoryBook2.sln --filter "ComparisonCatalogServiceTests|ComparePagesTests"` and fix User Story 4 failures in `StoryBook2.sln`.
 
 **Checkpoint**: Partial and full data failure states are independently testable and child-friendly.
 
@@ -151,11 +152,12 @@
 
 **Purpose**: 驗證完整流程、回應式/可及性、規格約束與交付品質。
 
-- [ ] T044 [P] Execute manual quickstart validation for `/`, `/explore`, `/compare`, selection, language, theme, storage, and failure scenarios in `specs/005-story-friend-compare/quickstart.md`.
-- [ ] T045 [P] Audit compare JavaScript for no `pushState`, `replaceState`, query initialization, `localStorage`, `sessionStorage`, cookie, or server state writes in `StoryBook/wwwroot/js/compare.js`.
-- [ ] T046 [P] Audit compare page markup for normal anchors, no theme selector, no blank values, and no internal error details in `StoryBook/Pages/Compare/Index.cshtml`.
-- [ ] T047 Run `dotnet build StoryBook2.sln` and fix build warnings or errors in `StoryBook2.sln`.
-- [ ] T048 Run `dotnet test StoryBook2.sln` and fix remaining regressions in `StoryBook2.sln`.
+- [ ] T047 [P] Execute manual quickstart validation for `/`, `/explore`, `/compare`, selection, language, theme, storage, failure scenarios, and 1-second update expectations in `specs/005-story-friend-compare/quickstart.md`.
+- [ ] T048 [P] Record representative usability evidence for SC-001 and SC-010 in the format defined by `specs/005-story-friend-compare/quickstart.md`.
+- [ ] T049 [P] Audit compare JavaScript for no `pushState`, `replaceState`, query initialization, `localStorage`, `sessionStorage`, cookie, or server state writes in `StoryBook/wwwroot/js/compare.js`.
+- [ ] T050 [P] Audit compare page markup for normal anchors, no theme selector, no blank values, no internal error details, no authentication requirement, no external search, no real-time translation, and no new external content source in `StoryBook/Pages/Compare/Index.cshtml`.
+- [ ] T051 Run `dotnet build StoryBook2.sln` and fix build warnings or errors in `StoryBook2.sln`.
+- [ ] T052 Run `dotnet test StoryBook2.sln` and fix remaining regressions in `StoryBook2.sln`.
 
 ---
 
@@ -163,12 +165,12 @@
 
 ### Phase Dependencies
 
-- **Setup (Phase 1)**: No dependencies.
-- **Foundational (Phase 2)**: Depends on Setup and blocks all user-story implementation.
+- **Test & Validation Definition (Phase 1)**: No dependencies; blocks all production implementation.
+- **Setup & Foundational (Phase 2)**: Depends on Test & Validation Definition and blocks all user-story implementation.
 - **User Story 1 (Phase 3)**: Depends on Foundational.
 - **User Story 2 (Phase 4)**: Depends on Foundational; rendered integration work depends on the `/compare` shell from User Story 1.
 - **User Story 3 (Phase 5)**: Depends on User Stories 1 and 2 because it verifies language, theme, and accessibility on the completed compare UI.
-- **User Story 4 (Phase 6)**: Service tests can begin after Foundational; rendered failure-state delivery depends on User Stories 1 and 2.
+- **User Story 4 (Phase 6)**: Failure-state implementation depends on Foundational; rendered failure-state delivery depends on User Stories 1 and 2.
 - **Polish (Phase 7)**: Depends on whichever user stories are selected for delivery, with full polish after all stories.
 
 ### User Story Dependencies
@@ -176,11 +178,11 @@
 - **US1 (P1)**: Independent navigable page shell after Foundational.
 - **US2 (P1)**: Core comparison workflow; depends on US1 for page shell but service and script tasks can start after Foundational.
 - **US3 (P2)**: Builds on US1/US2 UI and data contracts.
-- **US4 (P2)**: Builds on shared service/page contracts; failure tests can be developed in parallel with US3 after US2.
+- **US4 (P2)**: Builds on shared service/page contracts; failure tests are defined in Phase 1, and implementation can proceed after US2 contracts stabilize.
 
 ### Within Each User Story
 
-- Tests must be written first and observed failing before implementation.
+- Phase 1 tests must be written first and observed failing before implementation.
 - Models and service projection precede Razor rendering.
 - Razor metadata precedes JavaScript DOM behavior.
 - JavaScript behavior precedes responsive/focus polish.
@@ -190,13 +192,13 @@
 
 ## Parallel Opportunities
 
-- Setup tasks T001, T002, and T003 can run in parallel.
-- Foundational model tasks T004, T005, T006, T007, and T009 can run in parallel.
-- After Foundational, US1 entry link tasks T016 and T017 can run in parallel with page styling T019 once the page shell exists.
-- US2 unit projection tests T021 and client script contract tests T022 can run in parallel.
-- US3 integration tests T031 and fallback unit tests T032 can run in parallel.
-- US4 unit tests T038 and integration tests T039 can run in parallel after T037 test fixture support exists.
-- Polish audits T044, T045, and T046 can run in parallel.
+- Phase 1 integration, unit, static contract, and validation-definition tasks T001-T014 can run in parallel where file ownership does not overlap.
+- Foundational model tasks T017, T018, T019, T020, and T022 can run in parallel.
+- After Foundational, US1 entry link tasks T027 and T028 can run in parallel with page styling T030 once the page shell exists.
+- US2 projection implementation T032-T034 can run in parallel with static script contract refinement T005 after the expected failing tests are present.
+- US3 language/theme integration implementation T039-T041 can be split by Razor, JavaScript, and CSS ownership.
+- US4 service failure implementation T043 can proceed in parallel with rendered failure-state implementation T044 after fixture support T009 exists.
+- Polish audits T047, T048, T049, and T050 can run in parallel.
 
 ---
 
@@ -244,32 +246,35 @@ Task: "Implement friendly failure states in StoryBook/Pages/Compare/Index.cshtml
 
 ### MVP First
 
-1. Complete Phase 1 and Phase 2.
-2. Complete Phase 3 (US1) to make `/compare` discoverable and navigable.
-3. Validate US1 independently with `dotnet test StoryBook2.sln --filter ComparePagesTests`.
-4. For practical P1 delivery, continue immediately into Phase 4 (US2), because US2 provides the core comparison value.
+1. Complete Phase 1 and confirm expected failing tests/validation contracts exist.
+2. Complete Phase 2.
+3. Complete Phase 3 (US1) to make `/compare` discoverable and navigable.
+4. Validate US1 independently with `dotnet test StoryBook2.sln --filter ComparePagesTests`.
+5. For practical P1 delivery, continue immediately into Phase 4 (US2), because US2 provides the core comparison value.
 
 ### Incremental Delivery
 
-1. Setup + Foundational create shared files and compile-ready service boundaries.
-2. US1 delivers discoverable navigation and compare page shell.
-3. US2 delivers the usable comparison table and page-local interaction.
-4. US3 adds language, theme, keyboard, focus, and responsive consistency.
-5. US4 adds partial/failure data resilience.
-6. Polish runs full build, full tests, and quickstart validation.
+1. Test & Validation Definition creates failing tests and acceptance evidence requirements.
+2. Setup + Foundational create shared files and compile-ready service boundaries.
+3. US1 delivers discoverable navigation and compare page shell.
+4. US2 delivers the usable comparison table and page-local interaction.
+5. US3 adds language, theme, keyboard, focus, and responsive consistency.
+6. US4 adds partial/failure data resilience.
+7. Polish runs full build, full tests, quickstart validation, evidence recording, and audits.
 
 ### Parallel Team Strategy
 
-1. One developer handles setup/foundation DTO and service skeleton files.
-2. A second developer can prepare failing integration tests while foundational files are created.
-3. After US1 shell exists, service projection, Razor metadata, JavaScript behavior, and CSS can be split by file ownership.
-4. US3 and US4 tests can be prepared in parallel after US2 contracts stabilize.
+1. One developer handles failing integration and unit tests for the core compare contracts.
+2. A second developer prepares static JavaScript contract tests and quickstart validation/evidence definitions.
+3. After Phase 1 is complete, setup/foundation DTO and service skeleton files can be split by file ownership.
+4. After US1 shell exists, service projection, Razor metadata, JavaScript behavior, and CSS can be split by file ownership.
 
 ---
 
 ## Notes
 
 - `[P]` tasks use different files or do not depend on unfinished tasks.
+- T005 is a static source/contract test for JavaScript invariants; runtime DOM behavior is validated by T013 and T047 manual browser checks unless a browser automation runner is added in a future plan.
 - `[US1]` maps to entering the compare page.
 - `[US2]` maps to selecting two story friends and viewing the comparison table.
 - `[US3]` maps to bilingual, theme, and accessibility consistency.

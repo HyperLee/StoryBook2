@@ -34,6 +34,26 @@ dotnet run --project StoryBook/StoryBook.csproj
 6. Activate the entry and confirm the browser navigates to `/compare`.
 7. Confirm `/compare` shows first and second story friend selection controls.
 
+## 代表性可用性紀錄
+
+用於驗證 SC-001 與 SC-010；可由人工可用性驗收或同等瀏覽器任務紀錄完成。紀錄不可包含兒童個資、帳號、token、secret 或可識別個人的資料。
+
+### SC-001 入口尋找任務紀錄格式
+
+至少紀錄 20 次代表性 entry-finding attempts，且其中至少 95% 需在 5 秒內從首頁或 `/explore` 找到並進入 `/compare`。
+
+| Attempt | Start Page (`/` or `/explore`) | Completed Within 5s? | Navigated To `/compare`? | Notes |
+|---------|--------------------------------|----------------------|---------------------------|-------|
+| 1 | | | | |
+
+### SC-010 比較理解任務紀錄格式
+
+至少紀錄 10 位代表性測試使用者或同等人工驗收任務；其中至少 90% 需能正確說出兩位故事朋友至少一個相同點或不同點。
+
+| Attempt | Compared Friends | User Identified Same/Different Point? | Correct? | Notes |
+|---------|------------------|----------------------------------------|----------|-------|
+| 1 | | | | |
+
 ## 比較流程驗證
 
 1. On `/compare`, select `暴龍` as the first story friend.
@@ -45,6 +65,17 @@ dotnet run --project StoryBook/StoryBook.csproj
 7. Activate each detail link and confirm it opens `/dinosaurs/{slug}` or `/aquarium/{slug}`.
 8. Return to `/compare`, select the same story friend in both controls, and confirm the duplicate-selection prompt appears and the table is hidden.
 9. Use the clear selection control and confirm the page returns to the initial empty state.
+
+## 比較互動瀏覽器驗證
+
+此段補足 `CompareScriptContractTests` 無法直接執行 DOM runtime 的行為。
+
+1. Select the same story friend in both controls and confirm the duplicate-selection prompt appears within 1 second.
+2. Confirm the comparison table remains hidden while the duplicate-selection prompt is visible.
+3. Select two different story friends and confirm the ready comparison table appears within 1 second.
+4. Use the clear selection control and confirm both controls reset, status text returns to the initial prompt, and the table is hidden.
+5. With two different story friends selected, change the effective theme from another tab or homepage control and return to `/compare`.
+6. Confirm only visual appearance changes; selected candidates and visible comparison content remain unchanged.
 
 ## 語言與主題驗證
 
@@ -92,4 +123,14 @@ dotnet run --project StoryBook/StoryBook.csproj
 4. Simulate only one total candidate available.
 5. Confirm the page explains that at least two story friends are needed.
 6. Simulate all sources unavailable.
-7. Confirm the page shows a child-friendly error state and a home link, without internal exception details.
+7. Confirm the page shows a child-friendly error state and a home link within 1 second, without internal exception details.
+
+## 負向範圍稽核
+
+交付前確認本功能沒有引入規格排除的能力:
+
+- `/compare` does not require authentication and does not add login, account sync, favorites, recommendations, or saved history.
+- `/compare` does not search external websites, call external encyclopedia APIs, or add a new external content source.
+- `/compare` does not add real-time translation; it only uses existing bilingual content and `zh-TW` fallback rules.
+- `/compare` does not add comparison URL query state, server-side comparison state, cookies, `localStorage`, or `sessionStorage` writes.
+- `/compare` detail actions remain normal anchors to `/dinosaurs/{slug}` or `/aquarium/{slug}` and do not introduce `/compare/{slug}` detail routes.

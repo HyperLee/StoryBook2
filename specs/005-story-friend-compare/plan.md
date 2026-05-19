@@ -14,7 +14,7 @@
 **Language/Version**: C# / .NET `net10.0`, ASP.NET Core Razor Pages, nullable enabled, implicit usings enabled; browser互動使用原生 JavaScript 與 CSS。  
 **Primary Dependencies**: ASP.NET Core Razor Pages、Tag Helpers、Bootstrap 5、既有 `DinosaurCatalogService` / `AquariumCatalogService`、既有 `ExplorationSourceType` source metadata、xUnit、`Microsoft.AspNetCore.Mvc.Testing`；不新增 NuGet、JavaScript 套件或外部服務。  
 **Storage**: 既有本機 JSON catalog：`StoryBook/Data/dinosaurs.json`、`StoryBook/Data/aquarium.json`；不新增資料庫、cookie preference endpoint、比較歷史、分享 URL 或外部內容來源。  
-**Testing**: `dotnet test StoryBook2.sln`；新增/更新 xUnit 單元測試覆蓋比較候選 projection、stable id、來源排序、欄位 fallback、不適用文字、重複選擇規則與部分來源失敗；整合測試覆蓋 `/compare` route、首頁與 `/explore` 入口、HTML contract、theme selector absence、一般 anchor 詳情導覽與錯誤狀態。  
+**Testing**: `dotnet test StoryBook2.sln`；新增/更新 xUnit 單元測試覆蓋比較候選 projection、stable id、來源排序、欄位 fallback、不適用文字、部分來源失敗與靜態 JavaScript 合約；整合測試覆蓋 `/compare` route、首頁與 `/explore` 入口、HTML contract、theme selector absence、一般 anchor 詳情導覽與錯誤狀態。JavaScript runtime DOM behavior（重複選擇、清除、主題切換後保留目前選擇）以 quickstart 手動瀏覽器驗收記錄，除非後續 plan 明確新增 browser automation runner。
 **Target Platform**: 單一 ASP.NET Core web application，開發 URL 以 `dotnet run --project StoryBook/StoryBook.csproj` 輸出為準。  
 **Project Type**: Razor Pages web app + xUnit test project。  
 **Performance Goals**: `/compare` 初始載入與選擇變更後的比較表或提示更新須符合規格 1 秒內完成；目前候選集合為 23 筆內容，伺服器端 projection 加頁面內 DOM 更新足以達成。  
@@ -80,8 +80,10 @@ StoryBook/
 
 StoryBook.Tests/
 ├── Integration/
+│   ├── ComparePageTestFixture.cs
 │   └── ComparePagesTests.cs
 └── Unit/
+    ├── CompareScriptContractTests.cs
     └── ComparisonCatalogServiceTests.cs
 ```
 
