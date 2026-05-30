@@ -1,14 +1,10 @@
-using System.Net;
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Mvc.Testing;
-
 namespace StoryBook.Tests.Integration;
 
-public sealed class QuizPagesTests : IClassFixture<QuizPagesTests.QuizPageFixture>
+public sealed class QuizPagesTests : IClassFixture<QuizPageTestFixture>
 {
-    private readonly QuizPageFixture _fixture;
+    private readonly QuizPageTestFixture _fixture;
 
-    public QuizPagesTests(QuizPageFixture fixture)
+    public QuizPagesTests(QuizPageTestFixture fixture)
     {
         _fixture = fixture;
     }
@@ -130,64 +126,75 @@ public sealed class QuizPagesTests : IClassFixture<QuizPagesTests.QuizPageFixtur
         Assert.DoesNotContain("/missing-story", html, StringComparison.OrdinalIgnoreCase);
     }
 
-    public sealed class QuizPageFixture : IAsyncLifetime
+    [Fact]
+    public async Task Quiz_page_renders_friendly_empty_state_for_empty_catalog()
     {
-        public WebApplicationFactory<Program> Factory { get; private set; } = null!;
+        using TempQuizCatalog catalog = QuizPageTestFixture.CreateTempQuizCatalog(
+            """
+            { "version": 1, "questions": [] }
+            """);
+        using HttpClient client = _fixture.CreateClientWithCatalogPaths(catalog.Path);
 
-        public HttpClient Client { get; private set; } = null!;
+        string html = await GetOkHtmlAsync(client, "/quiz");
 
-        public Task InitializeAsync()
-        {
-            Factory = new WebApplicationFactory<Program>();
-            Client = Factory.CreateClient(new WebApplicationFactoryClientOptions
+        Assert.Contains("data-quiz-empty", html);
+        Assert.Contains("問答題目正在準備中", html);
+        Assert.DoesNotContain("System.", html);
+        Assert.DoesNotContain(catalog.Path, html);
+    }
+
+    [Fact]
+    public async Task Quiz_page_renders_friendly_state_for_invalid_question_file_without_internal_details()
+    {
+        using TempQuizCatalog catalog = QuizPageTestFixture.CreateTempQuizCatalog("{ not valid json");
+        using HttpClient client = _fixture.CreateClientWithCatalogPaths(catalog.Path);
+
+        string html = await GetOkHtmlAsync(client, "/quiz");
+
+        Assert.Contains("data-quiz-empty", html);
+        Assert.DoesNotContain("JsonException", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("System.Text.Json", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain(catalog.Path, html);
+    }
+
+    [Fact]
+    public async Task Quiz_page_filters_unavailable_story_references_and_unknown_question_id_falls_back()
+    {
+        using TempQuizCatalog catalog = QuizPageTestFixture.CreateTempQuizCatalog(
+            """
             {
-                AllowAutoRedirect = false
-            });
-
-            return Task.CompletedTask;
-        }
-
-        public Task DisposeAsync()
-        {
-            Client.Dispose();
-            Factory.Dispose();
-            return Task.CompletedTask;
-        }
-
-        public async Task<string> GetOkHtmlAsync(string path)
-        {
-            using HttpResponseMessage response = await Client.GetAsync(path);
-
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            return WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
-        }
-
-        public async Task<string> PostAnswerAsync(
-            string getPath,
-            string scope,
-            string questionId,
-            string? selectedOptionId)
-        {
-            string formHtml = await GetOkHtmlAsync(getPath);
-            string token = ExtractHiddenValue(formHtml, "__RequestVerificationToken");
-            List<KeyValuePair<string, string>> fields =
-            [
-                new("__RequestVerificationToken", token),
-                new("scope", scope),
-                new("questionId", questionId)
-            ];
-
-            if (!string.IsNullOrWhiteSpace(selectedOptionId))
-            {
-                fields.Add(new KeyValuePair<string, string>("selectedOptionId", selectedOptionId));
+              "version": 1,
+              "questions": [
+                {
+                  "id": "missing-story-question",
+                  "source": "dinosaurs",
+                  "difficulty": "easy",
+                  "sortOrder": 1,
+                  "prompt": { "zhTW": "題目", "en": "Question" },
+                  "options": [
+                    { "id": "one", "text": { "zhTW": "一", "en": "One" }, "sortOrder": 1 },
+                    { "id": "two", "text": { "zhTW": "二", "en": "Two" }, "sortOrder": 2 }
+                  ],
+                  "correctOptionId": "one",
+                  "correctFeedback": { "zhTW": "答對了", "en": "Correct" },
+                  "incorrectFeedback": { "zhTW": "再想想", "en": "Try again" },
+                  "explanation": { "zhTW": "解釋", "en": "Explanation" },
+                  "relatedStories": [
+                    { "source": "dinosaurs", "slug": "missing-story", "sortOrder": 1 }
+                  ]
+                }
+              ]
             }
+            """);
+        using HttpClient client = _fixture.CreateClientWithCatalogPaths(catalog.Path);
 
-            using FormUrlEncodedContent content = new(fields);
-            using HttpResponseMessage response = await Client.PostAsync("/quiz?handler=Answer", content);
+        string unavailableHtml = await GetOkHtmlAsync(client, "/quiz");
+        string unknownQuestionHtml = await _fixture.GetOkHtmlAsync("/quiz?scope=dinosaurs&questionId=not-here");
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            return WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
-        }
+        Assert.Contains("data-quiz-empty", unavailableHtml);
+        Assert.DoesNotContain("/missing-story", unavailableHtml, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("data-quiz-question-fallback", unknownQuestionHtml);
+        Assert.Contains("data-quiz-current-question-id=\"tyrannosaurus-teeth\"", unknownQuestionHtml);
     }
 
     private static bool HasLinkTo(string html, string href)
@@ -196,14 +203,11 @@ public sealed class QuizPagesTests : IClassFixture<QuizPagesTests.QuizPageFixtur
             || html.Contains($"href='{href}'", StringComparison.OrdinalIgnoreCase);
     }
 
-    private static string ExtractHiddenValue(string html, string name)
+    private static async Task<string> GetOkHtmlAsync(HttpClient client, string path)
     {
-        Match match = Regex.Match(
-            html,
-            $"<input[^>]*name=\"{Regex.Escape(name)}\"[^>]*value=\"(?<value>[^\"]+)\"",
-            RegexOptions.IgnoreCase);
+        using HttpResponseMessage response = await client.GetAsync(path);
 
-        Assert.True(match.Success, $"Expected hidden input named {name}.");
-        return match.Groups["value"].Value;
+        Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
+        return System.Net.WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
     }
 }

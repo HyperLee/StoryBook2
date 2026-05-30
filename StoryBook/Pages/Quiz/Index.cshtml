@@ -47,6 +47,19 @@
         </div>
     }
 
+    @if (Model.HasPartialSourceFailure || Model.HasAllSourcesFailed)
+    {
+        <div class="quiz-alert" role="status" data-quiz-source-status>
+            <strong data-i18n-zh-tw="有一些題目暫時躲起來了" data-i18n-en="Some questions are hiding for now">有一些題目暫時躲起來了</strong>
+            @foreach (QuizSourceStatus status in Model.SourceStatuses.Where(status => !status.IsAvailable || !string.IsNullOrWhiteSpace(status.FriendlyMessageZhTW)))
+            {
+                <p data-i18n-zh-tw="@status.GetFriendlyMessage(LanguageCode.ZhTW)" data-i18n-en="@status.GetFriendlyMessage(LanguageCode.En)">
+                    @status.GetFriendlyMessage(LanguageCode.ZhTW)
+                </p>
+            }
+        </div>
+    }
+
     @if (Model.HasQuestionFallback)
     {
         <div class="quiz-alert" role="status" data-quiz-question-fallback>

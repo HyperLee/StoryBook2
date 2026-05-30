@@ -128,18 +128,18 @@
 
 ### Tests for User Story 4
 
-- [ ] T041 [P] [US4] Add validation tests for version, required fields, unique kebab-case ids, source values, difficulty values, bilingual text, option count, unique correct option, related story shape, and minimum valid question counts in `StoryBook.Tests/Unit/QuizContentValidationTests.cs`
-- [ ] T042 [P] [US4] Add catalog tests for partial invalid filtering, source failure status, friendly source messages, and non-sensitive logging in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
-- [ ] T043 [P] [US4] Add integration tests for empty catalog, invalid question file, unavailable story references, unknown question id fallback, and no internal exception/path output in `StoryBook.Tests/Integration/QuizPagesTests.cs`
+- [X] T041 [P] [US4] Add validation tests for version, required fields, unique kebab-case ids, source values, difficulty values, bilingual text, option count, unique correct option, related story shape, and minimum valid question counts in `StoryBook.Tests/Unit/QuizContentValidationTests.cs`
+- [X] T042 [P] [US4] Add catalog tests for partial invalid filtering, source failure status, friendly source messages, and non-sensitive logging in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
+- [X] T043 [P] [US4] Add integration tests for empty catalog, invalid question file, unavailable story references, unknown question id fallback, and no internal exception/path output in `StoryBook.Tests/Integration/QuizPagesTests.cs`
 
 ### Implementation for User Story 4
 
-- [ ] T044 [US4] Implement full quiz schema and content validation rules with non-sensitive logging in `StoryBook/Services/QuizContentValidator.cs`
-- [ ] T045 [US4] Integrate validation results, invalid question filtering, source status summaries, and friendly fallback decisions in `StoryBook/Services/QuizCatalogService.cs`
-- [ ] T046 [US4] Add quiz integration fixture helpers for replacing content paths and services in `StoryBook.Tests/Integration/QuizPageTestFixture.cs`
-- [ ] T047 [US4] Render child-friendly empty catalog, no-question, invalid question id, and source-unavailable states in `StoryBook/Pages/Quiz/Index.cshtml`
-- [ ] T048 [US4] Add empty and error state layout styles in `StoryBook/wwwroot/css/quiz.css`
-- [ ] T049 [US4] Run US4 validation and fallback tests, then record the result in `specs/008-quiz-challenges/quickstart.md`
+- [X] T044 [US4] Implement full quiz schema and content validation rules with non-sensitive logging in `StoryBook/Services/QuizContentValidator.cs`
+- [X] T045 [US4] Integrate validation results, invalid question filtering, source status summaries, and friendly fallback decisions in `StoryBook/Services/QuizCatalogService.cs`
+- [X] T046 [US4] Add quiz integration fixture helpers for replacing content paths and services in `StoryBook.Tests/Integration/QuizPageTestFixture.cs`
+- [X] T047 [US4] Render child-friendly empty catalog, no-question, invalid question id, and source-unavailable states in `StoryBook/Pages/Quiz/Index.cshtml`
+- [X] T048 [US4] Add empty and error state layout styles in `StoryBook/wwwroot/css/quiz.css`
+- [X] T049 [US4] Run US4 validation and fallback tests, then record the result in `specs/008-quiz-challenges/quickstart.md`
 
 **Checkpoint**: User Story 4 is independently functional and testable.
 

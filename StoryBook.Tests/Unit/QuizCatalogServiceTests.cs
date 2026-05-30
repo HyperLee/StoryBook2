@@ -143,7 +143,7 @@ public sealed class QuizCatalogServiceTests
             "dinosaurs",
             2,
             "triceratops",
-            new QuizStoryReference { Source = "dinosaurs", Slug = "triceratops", SortOrder = 2 });
+            additionalRelatedStories: [new QuizStoryReference { Source = "dinosaurs", Slug = "triceratops", SortOrder = 2 }]);
         QuizQuestion missing = CreateQuestion("missing-reference", "dinosaurs", 3, "missing-story");
         using QuizCatalogServiceTestContext context = CreateContext(valid, duplicate, missing);
 
@@ -154,7 +154,55 @@ public sealed class QuizCatalogServiceTests
         Assert.Equal(2, snapshot.InvalidQuestionCount);
     }
 
+    [Fact]
+    public void GetSnapshot_filters_partially_invalid_questions_and_counts_invalid_question_diagnostics()
+    {
+        QuizQuestion valid = CreateQuestion("valid-reference", "dinosaurs", 1, "triceratops");
+        QuizQuestion invalid = CreateQuestion("invalid-difficulty", "dinosaurs", 2, "triceratops", difficulty: "hard");
+        using QuizCatalogServiceTestContext context = CreateContext(valid, invalid);
+
+        QuizCatalogSnapshot snapshot = context.Service.GetSnapshot();
+
+        QuizQuestion remaining = Assert.Single(snapshot.Questions);
+        Assert.Equal("valid-reference", remaining.Id);
+        Assert.Equal(1, snapshot.InvalidQuestionCount);
+    }
+
+    [Fact]
+    public void GetSnapshot_reports_source_failure_status_friendly_message_and_sanitized_logging()
+    {
+        RecordingLogger<QuizCatalogService> logger = new();
+        using QuizCatalogServiceTestContext context = CreateContextWithStoryPaths(
+            [
+                CreateQuestion("valid-dino", "dinosaurs", 1, "triceratops"),
+                CreateQuestion("aquarium-unavailable", "aquarium", 1, "clownfish")
+            ],
+            logger,
+            aquariumContentPath: "Data/not-found-aquarium.json");
+
+        QuizCatalogSnapshot snapshot = context.Service.GetSnapshot();
+
+        Assert.True(snapshot.HasPartialSourceFailure);
+        QuizSourceStatus aquarium = Assert.Single(snapshot.SourceStatuses, status => status.Source == ExplorationSourceType.Aquarium);
+        Assert.False(aquarium.IsAvailable);
+        Assert.False(string.IsNullOrWhiteSpace(aquarium.GetFriendlyMessage(LanguageCode.ZhTW)));
+        QuizQuestion remaining = Assert.Single(snapshot.Questions);
+        Assert.Equal("valid-dino", remaining.Id);
+        Assert.Contains(logger.Entries, entry => entry.Message.Contains("source-unavailable", StringComparison.OrdinalIgnoreCase));
+        Assert.DoesNotContain(logger.Entries, entry => entry.Message.Contains("not-found-aquarium", StringComparison.OrdinalIgnoreCase));
+        Assert.DoesNotContain(logger.Entries, entry => entry.Message.Contains(TestPaths.StoryBookRoot, StringComparison.OrdinalIgnoreCase));
+    }
+
     private static QuizCatalogServiceTestContext CreateContext(params QuizQuestion[] questions)
+    {
+        return CreateContextWithStoryPaths(questions);
+    }
+
+    private static QuizCatalogServiceTestContext CreateContextWithStoryPaths(
+        IReadOnlyList<QuizQuestion> questions,
+        RecordingLogger<QuizCatalogService>? logger = null,
+        string dinosaurContentPath = "Data/dinosaurs.json",
+        string aquariumContentPath = "Data/aquarium.json")
     {
         string path = Path.Combine(Path.GetTempPath(), $"storybook-quiz-{Guid.NewGuid():N}.json");
         QuizCatalog catalog = new()
@@ -169,9 +217,9 @@ public sealed class QuizCatalogServiceTests
             Options.Create(new QuizCatalogOptions { ContentPath = path }),
             new FakeWebHostEnvironment(TestPaths.StoryBookRoot),
             new QuizContentValidator(),
-            CreateDinosaurCatalog(),
-            CreateAquariumCatalog(),
-            new RecordingLogger<QuizCatalogService>());
+            CreateDinosaurCatalog(dinosaurContentPath),
+            CreateAquariumCatalog(aquariumContentPath),
+            logger ?? new RecordingLogger<QuizCatalogService>());
 
         return new QuizCatalogServiceTestContext(path, service);
     }
@@ -181,7 +229,8 @@ public sealed class QuizCatalogServiceTests
         string source,
         int sortOrder,
         string? relatedSlug = null,
-        params QuizStoryReference[] additionalRelatedStories)
+        QuizStoryReference[]? additionalRelatedStories = null,
+        string difficulty = "easy")
     {
         string slug = relatedSlug ?? (source == "aquarium" ? "clownfish" : "triceratops");
         List<QuizStoryReference> relatedStories =
@@ -193,13 +242,13 @@ public sealed class QuizCatalogServiceTests
                 SortOrder = 1
             }
         ];
-        relatedStories.AddRange(additionalRelatedStories);
+        relatedStories.AddRange(additionalRelatedStories ?? []);
 
         return new QuizQuestion
         {
             Id = id,
             Source = source,
-            Difficulty = "easy",
+            Difficulty = difficulty,
             SortOrder = sortOrder,
             Prompt = new QuizText { ZhTW = $"題目 {id}", En = $"Question {id}" },
             Options =
@@ -246,19 +295,19 @@ public sealed class QuizCatalogServiceTests
         }
     }
 
-    private static DinosaurCatalogService CreateDinosaurCatalog()
+    private static DinosaurCatalogService CreateDinosaurCatalog(string contentPath)
     {
         return new DinosaurCatalogService(
-            Options.Create(new DinosaurCatalogOptions { ContentPath = "Data/dinosaurs.json" }),
+            Options.Create(new DinosaurCatalogOptions { ContentPath = contentPath }),
             new FakeWebHostEnvironment(TestPaths.StoryBookRoot),
             new DinosaurContentValidator(),
             new RecordingLogger<DinosaurCatalogService>());
     }
 
-    private static AquariumCatalogService CreateAquariumCatalog()
+    private static AquariumCatalogService CreateAquariumCatalog(string contentPath)
     {
         return new AquariumCatalogService(
-            Options.Create(new AquariumCatalogOptions { ContentPath = "Data/aquarium.json" }),
+            Options.Create(new AquariumCatalogOptions { ContentPath = contentPath }),
             new FakeWebHostEnvironment(TestPaths.StoryBookRoot),
             new AquariumContentValidator(),
             new RecordingLogger<AquariumCatalogService>());

@@ -43,7 +43,11 @@ public sealed class QuizContentValidationResult
     /// <summary>
     /// Number of rejected question diagnostics.
     /// </summary>
-    public int InvalidQuestionCount => Diagnostics.Count(diagnostic => !string.IsNullOrWhiteSpace(diagnostic.QuestionId));
+    public int InvalidQuestionCount => Diagnostics
+        .Where(diagnostic => !string.IsNullOrWhiteSpace(diagnostic.QuestionId))
+        .Select(diagnostic => diagnostic.QuestionId)
+        .Distinct(StringComparer.Ordinal)
+        .Count();
 
     /// <summary>
     /// Creates a root-level invalid result.

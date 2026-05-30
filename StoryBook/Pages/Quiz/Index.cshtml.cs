@@ -29,6 +29,10 @@ public sealed class IndexModel : PageModel
 
     public bool HasAnyQuestion { get; private set; }
 
+    public bool HasPartialSourceFailure { get; private set; }
+
+    public bool HasAllSourcesFailed { get; private set; }
+
     public bool HasScopeFallback { get; private set; }
 
     public bool HasQuestionFallback { get; private set; }
@@ -47,6 +51,8 @@ public sealed class IndexModel : PageModel
         QuizCatalogSnapshot snapshot = _quizCatalogService.GetSnapshot();
         SourceStatuses = snapshot.SourceStatuses;
         HasAnyQuestion = snapshot.HasAnyQuestion;
+        HasPartialSourceFailure = snapshot.HasPartialSourceFailure;
+        HasAllSourcesFailed = snapshot.HasAllSourcesFailed;
         QuestionsInScope = _quizCatalogService.GetQuestionViews(Scope, LanguageCode.ZhTW);
         CurrentQuestion = _quizCatalogService.GetQuestionView(Scope, questionId, LanguageCode.ZhTW);
         HasQuestionFallback = !string.IsNullOrWhiteSpace(questionId)
@@ -64,6 +70,8 @@ public sealed class IndexModel : PageModel
         QuizCatalogSnapshot snapshot = _quizCatalogService.GetSnapshot();
         SourceStatuses = snapshot.SourceStatuses;
         HasAnyQuestion = snapshot.HasAnyQuestion;
+        HasPartialSourceFailure = snapshot.HasPartialSourceFailure;
+        HasAllSourcesFailed = snapshot.HasAllSourcesFailed;
         QuestionsInScope = _quizCatalogService.GetQuestionViews(Scope, LanguageCode.ZhTW);
         CurrentQuestion = _quizCatalogService.GetQuestionView(Scope, questionId, LanguageCode.ZhTW);
         HasQuestionFallback = !string.IsNullOrWhiteSpace(questionId)

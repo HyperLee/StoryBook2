@@ -170,6 +170,15 @@ public sealed class QuizCatalogService
                 return CreateUnavailableSnapshot("catalog-invalid");
             }
 
+            foreach (QuizContentDiagnostic diagnostic in result.Diagnostics)
+            {
+                _logger.LogWarning(
+                    "Quiz content validation diagnostic {ReasonCode} for question {QuestionId} and source {SourceCode}.",
+                    diagnostic.ReasonCode,
+                    diagnostic.QuestionId ?? "catalog",
+                    diagnostic.SourceCode ?? "all");
+            }
+
             IReadOnlyList<QuizQuestion> candidateQuestions = SortQuestions(result.ValidQuestions)
                 .Where(question => TryParseSource(question.Source, out _))
                 .Where(question => QuizDifficultyParser.TryParse(question.Difficulty, out _))
