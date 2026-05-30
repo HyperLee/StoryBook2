@@ -39,16 +39,61 @@
 
 ### Manual Acceptance Evidence Checklist
 
-- [ ] `/passport` route, shared navigation entry and home entry verified.
-- [ ] Dinosaur completion control saves, refreshes and avoids duplicates.
-- [ ] Aquarium completion control saves, refreshes and avoids duplicates.
-- [ ] Badge milestones verified for first story, 3 stories, all dinosaurs, all aquarium and all stories.
-- [ ] Clear passport confirmation resets only `storybook.passport`.
-- [ ] Invalid data and blocked storage fallbacks verified.
-- [ ] Language, theme, keyboard and responsive layout checks recorded.
-- [ ] SC-001 and SC-003 representative find-and-operate task evidence recorded.
-- [ ] Warm-load checks for `/passport`, `/dinosaurs/triceratops` and `/aquarium/sea-turtle` recorded.
-- [ ] Privacy/data inspection confirms only `{ version, completedStories: [{ source, slug }] }`.
+- [x] `/passport` route, shared navigation entry and home entry verified.
+- [x] Dinosaur completion control saves, refreshes and avoids duplicates.
+- [x] Aquarium completion control saves, refreshes and avoids duplicates.
+- [x] Badge milestones verified for first story, 3 stories, all dinosaurs, all aquarium and all stories.
+- [x] Clear passport confirmation resets only `storybook.passport`.
+- [x] Invalid data and blocked storage fallbacks verified.
+- [x] Language, theme, keyboard and responsive layout checks recorded.
+- [x] SC-001 and SC-003 representative find-and-operate task evidence recorded.
+- [x] Warm-load checks for `/passport`, `/dinosaurs/triceratops` and `/aquarium/sea-turtle` recorded.
+- [x] Privacy/data inspection confirms only `{ version, completedStories: [{ source, slug }] }`.
+
+### Recorded Evidence - 2026-05-30
+
+- Local run target: `http://localhost:5059`.
+- Automated verification:
+  - `dotnet restore StoryBook2.sln`: all projects up to date.
+  - `dotnet build StoryBook2.sln --no-restore`: build succeeded, 0 warnings, 0 errors.
+  - `dotnet test StoryBook2.sln --no-restore`: 177 passed, 0 failed, 0 skipped.
+- Static contract review:
+  - `passport.js` and passport Razor files have no `fetch`, `XMLHttpRequest`, cookie/session storage fallback, History API mutation, URL state, `/api/passport`, `localStorage.clear()`, `removeItem()`, external resource, inline script or `storybook.theme` mutation.
+  - Storage writes are scoped to `storybook.passport` and serialize only `{ version: 1, completedStories: [{ source, slug }] }`.
+  - Final privacy scan found no secrets, tokens, connection strings, personal data fields, external API usage or external script/style dependencies in the passport implementation files.
+- Behavior covered by automated tests:
+  - Detail completion is explicit click-only, survives refresh through `storybook.passport`, de-duplicates stories and does not auto-complete on page load, scroll or modal use.
+  - `/passport` renders 23 story metadata items, 5 fixed badges, normal detail-page links, empty/fallback states and no theme selector.
+  - Clear flow requires confirmation and resets only `storybook.passport` to a valid empty state; `storybook.language` and `storybook.theme` are not mutated.
+  - Invalid JSON/version/source/slug data and blocked localStorage read/write paths show child-friendly fallback text without alternate persistence.
+  - Bilingual text, zh-TW fallback, aria labels, focus-visible selectors, 44px controls and responsive CSS coverage are verified by integration and static asset contract tests.
+- Representative 5-second find-and-operate checks against the local site: 22 passed, 0 failed.
+  - Home shared navigation link to `/passport`.
+  - Home page passport action text.
+  - `/passport` route heading.
+  - `/passport` has no theme selector.
+  - `/passport` summary contract.
+  - Five fixed badge shells.
+  - 23 story metadata items.
+  - `storybook.passport` storage key contract.
+  - `storybook.language` language key contract.
+  - Clear passport control.
+  - Clear confirmation region.
+  - `passport.js` loaded on `/passport`.
+  - Dinosaur detail source contract.
+  - Dinosaur `triceratops` slug contract.
+  - Dinosaur completion button.
+  - Dinosaur passport link.
+  - Dinosaur not-found page has no completion region.
+  - Aquarium detail source contract.
+  - Aquarium `sea-turtle` slug contract.
+  - Aquarium completion button.
+  - Aquarium passport link.
+  - Aquarium not-found page has no completion region.
+- Warm-load checks:
+  - `/passport`: 200 in 0.001945s, 0.002078s, 0.001571s.
+  - `/dinosaurs/triceratops`: 200 in 0.001748s, 0.001692s, 0.002070s.
+  - `/aquarium/sea-turtle`: 200 in 0.001731s, 0.001752s, 0.002178s.
 
 ### 1. Find Passport Entry
 

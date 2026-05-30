@@ -185,13 +185,13 @@
 
 **Purpose**: 完成交付前的整體品質、回歸與手動驗收。
 
-- [ ] T060 [P] Review `passport.js` for forbidden persistence and navigation APIs against `specs/007-reading-passport/contracts/ui-routes.md`
-- [ ] T061 [P] Review generated storage shape against `specs/007-reading-passport/contracts/passport-state.schema.json`
-- [ ] T062 Run `dotnet restore StoryBook2.sln` for dependency validation in `StoryBook2.sln`
-- [ ] T063 Run `dotnet build StoryBook2.sln` and confirm no new warnings in `StoryBook2.sln`
-- [ ] T064 Run `dotnet test StoryBook2.sln` and confirm all unit/integration tests pass in `StoryBook2.sln`
-- [ ] T065 Execute and record quickstart manual acceptance evidence for routes, localStorage, clear flow, language, theme, keyboard, 375/768/1366px layout, at least 20 representative 5-second find-and-operate tasks for SC-001/SC-003, and 3 warm-load checks each for `/passport`, `/dinosaurs/triceratops` and `/aquarium/sea-turtle` in `specs/007-reading-passport/quickstart.md`
-- [ ] T066 Review final implementation for secrets, personal data fields, external API usage, forbidden storage keys, inline scripts and external resource dependencies in `StoryBook/wwwroot/js/passport.js`, `StoryBook/Pages/Passport/Index.cshtml`, `StoryBook/Pages/Dinosaurs/Details.cshtml` and `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T060 [P] Review `passport.js` for forbidden persistence and navigation APIs against `specs/007-reading-passport/contracts/ui-routes.md`
+- [X] T061 [P] Review generated storage shape against `specs/007-reading-passport/contracts/passport-state.schema.json`
+- [X] T062 Run `dotnet restore StoryBook2.sln` for dependency validation in `StoryBook2.sln`
+- [X] T063 Run `dotnet build StoryBook2.sln` and confirm no new warnings in `StoryBook2.sln`
+- [X] T064 Run `dotnet test StoryBook2.sln` and confirm all unit/integration tests pass in `StoryBook2.sln`
+- [X] T065 Execute and record quickstart manual acceptance evidence for routes, localStorage, clear flow, language, theme, keyboard, 375/768/1366px layout, at least 20 representative 5-second find-and-operate tasks for SC-001/SC-003, and 3 warm-load checks each for `/passport`, `/dinosaurs/triceratops` and `/aquarium/sea-turtle` in `specs/007-reading-passport/quickstart.md`
+- [X] T066 Review final implementation for secrets, personal data fields, external API usage, forbidden storage keys, inline scripts and external resource dependencies in `StoryBook/wwwroot/js/passport.js`, `StoryBook/Pages/Passport/Index.cshtml`, `StoryBook/Pages/Dinosaurs/Details.cshtml` and `StoryBook/Pages/Aquarium/Details.cshtml`
 
 ---
 
