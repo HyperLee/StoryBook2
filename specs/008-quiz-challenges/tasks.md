@@ -174,13 +174,13 @@
 
 **Purpose**: Final quality gates that span all quiz stories.
 
-- [ ] T059 [P] Review XML documentation, nullable annotations, and `.editorconfig` consistency in `StoryBook/Models/Quiz*.cs` and `StoryBook/Services/Quiz*.cs`
-- [ ] T060 [P] Review child-friendly Traditional Chinese and English copy in `StoryBook/Data/quiz-questions.json` and `StoryBook/Pages/Quiz/Index.cshtml`
-- [ ] T061 Review non-sensitive logging and absence of absolute paths, exception details, stack traces, secrets, and answer-result persistence in `StoryBook/Services/QuizCatalogService.cs`, `StoryBook/Services/QuizContentValidator.cs`, and `StoryBook/Pages/Quiz/Index.cshtml.cs`
-- [ ] T062 Run `dotnet test StoryBook2.sln` and record final automated verification in `specs/008-quiz-challenges/quickstart.md`
-- [ ] T063 Run local warm-load performance smoke checks for `/quiz`, scope navigation, next-question navigation, and answer feedback timing, then record p95/FCP/LCP/1-second response evidence in `specs/008-quiz-challenges/quickstart.md`
-- [ ] T064 Run the full manual acceptance checklist and update evidence checkboxes in `specs/008-quiz-challenges/quickstart.md`
-- [ ] T065 Record SC-001 and SC-010 evidence in `specs/008-quiz-challenges/quickstart.md`: at least 20 quiz-entry discovery or equivalent browser task records with at least 19 successes within 5 seconds, and at least 10 explanation-learning records with at least 9 successful key learning points
+- [X] T059 [P] Review XML documentation, nullable annotations, and `.editorconfig` consistency in `StoryBook/Models/Quiz*.cs` and `StoryBook/Services/Quiz*.cs`
+- [X] T060 [P] Review child-friendly Traditional Chinese and English copy in `StoryBook/Data/quiz-questions.json` and `StoryBook/Pages/Quiz/Index.cshtml`
+- [X] T061 Review non-sensitive logging and absence of absolute paths, exception details, stack traces, secrets, and answer-result persistence in `StoryBook/Services/QuizCatalogService.cs`, `StoryBook/Services/QuizContentValidator.cs`, and `StoryBook/Pages/Quiz/Index.cshtml.cs`
+- [X] T062 Run `dotnet test StoryBook2.sln` and record final automated verification in `specs/008-quiz-challenges/quickstart.md`
+- [X] T063 Run local warm-load performance smoke checks for `/quiz`, scope navigation, next-question navigation, and answer feedback timing, then record p95/FCP/LCP/1-second response evidence in `specs/008-quiz-challenges/quickstart.md`
+- [X] T064 Run the full manual acceptance checklist and update evidence checkboxes in `specs/008-quiz-challenges/quickstart.md`
+- [X] T065 Record SC-001 and SC-010 evidence in `specs/008-quiz-challenges/quickstart.md`: at least 20 quiz-entry discovery or equivalent browser task records with at least 19 successes within 5 seconds, and at least 10 explanation-learning records with at least 9 successful key learning points
 
 ---
 

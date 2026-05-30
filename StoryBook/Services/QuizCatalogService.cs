@@ -209,7 +209,7 @@ public sealed class QuizCatalogService
         }
         catch (Exception exception) when (exception is IOException or JsonException or UnauthorizedAccessException)
         {
-            _logger.LogWarning(exception, "Quiz catalog could not be loaded. Reason: {ReasonCode}", "catalog-load-failed");
+            _logger.LogWarning("Quiz catalog could not be loaded. Reason: {ReasonCode}", "catalog-load-failed");
             return CreateUnavailableSnapshot("catalog-load-failed");
         }
     }
@@ -347,10 +347,9 @@ public sealed class QuizCatalogService
             nameEn = dinosaur.Names.Get(LanguageCode.En);
             return true;
         }
-        catch (Exception exception)
+        catch (Exception)
         {
             _logger.LogWarning(
-                exception,
                 "Quiz related story source {Source} unavailable. Reason: {ReasonCode}",
                 source.ToCode(),
                 "related-source-unavailable");
@@ -399,10 +398,9 @@ public sealed class QuizCatalogService
                 : _dinosaurCatalogService.GetProfiles().Count;
             return true;
         }
-        catch (Exception exception)
+        catch (Exception)
         {
             _logger.LogWarning(
-                exception,
                 "Quiz source {Source} could not be counted. Reason: {ReasonCode}",
                 source.ToCode(),
                 "source-unavailable");

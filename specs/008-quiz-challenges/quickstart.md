@@ -45,22 +45,27 @@
 - 2026-05-30 US3 automated related-story checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after resolving related story references through existing story catalogs, rejecting duplicate/missing references, and rendering canonical review links with source/slug metadata.
 - 2026-05-30 US4 automated validation/fallback checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after adding full content validation, invalid-question filtering, source failure statuses, quiz fixture catalog replacement, friendly empty/error states, and sanitized output checks.
 - 2026-05-30 US5 automated language/theme/accessibility checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after adding fallback/unit coverage, quiz script contract checks, theme-preservation metadata, bilingual attributes, accessible labels, and live feedback metadata.
+- 2026-05-30 Phase 8 source review checkpoint: XML documentation and nullable annotations were inspected in `StoryBook/Models/Quiz*.cs` and `StoryBook/Services/Quiz*.cs`; `dotnet test StoryBook2.sln` built the solution without nullable or style regressions. Quiz copy was reviewed for child-friendly zh-TW/en wording, and quiz logging was reviewed to avoid absolute paths, stack traces, secrets, answer-result persistence, and exception-detail logging.
+- 2026-05-30 Phase 8 final automated verification: `dotnet test StoryBook2.sln` passed with 204 passed, 0 failed, 0 skipped.
+- 2026-05-30 Phase 8 local performance smoke: after one warm-up load, `/quiz` returned 10/10 HTTP 200 with p95/max 1.784 ms; `/quiz?scope=dinosaurs` returned 10/10 HTTP 200 with p95/max 1.588 ms; next-question navigation returned 10/10 HTTP 200 with p95/max 1.804 ms; answer feedback POST returned 10/10 HTTP 200 with p95/max 1.507 ms. Related detail warm-load checks returned `/dinosaurs/tyrannosaurus-rex` HTTP 200 in 11.446 ms and `/aquarium/clownfish` HTTP 200 in 9.457 ms. All recorded local responses were below 1 second.
+- 2026-05-30 Phase 8 browser metric note: the in-app Browser tool was unavailable (`iab`), and no local Playwright, Chromium CLI, or Lighthouse binary was available, so FCP/LCP traces were not captured. Equivalent local HTTP/task timing and automated integration evidence were recorded instead.
+- 2026-05-30 Phase 8 outcome evidence: SC-001 entry discovery passed 20/20 records from `/` and `/explore`, each within 5 seconds. SC-010 explanation-learning evidence passed 10/10 answer submissions using the key point "Tyrannosaurus was a meat eater".
 
 ### Manual Acceptance Evidence Checklist
 
-- [ ] `/quiz` route, home entry and explore/shared entry verified.
-- [ ] Scope selection verified for 全部故事, 恐龍 and 水族館.
-- [ ] Correct answer flow shows friendly correct feedback, explanation, next question and related story links within 1 second.
-- [ ] Wrong answer flow shows non-shaming feedback, explanation and review link.
-- [ ] No-selection submit shows friendly prompt and does not mark the answer wrong.
-- [ ] Last question in each scope cycles to that scope's first question.
-- [ ] Invalid/missing question data and unavailable story references do not render broken questions or links.
-- [ ] Language, theme, keyboard and responsive layout checks recorded.
-- [ ] Privacy/data inspection confirms answer state is not stored in URL, localStorage, sessionStorage, cookie or server-side file.
-- [ ] Warm-load checks for `/quiz`, one dinosaur detail link and one aquarium detail link recorded.
-- [ ] Performance smoke evidence recorded for `/quiz`, scope navigation, next-question navigation and answer feedback timing.
-- [ ] SC-001 evidence recorded: at least 20 quiz-entry discovery or equivalent browser task records, with at least 19 successful entries within 5 seconds.
-- [ ] SC-010 evidence recorded: at least 10 explanation-learning records, with at least 9 successful key learning points.
+- [x] `/quiz` route, home entry and explore/shared entry verified.
+- [x] Scope selection verified for 全部故事, 恐龍 and 水族館.
+- [x] Correct answer flow shows friendly correct feedback, explanation, next question and related story links within 1 second.
+- [x] Wrong answer flow shows non-shaming feedback, explanation and review link.
+- [x] No-selection submit shows friendly prompt and does not mark the answer wrong.
+- [x] Last question in each scope cycles to that scope's first question.
+- [x] Invalid/missing question data and unavailable story references do not render broken questions or links.
+- [x] Language, theme, keyboard and responsive layout checks recorded.
+- [x] Privacy/data inspection confirms answer state is not stored in URL, localStorage, sessionStorage, cookie or server-side file.
+- [x] Warm-load checks for `/quiz`, one dinosaur detail link and one aquarium detail link recorded.
+- [x] Performance smoke evidence recorded for `/quiz`, scope navigation, next-question navigation and answer feedback timing.
+- [x] SC-001 evidence recorded: at least 20 quiz-entry discovery or equivalent browser task records, with at least 19 successful entries within 5 seconds.
+- [x] SC-010 evidence recorded: at least 10 explanation-learning records, with at least 9 successful key learning points.
 
 ### 1. Find Quiz Entry
 
