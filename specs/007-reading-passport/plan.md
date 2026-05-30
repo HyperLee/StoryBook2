@@ -18,7 +18,7 @@
 
 **Storage**: 護照閱讀狀態只使用瀏覽器 `localStorage` key `storybook.passport`，JSON shape 固定為 `{ version, completedStories: [{ source, slug }] }`，`source` 只允許 `dinosaurs` 與 `aquarium`。伺服器端繼續以既有 `StoryBook/Data/dinosaurs.json` 與 `StoryBook/Data/aquarium.json` 作為唯讀故事來源；本功能不新增 `CardPicker2/data/cards.json`、資料庫、cookie endpoint、server-side session、檔案寫入或外部服務。
 
-**Storage Governance**: `storybook.passport` 是非敏感、同瀏覽器、可清除的使用者狀態，不保存姓名、年齡、班級、學校、自由輸入文字、閱讀時間線、標題快照或徽章快照。瀏覽器資料缺漏、格式錯誤、版本不支援、來源不允許、slug 不存在或重複時，`passport.js` 忽略無效資料，頁面顯示友善提示，並在下一次成功保存或清除時覆寫為有效資料。清除動作只移除或重設 `storybook.passport`，不得碰 `storybook.language`、`storybook.theme` 或其他 storage key。
+**Storage Governance**: `storybook.passport` 是非敏感、同瀏覽器、可清除的使用者狀態，不保存姓名、年齡、班級、學校、自由輸入文字、閱讀時間線、標題快照或徽章快照。瀏覽器資料缺漏、格式錯誤、版本不支援、來源不允許、slug 不存在或重複時，`passport.js` 忽略無效資料，頁面顯示友善提示，並在下一次成功保存時覆寫為有效資料。清除動作在 localStorage 可寫入時只把 `storybook.passport` 重設為有效空狀態 `{ version: 1, completedStories: [] }`，不得移除或改寫 `storybook.language`、`storybook.theme` 或其他 storage key。
 
 **Testing**: `dotnet test StoryBook2.sln`。新增 xUnit 單元測試覆蓋護照 catalog projection、來源總數、來源排序、badge milestone 定義、source/slug resolution、invalid source 過濾、雙語 fallback 與 source failure friendly status；新增 script contract tests 覆蓋 `storybook.passport`、版本欄位、去重、clear scope、禁止 cookie/session/history/fetch；新增整合測試覆蓋 `/passport` route、首頁/共用導覽入口、恐龍/水族館詳情完成控制、HTML data contract、theme selector absence、friendly empty/error states 與一般 anchor link。瀏覽器 localStorage 成功/失敗、清除確認、鍵盤、語言、主題與 375/768/1366px 版面依 quickstart 手動驗收。
 
@@ -28,7 +28,7 @@
 
 **Performance Goals**: `/passport` PageModel 與 catalog projection p95 目標低於 200ms；主要內容 FCP 目標低於 1.5 秒、LCP 目標低於 2.5 秒；完成標記、清除、徽章更新與已讀清單更新互動回應低於 1 秒。資料量以數十到數百筆故事為設計範圍，初始有效總數為 23 筆故事朋友。
 
-**Performance Verification**: Phase tasks 必須在完整 catalog 狀態下，以 quickstart 或同等瀏覽器任務紀錄驗收 `/passport`、`/dinosaurs/triceratops`、`/aquarium/sea-turtle` warm-load 與互動回應；每個 route 至少 3 次，記錄是否在 1 秒內出現主要可操作內容。自動化測試可驗證 route/HTML contract；瀏覽器渲染時間以手動或 browser automation 紀錄補足。
+**Performance Verification**: Phase tasks 必須在完整 catalog 狀態下，以 quickstart 或同等瀏覽器任務紀錄驗收 `/passport`、`/dinosaurs/triceratops`、`/aquarium/sea-turtle` warm-load 與互動回應；每個 route 至少 3 次，記錄是否在 1 秒內出現主要可操作內容。另需記錄至少 20 次代表性任務或同等瀏覽器自動化紀錄，用於驗證完成閱讀控制與 `/passport` 入口是否能在 5 秒內被找到並操作。自動化測試可驗證 route/HTML contract；瀏覽器渲染時間以手動或 browser automation 紀錄補足。
 
 **Constraints**: 維持單一 ASP.NET Core Razor Pages app，不改 SPA、Blazor、MVC 或 Web API。完成閱讀必須由使用者明確按下控制，不得由載入、捲動、停留時間或開啟圖片自動標記。所有護照故事連結使用一般 anchor 指向 `/dinosaurs/{slug}` 或 `/aquarium/{slug}`。`/passport` 套用既有有效主題但不得出現 theme selector。新增 JavaScript 放在 `StoryBook/wwwroot/js/passport.js`，不改寫 history、不使用 fetch/XMLHttpRequest、不使用 cookie/sessionStorage、不依賴 jQuery。新增 CSS 放在 `StoryBook/wwwroot/css/passport.css` 並沿用 site theme tokens；所有操作目標至少 44x44 CSS px、具 accessible name、可鍵盤操作且焦點可見。正式環境維持 HTTPS/HSTS/CSP 方向；本功能不新增 inline script 或外部資源以避免擴大 CSP 例外。
 
@@ -108,7 +108,7 @@ StoryBook.Tests/
     └── PassportScriptContractTests.cs
 ```
 
-**Structure Decision**: 使用現有單一 ASP.NET Core Razor Pages 應用。`PassportCatalogService` 從既有 dinosaur/aquarium catalog service 組合有效故事清單、來源狀態、總數、來源排序與 badge 定義；`PassportPreferenceService` 只暴露 storage key、state version、allowed source codes 與 friendly metadata，不讀寫瀏覽器狀態。`Pages/Passport/Index` 伺服器端輸出所有可辨識故事的雙語 metadata 與 badge shell，`passport.js` 在瀏覽器讀寫 `storybook.passport`、去重、過濾、清除與更新 DOM。恐龍/水族館詳情頁只加入顯式完成控制與護照入口，不改既有故事內容、搜尋、modal、上一頁/下一頁、語言或主題流程。
+**Structure Decision**: 使用現有單一 ASP.NET Core Razor Pages 應用。`PassportCatalogService` 從既有 dinosaur/aquarium catalog service 組合有效故事清單、來源狀態、總數、固定來源排序與 badge 定義；來源排序固定為 `dinosaurs` 先於 `aquarium`，各來源內保留既有故事順序。`PassportPreferenceService` 只暴露 storage key、state version、allowed source codes 與 friendly metadata，不讀寫瀏覽器狀態。`Pages/Passport/Index` 伺服器端輸出所有可辨識故事的雙語 metadata 與 badge shell，`passport.js` 在瀏覽器讀寫 `storybook.passport`、去重、過濾、以有效空狀態清除與更新 DOM。恐龍/水族館詳情頁只加入顯式完成控制與護照入口，不改既有故事內容、搜尋、modal、上一頁/下一頁、語言或主題流程。
 
 ## Complexity Tracking
 

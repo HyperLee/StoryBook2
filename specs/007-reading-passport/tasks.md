@@ -16,14 +16,14 @@
 
 ## Phase 1: Setup (Shared Infrastructure)
 
-**Purpose**: 建立護照功能所需的檔案位置與測試入口，不加入完整行為。
+**Purpose**: 先建立護照功能的測試與驗收入口，不加入 runtime 行為。
 
-- [ ] T001 [P] Create Passport Razor page shell in `StoryBook/Pages/Passport/Index.cshtml`
-- [ ] T002 [P] Create Passport PageModel shell in `StoryBook/Pages/Passport/Index.cshtml.cs`
-- [ ] T003 [P] Create Passport stylesheet shell in `StoryBook/wwwroot/css/passport.css`
-- [ ] T004 [P] Create Passport script shell in `StoryBook/wwwroot/js/passport.js`
-- [ ] T005 [P] Create Passport integration fixture shell in `StoryBook.Tests/Integration/PassportPageTestFixture.cs`
-- [ ] T006 [P] Create Passport integration test class shell in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [ ] T001 [P] Create Passport integration fixture shell in `StoryBook.Tests/Integration/PassportPageTestFixture.cs`
+- [ ] T002 [P] Create Passport integration test class shell in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [ ] T003 [P] Create Passport preference unit test class shell in `StoryBook.Tests/Unit/PassportPreferenceServiceTests.cs`
+- [ ] T004 [P] Create Passport catalog unit test class shell in `StoryBook.Tests/Unit/PassportCatalogServiceTests.cs`
+- [ ] T005 [P] Create Passport script contract test class shell in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [ ] T006 [P] Add reading-passport manual acceptance evidence checklist placeholder in `specs/007-reading-passport/quickstart.md`
 
 ---
 
@@ -69,7 +69,7 @@
 - [ ] T022 [US1] Set `UsePassportAssets` and include `~/js/passport.js` on dinosaur details without changing existing dinosaur script behavior in `StoryBook/Pages/Dinosaurs/Details.cshtml`
 - [ ] T023 [US1] Set `UsePassportAssets` and include `~/js/passport.js` on aquarium details without changing existing aquarium script behavior in `StoryBook/Pages/Aquarium/Details.cshtml`
 - [ ] T024 [US1] Add completion control, read status and passport link styling with visible focus and 44px targets in `StoryBook/wwwroot/css/passport.css`
-- [ ] T025 [US1] Run targeted US1 integration and script contract checks in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [ ] T025 [US1] Run targeted US1 integration and script contract checks in `StoryBook.Tests/Integration/PassportPagesTests.cs` and `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
 
 **Checkpoint**: US1 可獨立示範；詳情頁完成標記可保存、重新整理後可讀回，且同一故事只計一次。
 
@@ -98,7 +98,7 @@
 - [ ] T033 [US2] Add home page passport action to `/passport` with bilingual accessible text in `StoryBook/Pages/Index.cshtml`
 - [ ] T034 [US2] Implement passport-page read list, completed count, total count and badge state rendering from normalized localStorage state in `StoryBook/wwwroot/js/passport.js`
 - [ ] T035 [US2] Add passport summary, badge grid, read list, source status and empty/error state styles in `StoryBook/wwwroot/css/passport.css`
-- [ ] T036 [US2] Run targeted US2 catalog and integration checks in `StoryBook.Tests/Unit/PassportCatalogServiceTests.cs`
+- [ ] T036 [US2] Run targeted US2 catalog and integration checks in `StoryBook.Tests/Unit/PassportCatalogServiceTests.cs` and `StoryBook.Tests/Integration/PassportPagesTests.cs`
 
 **Checkpoint**: US2 可獨立示範；`/passport` 可從首頁或共用導覽進入，並依本機護照狀態顯示進度與連結。
 
@@ -115,16 +115,16 @@
 > 先寫這些測試，確認在實作前失敗。
 
 - [ ] T037 [US3] Add failing integration tests for visible clear control, explicit confirmation UI and child-friendly clear text in `StoryBook.Tests/Integration/PassportPagesTests.cs`
-- [ ] T038 [P] [US3] Add failing script contract tests for clear confirmation, `storybook.passport` scoped removal/reset, no `localStorage.clear()`, and no language/theme key mutation in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [ ] T038 [P] [US3] Add failing script contract tests for clear confirmation, `storybook.passport` scoped reset to `{ version: 1, completedStories: [] }`, no `localStorage.clear()`, and no language/theme key mutation in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
 
 ### Implementation for User Story 3
 
 - [ ] T039 [US3] Render clear passport button, confirmation region, confirm/cancel controls and bilingual text in `StoryBook/Pages/Passport/Index.cshtml`
-- [ ] T040 [US3] Implement clear confirmation, scoped remove/reset and UI refresh behavior in `StoryBook/wwwroot/js/passport.js`
+- [ ] T040 [US3] Implement clear confirmation, scoped valid empty-state reset and UI refresh behavior in `StoryBook/wwwroot/js/passport.js`
 - [ ] T041 [US3] Add clear confirmation layout, button states and focus styling in `StoryBook/wwwroot/css/passport.css`
-- [ ] T042 [US3] Run targeted US3 clear-flow checks in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [ ] T042 [US3] Run targeted US3 clear-flow checks in `StoryBook.Tests/Unit/PassportScriptContractTests.cs` and `StoryBook.Tests/Integration/PassportPagesTests.cs`
 
-**Checkpoint**: US3 可獨立驗證；清除動作只清除護照資料，不碰其他 storage key。
+**Checkpoint**: US3 可獨立驗證；清除動作只把護照資料重設為有效空狀態，不碰其他 storage key。
 
 ---
 
@@ -149,7 +149,7 @@
 - [ ] T048 [US4] Add detail-page storage warning/status text attributes for dinosaur completion controls in `StoryBook/Pages/Dinosaurs/Details.cshtml`
 - [ ] T049 [US4] Add detail-page storage warning/status text attributes for aquarium completion controls in `StoryBook/Pages/Aquarium/Details.cshtml`
 - [ ] T050 [US4] Add degraded storage warning and invalid-data styles in `StoryBook/wwwroot/css/passport.css`
-- [ ] T051 [US4] Run targeted US4 fallback checks in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [ ] T051 [US4] Run targeted US4 fallback checks in `StoryBook.Tests/Unit/PassportScriptContractTests.cs` and `StoryBook.Tests/Integration/PassportPagesTests.cs`
 
 **Checkpoint**: US4 可獨立驗證；保存受限時不破壞既有閱讀流程，也不把護照資料移到網址、cookie、session 或外部服務。
 
@@ -166,7 +166,7 @@
 > 先寫這些測試，確認在實作前失敗。
 
 - [ ] T052 [US5] Add failing integration tests for bilingual text/aria contracts, zh-TW fallback, theme selector absence on `/passport`, accessible names and no blank title/summary/source labels in `StoryBook.Tests/Integration/PassportPagesTests.cs`
-- [ ] T053 [P] [US5] Add failing static asset contract tests for no jQuery dependency, no inline router/history mutation, focus-visible selectors and responsive class coverage in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [ ] T053 [P] [US5] Add failing static asset contract tests for no jQuery dependency, no inline router/history mutation, no inline script or external resource dependency, focus-visible selectors and responsive class coverage in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
 
 ### Implementation for User Story 5
 
@@ -175,7 +175,7 @@
 - [ ] T056 [US5] Complete bilingual completion control labels and fallback-safe text for aquarium details in `StoryBook/Pages/Aquarium/Details.cshtml`
 - [ ] T057 [US5] Implement language switching and aria-label refresh for passport summary, badges, read list, status messages and clear confirmation in `StoryBook/wwwroot/js/passport.js`
 - [ ] T058 [US5] Finalize responsive layout, visible focus, theme token usage, contrast-safe states and 44px controls in `StoryBook/wwwroot/css/passport.css`
-- [ ] T059 [US5] Run targeted US5 bilingual/theme/accessibility contract checks in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [ ] T059 [US5] Run targeted US5 bilingual/theme/accessibility/static asset contract checks in `StoryBook.Tests/Integration/PassportPagesTests.cs` and `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
 
 **Checkpoint**: US5 可獨立驗證；護照功能與既有語言、主題、鍵盤操作和回應式體驗一致。
 
@@ -190,8 +190,8 @@
 - [ ] T062 Run `dotnet restore StoryBook2.sln` for dependency validation in `StoryBook2.sln`
 - [ ] T063 Run `dotnet build StoryBook2.sln` and confirm no new warnings in `StoryBook2.sln`
 - [ ] T064 Run `dotnet test StoryBook2.sln` and confirm all unit/integration tests pass in `StoryBook2.sln`
-- [ ] T065 Execute quickstart manual acceptance for routes, localStorage, clear flow, language, theme, keyboard and 375/768/1366px layout in `specs/007-reading-passport/quickstart.md`
-- [ ] T066 Review final implementation for secrets, personal data fields, external API usage and forbidden storage keys in `StoryBook/wwwroot/js/passport.js`
+- [ ] T065 Execute and record quickstart manual acceptance evidence for routes, localStorage, clear flow, language, theme, keyboard, 375/768/1366px layout, at least 20 representative 5-second find-and-operate tasks for SC-001/SC-003, and 3 warm-load checks each for `/passport`, `/dinosaurs/triceratops` and `/aquarium/sea-turtle` in `specs/007-reading-passport/quickstart.md`
+- [ ] T066 Review final implementation for secrets, personal data fields, external API usage, forbidden storage keys, inline scripts and external resource dependencies in `StoryBook/wwwroot/js/passport.js`, `StoryBook/Pages/Passport/Index.cshtml`, `StoryBook/Pages/Dinosaurs/Details.cshtml` and `StoryBook/Pages/Aquarium/Details.cshtml`
 
 ---
 
@@ -226,7 +226,7 @@
 
 ## Parallel Opportunities
 
-- Phase 1 的 T001-T006 可平行建立檔案 shell。
+- Phase 1 的 T001-T006 可平行建立測試與驗收入口。
 - Phase 2 的 T009-T013 可平行建立模型檔，T007 可與模型檔平行撰寫。
 - US1 的 T017 與 T018 可平行撰寫測試；T020 與 T021 可在 T019 contract 明確後平行實作。
 - US2 的 T026 與 T027 可平行撰寫測試；T032 與 T033 可平行新增導覽入口。
