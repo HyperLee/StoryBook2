@@ -21,7 +21,7 @@
    - Unit tests for `QuizCatalogService` JSON loading, caching, stable sorting, scope filtering, source status, related story resolution, invalid question filtering, no blank fallback text and next-question cycling.
    - Unit tests for answer evaluation: correct answer, wrong answer, unknown option, no option selected and no persistent answer state.
    - Integration tests for `/quiz`, scope links, answer form post with antiforgery, no-selection friendly prompt, feedback/explanation rendering, related story anchors, homepage/explore entry, theme selector absence and friendly empty/error states.
-   - Script contract tests for `quiz.js` if present: no jQuery dependency, no `localStorage`/`sessionStorage`/cookie answer persistence, no fetch/API, no History API mutation and no correctness calculation in client-only code.
+   - Script contract tests for `quiz.js` if present: no jQuery dependency, no `localStorage`/`sessionStorage`/cookie answer persistence, no fetch/API, no History API mutation, no timer/countdown, no drag/drop or precision gesture dependency, and no correctness calculation in client-only code.
 
 ## Local Run
 
@@ -50,13 +50,17 @@
 - [ ] Language, theme, keyboard and responsive layout checks recorded.
 - [ ] Privacy/data inspection confirms answer state is not stored in URL, localStorage, sessionStorage, cookie or server-side file.
 - [ ] Warm-load checks for `/quiz`, one dinosaur detail link and one aquarium detail link recorded.
+- [ ] Performance smoke evidence recorded for `/quiz`, scope navigation, next-question navigation and answer feedback timing.
+- [ ] SC-001 evidence recorded: at least 20 quiz-entry discovery or equivalent browser task records, with at least 19 successful entries within 5 seconds.
+- [ ] SC-010 evidence recorded: at least 10 explanation-learning records, with at least 9 successful key learning points.
 
 ### 1. Find Quiz Entry
 
 1. Open `/`.
 2. Confirm there is a visible「問答挑戰」entry.
-3. Open `/explore` if the implementation adds a second entry there.
-4. Activate the quiz entry with mouse and keyboard.
+3. Open `/explore`.
+4. Confirm there is a visible「問答挑戰」entry.
+5. Activate both quiz entries with mouse and keyboard.
 
 Expected: Browser navigates to `/quiz` through a normal link. The page shows scope options and either a first valid question or a friendly unavailable state. No theme selector appears.
 
@@ -142,6 +146,14 @@ Check widths 375px, 768px and 1366px.
 
 Expected: All controls are focusable and activatable. Focus is visible. Touch/click targets are at least 44x44 CSS px. Text and controls do not overlap or overflow.
 
+Also inspect the core quiz flow for interaction constraints:
+
+1. Confirm answering, submitting, reviewing feedback and moving to the next question do not require drag/drop.
+2. Confirm there is no countdown, time limit or timer-gated answer flow.
+3. Confirm the flow can be completed with keyboard and ordinary click/tap targets, without precision gestures.
+
+Expected: The core quiz flow remains usable with keyboard, mouse and touch, and does not depend on drag, timing pressure or fine motor precision.
+
 ### 11. Privacy/Data Check
 
 After answering several questions, inspect browser storage and URL:
@@ -154,3 +166,29 @@ location.href
 ```
 
 Expected: No quiz answer result, score, selected option, correct/incorrect state or history is stored in localStorage, sessionStorage, cookies or shareable URL. Existing `storybook.language`, `storybook.theme` and `storybook.passport` keys remain unchanged by answering quiz questions.
+
+### 12. Performance And Outcome Evidence
+
+Record local warm-load timing with browser DevTools, automated browser task logs or equivalent local evidence:
+
+1. Load `/quiz` at least 10 times after the first warm-up load and record FCP/LCP plus server or task timing when available.
+2. Navigate scope links and next-question links at least 10 times each.
+3. Submit at least 10 answer forms and record time from submit activation to visible feedback/explanation.
+
+Expected: `/quiz` Page handler and catalog projection p95 is below 200ms when server timing is available. FCP is below 1.5 seconds, LCP below 2.5 seconds, feedback/explanation appears within 1 second, and scope/next navigation responds within 1 second.
+
+Record SC-001 entry-discovery evidence:
+
+1. Use at least 20 representative manual attempts or equivalent browser task records.
+2. Include attempts from both `/` and `/explore`.
+3. For each attempt, record source page, elapsed time to reach `/quiz`, and pass/fail.
+
+Expected: At least 19 of 20 attempts reach `/quiz` within 5 seconds.
+
+Record SC-010 explanation-learning evidence:
+
+1. Use at least 10 representative manual attempts or equivalent task records.
+2. After answer feedback appears, record one key learning point repeated or selected from the explanation.
+3. Mark each attempt pass/fail based on whether the recorded point matches the explanation.
+
+Expected: At least 9 of 10 attempts record a valid key learning point.

@@ -9,7 +9,7 @@
 | `/quiz?scope={scope}&questionId={questionId}` | `Pages/Quiz/Index` | 200 | 顯示指定 scope 中的有效題目；未知 question id 回退該 scope 第一題並顯示友善提示。 |
 | `/quiz?handler=Answer` | `Pages/Quiz/Index.OnPostAnswer` | 200 | 透過 antiforgery form post 評估目前單題答案，同頁顯示正誤/未選提示、解釋與下一題 link。 |
 | `/` | `Pages/Index` | 200 | 至少提供一個前往 `/quiz` 的一般 anchor 問答入口。 |
-| `/explore` | `Pages/Explore/Index` | 200 | 可提供前往 `/quiz` 的一般 anchor 問答入口；若首頁已提供，探索頁入口仍建議加入以符合跨站探索流程。 |
+| `/explore` | `Pages/Explore/Index` | 200 | 必須提供前往 `/quiz` 的一般 anchor 問答入口，以符合跨站探索流程。 |
 | `/dinosaurs/{slug}` | `Pages/Dinosaurs/Details` | 200/404 | 題目相關故事連結指向既有恐龍詳情頁；問答功能不得建立重複故事頁。 |
 | `/aquarium/{slug}` | `Pages/Aquarium/Details` | 200/404 | 題目相關故事連結指向既有水族館詳情頁；問答功能不得建立重複故事頁。 |
 
@@ -138,5 +138,7 @@ Quiz behavior must not rely on:
 - `document.cookie`
 - `fetch` or `XMLHttpRequest`
 - `history.pushState` or `history.replaceState`
+- countdown timers or time-limit gates for the core answer flow
+- drag/drop, pointer-only controls or precision gestures as the required way to answer
 - jQuery selectors/events for core behavior
 - external scripts, external styles, external APIs or external content lookup

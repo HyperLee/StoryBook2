@@ -50,7 +50,7 @@
 
 **Goal**: Users can enter `/quiz`, choose all stories, dinosaurs, or aquarium scope, and see one valid question for the selected scope.
 
-**Independent Test**: From `/` or `/explore`, follow a normal anchor to `/quiz`, choose `dinosaurs`, and verify a dinosaur question is displayed.
+**Independent Test**: From `/` and `/explore`, follow normal anchors to `/quiz`, choose `dinosaurs`, and verify a dinosaur question is displayed.
 
 ### Tests for User Story 1
 
@@ -154,7 +154,7 @@
 ### Tests for User Story 5
 
 - [ ] T050 [P] [US5] Add unit tests for quiz text fallback, invalid language fallback, no blank projection text, and bilingual source labels in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
-- [ ] T051 [P] [US5] Add script contract tests for no `localStorage`, `sessionStorage`, cookie, fetch, History API, jQuery, or client-side correctness calculation in `StoryBook.Tests/Unit/QuizScriptContractTests.cs`
+- [ ] T051 [P] [US5] Add script contract tests for no `localStorage`, `sessionStorage`, cookie, fetch, History API, jQuery, timer/countdown dependency, drag/drop dependency, precision gesture dependency, or client-side correctness calculation in `StoryBook.Tests/Unit/QuizScriptContractTests.cs`
 - [ ] T052 [P] [US5] Add integration tests for English rendering, zh-TW rendering, theme selector absence, layout theme attributes, accessible names, fieldset legend, and live feedback metadata in `StoryBook.Tests/Integration/QuizPagesTests.cs`
 
 ### Implementation for User Story 5
@@ -164,7 +164,7 @@
 - [ ] T055 [US5] Use existing site theme tokens, visible focus styles, and responsive constraints in `StoryBook/wwwroot/css/quiz.css`
 - [ ] T056 [US5] Finalize quiz progressive enhancement without storage, fetch, History API, jQuery, or correctness logic in `StoryBook/wwwroot/js/quiz.js`
 - [ ] T057 [US5] Ensure quiz CSS and script are referenced without inline event handlers in `StoryBook/Pages/Quiz/Index.cshtml`
-- [ ] T058 [US5] Run US5 language, theme, keyboard, and responsive acceptance checks, then record the result in `specs/008-quiz-challenges/quickstart.md`
+- [ ] T058 [US5] Run US5 language, theme, keyboard, responsive, no timer/countdown, no drag/drop, and no precision-gesture acceptance checks, then record the result in `specs/008-quiz-challenges/quickstart.md`
 
 **Checkpoint**: User Story 5 is independently functional and testable.
 
@@ -178,7 +178,9 @@
 - [ ] T060 [P] Review child-friendly Traditional Chinese and English copy in `StoryBook/Data/quiz-questions.json` and `StoryBook/Pages/Quiz/Index.cshtml`
 - [ ] T061 Review non-sensitive logging and absence of absolute paths, exception details, stack traces, secrets, and answer-result persistence in `StoryBook/Services/QuizCatalogService.cs`, `StoryBook/Services/QuizContentValidator.cs`, and `StoryBook/Pages/Quiz/Index.cshtml.cs`
 - [ ] T062 Run `dotnet test StoryBook2.sln` and record final automated verification in `specs/008-quiz-challenges/quickstart.md`
-- [ ] T063 Run the full manual acceptance checklist and update evidence checkboxes in `specs/008-quiz-challenges/quickstart.md`
+- [ ] T063 Run local warm-load performance smoke checks for `/quiz`, scope navigation, next-question navigation, and answer feedback timing, then record p95/FCP/LCP/1-second response evidence in `specs/008-quiz-challenges/quickstart.md`
+- [ ] T064 Run the full manual acceptance checklist and update evidence checkboxes in `specs/008-quiz-challenges/quickstart.md`
+- [ ] T065 Record SC-001 and SC-010 evidence in `specs/008-quiz-challenges/quickstart.md`: at least 20 quiz-entry discovery or equivalent browser task records with at least 19 successes within 5 seconds, and at least 10 explanation-learning records with at least 9 successful key learning points
 
 ---
 
@@ -292,4 +294,3 @@ Task: "T052 [US5] Add language/theme/accessibility integration tests in StoryBoo
 3. Run the story-specific tests.
 4. Update quickstart evidence for that story.
 5. Move to the next story only after the current story can be demonstrated independently.
-

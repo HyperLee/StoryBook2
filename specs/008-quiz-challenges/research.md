@@ -48,7 +48,7 @@
 
 **決策**: `QuizContentValidator` 驗證根物件、唯一 question id、source、difficulty、題幹、2-4 個選項、唯一 correct option、雙語回饋、雙語解釋、related story references 與 kebab-case slug。`QuizCatalogService` 再確認 related stories 存在於既有 dinosaur/aquarium catalog，無效題目不提供給 UI。
 
-**理由**: FR-018、FR-019 與錯誤學習風險要求「寧可不顯示無效題目，也不要顯示錯誤題目」。將 schema/content/story-reference 驗證集中在 service 層，PageModel 可保持薄層且容易單元測試。
+**理由**: FR-019、FR-020 與錯誤學習風險要求「寧可不顯示無效題目，也不要顯示錯誤題目」。將 schema/content/story-reference 驗證集中在 service 層，PageModel 可保持薄層且容易單元測試。
 
 **替代方案**:
 - View 層即時判斷缺漏: 會分散規則並容易造成空白題目/失效連結。
@@ -83,13 +83,13 @@
 **替代方案**:
 - Server-side cookie 語言: 偏離既有 `storybook.language` localStorage contract。
 - 問答頁新增主題 selector: 違反 dark mode feature 約束。
-- 只用色彩表示正誤: 不符合 FR-030 與 accessibility 需求。
+- 只用色彩表示正誤: 不符合 FR-031 與 accessibility 需求。
 
 ## Decision 9: Friendly fallback 優先顯示可用題目或安全空狀態
 
 **決策**: 題庫部分無效時，顯示剩餘有效題目並記錄非敏感摘要；某 scope 無有效題時，顯示該範圍暫時沒有題目的友善提示；全部題庫不可用或來源 catalog 失敗導致無題可用時，顯示回首頁/故事入口 action，不顯示內部例外、檔案路徑或 stack trace。
 
-**理由**: FR-027 與 edge cases 要求資料不可用時不能空白頁，也不能暴露內部診斷。部分可用時，讓孩子仍能完成可用範圍的問答。
+**理由**: FR-028 與 edge cases 要求資料不可用時不能空白頁，也不能暴露內部診斷。部分可用時，讓孩子仍能完成可用範圍的問答。
 
 **替代方案**:
 - fail-fast 導向 Error page: 對內容部分失效不夠友善。

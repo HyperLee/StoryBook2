@@ -1,6 +1,6 @@
 # Implementation Plan: 互動問答挑戰
 
-**Branch**: `010-quiz-challenges` | **Date**: 2026-05-30 | **Spec**: [spec.md](./spec.md)
+**Branch**: `010-quiz-challenges` | **Date**: 2026-05-30 | **Spec**: [spec.md](./spec.md) | **Spec Directory**: `specs/008-quiz-challenges`
 
 **Input**: Feature specification from `/specs/008-quiz-challenges/spec.md`
 
@@ -8,7 +8,7 @@
 
 ## Summary
 
-新增唯一 canonical route `/quiz`，讓使用者從首頁或全站探索入口進入問答挑戰，選擇全部故事、恐龍或水族館範圍，作答單題選擇題，得到友善正誤回饋、解釋與相關故事複習連結。技術上維持目前 `StoryBook2.sln` 的單一 ASP.NET Core Razor Pages app、`net10.0`、Bootstrap 5、`System.Text.Json`、既有 catalog services、既有語言/主題合約與 xUnit 測試；題庫使用 repo 內人工維護 JSON `StoryBook/Data/quiz-questions.json`，不沿用 CardPicker2 `cards.json`、不新增資料庫、CRUD 後台、外部題庫、即時翻譯、Web API、Serilog、Moq 或 jQuery 依賴。
+新增唯一 canonical route `/quiz`，讓使用者從首頁與全站探索入口進入問答挑戰，選擇全部故事、恐龍或水族館範圍，作答單題選擇題，得到友善正誤回饋、解釋與相關故事複習連結。技術上維持目前 `StoryBook2.sln` 的單一 ASP.NET Core Razor Pages app、`net10.0`、Bootstrap 5、`System.Text.Json`、既有 catalog services、既有語言/主題合約與 xUnit 測試；題庫使用 repo 內人工維護 JSON `StoryBook/Data/quiz-questions.json`，不沿用 CardPicker2 `cards.json`、不新增資料庫、CRUD 後台、外部題庫、即時翻譯、Web API、Serilog、Moq 或 jQuery 依賴。
 
 ## Technical Context
 
@@ -18,7 +18,7 @@
 
 **Storage**: 題庫是單一本機 JSON 文字檔，repo 位置為 `StoryBook/Data/quiz-questions.json`，執行期預設路徑為 `{ContentRootPath}/Data/quiz-questions.json`，透過 `QuizCatalogOptions.ContentPath` 設定。檔案只由專案維護者在 repo 中人工編輯與審核；runtime 不提供 CRUD UI、不寫入 JSON、不使用 `CardPicker2/data/cards.json`、不使用資料庫、cookie、session、localStorage 作為答題結果保存，也不呼叫外部 API。
 
-**Testing**: `dotnet test StoryBook2.sln`。新增/更新 xUnit 單元測試覆蓋 `QuizContentValidator` schema/content rules、`QuizCatalogService` JSON 載入/cache/filter/sort/source failure、story reference resolution、language fallback、question scope selection、answer evaluation 與 next-question cycling。新增整合測試覆蓋 `/quiz` route、DI、Razor Pages handler、antiforgery form submit、no-selection friendly validation、scope links、related story anchors、theme selector absence、friendly empty/error states 與首頁/探索入口。若需要替換服務驗證錯誤情境，使用 `WebApplicationFactory<Program>` / TestServer service replacement；Moq 不列為預設相依性。
+**Testing**: `dotnet test StoryBook2.sln`。新增/更新 xUnit 單元測試覆蓋 `QuizContentValidator` schema/content rules、`QuizCatalogService` JSON 載入/cache/filter/sort/source failure、story reference resolution、language fallback、question scope selection、answer evaluation 與 next-question cycling。新增整合測試覆蓋 `/quiz` route、DI、Razor Pages handler、antiforgery form submit、no-selection friendly validation、scope links、related story anchors、theme selector absence、friendly empty/error states 與首頁/探索入口。新增 script contract 與人工驗收覆蓋不得依賴拖曳、限時或精細手勢的互動。效能目標以本機 warm-load smoke checks、瀏覽器 network/task records 或等效紀錄驗證，並將結果記錄於 quickstart。若需要替換服務驗證錯誤情境，使用 `WebApplicationFactory<Program>` / TestServer service replacement；Moq 不列為預設相依性。
 
 **Target Platform**: 單一 ASP.NET Core web app；支援 Chrome、Firefox、Safari、Edge 的桌面與行動瀏覽器。開發 URL 以 `dotnet run --project StoryBook/StoryBook.csproj` 輸出為準。
 
@@ -28,7 +28,7 @@
 
 **Constraints**: 維持單一 Razor Pages app，不改 SPA、Blazor、MVC 或獨立 Web API。唯一 canonical route 是 `/quiz`；題目 `source` 只允許 `dinosaurs` 或 `aquarium`，`all` 只作為 UI 聚合篩選。`difficulty` 只允許 `easy`、`medium`。MVP 不顯示累計分數、答對/答錯統計或題數進度，不保存作答狀態，不引入登入、排行榜、限時競賽、後台管理或使用者上傳內容。所有使用者可見文字使用繁體中文為預設並提供英文，缺漏或無效語言回退繁體中文。正式環境維持既有 HTTPS/HSTS 方向，問答新增資產必須相容嚴格 CSP：不新增外部 script/style、inline event handler 或外部資源。
 
-**Scale/Scope**: 初始整合既有恐龍 8 筆與水族館 15 筆故事內容作為複習連結來源。功能範圍包含首頁或探索入口、`/quiz` 頁面、scope 選擇、單題顯示、2-4 個單選選項、提交、正誤/未選提示、解釋、下一題循環、相關故事連結、題庫完整性檢查、友善空/錯誤狀態、雙語、主題套用與可及性。不包含 CardPicker 的早餐/午餐/晚餐卡牌、抽卡、CRUD、搜尋卡牌或資料寫入流程。
+**Scale/Scope**: 初始整合既有恐龍 8 筆與水族館 15 筆故事內容作為複習連結來源。功能範圍包含首頁與探索入口、`/quiz` 頁面、scope 選擇、單題顯示、2-4 個單選選項、提交、正誤/未選提示、解釋、下一題循環、相關故事連結、題庫完整性檢查、友善空/錯誤狀態、雙語、主題套用與可及性。不包含 CardPicker 的早餐/午餐/晚餐卡牌、抽卡、CRUD、搜尋卡牌或資料寫入流程。
 
 **Observability/Logging**: 使用 `ILogger<QuizCatalogService>` / `ILogger<QuizContentValidator>` 記錄非敏感摘要，例如 reason code、question id、source code、valid/invalid counts。不得在使用者頁面或 logs 中暴露檔案絕對路徑、exception detail、stack trace、secret、token、connection string 或作答結果。此功能不需要 Serilog file sink；若未來全站營運要求 file logging，需另立 plan 記錄理由、資料保護與輪替策略。
 
