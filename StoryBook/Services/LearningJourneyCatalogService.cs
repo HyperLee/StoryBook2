@@ -82,10 +82,20 @@ public sealed class LearningJourneyCatalogService
             return [];
         }
 
-        return journey!.StoryReferences
-            .Select(TryCreateStoryItem)
-            .Where(item => item is not null)
-            .Select(item => item!)
+        List<JourneyStoryItem> items = [];
+        HashSet<string> stableIds = new(StringComparer.Ordinal);
+
+        foreach (JourneyStoryReference reference in journey!.StoryReferences.OrderBy(reference => reference.SortOrder))
+        {
+            JourneyStoryItem? item = TryCreateStoryItem(reference);
+
+            if (item is not null && stableIds.Add(item.StableId))
+            {
+                items.Add(item);
+            }
+        }
+
+        return items
             .OrderBy(item => item.SortOrder)
             .ThenBy(item => item.StableId, StringComparer.Ordinal)
             .ToList();
@@ -99,17 +109,41 @@ public sealed class LearningJourneyCatalogService
         return GetStoryItems(journeySlug).FirstOrDefault()?.DetailHref;
     }
 
+    /// <summary>
+    /// Gets availability status for a journey slug, including friendly unavailable states.
+    /// </summary>
+    public JourneyAvailabilityStatus GetAvailabilityStatus(string? journeySlug)
+    {
+        if (!TryGetJourneyBySlug(journeySlug, out LearningJourney? journey))
+        {
+            string normalizedSlug = journeySlug?.Trim().ToLowerInvariant() ?? string.Empty;
+            return CreateNotFoundStatus(normalizedSlug);
+        }
+
+        return CreateAvailabilityStatus(journey!, _snapshot.Value.SourceStatuses);
+    }
+
     private JourneyCatalogSnapshot LoadSnapshot()
     {
         JourneyCatalog catalog = _catalog.Value;
         IReadOnlyList<JourneySourceStatus> sourceStatuses = LoadSourceStatuses();
+        IReadOnlyList<JourneyAvailabilityStatus> availabilityStatuses = catalog.Journeys
+            .Select(journey => CreateAvailabilityStatus(journey, sourceStatuses))
+            .ToList();
+        HashSet<string> availableSlugs = availabilityStatuses
+            .Where(status => status.CanAppearInList)
+            .Select(status => status.JourneySlug)
+            .ToHashSet(StringComparer.Ordinal);
         IReadOnlyList<LearningJourney> availableJourneys = catalog.Journeys
-            .Where(IsListAvailable)
+            .Where(journey => availableSlugs.Contains(journey.Slug))
             .OrderBy(journey => journey.SortOrder)
             .ThenBy(journey => journey.Slug, StringComparer.Ordinal)
             .ToList();
 
-        return new JourneyCatalogSnapshot(availableJourneys, [], sourceStatuses);
+        return new JourneyCatalogSnapshot(
+            availableJourneys,
+            availabilityStatuses.Where(status => !status.CanAppearInList).ToList(),
+            sourceStatuses);
     }
 
     private JourneyCatalog LoadCatalog()
@@ -203,16 +237,6 @@ public sealed class LearningJourneyCatalogService
         return Path.Combine(_environment.ContentRootPath, _options.ContentPath);
     }
 
-    private static bool IsListAvailable(LearningJourney journey)
-    {
-        return journey.StoryReferences.Count is >= 3 and <= 5
-            && !string.IsNullOrWhiteSpace(journey.Slug)
-            && !string.IsNullOrWhiteSpace(journey.Title.Get(LanguageCode.ZhTW))
-            && !string.IsNullOrWhiteSpace(journey.Summary.Get(LanguageCode.ZhTW))
-            && journey.SuggestedReadingMinutes > 0
-            && !string.IsNullOrWhiteSpace(journey.AgeGuidance.Get(LanguageCode.ZhTW));
-    }
-
     private JourneyStoryItem? TryCreateStoryItem(JourneyStoryReference reference)
     {
         if (!TryParseSource(reference.Source, out ExplorationSourceType source))
@@ -220,9 +244,16 @@ public sealed class LearningJourneyCatalogService
             return null;
         }
 
-        return source == ExplorationSourceType.Dinosaurs
-            ? TryCreateDinosaurStoryItem(reference)
-            : TryCreateAquariumStoryItem(reference);
+        try
+        {
+            return source == ExplorationSourceType.Dinosaurs
+                ? TryCreateDinosaurStoryItem(reference)
+                : TryCreateAquariumStoryItem(reference);
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 
     private JourneyStoryItem? TryCreateDinosaurStoryItem(JourneyStoryReference reference)
@@ -303,5 +334,152 @@ public sealed class LearningJourneyCatalogService
     {
         source = value;
         return true;
+    }
+
+    private JourneyAvailabilityStatus CreateAvailabilityStatus(
+        LearningJourney journey,
+        IReadOnlyList<JourneySourceStatus> sourceStatuses)
+    {
+        IReadOnlyList<JourneyStoryItem> storyItems = GetStoryItems(journey.Slug);
+        JourneyAvailabilityState state = GetAvailabilityState(journey, storyItems, sourceStatuses);
+        bool canAppearInList = state == JourneyAvailabilityState.Available;
+        JourneyDiagnosticSummary? diagnostic = canAppearInList
+            ? null
+            : new JourneyDiagnosticSummary
+            {
+                ReasonCode = ToReasonCode(state),
+                JourneySlug = journey.Slug,
+                Count = storyItems.Count
+            };
+
+        if (!canAppearInList)
+        {
+            _logger.LogWarning(
+                "Learning journey unavailable: {JourneySlug} {ReasonCode} {Count}",
+                journey.Slug,
+                diagnostic?.ReasonCode,
+                storyItems.Count);
+        }
+
+        return new JourneyAvailabilityStatus
+        {
+            JourneySlug = journey.Slug,
+            State = state,
+            ValidItemCount = storyItems.Count,
+            CanAppearInList = canAppearInList,
+            FriendlyMessage = CreateFriendlyMessage(state),
+            DiagnosticSummary = diagnostic
+        };
+    }
+
+    private static JourneyAvailabilityState GetAvailabilityState(
+        LearningJourney journey,
+        IReadOnlyList<JourneyStoryItem> storyItems,
+        IReadOnlyList<JourneySourceStatus> sourceStatuses)
+    {
+        if (HasMissingRequiredText(journey))
+        {
+            return JourneyAvailabilityState.MissingRequiredText;
+        }
+
+        bool referencesUnavailableSource = journey.StoryReferences.Any(reference =>
+            TryParseSource(reference.Source, out ExplorationSourceType source)
+            && sourceStatuses.Any(status => status.Source == source && !status.IsAvailable));
+
+        if (referencesUnavailableSource && storyItems.Count < 3)
+        {
+            return JourneyAvailabilityState.SourceUnavailable;
+        }
+
+        if (storyItems.Count < 3)
+        {
+            return JourneyAvailabilityState.NotEnoughItems;
+        }
+
+        if (storyItems.Count > 5)
+        {
+            return JourneyAvailabilityState.TooManyItems;
+        }
+
+        return JourneyAvailabilityState.Available;
+    }
+
+    private static bool HasMissingRequiredText(LearningJourney journey)
+    {
+        return string.IsNullOrWhiteSpace(journey.Slug)
+            || string.IsNullOrWhiteSpace(journey.Title.Get(LanguageCode.ZhTW))
+            || string.IsNullOrWhiteSpace(journey.Summary.Get(LanguageCode.ZhTW))
+            || journey.LearningGoals.Count is < 1 or > 3
+            || journey.LearningGoals.Any(goal => string.IsNullOrWhiteSpace(goal.Get(LanguageCode.ZhTW)))
+            || journey.SuggestedReadingMinutes < 1
+            || string.IsNullOrWhiteSpace(journey.AgeGuidance.Get(LanguageCode.ZhTW));
+    }
+
+    private static JourneyAvailabilityStatus CreateNotFoundStatus(string journeySlug)
+    {
+        return new JourneyAvailabilityStatus
+        {
+            JourneySlug = journeySlug,
+            State = JourneyAvailabilityState.NotFound,
+            ValidItemCount = 0,
+            CanAppearInList = false,
+            FriendlyMessage = new JourneyText
+            {
+                ZhTW = "找不到這條旅程，先回旅程列表看看其他路線。",
+                En = "This journey cannot be found. Return to the journey list and try another route."
+            },
+            DiagnosticSummary = new JourneyDiagnosticSummary
+            {
+                ReasonCode = "not-found",
+                JourneySlug = journeySlug
+            }
+        };
+    }
+
+    private static JourneyText CreateFriendlyMessage(JourneyAvailabilityState state)
+    {
+        return state switch
+        {
+            JourneyAvailabilityState.NotEnoughItems => new JourneyText
+            {
+                ZhTW = "這條旅程暫時不能出發，故事朋友還沒有排滿三位。",
+                En = "This journey is not ready yet because it needs at least three story friends."
+            },
+            JourneyAvailabilityState.TooManyItems => new JourneyText
+            {
+                ZhTW = "這條旅程暫時太長了，需要把故事範圍縮小一點。",
+                En = "This journey is too long for now and needs a smaller story range."
+            },
+            JourneyAvailabilityState.SourceUnavailable => new JourneyText
+            {
+                ZhTW = "有些故事朋友暫時躲起來了，這條旅程暫時不能出發。",
+                En = "Some story friends are hiding for now, so this journey is not ready yet."
+            },
+            JourneyAvailabilityState.MissingRequiredText => new JourneyText
+            {
+                ZhTW = "這條旅程還少一點說明文字，整理好就能出發。",
+                En = "This journey still needs a little more text before it is ready."
+            },
+            JourneyAvailabilityState.InvalidReference => new JourneyText
+            {
+                ZhTW = "這條旅程有故事路標需要整理，暫時不能出發。",
+                En = "This journey has story signs that need fixing before it is ready."
+            },
+            _ => new JourneyText()
+        };
+    }
+
+    private static string ToReasonCode(JourneyAvailabilityState state)
+    {
+        return state switch
+        {
+            JourneyAvailabilityState.NotFound => "not-found",
+            JourneyAvailabilityState.NotEnoughItems => "not-enough-items",
+            JourneyAvailabilityState.TooManyItems => "too-many-items",
+            JourneyAvailabilityState.MissingRequiredText => "missing-required-text",
+            JourneyAvailabilityState.SourceUnavailable => "source-unavailable",
+            JourneyAvailabilityState.InvalidReference => "invalid-reference",
+            _ => "available"
+        };
     }
 }

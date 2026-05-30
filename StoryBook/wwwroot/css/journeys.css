@@ -79,7 +79,8 @@ html[data-storybook-effective-theme="dark"] .journeys-action:focus {
 }
 
 .journeys-alert p:last-child,
-.journeys-empty p:last-child {
+.journeys-empty p:last-child,
+.journey-unavailable p:last-child {
   margin-bottom: 0;
 }
 

@@ -117,20 +117,20 @@ Write these tests first and confirm they fail before implementation.
 
 Write these tests first and confirm they fail before implementation.
 
-- [ ] T040 [P] [US3] Add validator tests for kebab-case slugs, unique slugs, required localized text fallback, 1-3 goals, positive minutes, allowed sources, and reference sort order in `StoryBook.Tests/Unit/LearningJourneyContentValidationTests.cs`
-- [ ] T041 [P] [US3] Add service tests for invalid references, duplicate references, not-enough items, too-many items, source unavailable, all sources failed, and sanitized diagnostics in `StoryBook.Tests/Unit/LearningJourneyCatalogServiceTests.cs`
-- [ ] T042 [P] [US3] Add integration tests for unknown slug, unavailable detail state, hidden unavailable journeys, partial failure state, all-unavailable state, and absence of internal diagnostics in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
-- [ ] T043 [P] [US3] Add source failure and invalid journey fixture helpers in `StoryBook.Tests/Integration/JourneyPageTestFixture.cs`
+- [X] T040 [P] [US3] Add validator tests for kebab-case slugs, unique slugs, required localized text fallback, 1-3 goals, positive minutes, allowed sources, and reference sort order in `StoryBook.Tests/Unit/LearningJourneyContentValidationTests.cs`
+- [X] T041 [P] [US3] Add service tests for invalid references, duplicate references, not-enough items, too-many items, source unavailable, all sources failed, and sanitized diagnostics in `StoryBook.Tests/Unit/LearningJourneyCatalogServiceTests.cs`
+- [X] T042 [P] [US3] Add integration tests for unknown slug, unavailable detail state, hidden unavailable journeys, partial failure state, all-unavailable state, and absence of internal diagnostics in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [X] T043 [P] [US3] Add source failure and invalid journey fixture helpers in `StoryBook.Tests/Integration/JourneyPageTestFixture.cs`
 
 ### Implementation for User Story 3
 
-- [ ] T044 [US3] Implement validation rules and child-friendly validation result messages in `StoryBook/Services/LearningJourneyContentValidator.cs`
-- [ ] T045 [US3] Implement invalid reference filtering, duplicate removal, 3-5 item availability rules, and source failure aggregation in `StoryBook/Services/LearningJourneyCatalogService.cs`
-- [ ] T046 [US3] Implement sanitized `ILogger<LearningJourneyCatalogService>` summaries without file paths, exception details, stack traces, secrets, or personal data in `StoryBook/Services/LearningJourneyCatalogService.cs`
-- [ ] T047 [US3] Render partial failure and all-unavailable friendly list states with normal home/explore anchors in `StoryBook/Pages/Journeys/Index.cshtml`
-- [ ] T048 [US3] Render not-found and unavailable detail states without misleading start-reading links in `StoryBook/Pages/Journeys/Details.cshtml`
-- [ ] T049 [US3] Add CSS for journey status, empty, partial failure, and unavailable states in `StoryBook/wwwroot/css/journeys.css`
-- [ ] T050 [US3] Run `dotnet test StoryBook2.sln` and address US3 failures in `StoryBook.Tests/Unit/LearningJourneyContentValidationTests.cs`
+- [X] T044 [US3] Implement validation rules and child-friendly validation result messages in `StoryBook/Services/LearningJourneyContentValidator.cs`
+- [X] T045 [US3] Implement invalid reference filtering, duplicate removal, 3-5 item availability rules, and source failure aggregation in `StoryBook/Services/LearningJourneyCatalogService.cs`
+- [X] T046 [US3] Implement sanitized `ILogger<LearningJourneyCatalogService>` summaries without file paths, exception details, stack traces, secrets, or personal data in `StoryBook/Services/LearningJourneyCatalogService.cs`
+- [X] T047 [US3] Render partial failure and all-unavailable friendly list states with normal home/explore anchors in `StoryBook/Pages/Journeys/Index.cshtml`
+- [X] T048 [US3] Render not-found and unavailable detail states without misleading start-reading links in `StoryBook/Pages/Journeys/Details.cshtml`
+- [X] T049 [US3] Add CSS for journey status, empty, partial failure, and unavailable states in `StoryBook/wwwroot/css/journeys.css`
+- [X] T050 [US3] Run `dotnet test StoryBook2.sln` and address US3 failures in `StoryBook.Tests/Unit/LearningJourneyContentValidationTests.cs`
 
 **Checkpoint**: User Story 3 protects data integrity and friendly failure states while preserving existing story routes.
 

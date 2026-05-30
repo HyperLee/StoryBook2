@@ -19,7 +19,12 @@ public sealed class DetailsModel : PageModel
 
     public string? StartReadingHref { get; private set; }
 
-    public bool HasAvailableJourney => Journey is not null && StoryItems.Count > 0 && StartReadingHref is not null;
+    public JourneyAvailabilityStatus? AvailabilityStatus { get; private set; }
+
+    public bool HasAvailableJourney => AvailabilityStatus?.State == JourneyAvailabilityState.Available
+        && Journey is not null
+        && StoryItems.Count > 0
+        && StartReadingHref is not null;
 
     public void OnGet(string? slug)
     {
@@ -27,11 +32,13 @@ public sealed class DetailsModel : PageModel
 
         if (!_catalogService.TryGetJourneyBySlug(slug, out LearningJourney? journey))
         {
+            AvailabilityStatus = _catalogService.GetAvailabilityStatus(slug);
             return;
         }
 
         Journey = journey;
         StoryItems = _catalogService.GetStoryItems(journey!.Slug);
         StartReadingHref = _catalogService.GetStartReadingHref(journey.Slug);
+        AvailabilityStatus = _catalogService.GetAvailabilityStatus(journey.Slug);
     }
 }

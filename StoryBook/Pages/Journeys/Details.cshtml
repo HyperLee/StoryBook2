@@ -6,11 +6,25 @@
 }
 
 <section class="journeys-page journey-detail-page" aria-labelledby="journey-detail-title">
-    @if (!Model.HasAvailableJourney || Model.Journey is null)
+    @if (Model.Journey is null)
     {
         <div class="journeys-empty" role="status" data-journey-not-found>
             <h1 id="journey-detail-title" data-i18n-zh-tw="找不到這條旅程" data-i18n-en="This journey cannot be found">找不到這條旅程</h1>
             <p data-i18n-zh-tw="這條路線可能還在整理，先回旅程列表看看其他路線。" data-i18n-en="This route may still be getting ready. Return to the journey list and try another route.">這條路線可能還在整理，先回旅程列表看看其他路線。</p>
+            <div class="journeys-page__actions">
+                <a class="journeys-primary-action" asp-page="/Journeys/Index" data-i18n-zh-tw="回旅程列表" data-i18n-en="Back to journeys">回旅程列表</a>
+                <a class="journeys-action" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+            </div>
+        </div>
+    }
+    else if (!Model.HasAvailableJourney)
+    {
+        <div class="journeys-empty journey-unavailable" role="status" aria-live="polite" data-journey-unavailable>
+            <h1 id="journey-detail-title"
+                data-i18n-zh-tw="@Model.Journey.Title.Get(LanguageCode.ZhTW)"
+                data-i18n-en="@Model.Journey.Title.Get(LanguageCode.En)">@Model.Journey.Title.Get(LanguageCode.ZhTW)</h1>
+            <p data-i18n-zh-tw="@Model.AvailabilityStatus?.GetFriendlyMessage(LanguageCode.ZhTW)"
+               data-i18n-en="@Model.AvailabilityStatus?.GetFriendlyMessage(LanguageCode.En)">@(Model.AvailabilityStatus?.GetFriendlyMessage(LanguageCode.ZhTW) ?? "這條旅程暫時不能出發。")</p>
             <div class="journeys-page__actions">
                 <a class="journeys-primary-action" asp-page="/Journeys/Index" data-i18n-zh-tw="回旅程列表" data-i18n-en="Back to journeys">回旅程列表</a>
                 <a class="journeys-action" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>

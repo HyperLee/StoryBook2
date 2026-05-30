@@ -1,4 +1,6 @@
 using System.Net;
+using System.Text.Json;
+using StoryBook.Models;
 
 namespace StoryBook.Tests.Integration;
 
@@ -86,5 +88,136 @@ public sealed class JourneyPagesTests : IClassFixture<JourneyPageTestFixture>
         Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/aquarium/octopus"));
         Assert.DoesNotContain("/journeys/story/", html, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("/journeys/clever-hunters/", html, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task Unknown_journey_slug_renders_friendly_not_found_without_internal_details()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/journeys/unknown-slug");
+
+        Assert.Contains("data-journey-not-found", html);
+        Assert.Contains("找不到這條旅程", html);
+        Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/journeys"));
+        Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/"));
+        Assert.DoesNotContain("System.IO", html);
+        Assert.DoesNotContain("Data/", html, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task Unavailable_journey_is_hidden_from_list_and_direct_detail_has_no_start_link()
+    {
+        string path = WriteCatalog(
+            CreateJourney("ready-trail"),
+            CreateJourney("tiny-trail", references:
+            [
+                Ref("dinosaurs", "tyrannosaurus-rex", 1),
+                Ref("aquarium", "shark", 2)
+            ]));
+        using HttpClient client = _fixture.CreateClientWithCatalogPaths(journeyContentPath: path);
+
+        string listHtml = WebUtility.HtmlDecode(await client.GetStringAsync("/journeys"));
+        string detailHtml = WebUtility.HtmlDecode(await client.GetStringAsync("/journeys/tiny-trail"));
+
+        Assert.Contains("data-journey-slug=\"ready-trail\"", listHtml);
+        Assert.DoesNotContain("data-journey-slug=\"tiny-trail\"", listHtml);
+        Assert.Contains("data-journey-unavailable", detailHtml);
+        Assert.Contains("暫時不能出發", detailHtml);
+        Assert.DoesNotContain("data-journey-start-reading", detailHtml);
+        Assert.DoesNotContain("System.IO", detailHtml);
+    }
+
+    [Fact]
+    public async Task Partial_source_failure_renders_available_content_and_no_internal_diagnostics()
+    {
+        string path = WriteCatalog(
+            CreateJourney("dino-only-trail", references:
+            [
+                Ref("dinosaurs", "tyrannosaurus-rex", 1),
+                Ref("dinosaurs", "triceratops", 2),
+                Ref("dinosaurs", "stegosaurus", 3)
+            ]),
+            CreateJourney("mixed-trail"));
+        using HttpClient client = _fixture.CreateClientWithCatalogPaths(
+            journeyContentPath: path,
+            aquariumContentPath: "Data/not-found-aquarium.json");
+        using HttpResponseMessage response = await client.GetAsync("/journeys");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        string html = WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
+
+        Assert.Contains("data-journeys-partial-failure", html);
+        Assert.Contains("data-journey-slug=\"dino-only-trail\"", html);
+        Assert.DoesNotContain("data-journey-slug=\"mixed-trail\"", html);
+        Assert.DoesNotContain("not-found-aquarium.json", html);
+        Assert.DoesNotContain("System.IO", html);
+    }
+
+    [Fact]
+    public async Task All_unavailable_state_renders_home_anchor_without_internal_diagnostics()
+    {
+        string path = WriteCatalog(CreateJourney("tiny-trail", references:
+        [
+            Ref("dinosaurs", "tyrannosaurus-rex", 1),
+            Ref("aquarium", "shark", 2)
+        ]));
+        using HttpClient client = _fixture.CreateClientWithCatalogPaths(journeyContentPath: path);
+        using HttpResponseMessage response = await client.GetAsync("/journeys");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        string html = WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
+
+        Assert.Contains("data-journeys-all-unavailable", html);
+        Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/"));
+        Assert.DoesNotContain("System.IO", html);
+        Assert.DoesNotContain("Data/", html, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string WriteCatalog(params LearningJourney[] journeys)
+    {
+        string json = JsonSerializer.Serialize(
+            new JourneyCatalog { Journeys = journeys.ToList() },
+            new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        return JourneyPageTestFixture.WriteJourneyCatalog(json);
+    }
+
+    private static LearningJourney CreateJourney(
+        string slug,
+        List<JourneyStoryReference>? references = null)
+    {
+        return new LearningJourney
+        {
+            Slug = slug,
+            SortOrder = 1,
+            Title = Text("旅程", "Journey"),
+            Summary = Text("旅程摘要", "Journey summary"),
+            LearningGoals = [Text("學習目標", "Learning goal")],
+            SuggestedReadingMinutes = 10,
+            AgeGuidance = Text("5-7 歲", "Ages 5-7"),
+            StoryReferences = references ??
+            [
+                Ref("dinosaurs", "tyrannosaurus-rex", 1),
+                Ref("dinosaurs", "triceratops", 2),
+                Ref("aquarium", "shark", 3)
+            ]
+        };
+    }
+
+    private static JourneyStoryReference Ref(string source, string slug, int sortOrder)
+    {
+        return new JourneyStoryReference
+        {
+            Source = source,
+            Slug = slug,
+            SortOrder = sortOrder
+        };
+    }
+
+    private static JourneyText Text(string zhTW, string en)
+    {
+        return new JourneyText
+        {
+            ZhTW = zhTW,
+            En = en
+        };
     }
 }

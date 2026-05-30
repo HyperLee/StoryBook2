@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using System.Text.Json;
 using StoryBook.Models;
 using StoryBook.Services;
 using StoryBook.Tests.Support;
@@ -68,6 +69,92 @@ public sealed class LearningJourneyCatalogServiceTests
         Assert.Equal("/dinosaurs/tyrannosaurus-rex", service.GetStartReadingHref("clever-hunters"));
     }
 
+    [Fact]
+    public void GetSnapshot_hides_not_enough_and_too_many_journeys_and_reports_statuses()
+    {
+        string path = WriteCatalog(
+            CreateJourney("ready-trail"),
+            CreateJourney("tiny-trail", references:
+            [
+                Ref("dinosaurs", "tyrannosaurus-rex", 1),
+                Ref("aquarium", "shark", 2)
+            ]),
+            CreateJourney("wide-trail", references:
+            [
+                Ref("dinosaurs", "tyrannosaurus-rex", 1),
+                Ref("dinosaurs", "triceratops", 2),
+                Ref("dinosaurs", "stegosaurus", 3),
+                Ref("dinosaurs", "brachiosaurus", 4),
+                Ref("aquarium", "shark", 5),
+                Ref("aquarium", "octopus", 6)
+            ]));
+        LearningJourneyCatalogService service = CreateService(journeyContentPath: path);
+
+        JourneyCatalogSnapshot snapshot = service.GetSnapshot();
+
+        Assert.Contains(snapshot.AvailableJourneys, journey => journey.Slug == "ready-trail");
+        Assert.DoesNotContain(snapshot.AvailableJourneys, journey => journey.Slug == "tiny-trail");
+        Assert.DoesNotContain(snapshot.AvailableJourneys, journey => journey.Slug == "wide-trail");
+        Assert.Contains(snapshot.UnavailableStatuses, status =>
+            status.JourneySlug == "tiny-trail"
+            && status.State == JourneyAvailabilityState.NotEnoughItems
+            && !status.CanAppearInList);
+        Assert.Contains(snapshot.UnavailableStatuses, status =>
+            status.JourneySlug == "wide-trail"
+            && status.State == JourneyAvailabilityState.TooManyItems
+            && !status.CanAppearInList);
+    }
+
+    [Fact]
+    public void GetStoryItems_filters_duplicate_and_invalid_references_without_broken_links()
+    {
+        string path = WriteCatalog(CreateJourney("messy-trail", references:
+        [
+            Ref("dinosaurs", "tyrannosaurus-rex", 1),
+            Ref("dinosaurs", "tyrannosaurus-rex", 2),
+            Ref("aquarium", "missing-shark", 3),
+            Ref("aquarium", "shark", 4)
+        ]));
+        LearningJourneyCatalogService service = CreateService(journeyContentPath: path);
+
+        IReadOnlyList<JourneyStoryItem> items = service.GetStoryItems("messy-trail");
+        JourneyAvailabilityStatus status = service.GetAvailabilityStatus("messy-trail");
+
+        Assert.Equal(["dinosaurs:tyrannosaurus-rex", "aquarium:shark"], items.Select(item => item.StableId));
+        Assert.All(items, item => Assert.Matches("^/(dinosaurs|aquarium)/[a-z0-9]+(?:-[a-z0-9]+)*$", item.DetailHref));
+        Assert.Equal(JourneyAvailabilityState.NotEnoughItems, status.State);
+        Assert.Equal(2, status.ValidItemCount);
+        Assert.NotNull(status.DiagnosticSummary);
+        Assert.Equal("not-enough-items", status.DiagnosticSummary.ReasonCode);
+    }
+
+    [Fact]
+    public void GetSnapshot_reports_source_failure_and_all_sources_failed_with_sanitized_diagnostics()
+    {
+        RecordingLogger<LearningJourneyCatalogService> logger = new();
+        LearningJourneyCatalogService partialService = CreateService(
+            logger: logger,
+            aquariumContentPath: "Data/not-found-aquarium.json");
+
+        JourneyCatalogSnapshot partialSnapshot = partialService.GetSnapshot();
+
+        Assert.True(partialSnapshot.HasPartialSourceFailure);
+        Assert.False(partialSnapshot.HasAllSourcesFailed);
+        JourneySourceStatus aquarium = Assert.Single(partialSnapshot.SourceStatuses, status => status.Source == ExplorationSourceType.Aquarium);
+        Assert.False(aquarium.IsAvailable);
+        Assert.Equal("source-load-failed", aquarium.DiagnosticSummary?.ReasonCode);
+        Assert.DoesNotContain(logger.Entries, entry => entry.Message.Contains("not-found-aquarium.json", StringComparison.OrdinalIgnoreCase));
+        Assert.DoesNotContain(logger.Entries, entry => entry.Message.Contains("System.IO", StringComparison.OrdinalIgnoreCase));
+
+        LearningJourneyCatalogService allFailedService = CreateService(
+            dinosaurContentPath: "Data/not-found-dinosaurs.json",
+            aquariumContentPath: "Data/not-found-aquarium.json");
+        JourneyCatalogSnapshot allFailedSnapshot = allFailedService.GetSnapshot();
+
+        Assert.True(allFailedSnapshot.HasAllSourcesFailed);
+        Assert.False(allFailedSnapshot.HasAnyAvailableJourney);
+    }
+
     private static LearningJourneyCatalogService CreateService(
         string journeyContentPath = "Data/journeys.json",
         string dinosaurContentPath = "Data/dinosaurs.json",
@@ -93,5 +180,56 @@ public sealed class LearningJourneyCatalogServiceTests
             dinosaurCatalog,
             aquariumCatalog,
             logger ?? new RecordingLogger<LearningJourneyCatalogService>());
+    }
+
+    private static string WriteCatalog(params LearningJourney[] journeys)
+    {
+        string json = JsonSerializer.Serialize(
+            new JourneyCatalog { Journeys = journeys.ToList() },
+            new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        string path = Path.Combine(Path.GetTempPath(), $"storybook-journeys-{Guid.NewGuid():N}.json");
+        File.WriteAllText(path, json);
+        return path;
+    }
+
+    private static LearningJourney CreateJourney(
+        string slug,
+        List<JourneyStoryReference>? references = null)
+    {
+        return new LearningJourney
+        {
+            Slug = slug,
+            SortOrder = 1,
+            Title = Text("旅程", "Journey"),
+            Summary = Text("旅程摘要", "Journey summary"),
+            LearningGoals = [Text("學習目標", "Learning goal")],
+            SuggestedReadingMinutes = 10,
+            AgeGuidance = Text("5-7 歲", "Ages 5-7"),
+            StoryReferences = references ??
+            [
+                Ref("dinosaurs", "tyrannosaurus-rex", 1),
+                Ref("dinosaurs", "triceratops", 2),
+                Ref("aquarium", "shark", 3)
+            ]
+        };
+    }
+
+    private static JourneyStoryReference Ref(string source, string slug, int sortOrder)
+    {
+        return new JourneyStoryReference
+        {
+            Source = source,
+            Slug = slug,
+            SortOrder = sortOrder
+        };
+    }
+
+    private static JourneyText Text(string zhTW, string en)
+    {
+        return new JourneyText
+        {
+            ZhTW = zhTW,
+            En = en
+        };
     }
 }
