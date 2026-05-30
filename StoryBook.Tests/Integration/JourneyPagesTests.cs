@@ -54,4 +54,37 @@ public sealed class JourneyPagesTests : IClassFixture<JourneyPageTestFixture>
         Assert.True(JourneyPageTestFixture.HasLinkTo(exploreHtml, "/compare"));
         Assert.DoesNotContain("data-theme-selector", exploreHtml, StringComparison.OrdinalIgnoreCase);
     }
+
+    [Fact]
+    public async Task Journey_detail_page_renders_contract_start_reading_and_back_link()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/journeys/clever-hunters");
+
+        Assert.Contains("data-journey-detail", html);
+        Assert.Contains("data-journey-slug=\"clever-hunters\"", html);
+        Assert.Contains("聰明獵手觀察隊", html);
+        Assert.Contains("學習目標", html);
+        Assert.Contains("建議閱讀時間", html);
+        Assert.Contains("建議年齡", html);
+        Assert.Contains("data-journey-start-reading", html);
+        Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/dinosaurs/tyrannosaurus-rex"));
+        Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/journeys"));
+        Assert.DoesNotContain("data-theme-selector", html, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task Journey_detail_story_items_are_ordered_normal_source_anchors_only()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/journeys/clever-hunters");
+
+        Assert.Equal(4, JourneyPageTestFixture.CountOccurrences(html, "data-journey-story-item"));
+        Assert.Contains("data-journey-story-id=\"dinosaurs:tyrannosaurus-rex\"", html);
+        Assert.Contains("data-journey-story-id=\"aquarium:shark\"", html);
+        Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/dinosaurs/tyrannosaurus-rex"));
+        Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/dinosaurs/velociraptor"));
+        Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/aquarium/shark"));
+        Assert.True(JourneyPageTestFixture.HasLinkTo(html, "/aquarium/octopus"));
+        Assert.DoesNotContain("/journeys/story/", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("/journeys/clever-hunters/", html, StringComparison.OrdinalIgnoreCase);
+    }
 }

@@ -90,18 +90,18 @@ Write these tests first and confirm they fail before implementation.
 
 Write these tests first and confirm they fail before implementation.
 
-- [ ] T031 [P] [US2] Add service tests for resolving dinosaur and aquarium references into names, summaries, source labels, detail hrefs, and first-story start href in `StoryBook.Tests/Unit/LearningJourneyCatalogServiceTests.cs`
-- [ ] T032 [P] [US2] Add `/journeys/{slug}` integration tests for detail contract, `data-journey-detail`, `data-journey-start-reading`, and `/journeys` back link in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
-- [ ] T033 [P] [US2] Add integration tests that journey story item links point only to `/dinosaurs/{slug}` or `/aquarium/{slug}` normal anchors in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [X] T031 [P] [US2] Add service tests for resolving dinosaur and aquarium references into names, summaries, source labels, detail hrefs, and first-story start href in `StoryBook.Tests/Unit/LearningJourneyCatalogServiceTests.cs`
+- [X] T032 [P] [US2] Add `/journeys/{slug}` integration tests for detail contract, `data-journey-detail`, `data-journey-start-reading`, and `/journeys` back link in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [X] T033 [P] [US2] Add integration tests that journey story item links point only to `/dinosaurs/{slug}` or `/aquarium/{slug}` normal anchors in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
 
 ### Implementation for User Story 2
 
-- [ ] T034 [US2] Implement journey detail projection, source lookup, story item ordering, and first valid item start href in `StoryBook/Services/LearningJourneyCatalogService.cs`
-- [ ] T035 [US2] Implement `/journeys/{slug}` PageModel for available journey detail loading in `StoryBook/Pages/Journeys/Details.cshtml.cs`
-- [ ] T036 [US2] Implement detail Razor markup with title, summary, learning goals, reading metadata, ordered story item list, start-reading anchor, and back link in `StoryBook/Pages/Journeys/Details.cshtml`
-- [ ] T037 [US2] Add detail and story item responsive styles in `StoryBook/wwwroot/css/journeys.css`
-- [ ] T038 [US2] Include the journey stylesheet and script sections for the detail page in `StoryBook/Pages/Journeys/Details.cshtml`
-- [ ] T039 [US2] Run `dotnet test StoryBook2.sln` and address US2 failures in `StoryBook.Tests/Unit/LearningJourneyCatalogServiceTests.cs`
+- [X] T034 [US2] Implement journey detail projection, source lookup, story item ordering, and first valid item start href in `StoryBook/Services/LearningJourneyCatalogService.cs`
+- [X] T035 [US2] Implement `/journeys/{slug}` PageModel for available journey detail loading in `StoryBook/Pages/Journeys/Details.cshtml.cs`
+- [X] T036 [US2] Implement detail Razor markup with title, summary, learning goals, reading metadata, ordered story item list, start-reading anchor, and back link in `StoryBook/Pages/Journeys/Details.cshtml`
+- [X] T037 [US2] Add detail and story item responsive styles in `StoryBook/wwwroot/css/journeys.css`
+- [X] T038 [US2] Include the journey stylesheet and script sections for the detail page in `StoryBook/Pages/Journeys/Details.cshtml`
+- [X] T039 [US2] Run `dotnet test StoryBook2.sln` and address US2 failures in `StoryBook.Tests/Unit/LearningJourneyCatalogServiceTests.cs`
 
 **Checkpoint**: User Story 2 works independently when a valid journey slug is opened directly or from the list.
 

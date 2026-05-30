@@ -1,0 +1,98 @@
+@page "/journeys/{slug}"
+@using StoryBook.Models
+@model StoryBook.Pages.Journeys.DetailsModel
+@{
+    ViewData["Title"] = Model.Journey?.Title.Get(LanguageCode.ZhTW) ?? "學習旅程";
+}
+
+<section class="journeys-page journey-detail-page" aria-labelledby="journey-detail-title">
+    @if (!Model.HasAvailableJourney || Model.Journey is null)
+    {
+        <div class="journeys-empty" role="status" data-journey-not-found>
+            <h1 id="journey-detail-title" data-i18n-zh-tw="找不到這條旅程" data-i18n-en="This journey cannot be found">找不到這條旅程</h1>
+            <p data-i18n-zh-tw="這條路線可能還在整理，先回旅程列表看看其他路線。" data-i18n-en="This route may still be getting ready. Return to the journey list and try another route.">這條路線可能還在整理，先回旅程列表看看其他路線。</p>
+            <div class="journeys-page__actions">
+                <a class="journeys-primary-action" asp-page="/Journeys/Index" data-i18n-zh-tw="回旅程列表" data-i18n-en="Back to journeys">回旅程列表</a>
+                <a class="journeys-action" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        LearningJourney journey = Model.Journey;
+        string goalsZhTW = string.Join("、", journey.LearningGoals.Select(goal => goal.Get(LanguageCode.ZhTW)));
+        string goalsEn = string.Join(", ", journey.LearningGoals.Select(goal => goal.Get(LanguageCode.En)));
+        string readingTimeZhTW = $"建議閱讀時間：{journey.SuggestedReadingMinutes} 分鐘";
+        string readingTimeEn = $"Suggested reading time: {journey.SuggestedReadingMinutes} minutes";
+        string ageZhTW = $"建議年齡：{journey.AgeGuidance.Get(LanguageCode.ZhTW)}";
+        string ageEn = $"Suggested age: {journey.AgeGuidance.Get(LanguageCode.En)}";
+
+        <article class="journey-detail"
+                 data-journey-detail
+                 data-journey-slug="@journey.Slug">
+            <div class="journey-detail__header">
+                <p class="journeys-kicker" data-i18n-zh-tw="學習旅程" data-i18n-en="Learning journey">學習旅程</p>
+                <h1 id="journey-detail-title"
+                    data-i18n-zh-tw="@journey.Title.Get(LanguageCode.ZhTW)"
+                    data-i18n-en="@journey.Title.Get(LanguageCode.En)">@journey.Title.Get(LanguageCode.ZhTW)</h1>
+                <p class="journey-detail__summary"
+                   data-i18n-zh-tw="@journey.Summary.Get(LanguageCode.ZhTW)"
+                   data-i18n-en="@journey.Summary.Get(LanguageCode.En)">@journey.Summary.Get(LanguageCode.ZhTW)</p>
+                <div class="journey-detail__actions">
+                    <a class="journeys-primary-action"
+                       href="@Model.StartReadingHref"
+                       data-journey-start-reading
+                       data-i18n-zh-tw="開始閱讀"
+                       data-i18n-en="Start reading">開始閱讀</a>
+                    <a class="journeys-action" asp-page="/Journeys/Index" data-i18n-zh-tw="回旅程列表" data-i18n-en="Back to journeys">回旅程列表</a>
+                </div>
+            </div>
+
+            <section class="journey-detail__meta" aria-labelledby="journey-meta-title">
+                <h2 id="journey-meta-title" data-i18n-zh-tw="旅程資訊" data-i18n-en="Journey information">旅程資訊</h2>
+                <dl>
+                    <div>
+                        <dt data-i18n-zh-tw="學習目標" data-i18n-en="Learning goals">學習目標</dt>
+                        <dd data-i18n-zh-tw="@goalsZhTW" data-i18n-en="@goalsEn">@goalsZhTW</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n-zh-tw="建議閱讀時間" data-i18n-en="Suggested reading time">建議閱讀時間</dt>
+                        <dd data-i18n-zh-tw="@readingTimeZhTW" data-i18n-en="@readingTimeEn">@readingTimeZhTW</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n-zh-tw="建議年齡" data-i18n-en="Suggested age">建議年齡</dt>
+                        <dd data-i18n-zh-tw="@ageZhTW" data-i18n-en="@ageEn">@ageZhTW</dd>
+                    </div>
+                </dl>
+            </section>
+
+            <section class="journey-story-list" aria-labelledby="journey-story-list-title">
+                <h2 id="journey-story-list-title" data-i18n-zh-tw="閱讀順序" data-i18n-en="Reading order">閱讀順序</h2>
+                <ol>
+                    @foreach (JourneyStoryItem item in Model.StoryItems)
+                    {
+                        <li class="journey-story-item"
+                            data-journey-story-item
+                            data-journey-story-id="@item.StableId">
+                            <a class="journey-story-item__link" href="@item.DetailHref">
+                                <span class="journey-story-item__source"
+                                      data-i18n-zh-tw="@item.GetSourceLabel(LanguageCode.ZhTW)"
+                                      data-i18n-en="@item.GetSourceLabel(LanguageCode.En)">@item.GetSourceLabel(LanguageCode.ZhTW)</span>
+                                <span class="journey-story-item__name"
+                                      data-i18n-zh-tw="@item.GetName(LanguageCode.ZhTW)"
+                                      data-i18n-en="@item.GetName(LanguageCode.En)">@item.GetName(LanguageCode.ZhTW)</span>
+                                <span class="journey-story-item__summary"
+                                      data-i18n-zh-tw="@item.GetSummary(LanguageCode.ZhTW)"
+                                      data-i18n-en="@item.GetSummary(LanguageCode.En)">@item.GetSummary(LanguageCode.ZhTW)</span>
+                            </a>
+                        </li>
+                    }
+                </ol>
+            </section>
+        </article>
+    }
+</section>
+
+@section Scripts {
+    <script src="~/js/journeys.js" asp-append-version="true"></script>
+}

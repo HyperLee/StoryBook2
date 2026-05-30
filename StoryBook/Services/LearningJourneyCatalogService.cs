@@ -16,6 +16,7 @@ public sealed class LearningJourneyCatalogService
     private readonly DinosaurCatalogService _dinosaurCatalogService;
     private readonly AquariumCatalogService _aquariumCatalogService;
     private readonly ILogger<LearningJourneyCatalogService> _logger;
+    private readonly Lazy<JourneyCatalog> _catalog;
     private readonly Lazy<JourneyCatalogSnapshot> _snapshot;
 
     /// <summary>
@@ -35,6 +36,7 @@ public sealed class LearningJourneyCatalogService
         _dinosaurCatalogService = dinosaurCatalogService;
         _aquariumCatalogService = aquariumCatalogService;
         _logger = logger;
+        _catalog = new Lazy<JourneyCatalog>(LoadCatalog);
         _snapshot = new Lazy<JourneyCatalogSnapshot>(LoadSnapshot);
     }
 
@@ -58,13 +60,48 @@ public sealed class LearningJourneyCatalogService
             return false;
         }
 
-        _logger.LogWarning("Unknown learning journey slug requested: {JourneySlug}", slug.Trim().ToLowerInvariant());
-        return false;
+        string normalizedSlug = slug.Trim().ToLowerInvariant();
+        journey = _catalog.Value.Journeys.FirstOrDefault(item => item.Slug == normalizedSlug);
+
+        if (journey is null)
+        {
+            _logger.LogWarning("Unknown learning journey slug requested: {JourneySlug}", normalizedSlug);
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Gets resolved, ordered story items for a journey slug.
+    /// </summary>
+    public IReadOnlyList<JourneyStoryItem> GetStoryItems(string? journeySlug)
+    {
+        if (!TryGetJourneyBySlug(journeySlug, out LearningJourney? journey))
+        {
+            return [];
+        }
+
+        return journey!.StoryReferences
+            .Select(TryCreateStoryItem)
+            .Where(item => item is not null)
+            .Select(item => item!)
+            .OrderBy(item => item.SortOrder)
+            .ThenBy(item => item.StableId, StringComparer.Ordinal)
+            .ToList();
+    }
+
+    /// <summary>
+    /// Gets the first resolved story href for a journey slug, or <see langword="null" /> when none is available.
+    /// </summary>
+    public string? GetStartReadingHref(string? journeySlug)
+    {
+        return GetStoryItems(journeySlug).FirstOrDefault()?.DetailHref;
     }
 
     private JourneyCatalogSnapshot LoadSnapshot()
     {
-        JourneyCatalog catalog = LoadCatalog();
+        JourneyCatalog catalog = _catalog.Value;
         IReadOnlyList<JourneySourceStatus> sourceStatuses = LoadSourceStatuses();
         IReadOnlyList<LearningJourney> availableJourneys = catalog.Journeys
             .Where(IsListAvailable)
@@ -174,5 +211,97 @@ public sealed class LearningJourneyCatalogService
             && !string.IsNullOrWhiteSpace(journey.Summary.Get(LanguageCode.ZhTW))
             && journey.SuggestedReadingMinutes > 0
             && !string.IsNullOrWhiteSpace(journey.AgeGuidance.Get(LanguageCode.ZhTW));
+    }
+
+    private JourneyStoryItem? TryCreateStoryItem(JourneyStoryReference reference)
+    {
+        if (!TryParseSource(reference.Source, out ExplorationSourceType source))
+        {
+            return null;
+        }
+
+        return source == ExplorationSourceType.Dinosaurs
+            ? TryCreateDinosaurStoryItem(reference)
+            : TryCreateAquariumStoryItem(reference);
+    }
+
+    private JourneyStoryItem? TryCreateDinosaurStoryItem(JourneyStoryReference reference)
+    {
+        DinosaurProfile? profile = _dinosaurCatalogService.GetProfiles()
+            .FirstOrDefault(item => item.Slug == reference.Slug);
+
+        if (profile is null)
+        {
+            return null;
+        }
+
+        ExplorationSourceType source = ExplorationSourceType.Dinosaurs;
+
+        return new JourneyStoryItem
+        {
+            StableId = $"{source.ToCode()}:{profile.Slug}",
+            Source = source,
+            Slug = profile.Slug,
+            DetailHref = $"/{source.GetRoutePrefix()}/{profile.Slug}",
+            SortOrder = reference.SortOrder,
+            SourceLabelZhTW = source.GetLabel(LanguageCode.ZhTW),
+            SourceLabelEn = source.GetLabel(LanguageCode.En),
+            NameZhTW = profile.Names.Get(LanguageCode.ZhTW),
+            NameEn = profile.Names.Get(LanguageCode.En),
+            SummaryZhTW = profile.Summary.Get(LanguageCode.ZhTW),
+            SummaryEn = profile.Summary.Get(LanguageCode.En),
+            ImagePath = profile.MainImage.Path,
+            ImageAltTextZhTW = profile.MainImage.AltText.Get(LanguageCode.ZhTW),
+            ImageAltTextEn = profile.MainImage.AltText.Get(LanguageCode.En)
+        };
+    }
+
+    private JourneyStoryItem? TryCreateAquariumStoryItem(JourneyStoryReference reference)
+    {
+        AquariumAnimalProfile? profile = _aquariumCatalogService.GetProfiles()
+            .FirstOrDefault(item => item.Slug == reference.Slug);
+
+        if (profile is null)
+        {
+            return null;
+        }
+
+        ExplorationSourceType source = ExplorationSourceType.Aquarium;
+
+        return new JourneyStoryItem
+        {
+            StableId = $"{source.ToCode()}:{profile.Slug}",
+            Source = source,
+            Slug = profile.Slug,
+            DetailHref = $"/{source.GetRoutePrefix()}/{profile.Slug}",
+            SortOrder = reference.SortOrder,
+            SourceLabelZhTW = source.GetLabel(LanguageCode.ZhTW),
+            SourceLabelEn = source.GetLabel(LanguageCode.En),
+            NameZhTW = profile.Names.Get(LanguageCode.ZhTW),
+            NameEn = profile.Names.Get(LanguageCode.En),
+            SummaryZhTW = profile.Summary.Get(LanguageCode.ZhTW),
+            SummaryEn = profile.Summary.Get(LanguageCode.En),
+            ImagePath = profile.MainImage.Path,
+            ImageAltTextZhTW = profile.MainImage.AltText.Get(LanguageCode.ZhTW),
+            ImageAltTextEn = profile.MainImage.AltText.Get(LanguageCode.En)
+        };
+    }
+
+    private static bool TryParseSource(string? sourceCode, out ExplorationSourceType source)
+    {
+        source = ExplorationSourceType.Dinosaurs;
+
+        return sourceCode?.Trim().ToLowerInvariant() switch
+        {
+            "dinosaurs" => true,
+            "aquarium" => SetSource(ExplorationSourceType.Aquarium, out source),
+            _ => false
+        };
+    }
+
+    private static bool SetSource(ExplorationSourceType value, out ExplorationSourceType source)
+    {
+        source = value;
+        return true;
     }
 }

@@ -31,6 +31,43 @@ public sealed class LearningJourneyCatalogServiceTests
         });
     }
 
+    [Fact]
+    public void GetStoryItems_resolves_source_names_summaries_hrefs_and_first_story_start_href()
+    {
+        LearningJourneyCatalogService service = CreateService();
+
+        Assert.True(service.TryGetJourneyBySlug("clever-hunters", out LearningJourney? journey));
+        IReadOnlyList<JourneyStoryItem> items = service.GetStoryItems("clever-hunters");
+
+        Assert.NotNull(journey);
+        Assert.Equal(4, items.Count);
+        Assert.Collection(
+            items.Select(item => item.StableId),
+            stableId => Assert.Equal("dinosaurs:tyrannosaurus-rex", stableId),
+            stableId => Assert.Equal("dinosaurs:velociraptor", stableId),
+            stableId => Assert.Equal("aquarium:shark", stableId),
+            stableId => Assert.Equal("aquarium:octopus", stableId));
+
+        JourneyStoryItem tyrannosaurus = items[0];
+        Assert.Equal(ExplorationSourceType.Dinosaurs, tyrannosaurus.Source);
+        Assert.Equal("恐龍", tyrannosaurus.GetSourceLabel(LanguageCode.ZhTW));
+        Assert.Equal("Dinosaurs", tyrannosaurus.GetSourceLabel(LanguageCode.En));
+        Assert.Equal("暴龍", tyrannosaurus.GetName(LanguageCode.ZhTW));
+        Assert.Equal("Tyrannosaurus Rex", tyrannosaurus.GetName(LanguageCode.En));
+        Assert.Equal("/dinosaurs/tyrannosaurus-rex", tyrannosaurus.DetailHref);
+        Assert.False(string.IsNullOrWhiteSpace(tyrannosaurus.GetSummary(LanguageCode.ZhTW)));
+
+        JourneyStoryItem shark = Assert.Single(items, item => item.StableId == "aquarium:shark");
+        Assert.Equal(ExplorationSourceType.Aquarium, shark.Source);
+        Assert.Equal("水族館", shark.GetSourceLabel(LanguageCode.ZhTW));
+        Assert.Equal("Aquarium", shark.GetSourceLabel(LanguageCode.En));
+        Assert.Equal("鯊魚", shark.GetName(LanguageCode.ZhTW));
+        Assert.Equal("/aquarium/shark", shark.DetailHref);
+        Assert.False(string.IsNullOrWhiteSpace(shark.GetSummary(LanguageCode.En)));
+
+        Assert.Equal("/dinosaurs/tyrannosaurus-rex", service.GetStartReadingHref("clever-hunters"));
+    }
+
     private static LearningJourneyCatalogService CreateService(
         string journeyContentPath = "Data/journeys.json",
         string dinosaurContentPath = "Data/dinosaurs.json",
