@@ -1,0 +1,97 @@
+@page "/journeys"
+@using StoryBook.Models
+@model StoryBook.Pages.Journeys.IndexModel
+@{
+    ViewData["Title"] = "學習旅程";
+}
+
+<section class="journeys-page" aria-labelledby="journeys-title" data-journeys-page>
+    <div class="journeys-page__header">
+        <div>
+            <p class="journeys-kicker" data-i18n-zh-tw="主題路線" data-i18n-en="Theme routes">主題路線</p>
+            <h1 id="journeys-title" data-i18n-zh-tw="學習旅程" data-i18n-en="Learning journeys">學習旅程</h1>
+            <p class="journeys-intro"
+               data-i18n-zh-tw="選一條路線，照順序拜訪恐龍和水族館故事朋友。"
+               data-i18n-en="Choose a route and visit dinosaur and aquarium story friends in order.">選一條路線，照順序拜訪恐龍和水族館故事朋友。</p>
+        </div>
+        <div class="journeys-page__actions">
+            <a class="journeys-action" asp-page="/Explore/Index" data-i18n-zh-tw="回探索" data-i18n-en="Explore">回探索</a>
+            <a class="journeys-action" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+        </div>
+    </div>
+
+    @if (Model.HasAllSourcesFailed || !Model.HasAnyAvailableJourney)
+    {
+        <div class="journeys-empty" role="status" data-journeys-all-unavailable>
+            <h2 data-i18n-zh-tw="旅程暫時還不能出發" data-i18n-en="Journeys are not ready yet">旅程暫時還不能出發</h2>
+            <p data-i18n-zh-tw="請先回首頁，等故事朋友排好隊再回來。" data-i18n-en="Please return home and come back when the story friends are lined up.">請先回首頁，等故事朋友排好隊再回來。</p>
+            <a class="journeys-primary-action" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+        </div>
+    }
+    else
+    {
+        @if (Model.HasPartialSourceFailure)
+        {
+            <div class="journeys-alert" role="status" data-journeys-partial-failure>
+                <strong data-i18n-zh-tw="有一些故事暫時躲起來了" data-i18n-en="Some stories are hiding for now">有一些故事暫時躲起來了</strong>
+                @foreach (JourneySourceStatus status in Model.SourceStatuses.Where(status => !status.IsAvailable))
+                {
+                    <p data-i18n-zh-tw="@status.GetFriendlyMessage(LanguageCode.ZhTW)" data-i18n-en="@status.GetFriendlyMessage(LanguageCode.En)">
+                        @status.GetFriendlyMessage(LanguageCode.ZhTW)
+                    </p>
+                }
+            </div>
+        }
+
+        <div class="journeys-list" data-journeys-list>
+            @foreach (LearningJourney journey in Model.Journeys)
+            {
+                string detailHref = $"/journeys/{journey.Slug}";
+                string goalsZhTW = string.Join("、", journey.LearningGoals.Select(goal => goal.Get(LanguageCode.ZhTW)));
+                string goalsEn = string.Join(", ", journey.LearningGoals.Select(goal => goal.Get(LanguageCode.En)));
+                string readingTimeZhTW = $"建議閱讀時間：{journey.SuggestedReadingMinutes} 分鐘";
+                string readingTimeEn = $"Suggested reading time: {journey.SuggestedReadingMinutes} minutes";
+                string ageZhTW = $"建議年齡：{journey.AgeGuidance.Get(LanguageCode.ZhTW)}";
+                string ageEn = $"Suggested age: {journey.AgeGuidance.Get(LanguageCode.En)}";
+                string countZhTW = $"故事數量：{journey.StoryReferences.Count} 個";
+                string countEn = $"Story count: {journey.StoryReferences.Count}";
+
+                <article class="journey-card"
+                         data-journey-card
+                         data-journey-slug="@journey.Slug">
+                    <a class="journey-card__link"
+                       href="@detailHref"
+                       aria-label="開啟 @journey.Title.Get(LanguageCode.ZhTW)"
+                       data-aria-label-zh-tw="開啟 @journey.Title.Get(LanguageCode.ZhTW)"
+                       data-aria-label-en="Open @journey.Title.Get(LanguageCode.En)">
+                        <span class="journey-card__body">
+                            <span class="journey-card__title"
+                                  data-i18n-zh-tw="@journey.Title.Get(LanguageCode.ZhTW)"
+                                  data-i18n-en="@journey.Title.Get(LanguageCode.En)">@journey.Title.Get(LanguageCode.ZhTW)</span>
+                            <span class="journey-card__summary"
+                                  data-i18n-zh-tw="@journey.Summary.Get(LanguageCode.ZhTW)"
+                                  data-i18n-en="@journey.Summary.Get(LanguageCode.En)">@journey.Summary.Get(LanguageCode.ZhTW)</span>
+                            <span class="journey-card__goals"
+                                  data-i18n-zh-tw="@goalsZhTW"
+                                  data-i18n-en="@goalsEn">@goalsZhTW</span>
+                            <span class="journey-card__meta"
+                                  data-i18n-zh-tw="@readingTimeZhTW"
+                                  data-i18n-en="@readingTimeEn">@readingTimeZhTW</span>
+                            <span class="journey-card__meta"
+                                  data-i18n-zh-tw="@ageZhTW"
+                                  data-i18n-en="@ageEn">@ageZhTW</span>
+                            <span class="journey-card__meta"
+                                  data-i18n-zh-tw="@countZhTW"
+                                  data-i18n-en="@countEn">@countZhTW</span>
+                            <span class="journey-card__action" data-i18n-zh-tw="查看旅程" data-i18n-en="View journey">查看旅程</span>
+                        </span>
+                    </a>
+                </article>
+            }
+        </div>
+    }
+</section>
+
+@section Scripts {
+    <script src="~/js/journeys.js" asp-append-version="true"></script>
+}

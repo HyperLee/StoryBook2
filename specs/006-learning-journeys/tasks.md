@@ -61,20 +61,20 @@
 
 Write these tests first and confirm they fail before implementation.
 
-- [ ] T020 [P] [US1] Add catalog load/sort/available-count unit tests for at least three complete journeys in `StoryBook.Tests/Unit/LearningJourneyCatalogServiceTests.cs`
-- [ ] T021 [P] [US1] Add `/journeys` integration tests for `200 OK`, `data-journeys-list`, at least three `data-journey-card` elements, and theme selector absence in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
-- [ ] T022 [P] [US1] Add homepage and `/explore` integration tests for normal `/journeys` anchors without removing existing actions in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [X] T020 [P] [US1] Add catalog load/sort/available-count unit tests for at least three complete journeys in `StoryBook.Tests/Unit/LearningJourneyCatalogServiceTests.cs`
+- [X] T021 [P] [US1] Add `/journeys` integration tests for `200 OK`, `data-journeys-list`, at least three `data-journey-card` elements, and theme selector absence in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [X] T022 [P] [US1] Add homepage and `/explore` integration tests for normal `/journeys` anchors without removing existing actions in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
 
 ### Implementation for User Story 1
 
-- [ ] T023 [US1] Implement JSON load, cache, sort by `SortOrder` then slug, and available journey list projection in `StoryBook/Services/LearningJourneyCatalogService.cs`
-- [ ] T024 [US1] Implement `/journeys` PageModel with snapshot loading and friendly aggregate state properties in `StoryBook/Pages/Journeys/Index.cshtml.cs`
-- [ ] T025 [US1] Implement `/journeys` Razor list markup with `data-journeys-list`, `data-journey-card`, reading time, age guidance, story count, and normal detail anchors in `StoryBook/Pages/Journeys/Index.cshtml`
-- [ ] T026 [US1] Add the homepage learning journey entry as a normal anchor in `StoryBook/Pages/Index.cshtml`
-- [ ] T027 [US1] Add the `/explore` learning journey entry as a normal anchor in `StoryBook/Pages/Explore/Index.cshtml`
-- [ ] T028 [US1] Style journey list cards, metadata, and entry actions without horizontal overflow in `StoryBook/wwwroot/css/journeys.css`
-- [ ] T029 [US1] Include the journey stylesheet and script sections for the list page in `StoryBook/Pages/Journeys/Index.cshtml`
-- [ ] T030 [US1] Run `dotnet test StoryBook2.sln` and address US1 failures in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [X] T023 [US1] Implement JSON load, cache, sort by `SortOrder` then slug, and available journey list projection in `StoryBook/Services/LearningJourneyCatalogService.cs`
+- [X] T024 [US1] Implement `/journeys` PageModel with snapshot loading and friendly aggregate state properties in `StoryBook/Pages/Journeys/Index.cshtml.cs`
+- [X] T025 [US1] Implement `/journeys` Razor list markup with `data-journeys-list`, `data-journey-card`, reading time, age guidance, story count, and normal detail anchors in `StoryBook/Pages/Journeys/Index.cshtml`
+- [X] T026 [US1] Add the homepage learning journey entry as a normal anchor in `StoryBook/Pages/Index.cshtml`
+- [X] T027 [US1] Add the `/explore` learning journey entry as a normal anchor in `StoryBook/Pages/Explore/Index.cshtml`
+- [X] T028 [US1] Style journey list cards, metadata, and entry actions without horizontal overflow in `StoryBook/wwwroot/css/journeys.css`
+- [X] T029 [US1] Include the journey stylesheet and script sections for the list page in `StoryBook/Pages/Journeys/Index.cshtml`
+- [X] T030 [US1] Run `dotnet test StoryBook2.sln` and address US1 failures in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
 
 **Checkpoint**: User Story 1 is fully functional and independently testable as the MVP entry/list flow.
 

@@ -2,3 +2,150 @@
   color: var(--storybook-text);
   overflow-wrap: anywhere;
 }
+
+.journeys-page__header {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.journeys-kicker,
+.journeys-intro,
+.journey-card__summary,
+.journey-card__goals,
+.journey-card__meta {
+  color: var(--storybook-text-muted);
+}
+
+.journeys-kicker {
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.journeys-intro {
+  margin-bottom: 0;
+  max-width: 42rem;
+}
+
+.journeys-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.journeys-action,
+.journeys-primary-action,
+.journey-card__link {
+  border-radius: 8px;
+}
+
+.journeys-action,
+.journeys-primary-action {
+  align-items: center;
+  border: 2px solid var(--storybook-link);
+  color: var(--storybook-link);
+  display: inline-flex;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.55rem 0.85rem;
+  text-decoration: none;
+}
+
+.journeys-primary-action,
+.journeys-action:hover,
+.journeys-action:focus {
+  background: var(--storybook-link);
+  color: #ffffff;
+}
+
+html[data-storybook-effective-theme="dark"] .journeys-primary-action,
+html[data-storybook-effective-theme="dark"] .journeys-action:hover,
+html[data-storybook-effective-theme="dark"] .journeys-action:focus {
+  color: #08111d;
+}
+
+.journeys-alert,
+.journeys-empty {
+  background: var(--storybook-alert-bg);
+  border: 2px solid var(--storybook-alert-border);
+  border-radius: 8px;
+  color: var(--storybook-alert-text);
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+.journeys-alert p:last-child,
+.journeys-empty p:last-child {
+  margin-bottom: 0;
+}
+
+.journeys-list {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  min-width: 0;
+}
+
+.journey-card {
+  min-width: 0;
+}
+
+.journey-card__link {
+  background: var(--storybook-surface);
+  border: 2px solid var(--storybook-border);
+  color: var(--storybook-text);
+  display: block;
+  height: 100%;
+  min-height: 44px;
+  text-decoration: none;
+}
+
+.journey-card__link:hover,
+.journey-card__link:focus {
+  border-color: var(--storybook-link);
+  color: var(--storybook-text);
+  transform: translateY(-1px);
+}
+
+.journey-card__link:focus-visible,
+.journeys-action:focus-visible,
+.journeys-primary-action:focus-visible {
+  outline: 4px solid var(--storybook-focus);
+  outline-offset: 3px;
+}
+
+.journey-card__body {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+}
+
+.journey-card__title {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.journey-card__goals {
+  font-weight: 700;
+}
+
+.journey-card__meta {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.journey-card__action {
+  color: var(--storybook-link);
+  font-weight: 800;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 575.98px) {
+  .journeys-list {
+    grid-template-columns: 1fr;
+  }
+}
