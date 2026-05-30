@@ -1,0 +1,146 @@
+{
+  "journeys": [
+    {
+      "slug": "gentle-giants",
+      "sortOrder": 1,
+      "title": {
+        "zhTW": "溫柔巨人小路",
+        "en": "Gentle Giants Trail"
+      },
+      "summary": {
+        "zhTW": "認識身體很大、故事很溫柔的朋友，看看牠們怎麼用力量照顧身邊的小夥伴。",
+        "en": "Meet large friends with gentle stories and see how strong bodies can help smaller neighbors."
+      },
+      "learningGoals": [
+        {
+          "zhTW": "比較大型恐龍和海洋朋友的身體特色。",
+          "en": "Compare body features of large dinosaur and ocean friends."
+        },
+        {
+          "zhTW": "觀察強壯不一定代表可怕。",
+          "en": "Notice that strong does not have to mean scary."
+        }
+      ],
+      "suggestedReadingMinutes": 12,
+      "ageGuidance": {
+        "zhTW": "5-7 歲",
+        "en": "Ages 5-7"
+      },
+      "storyReferences": [
+        {
+          "source": "dinosaurs",
+          "slug": "brachiosaurus",
+          "sortOrder": 1
+        },
+        {
+          "source": "dinosaurs",
+          "slug": "triceratops",
+          "sortOrder": 2
+        },
+        {
+          "source": "aquarium",
+          "slug": "sea-turtle",
+          "sortOrder": 3
+        }
+      ]
+    },
+    {
+      "slug": "clever-hunters",
+      "sortOrder": 2,
+      "title": {
+        "zhTW": "聰明獵手觀察隊",
+        "en": "Clever Hunters Watch"
+      },
+      "summary": {
+        "zhTW": "跟著會觀察、會等待的朋友，學習牠們如何用感官和速度找到需要的食物。",
+        "en": "Follow observant friends who wait, sense, and move carefully to find the food they need."
+      },
+      "learningGoals": [
+        {
+          "zhTW": "認識肉食朋友尋找食物的方式。",
+          "en": "Learn how carnivore friends find food."
+        },
+        {
+          "zhTW": "分辨速度、嗅覺和耐心的不同用途。",
+          "en": "Tell how speed, smell, and patience help in different ways."
+        }
+      ],
+      "suggestedReadingMinutes": 15,
+      "ageGuidance": {
+        "zhTW": "6-8 歲",
+        "en": "Ages 6-8"
+      },
+      "storyReferences": [
+        {
+          "source": "dinosaurs",
+          "slug": "tyrannosaurus-rex",
+          "sortOrder": 1
+        },
+        {
+          "source": "dinosaurs",
+          "slug": "velociraptor",
+          "sortOrder": 2
+        },
+        {
+          "source": "aquarium",
+          "slug": "shark",
+          "sortOrder": 3
+        },
+        {
+          "source": "aquarium",
+          "slug": "octopus",
+          "sortOrder": 4
+        }
+      ]
+    },
+    {
+      "slug": "hide-and-protect",
+      "sortOrder": 3,
+      "title": {
+        "zhTW": "躲藏與保護任務",
+        "en": "Hide and Protect Mission"
+      },
+      "summary": {
+        "zhTW": "拜訪有盔甲、尖刺、硬殼或藏身技巧的朋友，找找牠們保護自己的方法。",
+        "en": "Visit friends with armor, spikes, shells, or hiding tricks and find how they stay safe."
+      },
+      "learningGoals": [
+        {
+          "zhTW": "找出動物保護自己的身體構造。",
+          "en": "Find body parts that help animals protect themselves."
+        },
+        {
+          "zhTW": "練習用故事線索說明牠們為什麼安全。",
+          "en": "Use story clues to explain why they are safe."
+        }
+      ],
+      "suggestedReadingMinutes": 14,
+      "ageGuidance": {
+        "zhTW": "5-8 歲",
+        "en": "Ages 5-8"
+      },
+      "storyReferences": [
+        {
+          "source": "dinosaurs",
+          "slug": "ankylosaurus",
+          "sortOrder": 1
+        },
+        {
+          "source": "dinosaurs",
+          "slug": "stegosaurus",
+          "sortOrder": 2
+        },
+        {
+          "source": "aquarium",
+          "slug": "crab",
+          "sortOrder": 3
+        },
+        {
+          "source": "aquarium",
+          "slug": "seahorse",
+          "sortOrder": 4
+        }
+      ]
+    }
+  ]
+}

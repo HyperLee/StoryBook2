@@ -18,10 +18,10 @@
 
 **Purpose**: Add the feature's empty assets, fixture surface, and curated data file locations without changing existing behavior.
 
-- [ ] T001 [P] Create the curated learning journey catalog with at least three complete available journey records in `StoryBook/Data/journeys.json`
-- [ ] T002 [P] Create the feature stylesheet scaffold in `StoryBook/wwwroot/css/journeys.css`
-- [ ] T003 [P] Create the feature script scaffold in `StoryBook/wwwroot/js/journeys.js`
-- [ ] T004 [P] Create the journey integration fixture scaffold in `StoryBook.Tests/Integration/JourneyPageTestFixture.cs`
+- [X] T001 [P] Create the curated learning journey catalog with at least three complete available journey records in `StoryBook/Data/journeys.json`
+- [X] T002 [P] Create the feature stylesheet scaffold in `StoryBook/wwwroot/css/journeys.css`
+- [X] T003 [P] Create the feature script scaffold in `StoryBook/wwwroot/js/journeys.js`
+- [X] T004 [P] Create the journey integration fixture scaffold in `StoryBook.Tests/Integration/JourneyPageTestFixture.cs`
 
 ---
 
