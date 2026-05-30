@@ -11,6 +11,7 @@
          data-passport-storage-key="@Model.StorageKey"
          data-passport-version="@Model.StateVersion"
          data-passport-language-storage-key="@Model.LanguageStorageKey"
+         data-passport-language-fallback="zh-TW"
          data-passport-summary-template-zh-tw="你已經認識 {0} / {1} 位故事朋友。"
          data-passport-summary-template-en="You have met {0} of {1} story friends."
          data-passport-storage-warning-read-blocked-zh-tw="護照暫時打不開，但你仍然可以閱讀故事。"
@@ -107,6 +108,9 @@
                 data-passport-clear
                 aria-controls="passport-clear-confirm"
                 aria-expanded="false"
+                aria-label="清除護照"
+                data-aria-label-zh-tw="清除護照"
+                data-aria-label-en="Clear passport"
                 data-i18n-zh-tw="清除護照"
                 data-i18n-en="Clear passport">清除護照</button>
         <div id="passport-clear-confirm"
@@ -118,11 +122,17 @@
                 <button class="passport-clear-button passport-clear-button--danger"
                         type="button"
                         data-passport-clear-confirm-action
+                        aria-label="確認清除護照"
+                        data-aria-label-zh-tw="確認清除護照"
+                        data-aria-label-en="Confirm clear passport"
                         data-i18n-zh-tw="確認清除"
                         data-i18n-en="Confirm clear">確認清除</button>
                 <button class="passport-clear-button"
                         type="button"
                         data-passport-clear-cancel
+                        aria-label="取消清除護照"
+                        data-aria-label-zh-tw="取消清除護照"
+                        data-aria-label-en="Cancel clearing passport"
                         data-i18n-zh-tw="取消"
                         data-i18n-en="Cancel">取消</button>
             </div>

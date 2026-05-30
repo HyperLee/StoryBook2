@@ -165,17 +165,17 @@
 
 > 先寫這些測試，確認在實作前失敗。
 
-- [ ] T052 [US5] Add failing integration tests for bilingual text/aria contracts, zh-TW fallback, theme selector absence on `/passport`, accessible names and no blank title/summary/source labels in `StoryBook.Tests/Integration/PassportPagesTests.cs`
-- [ ] T053 [P] [US5] Add failing static asset contract tests for no jQuery dependency, no inline router/history mutation, no inline script or external resource dependency, focus-visible selectors and responsive class coverage in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [X] T052 [US5] Add failing integration tests for bilingual text/aria contracts, zh-TW fallback, theme selector absence on `/passport`, accessible names and no blank title/summary/source labels in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [X] T053 [P] [US5] Add failing static asset contract tests for no jQuery dependency, no inline router/history mutation, no inline script or external resource dependency, focus-visible selectors and responsive class coverage in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
 
 ### Implementation for User Story 5
 
-- [ ] T054 [US5] Complete bilingual `data-i18n-*`, `data-aria-label-*`, language storage key and zh-TW fallback metadata in `StoryBook/Pages/Passport/Index.cshtml`
-- [ ] T055 [US5] Complete bilingual completion control labels and fallback-safe text for dinosaur details in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T056 [US5] Complete bilingual completion control labels and fallback-safe text for aquarium details in `StoryBook/Pages/Aquarium/Details.cshtml`
-- [ ] T057 [US5] Implement language switching and aria-label refresh for passport summary, badges, read list, status messages and clear confirmation in `StoryBook/wwwroot/js/passport.js`
-- [ ] T058 [US5] Finalize responsive layout, visible focus, theme token usage, contrast-safe states and 44px controls in `StoryBook/wwwroot/css/passport.css`
-- [ ] T059 [US5] Run targeted US5 bilingual/theme/accessibility/static asset contract checks in `StoryBook.Tests/Integration/PassportPagesTests.cs` and `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [X] T054 [US5] Complete bilingual `data-i18n-*`, `data-aria-label-*`, language storage key and zh-TW fallback metadata in `StoryBook/Pages/Passport/Index.cshtml`
+- [X] T055 [US5] Complete bilingual completion control labels and fallback-safe text for dinosaur details in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T056 [US5] Complete bilingual completion control labels and fallback-safe text for aquarium details in `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T057 [US5] Implement language switching and aria-label refresh for passport summary, badges, read list, status messages and clear confirmation in `StoryBook/wwwroot/js/passport.js`
+- [X] T058 [US5] Finalize responsive layout, visible focus, theme token usage, contrast-safe states and 44px controls in `StoryBook/wwwroot/css/passport.css`
+- [X] T059 [US5] Run targeted US5 bilingual/theme/accessibility/static asset contract checks in `StoryBook.Tests/Integration/PassportPagesTests.cs` and `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
 
 **Checkpoint**: US5 可獨立驗證；護照功能與既有語言、主題、鍵盤操作和回應式體驗一致。
 

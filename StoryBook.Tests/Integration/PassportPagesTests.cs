@@ -178,6 +178,38 @@ public sealed class PassportPagesTests : IClassFixture<PassportPageTestFixture>
         Assert.Contains("故事還可以繼續讀", aquariumHtml);
     }
 
+    [Fact]
+    public async Task Passport_pages_render_bilingual_aria_theme_and_nonblank_fallback_contracts()
+    {
+        string passportHtml = await _fixture.GetOkHtmlAsync("/passport");
+        string dinosaurHtml = await _fixture.GetOkHtmlAsync("/dinosaurs/triceratops");
+        string aquariumHtml = await _fixture.GetOkHtmlAsync("/aquarium/sea-turtle");
+
+        Assert.Contains("data-passport-language-storage-key=\"storybook.language\"", passportHtml);
+        Assert.Contains("data-passport-language-fallback=\"zh-TW\"", passportHtml);
+        Assert.Contains("data-i18n-en=\"Little Adventure Passport\"", passportHtml);
+        Assert.Contains("data-i18n-en=\"Current progress\"", passportHtml);
+        Assert.Contains("data-i18n-en=\"Adventure badges\"", passportHtml);
+        Assert.Contains("data-i18n-en=\"Completed story friends\"", passportHtml);
+        Assert.Contains("data-aria-label-zh-tw=\"清除護照\"", passportHtml);
+        Assert.Contains("data-aria-label-en=\"Clear passport\"", passportHtml);
+        Assert.Contains("data-aria-label-zh-tw=\"確認清除護照\"", passportHtml);
+        Assert.Contains("data-aria-label-en=\"Confirm clear passport\"", passportHtml);
+        Assert.Contains("data-aria-label-zh-tw=\"取消清除護照\"", passportHtml);
+        Assert.Contains("data-aria-label-en=\"Cancel clearing passport\"", passportHtml);
+        Assert.Contains("data-storybook-theme-boot", passportHtml);
+        Assert.DoesNotContain("data-theme-selector", passportHtml, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("data-i18n-name-zh-tw=\"\"", passportHtml, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("data-i18n-name-en=\"\"", passportHtml, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("data-i18n-summary-zh-tw=\"\"", passportHtml, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("data-i18n-source-zh-tw=\"\"", passportHtml, StringComparison.OrdinalIgnoreCase);
+
+        Assert.Contains("data-aria-label-en=\"Stamp Triceratops in my passport\"", dinosaurHtml);
+        Assert.Contains("data-i18n-en=\"My adventure passport\"", dinosaurHtml);
+        Assert.Contains("data-aria-label-en=\"Stamp Sea turtle in my passport\"", aquariumHtml);
+        Assert.Contains("data-i18n-en=\"My adventure passport\"", aquariumHtml);
+    }
+
     private static bool HasPassportStylesheet(string html)
     {
         return html.Contains("/css/passport.css", StringComparison.OrdinalIgnoreCase)

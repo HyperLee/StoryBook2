@@ -80,4 +80,26 @@ public sealed class PassportScriptContractTests
         Assert.DoesNotContain("location.search", script, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("removeItem", script, StringComparison.OrdinalIgnoreCase);
     }
+
+    [Fact]
+    public void Passport_static_assets_have_no_jquery_router_inline_or_external_dependencies_and_cover_focus_responsive_states()
+    {
+        string script = File.ReadAllText(Path.Combine(TestPaths.StoryBookRoot, "wwwroot", "js", "passport.js"));
+        string css = File.ReadAllText(Path.Combine(TestPaths.StoryBookRoot, "wwwroot", "css", "passport.css"));
+
+        Assert.Contains("data-passport-page", script);
+        Assert.Contains("data-aria-label-zh-tw", script);
+        Assert.Contains("data-i18n-zh-tw", script);
+        Assert.DoesNotContain("jQuery", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("$(", script, StringComparison.Ordinal);
+        Assert.DoesNotContain("pushState", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("replaceState", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("location.hash", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("http://", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("https://", script, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(":focus-visible", css);
+        Assert.Contains("@media (max-width: 575.98px)", css);
+        Assert.Contains("min-height: 44px", css);
+        Assert.Contains("var(--storybook", css);
+    }
 }
