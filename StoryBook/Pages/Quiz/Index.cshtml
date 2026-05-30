@@ -1,0 +1,24 @@
+@page "/quiz"
+@model StoryBook.Pages.Quiz.IndexModel
+@{
+    ViewData["Title"] = "問答挑戰";
+}
+
+<section class="quiz-page" aria-labelledby="quiz-title" data-quiz-page>
+    <div class="quiz-page__header">
+        <div>
+            <p class="quiz-kicker" data-i18n-zh-tw="故事小挑戰" data-i18n-en="Story challenge">故事小挑戰</p>
+            <h1 id="quiz-title" data-i18n-zh-tw="問答挑戰" data-i18n-en="Quiz challenge">問答挑戰</h1>
+        </div>
+        <a class="quiz-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+    </div>
+
+    <div class="quiz-empty" role="status" data-quiz-scaffold>
+        <h2 data-i18n-zh-tw="問答題目正在準備中" data-i18n-en="Quiz questions are being prepared">問答題目正在準備中</h2>
+        <p data-i18n-zh-tw="故事朋友很快就會帶著題目來。" data-i18n-en="The story friends will bring questions soon.">故事朋友很快就會帶著題目來。</p>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/quiz.js" asp-append-version="true"></script>
+}

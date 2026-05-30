@@ -18,9 +18,9 @@
 
 **Purpose**: Establish quiz feature scaffolding without changing existing storybook behavior.
 
-- [ ] T001 Create quiz page and asset scaffolds in `StoryBook/Pages/Quiz/Index.cshtml`, `StoryBook/Pages/Quiz/Index.cshtml.cs`, `StoryBook/wwwroot/css/quiz.css`, and `StoryBook/wwwroot/js/quiz.js`
-- [ ] T002 [P] Add the initial quiz catalog file with `version` and `questions` root fields in `StoryBook/Data/quiz-questions.json`
-- [ ] T003 [P] Add quiz test file scaffolds in `StoryBook.Tests/Unit/QuizContentValidationTests.cs`, `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`, `StoryBook.Tests/Unit/QuizScriptContractTests.cs`, and `StoryBook.Tests/Integration/QuizPagesTests.cs`
+- [X] T001 Create quiz page and asset scaffolds in `StoryBook/Pages/Quiz/Index.cshtml`, `StoryBook/Pages/Quiz/Index.cshtml.cs`, `StoryBook/wwwroot/css/quiz.css`, and `StoryBook/wwwroot/js/quiz.js`
+- [X] T002 [P] Add the initial quiz catalog file with `version` and `questions` root fields in `StoryBook/Data/quiz-questions.json`
+- [X] T003 [P] Add quiz test file scaffolds in `StoryBook.Tests/Unit/QuizContentValidationTests.cs`, `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`, `StoryBook.Tests/Unit/QuizScriptContractTests.cs`, and `StoryBook.Tests/Integration/QuizPagesTests.cs`
 
 ---
 

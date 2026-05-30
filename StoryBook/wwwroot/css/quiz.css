@@ -1,0 +1,24 @@
+.quiz-page {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.quiz-page__header {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.quiz-kicker {
+    color: var(--storybook-muted-text);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.quiz-empty {
+    border: 1px solid var(--storybook-border);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+}
