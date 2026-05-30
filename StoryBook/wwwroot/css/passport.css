@@ -154,7 +154,8 @@ html[data-storybook-effective-theme="dark"] .passport-action:focus {
 .passport-summary-panel,
 .passport-empty,
 .passport-section,
-.passport-alert {
+.passport-alert,
+.passport-clear-panel {
   background: var(--storybook-surface);
   border: 2px solid var(--storybook-border);
   border-radius: 8px;
@@ -163,7 +164,8 @@ html[data-storybook-effective-theme="dark"] .passport-action:focus {
 
 .passport-summary-panel h2,
 .passport-empty h2,
-.passport-section h2 {
+.passport-section h2,
+.passport-clear-panel h2 {
   font-size: 1.25rem;
   font-weight: 900;
   margin: 0 0 0.5rem;
@@ -172,7 +174,8 @@ html[data-storybook-effective-theme="dark"] .passport-action:focus {
 .passport-summary,
 .passport-storage-warning,
 .passport-empty p,
-.passport-alert p {
+.passport-alert p,
+.passport-clear-panel p {
   color: var(--storybook-text-muted);
   margin: 0;
 }
@@ -255,6 +258,60 @@ html[data-storybook-effective-theme="dark"] .passport-action:focus {
   margin-top: 0.15rem;
 }
 
+.passport-clear-panel {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.passport-clear-button {
+  align-items: center;
+  background: var(--storybook-control-bg);
+  border: 2px solid var(--storybook-control-border);
+  border-radius: 8px;
+  color: var(--storybook-control-text);
+  display: inline-flex;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.6rem 0.95rem;
+  width: fit-content;
+}
+
+.passport-clear-button:hover,
+.passport-clear-button:focus {
+  border-color: var(--storybook-link);
+}
+
+.passport-clear-button--danger {
+  background: #b42318;
+  border-color: #b42318;
+  color: #ffffff;
+}
+
+html[data-storybook-effective-theme="dark"] .passport-clear-button--danger {
+  background: #ffb4a8;
+  border-color: #ffb4a8;
+  color: #08111d;
+}
+
+.passport-clear-button:focus-visible {
+  outline: 4px solid var(--storybook-focus);
+  outline-offset: 3px;
+}
+
+.passport-clear-confirm {
+  border-left: 4px solid var(--storybook-alert-border);
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 0.9rem;
+}
+
+.passport-clear-confirm__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 @media (max-width: 575.98px) {
   .passport-page h1 {
     font-size: 1.65rem;
@@ -262,6 +319,10 @@ html[data-storybook-effective-theme="dark"] .passport-action:focus {
 
   .passport-page__header,
   .passport-home-link {
+    width: 100%;
+  }
+
+  .passport-clear-button {
     width: 100%;
   }
 }

@@ -35,4 +35,22 @@ public sealed class PassportScriptContractTests
         Assert.DoesNotContain("data-aquarium-modal-open", script, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("time-on-page", script, StringComparison.OrdinalIgnoreCase);
     }
+
+    [Fact]
+    public void Passport_script_resets_only_passport_state_after_clear_confirmation()
+    {
+        string script = File.ReadAllText(Path.Combine(TestPaths.StoryBookRoot, "wwwroot", "js", "passport.js"));
+
+        Assert.Contains("data-passport-clear", script);
+        Assert.Contains("data-passport-clear-confirm", script);
+        Assert.Contains("data-passport-clear-confirm-action", script);
+        Assert.Contains("data-passport-clear-cancel", script);
+        Assert.Contains("resetPassportState", script);
+        Assert.Contains("writePassportState(createEmptyState())", script);
+        Assert.Contains("completedStories: []", script);
+        Assert.DoesNotContain("localStorage.clear", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("removeItem(languageStorageKey", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("removeItem(\"storybook.language\"", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("storybook.theme", script, StringComparison.OrdinalIgnoreCase);
+    }
 }

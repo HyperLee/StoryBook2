@@ -95,6 +95,38 @@
         <ol class="passport-read-list" data-passport-read-list></ol>
     </section>
 
+    <section class="passport-clear-panel" aria-labelledby="passport-clear-title">
+        <div>
+            <h2 id="passport-clear-title" data-i18n-zh-tw="清除這台瀏覽器的護照" data-i18n-en="Clear this browser's passport">清除這台瀏覽器的護照</h2>
+            <p data-i18n-zh-tw="只會清除護照印章，不會改變語言、主題或故事內容。" data-i18n-en="This only clears passport stamps. It does not change language, theme, or story content.">只會清除護照印章，不會改變語言、主題或故事內容。</p>
+        </div>
+        <button class="passport-clear-button"
+                type="button"
+                data-passport-clear
+                aria-controls="passport-clear-confirm"
+                aria-expanded="false"
+                data-i18n-zh-tw="清除護照"
+                data-i18n-en="Clear passport">清除護照</button>
+        <div id="passport-clear-confirm"
+             class="passport-clear-confirm"
+             data-passport-clear-confirm
+             hidden>
+            <p data-i18n-zh-tw="要清除這台瀏覽器的探險護照嗎？故事還在，只會清除護照印章。" data-i18n-en="Do you want to clear this browser's adventure passport? Stories stay here; only passport stamps are cleared.">要清除這台瀏覽器的探險護照嗎？故事還在，只會清除護照印章。</p>
+            <div class="passport-clear-confirm__actions">
+                <button class="passport-clear-button passport-clear-button--danger"
+                        type="button"
+                        data-passport-clear-confirm-action
+                        data-i18n-zh-tw="確認清除"
+                        data-i18n-en="Confirm clear">確認清除</button>
+                <button class="passport-clear-button"
+                        type="button"
+                        data-passport-clear-cancel
+                        data-i18n-zh-tw="取消"
+                        data-i18n-en="Cancel">取消</button>
+            </div>
+        </div>
+    </section>
+
     <ol class="passport-story-metadata" hidden>
         @foreach (PassportStoryItem story in Model.Stories)
         {

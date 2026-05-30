@@ -114,15 +114,15 @@
 
 > 先寫這些測試，確認在實作前失敗。
 
-- [ ] T037 [US3] Add failing integration tests for visible clear control, explicit confirmation UI and child-friendly clear text in `StoryBook.Tests/Integration/PassportPagesTests.cs`
-- [ ] T038 [P] [US3] Add failing script contract tests for clear confirmation, `storybook.passport` scoped reset to `{ version: 1, completedStories: [] }`, no `localStorage.clear()`, and no language/theme key mutation in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [X] T037 [US3] Add failing integration tests for visible clear control, explicit confirmation UI and child-friendly clear text in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [X] T038 [P] [US3] Add failing script contract tests for clear confirmation, `storybook.passport` scoped reset to `{ version: 1, completedStories: [] }`, no `localStorage.clear()`, and no language/theme key mutation in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
 
 ### Implementation for User Story 3
 
-- [ ] T039 [US3] Render clear passport button, confirmation region, confirm/cancel controls and bilingual text in `StoryBook/Pages/Passport/Index.cshtml`
-- [ ] T040 [US3] Implement clear confirmation, scoped valid empty-state reset and UI refresh behavior in `StoryBook/wwwroot/js/passport.js`
-- [ ] T041 [US3] Add clear confirmation layout, button states and focus styling in `StoryBook/wwwroot/css/passport.css`
-- [ ] T042 [US3] Run targeted US3 clear-flow checks in `StoryBook.Tests/Unit/PassportScriptContractTests.cs` and `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [X] T039 [US3] Render clear passport button, confirmation region, confirm/cancel controls and bilingual text in `StoryBook/Pages/Passport/Index.cshtml`
+- [X] T040 [US3] Implement clear confirmation, scoped valid empty-state reset and UI refresh behavior in `StoryBook/wwwroot/js/passport.js`
+- [X] T041 [US3] Add clear confirmation layout, button states and focus styling in `StoryBook/wwwroot/css/passport.css`
+- [X] T042 [US3] Run targeted US3 clear-flow checks in `StoryBook.Tests/Unit/PassportScriptContractTests.cs` and `StoryBook.Tests/Integration/PassportPagesTests.cs`
 
 **Checkpoint**: US3 可獨立驗證；清除動作只把護照資料重設為有效空狀態，不碰其他 storage key。
 

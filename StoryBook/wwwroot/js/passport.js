@@ -145,12 +145,17 @@
         const summary = page.querySelector("[data-passport-summary]");
         const emptyState = page.querySelector("[data-passport-empty]");
         const storageWarning = page.querySelector("[data-passport-storage-warning]");
+        const clearButton = page.querySelector("[data-passport-clear]");
+        const clearConfirm = page.querySelector("[data-passport-clear-confirm]");
+        const clearConfirmAction = page.querySelector("[data-passport-clear-confirm-action]");
+        const clearCancel = page.querySelector("[data-passport-clear-cancel]");
         let currentLanguage = readStoredLanguage();
 
         if (!(readList instanceof HTMLOListElement) || !(summary instanceof HTMLElement)) {
             return;
         }
 
+        initializeClearControls();
         applyPassportPageLanguage(currentLanguage);
         renderPassportPage();
 
@@ -168,6 +173,53 @@
                 renderPassportPage();
             });
         });
+
+        function initializeClearControls() {
+            if (!(clearButton instanceof HTMLButtonElement)
+                || !(clearConfirm instanceof HTMLElement)
+                || !(clearConfirmAction instanceof HTMLButtonElement)
+                || !(clearCancel instanceof HTMLButtonElement)) {
+                return;
+            }
+
+            clearButton.addEventListener("click", () => {
+                clearConfirm.hidden = false;
+                clearButton.setAttribute("aria-expanded", "true");
+                clearConfirmAction.focus();
+            });
+
+            clearCancel.addEventListener("click", () => {
+                hideClearConfirmation();
+                clearButton.focus();
+            });
+
+            clearConfirmAction.addEventListener("click", () => {
+                const writeStatus = resetPassportState();
+
+                if (writeStatus === "write-blocked") {
+                    updateStorageWarning({
+                        storageStatus: "write-blocked",
+                        state: createEmptyState(),
+                        ignoredItemCount: 0
+                    });
+                    return;
+                }
+
+                hideClearConfirmation();
+                renderPassportPage();
+                clearButton.focus();
+            });
+        }
+
+        function hideClearConfirmation() {
+            if (clearConfirm instanceof HTMLElement) {
+                clearConfirm.hidden = true;
+            }
+
+            if (clearButton instanceof HTMLButtonElement) {
+                clearButton.setAttribute("aria-expanded", "false");
+            }
+        }
 
         function renderPassportPage() {
             const readResult = readPassportState(storyLookup);
@@ -199,7 +251,9 @@
                 return;
             }
 
-            const shouldShowWarning = readResult.storageStatus === "read-blocked" || readResult.storageStatus === "invalid-data";
+            const shouldShowWarning = readResult.storageStatus === "read-blocked"
+                || readResult.storageStatus === "write-blocked"
+                || readResult.storageStatus === "invalid-data";
             storageWarning.hidden = !shouldShowWarning;
 
             if (shouldShowWarning) {
@@ -425,6 +479,10 @@
         }
 
         return "available";
+    }
+
+    function resetPassportState() {
+        return writePassportState(createEmptyState());
     }
 
     function normalizeState(value, knownStories) {

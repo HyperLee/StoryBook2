@@ -135,6 +135,22 @@ public sealed class PassportPagesTests : IClassFixture<PassportPageTestFixture>
         Assert.True(PassportPageTestFixture.HasLinkTo(allFailedHtml, "/"));
     }
 
+    [Fact]
+    public async Task Passport_page_renders_clear_control_confirmation_and_child_friendly_text()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/passport");
+
+        Assert.Contains("data-passport-clear", html);
+        Assert.Contains("data-passport-clear-confirm", html);
+        Assert.Contains("data-passport-clear-confirm-action", html);
+        Assert.Contains("data-passport-clear-cancel", html);
+        Assert.Contains("清除護照", html);
+        Assert.Contains("要清除這台瀏覽器的探險護照嗎", html);
+        Assert.Contains("只會清除護照印章", html);
+        Assert.Contains("Confirm clear", html);
+        Assert.Contains("Cancel", html);
+    }
+
     private static bool HasPassportStylesheet(string html)
     {
         return html.Contains("/css/passport.css", StringComparison.OrdinalIgnoreCase)
