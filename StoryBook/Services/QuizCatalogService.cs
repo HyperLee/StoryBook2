@@ -13,6 +13,8 @@ public sealed class QuizCatalogService
     private readonly QuizCatalogOptions _options;
     private readonly IWebHostEnvironment _environment;
     private readonly QuizContentValidator _validator;
+    private readonly DinosaurCatalogService _dinosaurCatalogService;
+    private readonly AquariumCatalogService _aquariumCatalogService;
     private readonly ILogger<QuizCatalogService> _logger;
     private readonly Lazy<QuizCatalogSnapshot> _snapshot;
 
@@ -23,11 +25,15 @@ public sealed class QuizCatalogService
         IOptions<QuizCatalogOptions> options,
         IWebHostEnvironment environment,
         QuizContentValidator validator,
+        DinosaurCatalogService dinosaurCatalogService,
+        AquariumCatalogService aquariumCatalogService,
         ILogger<QuizCatalogService> logger)
     {
         _options = options.Value;
         _environment = environment;
         _validator = validator;
+        _dinosaurCatalogService = dinosaurCatalogService;
+        _aquariumCatalogService = aquariumCatalogService;
         _logger = logger;
         _snapshot = new Lazy<QuizCatalogSnapshot>(LoadSnapshot);
     }
@@ -164,13 +170,33 @@ public sealed class QuizCatalogService
                 return CreateUnavailableSnapshot("catalog-invalid");
             }
 
-            IReadOnlyList<QuizQuestion> questions = SortQuestions(result.ValidQuestions)
+            IReadOnlyList<QuizQuestion> candidateQuestions = SortQuestions(result.ValidQuestions)
                 .Where(question => TryParseSource(question.Source, out _))
                 .Where(question => QuizDifficultyParser.TryParse(question.Difficulty, out _))
                 .ToList();
+            List<QuizQuestion> questions = [];
+            int invalidReferenceCount = 0;
 
-            IReadOnlyList<QuizSourceStatus> statuses = CreateAvailableStatuses(questions);
-            return new QuizCatalogSnapshot(questions, statuses, result.InvalidQuestionCount);
+            foreach (QuizQuestion question in candidateQuestions)
+            {
+                if (ResolveRelatedStories(question).Count == 0)
+                {
+                    invalidReferenceCount++;
+                    _logger.LogWarning(
+                        "Quiz question {QuestionId} rejected. Reason: {ReasonCode}",
+                        question.Id,
+                        "related-story-invalid");
+                    continue;
+                }
+
+                questions.Add(question);
+            }
+
+            IReadOnlyList<QuizSourceStatus> statuses = CreateSourceStatuses(questions);
+            return new QuizCatalogSnapshot(
+                questions,
+                statuses,
+                result.InvalidQuestionCount + invalidReferenceCount);
         }
         catch (Exception exception) when (exception is IOException or JsonException or UnauthorizedAccessException)
         {
@@ -214,7 +240,7 @@ public sealed class QuizCatalogService
                     TextEn = option.Text.Get(LanguageCode.En)
                 })
                 .ToList(),
-            RelatedStories = [],
+            RelatedStories = ResolveRelatedStories(question),
             NextQuestionHref = BuildQuestionHref(scope, nextQuestionId)
         };
     }
@@ -231,28 +257,148 @@ public sealed class QuizCatalogService
             .ToList();
     }
 
-    private static IReadOnlyList<QuizSourceStatus> CreateAvailableStatuses(IReadOnlyList<QuizQuestion> questions)
+    private IReadOnlyList<QuizRelatedStoryView> ResolveRelatedStories(QuizQuestion question)
+    {
+        if (question.RelatedStories.Count == 0)
+        {
+            return [];
+        }
+
+        HashSet<string> seenReferences = new(StringComparer.Ordinal);
+        List<QuizRelatedStoryView> relatedStories = [];
+
+        foreach (QuizStoryReference reference in question.RelatedStories
+            .OrderBy(reference => reference.SortOrder)
+            .ThenBy(reference => reference.Source, StringComparer.Ordinal)
+            .ThenBy(reference => reference.Slug, StringComparer.Ordinal))
+        {
+            if (!TryParseSource(reference.Source, out ExplorationSourceType source))
+            {
+                return [];
+            }
+
+            string slug = NormalizeId(reference.Slug);
+            string key = $"{source.ToCode()}:{slug}";
+
+            if (string.IsNullOrWhiteSpace(slug) || !seenReferences.Add(key))
+            {
+                return [];
+            }
+
+            if (!TryGetStoryDetails(source, slug, out string nameZhTW, out string nameEn))
+            {
+                return [];
+            }
+
+            relatedStories.Add(new QuizRelatedStoryView
+            {
+                Source = source,
+                Slug = slug,
+                Href = $"/{source.GetRoutePrefix()}/{slug}",
+                SortOrder = reference.SortOrder,
+                LabelZhTW = $"去讀{nameZhTW}故事",
+                LabelEn = $"Read the {nameEn} story",
+                SourceLabelZhTW = source.GetLabel(LanguageCode.ZhTW),
+                SourceLabelEn = source.GetLabel(LanguageCode.En)
+            });
+        }
+
+        return relatedStories;
+    }
+
+    private bool TryGetStoryDetails(
+        ExplorationSourceType source,
+        string slug,
+        out string nameZhTW,
+        out string nameEn)
+    {
+        nameZhTW = string.Empty;
+        nameEn = string.Empty;
+
+        try
+        {
+            if (source == ExplorationSourceType.Aquarium)
+            {
+                if (!_aquariumCatalogService.TryGetBySlug(slug, out AquariumAnimalProfile? animal) || animal is null)
+                {
+                    return false;
+                }
+
+                nameZhTW = animal.Names.Get(LanguageCode.ZhTW);
+                nameEn = animal.Names.Get(LanguageCode.En);
+                return true;
+            }
+
+            if (!_dinosaurCatalogService.TryGetBySlug(slug, out DinosaurProfile? dinosaur) || dinosaur is null)
+            {
+                return false;
+            }
+
+            nameZhTW = dinosaur.Names.Get(LanguageCode.ZhTW);
+            nameEn = dinosaur.Names.Get(LanguageCode.En);
+            return true;
+        }
+        catch (Exception exception)
+        {
+            _logger.LogWarning(
+                exception,
+                "Quiz related story source {Source} unavailable. Reason: {ReasonCode}",
+                source.ToCode(),
+                "related-source-unavailable");
+            return false;
+        }
+    }
+
+    private IReadOnlyList<QuizSourceStatus> CreateSourceStatuses(IReadOnlyList<QuizQuestion> questions)
     {
         return
         [
-            CreateAvailableStatus(ExplorationSourceType.Dinosaurs, questions),
-            CreateAvailableStatus(ExplorationSourceType.Aquarium, questions)
+            CreateSourceStatus(ExplorationSourceType.Dinosaurs, questions),
+            CreateSourceStatus(ExplorationSourceType.Aquarium, questions)
         ];
     }
 
-    private static QuizSourceStatus CreateAvailableStatus(ExplorationSourceType source, IReadOnlyList<QuizQuestion> questions)
+    private QuizSourceStatus CreateSourceStatus(ExplorationSourceType source, IReadOnlyList<QuizQuestion> questions)
     {
+        if (!TryGetStoryCount(source, out int storyCount))
+        {
+            return CreateUnavailableStatus(source, "source-unavailable");
+        }
+
         int questionCount = questions.Count(question => TryParseSource(question.Source, out ExplorationSourceType parsed) && parsed == source);
 
         return new QuizSourceStatus
         {
             Source = source,
             IsAvailable = true,
+            StoryCount = storyCount,
             QuestionCount = questionCount,
             FriendlyMessageZhTW = questionCount == 0 ? $"{source.GetLabel(LanguageCode.ZhTW)}題目正在準備中。" : null,
             FriendlyMessageEn = questionCount == 0 ? $"{source.GetLabel(LanguageCode.En)} questions are being prepared." : null,
             ReasonCode = questionCount == 0 ? "source-empty" : null
         };
+    }
+
+    private bool TryGetStoryCount(ExplorationSourceType source, out int storyCount)
+    {
+        storyCount = 0;
+
+        try
+        {
+            storyCount = source == ExplorationSourceType.Aquarium
+                ? _aquariumCatalogService.GetProfiles().Count
+                : _dinosaurCatalogService.GetProfiles().Count;
+            return true;
+        }
+        catch (Exception exception)
+        {
+            _logger.LogWarning(
+                exception,
+                "Quiz source {Source} could not be counted. Reason: {ReasonCode}",
+                source.ToCode(),
+                "source-unavailable");
+            return false;
+        }
     }
 
     private static QuizCatalogSnapshot CreateUnavailableSnapshot(string reasonCode)

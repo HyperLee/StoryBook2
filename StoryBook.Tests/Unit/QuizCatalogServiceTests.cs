@@ -115,6 +115,45 @@ public sealed class QuizCatalogServiceTests
         Assert.Contains("choose one answer", unknown.GetFeedback(LanguageCode.En), StringComparison.OrdinalIgnoreCase);
     }
 
+    [Fact]
+    public void GetQuestionViews_resolves_related_stories_to_canonical_hrefs_labels_and_source_metadata()
+    {
+        using QuizCatalogServiceTestContext context = CreateContext(
+            CreateQuestion("triceratops-review", "dinosaurs", 1, "triceratops"));
+
+        QuizQuestionView question = Assert.Single(context.Service.GetQuestionViews(QuizScope.Dinosaurs, LanguageCode.ZhTW));
+        QuizRelatedStoryView relatedStory = Assert.Single(question.RelatedStories);
+
+        Assert.Equal(ExplorationSourceType.Dinosaurs, relatedStory.Source);
+        Assert.Equal("dinosaurs", relatedStory.SourceCode);
+        Assert.Equal("triceratops", relatedStory.Slug);
+        Assert.Equal("/dinosaurs/triceratops", relatedStory.Href);
+        Assert.Equal("恐龍", relatedStory.GetSourceLabel(LanguageCode.ZhTW));
+        Assert.Equal("Dinosaurs", relatedStory.GetSourceLabel(LanguageCode.En));
+        Assert.Equal("去讀三角龍故事", relatedStory.GetLabel(LanguageCode.ZhTW));
+        Assert.Equal("Read the Triceratops story", relatedStory.GetLabel(LanguageCode.En));
+    }
+
+    [Fact]
+    public void GetSnapshot_rejects_duplicate_and_missing_related_story_references()
+    {
+        QuizQuestion valid = CreateQuestion("valid-reference", "dinosaurs", 1, "triceratops");
+        QuizQuestion duplicate = CreateQuestion(
+            "duplicate-reference",
+            "dinosaurs",
+            2,
+            "triceratops",
+            new QuizStoryReference { Source = "dinosaurs", Slug = "triceratops", SortOrder = 2 });
+        QuizQuestion missing = CreateQuestion("missing-reference", "dinosaurs", 3, "missing-story");
+        using QuizCatalogServiceTestContext context = CreateContext(valid, duplicate, missing);
+
+        QuizCatalogSnapshot snapshot = context.Service.GetSnapshot();
+
+        QuizQuestion remaining = Assert.Single(snapshot.Questions);
+        Assert.Equal("valid-reference", remaining.Id);
+        Assert.Equal(2, snapshot.InvalidQuestionCount);
+    }
+
     private static QuizCatalogServiceTestContext CreateContext(params QuizQuestion[] questions)
     {
         string path = Path.Combine(Path.GetTempPath(), $"storybook-quiz-{Guid.NewGuid():N}.json");
@@ -130,13 +169,32 @@ public sealed class QuizCatalogServiceTests
             Options.Create(new QuizCatalogOptions { ContentPath = path }),
             new FakeWebHostEnvironment(TestPaths.StoryBookRoot),
             new QuizContentValidator(),
+            CreateDinosaurCatalog(),
+            CreateAquariumCatalog(),
             new RecordingLogger<QuizCatalogService>());
 
         return new QuizCatalogServiceTestContext(path, service);
     }
 
-    private static QuizQuestion CreateQuestion(string id, string source, int sortOrder)
+    private static QuizQuestion CreateQuestion(
+        string id,
+        string source,
+        int sortOrder,
+        string? relatedSlug = null,
+        params QuizStoryReference[] additionalRelatedStories)
     {
+        string slug = relatedSlug ?? (source == "aquarium" ? "clownfish" : "triceratops");
+        List<QuizStoryReference> relatedStories =
+        [
+            new QuizStoryReference
+            {
+                Source = source,
+                Slug = slug,
+                SortOrder = 1
+            }
+        ];
+        relatedStories.AddRange(additionalRelatedStories);
+
         return new QuizQuestion
         {
             Id = id,
@@ -163,15 +221,7 @@ public sealed class QuizCatalogServiceTests
             CorrectFeedback = new QuizText { ZhTW = "答對了", En = "Correct" },
             IncorrectFeedback = new QuizText { ZhTW = "再想想", En = "Try again" },
             Explanation = new QuizText { ZhTW = "因為故事這樣說。", En = "The story says so." },
-            RelatedStories =
-            [
-                new QuizStoryReference
-                {
-                    Source = source,
-                    Slug = source == "aquarium" ? "clownfish" : "triceratops",
-                    SortOrder = 1
-                }
-            ]
+            RelatedStories = relatedStories
         };
     }
 
@@ -194,5 +244,23 @@ public sealed class QuizCatalogServiceTests
                 File.Delete(_contentPath);
             }
         }
+    }
+
+    private static DinosaurCatalogService CreateDinosaurCatalog()
+    {
+        return new DinosaurCatalogService(
+            Options.Create(new DinosaurCatalogOptions { ContentPath = "Data/dinosaurs.json" }),
+            new FakeWebHostEnvironment(TestPaths.StoryBookRoot),
+            new DinosaurContentValidator(),
+            new RecordingLogger<DinosaurCatalogService>());
+    }
+
+    private static AquariumCatalogService CreateAquariumCatalog()
+    {
+        return new AquariumCatalogService(
+            Options.Create(new AquariumCatalogOptions { ContentPath = "Data/aquarium.json" }),
+            new FakeWebHostEnvironment(TestPaths.StoryBookRoot),
+            new AquariumContentValidator(),
+            new RecordingLogger<AquariumCatalogService>());
     }
 }

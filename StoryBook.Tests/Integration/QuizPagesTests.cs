@@ -99,6 +99,37 @@ public sealed class QuizPagesTests : IClassFixture<QuizPagesTests.QuizPageFixtur
         Assert.DoesNotContain("data-quiz-answer-state=\"incorrect\"", noSelectionHtml);
     }
 
+    [Fact]
+    public async Task Quiz_page_renders_related_story_anchor_metadata_and_source_labels()
+    {
+        string dinosaurHtml = await _fixture.GetOkHtmlAsync("/quiz?scope=dinosaurs&questionId=triceratops-horns");
+        string aquariumHtml = await _fixture.GetOkHtmlAsync("/quiz?scope=aquarium&questionId=clownfish-home");
+
+        Assert.Contains("data-quiz-related-stories", dinosaurHtml);
+        Assert.Contains("data-quiz-related-story", dinosaurHtml);
+        Assert.Contains("data-quiz-related-source=\"dinosaurs\"", dinosaurHtml);
+        Assert.Contains("data-quiz-related-slug=\"triceratops\"", dinosaurHtml);
+        Assert.True(HasLinkTo(dinosaurHtml, "/dinosaurs/triceratops"));
+        Assert.Contains("去讀三角龍故事", dinosaurHtml);
+        Assert.Contains("恐龍", dinosaurHtml);
+
+        Assert.Contains("data-quiz-related-source=\"aquarium\"", aquariumHtml);
+        Assert.Contains("data-quiz-related-slug=\"clownfish\"", aquariumHtml);
+        Assert.True(HasLinkTo(aquariumHtml, "/aquarium/clownfish"));
+        Assert.Contains("去讀小丑魚故事", aquariumHtml);
+        Assert.Contains("水族館", aquariumHtml);
+    }
+
+    [Fact]
+    public async Task Quiz_related_story_anchors_do_not_render_blank_or_placeholder_hrefs()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/quiz");
+
+        Assert.DoesNotContain("data-quiz-related-story href=\"\"", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("data-quiz-related-story href=\"#\"", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("/missing-story", html, StringComparison.OrdinalIgnoreCase);
+    }
+
     public sealed class QuizPageFixture : IAsyncLifetime
     {
         public WebApplicationFactory<Program> Factory { get; private set; } = null!;

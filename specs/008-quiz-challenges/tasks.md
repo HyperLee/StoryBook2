@@ -105,16 +105,16 @@
 
 ### Tests for User Story 3
 
-- [ ] T034 [P] [US3] Add unit tests for related story resolution, duplicate reference rejection, missing story rejection, source labels, and canonical href derivation in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
-- [ ] T035 [P] [US3] Add integration tests for related story anchors, `data-quiz-related-story` metadata, source labels, and no broken anchors in `StoryBook.Tests/Integration/QuizPagesTests.cs`
+- [X] T034 [P] [US3] Add unit tests for related story resolution, duplicate reference rejection, missing story rejection, source labels, and canonical href derivation in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
+- [X] T035 [P] [US3] Add integration tests for related story anchors, `data-quiz-related-story` metadata, source labels, and no broken anchors in `StoryBook.Tests/Integration/QuizPagesTests.cs`
 
 ### Implementation for User Story 3
 
-- [ ] T036 [US3] Resolve related story references through `DinosaurCatalogService` and `AquariumCatalogService` in `StoryBook/Services/QuizCatalogService.cs`
-- [ ] T037 [US3] Verify every starter question has at least one valid related story reference in `StoryBook/Data/quiz-questions.json`
-- [ ] T038 [US3] Render related story anchors with source, slug, href, and bilingual label metadata in `StoryBook/Pages/Quiz/Index.cshtml`
-- [ ] T039 [US3] Add related story review link layout styles in `StoryBook/wwwroot/css/quiz.css`
-- [ ] T040 [US3] Run US3 related-story tests, then record the result in `specs/008-quiz-challenges/quickstart.md`
+- [X] T036 [US3] Resolve related story references through `DinosaurCatalogService` and `AquariumCatalogService` in `StoryBook/Services/QuizCatalogService.cs`
+- [X] T037 [US3] Verify every starter question has at least one valid related story reference in `StoryBook/Data/quiz-questions.json`
+- [X] T038 [US3] Render related story anchors with source, slug, href, and bilingual label metadata in `StoryBook/Pages/Quiz/Index.cshtml`
+- [X] T039 [US3] Add related story review link layout styles in `StoryBook/wwwroot/css/quiz.css`
+- [X] T040 [US3] Run US3 related-story tests, then record the result in `specs/008-quiz-challenges/quickstart.md`
 
 **Checkpoint**: User Story 3 is independently functional and testable.
 

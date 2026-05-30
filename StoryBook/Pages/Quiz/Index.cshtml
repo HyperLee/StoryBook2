@@ -142,6 +142,30 @@
             </section>
         }
 
+        @if (question.RelatedStories.Count > 0)
+        {
+            <section class="quiz-related" aria-labelledby="quiz-related-title" data-quiz-related-stories>
+                <h2 id="quiz-related-title" data-i18n-zh-tw="複習相關故事" data-i18n-en="Review related stories">複習相關故事</h2>
+                <div class="quiz-related__links">
+                    @foreach (QuizRelatedStoryView story in question.RelatedStories)
+                    {
+                        <a class="quiz-related-link"
+                           href="@story.Href"
+                           data-quiz-related-story
+                           data-quiz-related-source="@story.SourceCode"
+                           data-quiz-related-slug="@story.Slug"
+                           data-i18n-zh-tw="@story.LabelZhTW"
+                           data-i18n-en="@story.LabelEn">
+                            <span class="quiz-related-link__source"
+                                  data-i18n-zh-tw="@story.SourceLabelZhTW"
+                                  data-i18n-en="@story.SourceLabelEn">@story.SourceLabelZhTW</span>
+                            <span>@story.LabelZhTW</span>
+                        </a>
+                    }
+                </div>
+            </section>
+        }
+
         <a class="quiz-next-link"
            href="@question.NextQuestionHref"
            data-quiz-next-question
