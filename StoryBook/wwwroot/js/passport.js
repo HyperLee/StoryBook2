@@ -17,9 +17,14 @@
 
     function initializePassport() {
         const detailRegion = document.querySelector("[data-passport-story]");
+        const passportPage = document.querySelector("[data-passport-page]");
 
         if (detailRegion instanceof HTMLElement) {
             initializeDetailCompletion(detailRegion);
+        }
+
+        if (passportPage instanceof HTMLElement) {
+            initializePassportPage(passportPage);
         }
     }
 
@@ -131,6 +136,223 @@
                 }
             });
         }
+    }
+
+    function initializePassportPage(page) {
+        const storyLookup = readStoryLookup();
+        const badgeElements = Array.from(page.querySelectorAll("[data-passport-badge]"));
+        const readList = page.querySelector("[data-passport-read-list]");
+        const summary = page.querySelector("[data-passport-summary]");
+        const emptyState = page.querySelector("[data-passport-empty]");
+        const storageWarning = page.querySelector("[data-passport-storage-warning]");
+        let currentLanguage = readStoredLanguage();
+
+        if (!(readList instanceof HTMLOListElement) || !(summary instanceof HTMLElement)) {
+            return;
+        }
+
+        applyPassportPageLanguage(currentLanguage);
+        renderPassportPage();
+
+        document.querySelectorAll("[data-language-option]").forEach((languageButton) => {
+            languageButton.addEventListener("click", () => {
+                currentLanguage = normalizeLanguage(languageButton.getAttribute("data-language-option"));
+
+                try {
+                    window.localStorage.setItem(languageStorageKey, currentLanguage);
+                } catch {
+                    // Storage can be blocked; the page still applies the selected language.
+                }
+
+                applyPassportPageLanguage(currentLanguage);
+                renderPassportPage();
+            });
+        });
+
+        function renderPassportPage() {
+            const readResult = readPassportState(storyLookup);
+            const completedStories = sortCompletedStories(readResult.state.completedStories, storyLookup);
+            const totalCount = storyLookup.size;
+
+            updateSummary(completedStories.length, totalCount);
+            updateStorageWarning(readResult);
+            renderReadList(completedStories);
+            renderBadges(completedStories, totalCount);
+
+            if (emptyState instanceof HTMLElement) {
+                emptyState.hidden = completedStories.length > 0;
+            }
+        }
+
+        function updateSummary(completedCount, totalCount) {
+            const template = getLocalizedAttribute(page, "passport-summary-template", currentLanguage);
+            const fallback = currentLanguage === "en"
+                ? `You have met ${completedCount} of ${totalCount} story friends.`
+                : `你已經認識 ${completedCount} / ${totalCount} 位故事朋友。`;
+            summary.textContent = template
+                ? template.replace("{0}", String(completedCount)).replace("{1}", String(totalCount))
+                : fallback;
+        }
+
+        function updateStorageWarning(readResult) {
+            if (!(storageWarning instanceof HTMLElement)) {
+                return;
+            }
+
+            const shouldShowWarning = readResult.storageStatus === "read-blocked" || readResult.storageStatus === "invalid-data";
+            storageWarning.hidden = !shouldShowWarning;
+
+            if (shouldShowWarning) {
+                storageWarning.textContent = getLocalizedAttribute(page, `passport-storage-warning-${readResult.storageStatus}`, currentLanguage);
+            }
+        }
+
+        function renderReadList(completedStories) {
+            readList.replaceChildren();
+
+            completedStories.forEach((completedStory) => {
+                const story = storyLookup.get(`${completedStory.source}:${completedStory.slug}`);
+
+                if (!story) {
+                    return;
+                }
+
+                const item = document.createElement("li");
+                const link = document.createElement("a");
+                const source = document.createElement("span");
+                const summaryText = document.createElement("p");
+
+                link.href = story.href;
+                link.textContent = getStoryText(story, "name", currentLanguage);
+                source.className = "passport-read-list__source";
+                source.textContent = getStoryText(story, "source", currentLanguage);
+                summaryText.textContent = getStoryText(story, "summary", currentLanguage);
+
+                item.append(link, source, summaryText);
+                readList.append(item);
+            });
+        }
+
+        function renderBadges(completedStories, totalCount) {
+            const completedKeys = new Set(completedStories.map((story) => `${story.source}:${story.slug}`));
+
+            badgeElements.forEach((badgeElement) => {
+                if (!(badgeElement instanceof HTMLElement)) {
+                    return;
+                }
+
+                const label = badgeElement.querySelector("[data-passport-badge-label]");
+                const description = badgeElement.querySelector("[data-passport-badge-description]");
+                const status = badgeElement.querySelector("[data-passport-badge-status]");
+                const isUnlocked = isBadgeUnlocked(badgeElement, completedKeys, completedStories.length, totalCount);
+
+                badgeElement.setAttribute("data-passport-badge-state", isUnlocked ? "unlocked" : "locked");
+
+                if (label instanceof HTMLElement) {
+                    label.textContent = getLocalizedAttribute(badgeElement, "i18n-label", currentLanguage);
+                }
+
+                if (description instanceof HTMLElement) {
+                    description.textContent = getLocalizedAttribute(badgeElement, "i18n-description", currentLanguage);
+                }
+
+                if (status instanceof HTMLElement) {
+                    status.textContent = getLocalizedAttribute(status, isUnlocked ? "i18n-unlocked" : "i18n-locked", currentLanguage);
+                }
+            });
+        }
+    }
+
+    function readStoryLookup() {
+        const stories = new Map();
+
+        document.querySelectorAll("[data-passport-story-item]").forEach((element) => {
+            if (!(element instanceof HTMLElement)) {
+                return;
+            }
+
+            const source = element.getAttribute("data-passport-source") || "";
+            const slug = element.getAttribute("data-passport-slug") || "";
+            const id = `${source}:${slug}`;
+
+            if (!allowedSources.includes(source) || !slugPattern.test(slug)) {
+                return;
+            }
+
+            stories.set(id, {
+                id,
+                source,
+                slug,
+                href: element.getAttribute("data-passport-href") || "#",
+                sourceOrder: Number.parseInt(element.getAttribute("data-passport-source-order") || "0", 10),
+                storyOrder: Number.parseInt(element.getAttribute("data-passport-story-order") || "0", 10),
+                element
+            });
+        });
+
+        return stories;
+    }
+
+    function sortCompletedStories(completedStories, storyLookup) {
+        return completedStories
+            .filter((story) => storyLookup.has(`${story.source}:${story.slug}`))
+            .sort((left, right) => {
+                const leftStory = storyLookup.get(`${left.source}:${left.slug}`);
+                const rightStory = storyLookup.get(`${right.source}:${right.slug}`);
+
+                return (leftStory?.sourceOrder || 0) - (rightStory?.sourceOrder || 0)
+                    || (leftStory?.storyOrder || 0) - (rightStory?.storyOrder || 0)
+                    || `${left.source}:${left.slug}`.localeCompare(`${right.source}:${right.slug}`);
+            });
+    }
+
+    function isBadgeUnlocked(badgeElement, completedKeys, completedCount, totalCount) {
+        const milestone = badgeElement.getAttribute("data-passport-badge-milestone");
+
+        if (milestone === "CompletedCountAtLeast") {
+            const targetCount = Number.parseInt(badgeElement.getAttribute("data-passport-target-count") || "0", 10);
+            return completedCount >= targetCount;
+        }
+
+        if (milestone === "CompletedAllInSource") {
+            const source = badgeElement.getAttribute("data-passport-source") || "";
+            const sourceStories = Array.from(document.querySelectorAll(`[data-passport-story-item][data-passport-source="${source}"]`));
+            return sourceStories.length > 0 && sourceStories.every((storyElement) => {
+                const slug = storyElement.getAttribute("data-passport-slug") || "";
+                return completedKeys.has(`${source}:${slug}`);
+            });
+        }
+
+        if (milestone === "CompletedAllStories") {
+            return totalCount > 0 && completedCount === totalCount;
+        }
+
+        return false;
+    }
+
+    function applyPassportPageLanguage(language) {
+        const selectedLanguage = normalizeLanguage(language);
+        document.documentElement.lang = selectedLanguage;
+
+        document.querySelectorAll("[data-i18n-zh-tw][data-i18n-en]").forEach((element) => {
+            const value = getLocalizedAttribute(element, "i18n", selectedLanguage);
+
+            if (value) {
+                element.textContent = value;
+            }
+        });
+
+        document.querySelectorAll("[data-aria-label-zh-tw][data-aria-label-en]").forEach((element) => {
+            const value = getLocalizedAttribute(element, "aria-label", selectedLanguage);
+
+            if (value) {
+                element.setAttribute("aria-label", value);
+            }
+        });
+    }
+
+    function getStoryText(story, fieldName, language) {
+        return getLocalizedAttribute(story.element, `i18n-${fieldName}`, language);
     }
 
     function readStory(region) {

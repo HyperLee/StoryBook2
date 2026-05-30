@@ -85,20 +85,20 @@
 
 > 先寫這些測試，確認在實作前失敗。
 
-- [ ] T026 [P] [US2] Add failing catalog projection tests for total count 23, dinosaur-before-aquarium ordering, canonical hrefs, no blank fallback text, five badge definitions and partial/all source failure status in `StoryBook.Tests/Unit/PassportCatalogServiceTests.cs`
-- [ ] T027 [US2] Add failing `/passport` route, DOM contract, home entry, shared navigation entry, badge shell, story item shell and theme selector absence tests in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [X] T026 [P] [US2] Add failing catalog projection tests for total count 23, dinosaur-before-aquarium ordering, canonical hrefs, no blank fallback text, five badge definitions and partial/all source failure status in `StoryBook.Tests/Unit/PassportCatalogServiceTests.cs`
+- [X] T027 [US2] Add failing `/passport` route, DOM contract, home entry, shared navigation entry, badge shell, story item shell and theme selector absence tests in `StoryBook.Tests/Integration/PassportPagesTests.cs`
 
 ### Implementation for User Story 2
 
-- [ ] T028 [US2] Implement `PassportCatalogService` composition from dinosaur and aquarium catalogs with non-sensitive logging in `StoryBook/Services/PassportCatalogService.cs`
-- [ ] T029 [US2] Register `PassportCatalogService` in the service container in `StoryBook/Program.cs`
-- [ ] T030 [US2] Implement `/passport` PageModel snapshot loading and friendly source failure state in `StoryBook/Pages/Passport/Index.cshtml.cs`
-- [ ] T031 [US2] Render `/passport` summary region, story metadata nodes, badge shells, empty/error/fallback regions and no personal state in `StoryBook/Pages/Passport/Index.cshtml`
-- [ ] T032 [US2] Add shared navigation anchor to `/passport` with bilingual accessible text in `StoryBook/Pages/Shared/_Layout.cshtml`
-- [ ] T033 [US2] Add home page passport action to `/passport` with bilingual accessible text in `StoryBook/Pages/Index.cshtml`
-- [ ] T034 [US2] Implement passport-page read list, completed count, total count and badge state rendering from normalized localStorage state in `StoryBook/wwwroot/js/passport.js`
-- [ ] T035 [US2] Add passport summary, badge grid, read list, source status and empty/error state styles in `StoryBook/wwwroot/css/passport.css`
-- [ ] T036 [US2] Run targeted US2 catalog and integration checks in `StoryBook.Tests/Unit/PassportCatalogServiceTests.cs` and `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [X] T028 [US2] Implement `PassportCatalogService` composition from dinosaur and aquarium catalogs with non-sensitive logging in `StoryBook/Services/PassportCatalogService.cs`
+- [X] T029 [US2] Register `PassportCatalogService` in the service container in `StoryBook/Program.cs`
+- [X] T030 [US2] Implement `/passport` PageModel snapshot loading and friendly source failure state in `StoryBook/Pages/Passport/Index.cshtml.cs`
+- [X] T031 [US2] Render `/passport` summary region, story metadata nodes, badge shells, empty/error/fallback regions and no personal state in `StoryBook/Pages/Passport/Index.cshtml`
+- [X] T032 [US2] Add shared navigation anchor to `/passport` with bilingual accessible text in `StoryBook/Pages/Shared/_Layout.cshtml`
+- [X] T033 [US2] Add home page passport action to `/passport` with bilingual accessible text in `StoryBook/Pages/Index.cshtml`
+- [X] T034 [US2] Implement passport-page read list, completed count, total count and badge state rendering from normalized localStorage state in `StoryBook/wwwroot/js/passport.js`
+- [X] T035 [US2] Add passport summary, badge grid, read list, source status and empty/error state styles in `StoryBook/wwwroot/css/passport.css`
+- [X] T036 [US2] Run targeted US2 catalog and integration checks in `StoryBook.Tests/Unit/PassportCatalogServiceTests.cs` and `StoryBook.Tests/Integration/PassportPagesTests.cs`
 
 **Checkpoint**: US2 可獨立示範；`/passport` 可從首頁或共用導覽進入，並依本機護照狀態顯示進度與連結。
 

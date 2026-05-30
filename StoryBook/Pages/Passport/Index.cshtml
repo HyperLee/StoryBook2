@@ -1,0 +1,122 @@
+@page "/passport"
+@using StoryBook.Models
+@model StoryBook.Pages.Passport.IndexModel
+@{
+    ViewData["Title"] = "小小探險護照";
+}
+
+<section class="passport-page"
+         aria-labelledby="passport-title"
+         data-passport-page
+         data-passport-storage-key="@Model.StorageKey"
+         data-passport-version="@Model.StateVersion"
+         data-passport-language-storage-key="@Model.LanguageStorageKey"
+         data-passport-summary-template-zh-tw="你已經認識 {0} / {1} 位故事朋友。"
+         data-passport-summary-template-en="You have met {0} of {1} story friends."
+         data-passport-storage-warning-read-blocked-zh-tw="護照暫時打不開，但你仍然可以閱讀故事。"
+         data-passport-storage-warning-read-blocked-en="The passport cannot open right now, but you can still read stories."
+         data-passport-storage-warning-invalid-data-zh-tw="護照裡有看不懂的舊資料，已先顯示能認得的故事。"
+         data-passport-storage-warning-invalid-data-en="The passport has old data it cannot read. It is showing the stories it can recognize.">
+    <div class="passport-page__header">
+        <div>
+            <p class="passport-kicker" data-i18n-zh-tw="小小探險家" data-i18n-en="Little explorer">小小探險家</p>
+            <h1 id="passport-title" data-i18n-zh-tw="小小探險護照" data-i18n-en="Little Adventure Passport">小小探險護照</h1>
+        </div>
+        <a class="passport-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+    </div>
+
+    @if (Model.HasAllSourcesFailed)
+    {
+        <div class="passport-alert" role="status" data-passport-all-failed>
+            <h2 data-i18n-zh-tw="故事朋友暫時躲起來了" data-i18n-en="Story friends are hiding right now">故事朋友暫時躲起來了</h2>
+            <p data-i18n-zh-tw="請先回首頁，等故事朋友整理好再回來看護照。" data-i18n-en="Please return home and come back when the story friends are ready.">請先回首頁，等故事朋友整理好再回來看護照。</p>
+            <a class="passport-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+        </div>
+    }
+
+    @if (Model.HasPartialSourceFailure)
+    {
+        <div class="passport-alert" role="status" data-passport-partial-failure>
+            <strong data-i18n-zh-tw="有一些故事朋友暫時躲起來了" data-i18n-en="Some story friends are hiding for now">有一些故事朋友暫時躲起來了</strong>
+            @foreach (PassportSourceStatus status in Model.SourceStatuses.Where(status => !status.IsAvailable))
+            {
+                <p data-i18n-zh-tw="@status.GetFriendlyMessage(LanguageCode.ZhTW)" data-i18n-en="@status.GetFriendlyMessage(LanguageCode.En)">
+                    @status.GetFriendlyMessage(LanguageCode.ZhTW)
+                </p>
+            }
+        </div>
+    }
+
+    <div class="passport-summary-panel" aria-labelledby="passport-summary-title">
+        <h2 id="passport-summary-title" data-i18n-zh-tw="目前進度" data-i18n-en="Current progress">目前進度</h2>
+        <p class="passport-summary"
+           data-passport-summary
+           role="status"
+           aria-live="polite"
+           data-i18n-zh-tw="你已經認識 0 / @Model.TotalStoryCount 位故事朋友。"
+           data-i18n-en="You have met 0 of @Model.TotalStoryCount story friends.">你已經認識 0 / @Model.TotalStoryCount 位故事朋友。</p>
+        <div class="passport-storage-warning"
+             data-passport-storage-warning
+             role="status"
+             aria-live="polite"
+             hidden></div>
+    </div>
+
+    <div class="passport-empty" data-passport-empty>
+        <h2 data-i18n-zh-tw="護照還在等第一個印章" data-i18n-en="Your passport is waiting for its first stamp">護照還在等第一個印章</h2>
+        <p data-i18n-zh-tw="先去讀一篇恐龍或水族館故事，再把朋友蓋進護照。" data-i18n-en="Read a dinosaur or aquarium story, then stamp that friend into your passport.">先去讀一篇恐龍或水族館故事，再把朋友蓋進護照。</p>
+        <div class="passport-actions">
+            <a class="passport-action" asp-page="/Dinosaurs/Index" data-i18n-zh-tw="去看恐龍" data-i18n-en="Visit dinosaurs">去看恐龍</a>
+            <a class="passport-action" asp-page="/Aquarium/Index" data-i18n-zh-tw="去看水族館" data-i18n-en="Visit aquarium">去看水族館</a>
+        </div>
+    </div>
+
+    <section class="passport-section" aria-labelledby="passport-badges-title">
+        <h2 id="passport-badges-title" data-i18n-zh-tw="探險徽章" data-i18n-en="Adventure badges">探險徽章</h2>
+        <div class="passport-badge-grid">
+            @foreach (PassportBadgeDefinition badge in Model.Badges)
+            {
+                <article class="passport-badge" data-passport-badge data-passport-badge-code="@badge.Code" data-passport-badge-milestone="@badge.Milestone" data-passport-source="@badge.SourceCode" data-passport-target-count="@badge.TargetCount" data-i18n-label-zh-tw="@badge.GetLabel(LanguageCode.ZhTW)" data-i18n-label-en="@badge.GetLabel(LanguageCode.En)" data-i18n-description-zh-tw="@badge.GetDescription(LanguageCode.ZhTW)" data-i18n-description-en="@badge.GetDescription(LanguageCode.En)">
+                    <h3 data-passport-badge-label>@badge.GetLabel(LanguageCode.ZhTW)</h3>
+                    <p data-passport-badge-description>@badge.GetDescription(LanguageCode.ZhTW)</p>
+                    <p class="passport-badge__status"
+                       data-passport-badge-status
+                       data-i18n-locked-zh-tw="還沒解鎖"
+                       data-i18n-locked-en="Locked"
+                       data-i18n-unlocked-zh-tw="已解鎖"
+                       data-i18n-unlocked-en="Unlocked">還沒解鎖</p>
+                </article>
+            }
+        </div>
+    </section>
+
+    <section class="passport-section" aria-labelledby="passport-read-list-title">
+        <h2 id="passport-read-list-title" data-i18n-zh-tw="已讀故事朋友" data-i18n-en="Completed story friends">已讀故事朋友</h2>
+        <ol class="passport-read-list" data-passport-read-list></ol>
+    </section>
+
+    <ol class="passport-story-metadata" hidden>
+        @foreach (PassportStoryItem story in Model.Stories)
+        {
+            <li data-passport-story-item
+                data-passport-story-id="@story.StableId"
+                data-passport-source="@story.SourceCode"
+                data-passport-slug="@story.Slug"
+                data-passport-href="@story.DetailHref"
+                data-passport-source-order="@story.SourceSortOrder"
+                data-passport-story-order="@story.SortOrder"
+                data-i18n-name-zh-tw="@story.GetName(LanguageCode.ZhTW)"
+                data-i18n-name-en="@story.GetName(LanguageCode.En)"
+                data-i18n-summary-zh-tw="@story.GetSummary(LanguageCode.ZhTW)"
+                data-i18n-summary-en="@story.GetSummary(LanguageCode.En)"
+                data-i18n-source-zh-tw="@story.GetSourceLabel(LanguageCode.ZhTW)"
+                data-i18n-source-en="@story.GetSourceLabel(LanguageCode.En)">
+                <a href="@story.DetailHref" data-passport-story-anchor>@story.GetName(LanguageCode.ZhTW)</a>
+            </li>
+        }
+    </ol>
+</section>
+
+@section Scripts {
+    <script src="~/js/passport.js" asp-append-version="true"></script>
+}
