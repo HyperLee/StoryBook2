@@ -73,6 +73,23 @@ dotnet run --project StoryBook/StoryBook.csproj
 6. Confirm story item display names and summaries match existing source story content.
 7. Confirm browser back/forward, open in new tab, and copy link work for journey and story links.
 
+## 主要內容效能驗證
+
+用於驗證 SC-011；在完整 catalog 狀態下，先開啟一次 `/journeys` 與一個已知 `/journeys/{slug}` 作為 warm-up，再對兩個 route 各連續載入 5 次。可使用瀏覽器任務紀錄、DevTools timing 或同等整合測試紀錄；紀錄不得包含檔案路徑、secret、token、個資或例外細節。
+
+| Route | Attempt | Main Content Available Within 1s? | Measurement Method | Non-sensitive Notes |
+|-------|---------|-----------------------------------|--------------------|---------------------|
+| `/journeys` | 1 | | | |
+| `/journeys` | 2 | | | |
+| `/journeys` | 3 | | | |
+| `/journeys` | 4 | | | |
+| `/journeys` | 5 | | | |
+| `/journeys/{slug}` | 1 | | | |
+| `/journeys/{slug}` | 2 | | | |
+| `/journeys/{slug}` | 3 | | | |
+| `/journeys/{slug}` | 4 | | | |
+| `/journeys/{slug}` | 5 | | | |
+
 ## 語言與主題驗證
 
 1. Set language to English using the existing language control.

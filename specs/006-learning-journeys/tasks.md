@@ -18,7 +18,7 @@
 
 **Purpose**: Add the feature's empty assets, fixture surface, and curated data file locations without changing existing behavior.
 
-- [ ] T001 [P] Create the curated learning journey catalog with at least three draft journey records in `StoryBook/Data/journeys.json`
+- [ ] T001 [P] Create the curated learning journey catalog with at least three complete available journey records in `StoryBook/Data/journeys.json`
 - [ ] T002 [P] Create the feature stylesheet scaffold in `StoryBook/wwwroot/css/journeys.css`
 - [ ] T003 [P] Create the feature script scaffold in `StoryBook/wwwroot/js/journeys.js`
 - [ ] T004 [P] Create the journey integration fixture scaffold in `StoryBook.Tests/Integration/JourneyPageTestFixture.cs`
@@ -33,18 +33,18 @@
 
 - [ ] T005 Add the `LearningJourneyCatalog` configuration section with `ContentPath` in `StoryBook/appsettings.json`
 - [ ] T006 [P] Create `LearningJourneyCatalogOptions` with XML docs and default `Data/journeys.json` path in `StoryBook/Services/LearningJourneyCatalogOptions.cs`
-- [ ] T007 [P] Create `JourneyText` with `zh-TW` fallback behavior in `StoryBook/Models/JourneyText.cs`
-- [ ] T008 [P] Create `JourneyStoryReference` with source, slug, and sort order fields in `StoryBook/Models/JourneyStoryReference.cs`
-- [ ] T009 [P] Create `LearningJourney` with slug, sort order, localized content, reading metadata, and story references in `StoryBook/Models/LearningJourney.cs`
-- [ ] T010 [P] Create `JourneyCatalog` root model matching `contracts/learning-journeys.schema.json` in `StoryBook/Models/JourneyCatalog.cs`
-- [ ] T011 [P] Create `JourneyDiagnosticSummary` with non-sensitive reason/source/reference fields in `StoryBook/Models/JourneyDiagnosticSummary.cs`
-- [ ] T012 [P] Create `JourneyAvailabilityStatus` and availability state enum in `StoryBook/Models/JourneyAvailabilityStatus.cs`
-- [ ] T013 [P] Create `JourneySourceStatus` for source availability summaries in `StoryBook/Models/JourneySourceStatus.cs`
-- [ ] T014 [P] Create `JourneyStoryItem` projection with href, localized source/name/summary, image, and stable id fields in `StoryBook/Models/JourneyStoryItem.cs`
-- [ ] T015 Create `JourneyCatalogSnapshot` with available journeys, unavailable statuses, source statuses, and aggregate failure flags in `StoryBook/Models/JourneyCatalogSnapshot.cs`
-- [ ] T016 Create `LearningJourneyContentValidationResult` for errors and diagnostic summaries in `StoryBook/Services/LearningJourneyContentValidationResult.cs`
+- [ ] T007 [P] Create `JourneyText` with `zh-TW` fallback behavior and XML docs in `StoryBook/Models/JourneyText.cs`
+- [ ] T008 [P] Create `JourneyStoryReference` with source, slug, sort order fields, and XML docs in `StoryBook/Models/JourneyStoryReference.cs`
+- [ ] T009 [P] Create `LearningJourney` with slug, sort order, localized content, reading metadata, story references, and XML docs in `StoryBook/Models/LearningJourney.cs`
+- [ ] T010 [P] Create `JourneyCatalog` root model matching `contracts/learning-journeys.schema.json` with XML docs in `StoryBook/Models/JourneyCatalog.cs`
+- [ ] T011 [P] Create `JourneyDiagnosticSummary` with non-sensitive reason/source/reference fields and XML docs in `StoryBook/Models/JourneyDiagnosticSummary.cs`
+- [ ] T012 [P] Create `JourneyAvailabilityStatus` and availability state enum with XML docs in `StoryBook/Models/JourneyAvailabilityStatus.cs`
+- [ ] T013 [P] Create `JourneySourceStatus` for source availability summaries with XML docs in `StoryBook/Models/JourneySourceStatus.cs`
+- [ ] T014 [P] Create `JourneyStoryItem` projection with href, localized source/name/summary, image, stable id fields, and XML docs in `StoryBook/Models/JourneyStoryItem.cs`
+- [ ] T015 Create `JourneyCatalogSnapshot` with available journeys, unavailable statuses, source statuses, aggregate failure flags, and XML docs in `StoryBook/Models/JourneyCatalogSnapshot.cs`
+- [ ] T016 Create `LearningJourneyContentValidationResult` for errors and diagnostic summaries with XML docs in `StoryBook/Services/LearningJourneyContentValidationResult.cs`
 - [ ] T017 Create `LearningJourneyContentValidator` validation entry points and XML docs in `StoryBook/Services/LearningJourneyContentValidator.cs`
-- [ ] T018 Create `LearningJourneyCatalogService` compile-ready skeleton with snapshot/detail lookup methods in `StoryBook/Services/LearningJourneyCatalogService.cs`
+- [ ] T018 Create `LearningJourneyCatalogService` compile-ready skeleton with snapshot/detail lookup methods and XML docs in `StoryBook/Services/LearningJourneyCatalogService.cs`
 - [ ] T019 Register journey options, validator, and catalog service in `StoryBook/Program.cs`
 
 **Checkpoint**: The solution compiles with journey types and service contracts available, but journey behavior is still expected to fail story tests.
@@ -168,10 +168,11 @@ Write these tests first and confirm they fail before implementation.
 
 - [ ] T059 [P] Update manual validation notes with actual journey slugs and representative source-failure setup in `specs/006-learning-journeys/quickstart.md`
 - [ ] T060 [P] Add final negative-scope assertions for no login, no external APIs, no progress storage, and no journey-specific story routes in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
-- [ ] T061 Run `dotnet build StoryBook2.sln` and address build warnings or errors in `StoryBook2.sln`
-- [ ] T062 Run `dotnet test StoryBook2.sln` and address failing journey regressions in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
-- [ ] T063 Perform quickstart manual acceptance for `/`, `/explore`, `/journeys`, `/journeys/{slug}`, language, theme, keyboard, and responsive flows documented in `specs/006-learning-journeys/quickstart.md`
-- [ ] T064 Review changed files and ensure generated `bin/` or `obj/` artifacts are not staged by checking paths listed in `StoryBook2.sln`
+- [ ] T061 Record complete-catalog performance verification for `/journeys` and one known `/journeys/{slug}` against SC-011 in `specs/006-learning-journeys/quickstart.md`
+- [ ] T062 Run `dotnet build StoryBook2.sln` and address build warnings or errors in `StoryBook2.sln`
+- [ ] T063 Run `dotnet test StoryBook2.sln` and address failing journey regressions in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [ ] T064 Perform quickstart manual acceptance for `/`, `/explore`, `/journeys`, `/journeys/{slug}`, language, theme, keyboard, responsive, and performance flows documented in `specs/006-learning-journeys/quickstart.md`
+- [ ] T065 Review changed files and ensure generated `bin/` or `obj/` artifacts are not staged by checking paths listed in `StoryBook2.sln`
 
 ---
 
