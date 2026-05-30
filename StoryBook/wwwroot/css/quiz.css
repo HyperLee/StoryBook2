@@ -135,6 +135,38 @@
     display: none;
 }
 
+.quiz-feedback {
+    border: 2px solid var(--storybook-border);
+    border-radius: 0.5rem;
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.quiz-feedback h2,
+.quiz-feedback p {
+    margin: 0;
+}
+
+.quiz-feedback--correct {
+    border-color: #1f8f5f;
+}
+
+.quiz-feedback--incorrect {
+    border-color: #b45309;
+}
+
+.quiz-feedback--needs-selection {
+    background: var(--storybook-alert-bg);
+    border-color: var(--storybook-alert-border);
+    color: var(--storybook-alert-text);
+}
+
+.quiz-explanation {
+    color: var(--storybook-text);
+    font-weight: 600;
+}
+
 @media (max-width: 575.98px) {
     .quiz-page__header,
     .quiz-scope-nav,

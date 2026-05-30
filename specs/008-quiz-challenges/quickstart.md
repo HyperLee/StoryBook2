@@ -41,6 +41,7 @@
 ## Implementation Evidence
 
 - 2026-05-30 US1 automated route and scope checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after adding the `/quiz` service, route, starter catalog, home entry, explore entry, scope links, question DOM metadata, and next-question projection.
+- 2026-05-30 US2 automated answer-flow checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after adding transient answer evaluation, antiforgery answer posts, correct/wrong/no-selection feedback, explanations, next-question links, and no score/progress UI.
 
 ### Manual Acceptance Evidence Checklist
 

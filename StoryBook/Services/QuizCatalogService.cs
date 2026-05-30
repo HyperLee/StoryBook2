@@ -95,6 +95,54 @@ public sealed class QuizCatalogService
     }
 
     /// <summary>
+    /// Evaluates one submitted answer without persisting answer state.
+    /// </summary>
+    public QuizAnswerResult EvaluateAnswer(
+        QuizScope scope,
+        string? questionId,
+        string? selectedOptionId,
+        LanguageCode language)
+    {
+        IReadOnlyList<QuizQuestion> questions = GetScopedQuestions(scope);
+        QuizQuestion? question = questions.FirstOrDefault(item => item.Id == NormalizeId(questionId))
+            ?? questions.FirstOrDefault();
+
+        if (question is null)
+        {
+            return CreateNeedsSelectionResult(
+                NormalizeId(questionId),
+                selectedOptionId);
+        }
+
+        string? normalizedSelectedOptionId = string.IsNullOrWhiteSpace(selectedOptionId)
+            ? null
+            : NormalizeId(selectedOptionId);
+        QuizAnswerOption? selectedOption = normalizedSelectedOptionId is null
+            ? null
+            : question.Options.FirstOrDefault(option => option.Id == normalizedSelectedOptionId);
+
+        if (selectedOption is null)
+        {
+            return CreateNeedsSelectionResult(question.Id, normalizedSelectedOptionId);
+        }
+
+        bool isCorrect = string.Equals(question.CorrectOptionId, selectedOption.Id, StringComparison.Ordinal);
+        QuizText feedback = isCorrect ? question.CorrectFeedback : question.IncorrectFeedback;
+
+        return new QuizAnswerResult
+        {
+            QuestionId = question.Id,
+            SelectedOptionId = selectedOption.Id,
+            IsAnswered = true,
+            IsCorrect = isCorrect,
+            FeedbackZhTW = feedback.Get(LanguageCode.ZhTW),
+            FeedbackEn = feedback.Get(LanguageCode.En),
+            ExplanationZhTW = question.Explanation.Get(LanguageCode.ZhTW),
+            ExplanationEn = question.Explanation.Get(LanguageCode.En)
+        };
+    }
+
+    /// <summary>
     /// Builds a canonical same-page question href.
     /// </summary>
     public static string BuildQuestionHref(QuizScope scope, string questionId)
@@ -258,5 +306,23 @@ public sealed class QuizCatalogService
     private static string NormalizeId(string? value)
     {
         return value?.Trim().ToLowerInvariant() ?? string.Empty;
+    }
+
+    private static QuizAnswerResult CreateNeedsSelectionResult(
+        string questionId,
+        string? selectedOptionId)
+    {
+        const string feedbackZhTW = "請先選一個答案，再送出挑戰。";
+        const string feedbackEn = "Please choose one answer before submitting.";
+
+        return new QuizAnswerResult
+        {
+            QuestionId = questionId,
+            SelectedOptionId = selectedOptionId,
+            IsAnswered = false,
+            IsCorrect = null,
+            FeedbackZhTW = feedbackZhTW,
+            FeedbackEn = feedbackEn
+        };
     }
 }

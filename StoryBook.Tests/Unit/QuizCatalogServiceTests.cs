@@ -65,6 +65,56 @@ public sealed class QuizCatalogServiceTests
         Assert.Equal("a-aquarium", context.Service.GetNextQuestionId(QuizScope.Aquarium, "a-aquarium"));
     }
 
+    [Fact]
+    public void EvaluateAnswer_returns_correct_feedback_and_explanation_without_persisting_state()
+    {
+        using QuizCatalogServiceTestContext context = CreateContext(CreateQuestion("a-dino", "dinosaurs", 1));
+
+        QuizAnswerResult result = context.Service.EvaluateAnswer(QuizScope.Dinosaurs, "a-dino", "one", LanguageCode.ZhTW);
+        QuizQuestionView viewAfterAnswer = Assert.Single(context.Service.GetQuestionViews(QuizScope.Dinosaurs, LanguageCode.ZhTW));
+
+        Assert.True(result.IsAnswered);
+        Assert.True(result.IsCorrect);
+        Assert.Equal("one", result.SelectedOptionId);
+        Assert.Equal("答對了", result.GetFeedback(LanguageCode.ZhTW));
+        Assert.Equal("因為故事這樣說。", result.GetExplanation(LanguageCode.ZhTW));
+        Assert.DoesNotContain("CorrectOptionId", JsonSerializer.Serialize(viewAfterAnswer));
+        Assert.DoesNotContain("one", viewAfterAnswer.NextQuestionHref, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void EvaluateAnswer_returns_kind_wrong_feedback_for_wrong_answer()
+    {
+        using QuizCatalogServiceTestContext context = CreateContext(CreateQuestion("a-dino", "dinosaurs", 1));
+
+        QuizAnswerResult result = context.Service.EvaluateAnswer(QuizScope.Dinosaurs, "a-dino", "two", LanguageCode.En);
+
+        Assert.True(result.IsAnswered);
+        Assert.False(result.IsCorrect);
+        Assert.Equal("two", result.SelectedOptionId);
+        Assert.Equal("Try again", result.GetFeedback(LanguageCode.En));
+        Assert.Equal("The story says so.", result.GetExplanation(LanguageCode.En));
+    }
+
+    [Fact]
+    public void EvaluateAnswer_treats_unknown_or_missing_option_as_not_answered()
+    {
+        using QuizCatalogServiceTestContext context = CreateContext(CreateQuestion("a-dino", "dinosaurs", 1));
+
+        QuizAnswerResult missing = context.Service.EvaluateAnswer(QuizScope.Dinosaurs, "a-dino", null, LanguageCode.ZhTW);
+        QuizAnswerResult unknown = context.Service.EvaluateAnswer(QuizScope.Dinosaurs, "a-dino", "missing-option", LanguageCode.En);
+
+        Assert.False(missing.IsAnswered);
+        Assert.Null(missing.IsCorrect);
+        Assert.Null(missing.SelectedOptionId);
+        Assert.Contains("請先選一個答案", missing.GetFeedback(LanguageCode.ZhTW));
+        Assert.Null(missing.GetExplanation(LanguageCode.ZhTW));
+        Assert.False(unknown.IsAnswered);
+        Assert.Null(unknown.IsCorrect);
+        Assert.Equal("missing-option", unknown.SelectedOptionId);
+        Assert.Contains("choose one answer", unknown.GetFeedback(LanguageCode.En), StringComparison.OrdinalIgnoreCase);
+    }
+
     private static QuizCatalogServiceTestContext CreateContext(params QuizQuestion[] questions)
     {
         string path = Path.Combine(Path.GetTempPath(), $"storybook-quiz-{Guid.NewGuid():N}.json");

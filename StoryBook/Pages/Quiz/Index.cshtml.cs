@@ -33,6 +33,8 @@ public sealed class IndexModel : PageModel
 
     public bool HasQuestionFallback { get; private set; }
 
+    public QuizAnswerResult? AnswerResult { get; private set; }
+
     public string LanguageStorageKey => _languagePreferenceService.StorageKey;
 
     public void OnGet(string? scope, string? questionId)
@@ -50,6 +52,24 @@ public sealed class IndexModel : PageModel
         HasQuestionFallback = !string.IsNullOrWhiteSpace(questionId)
             && CurrentQuestion is not null
             && !string.Equals(CurrentQuestion.Id, questionId.Trim(), StringComparison.OrdinalIgnoreCase);
+    }
+
+    public void OnPostAnswer(string? scope, string? questionId, string? selectedOptionId)
+    {
+        ViewData["UseQuizAssets"] = true;
+
+        Scope = QuizScopeParser.ParseOrDefault(scope);
+        HasScopeFallback = IsInvalidExplicitScope(scope);
+
+        QuizCatalogSnapshot snapshot = _quizCatalogService.GetSnapshot();
+        SourceStatuses = snapshot.SourceStatuses;
+        HasAnyQuestion = snapshot.HasAnyQuestion;
+        QuestionsInScope = _quizCatalogService.GetQuestionViews(Scope, LanguageCode.ZhTW);
+        CurrentQuestion = _quizCatalogService.GetQuestionView(Scope, questionId, LanguageCode.ZhTW);
+        HasQuestionFallback = !string.IsNullOrWhiteSpace(questionId)
+            && CurrentQuestion is not null
+            && !string.Equals(CurrentQuestion.Id, questionId.Trim(), StringComparison.OrdinalIgnoreCase);
+        AnswerResult = _quizCatalogService.EvaluateAnswer(Scope, questionId, selectedOptionId, LanguageCode.ZhTW);
     }
 
     private static bool IsInvalidExplicitScope(string? scope)

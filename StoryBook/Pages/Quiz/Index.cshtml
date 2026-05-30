@@ -96,7 +96,8 @@
                             <input id="@optionId"
                                    type="radio"
                                    name="selectedOptionId"
-                                   value="@option.Id" />
+                                   value="@option.Id"
+                                   checked="@(Model.AnswerResult?.SelectedOptionId == option.Id)" />
                             <span data-i18n-zh-tw="@option.TextZhTW" data-i18n-en="@option.TextEn">@option.TextZhTW</span>
                         </label>
                     }
@@ -105,7 +106,41 @@
             </form>
         </section>
 
-        <section class="quiz-feedback" data-quiz-feedback role="status" aria-live="polite"></section>
+        @if (Model.AnswerResult is null)
+        {
+            <section class="quiz-feedback" data-quiz-feedback role="status" aria-live="polite"></section>
+        }
+        else
+        {
+            string answerState = Model.AnswerResult.IsAnswered
+                ? (Model.AnswerResult.IsCorrect == true ? "correct" : "incorrect")
+                : "needs-selection";
+            string resultTitleZhTW = answerState == "correct"
+                ? "答對了"
+                : answerState == "incorrect" ? "再想想" : "請先選答案";
+            string resultTitleEn = answerState == "correct"
+                ? "Correct"
+                : answerState == "incorrect" ? "Try again" : "Choose an answer";
+
+            <section class="quiz-feedback quiz-feedback--@answerState"
+                     data-quiz-feedback
+                     data-quiz-answer-state="@answerState"
+                     role="status"
+                     aria-live="polite"
+                     tabindex="-1">
+                <h2 data-i18n-zh-tw="@resultTitleZhTW" data-i18n-en="@resultTitleEn">@resultTitleZhTW</h2>
+                <p data-i18n-zh-tw="@Model.AnswerResult.FeedbackZhTW" data-i18n-en="@Model.AnswerResult.FeedbackEn">
+                    @Model.AnswerResult.FeedbackZhTW
+                </p>
+                @if (!string.IsNullOrWhiteSpace(Model.AnswerResult.ExplanationZhTW))
+                {
+                    <p class="quiz-explanation"
+                       data-quiz-explanation
+                       data-i18n-zh-tw="@Model.AnswerResult.ExplanationZhTW"
+                       data-i18n-en="@Model.AnswerResult.ExplanationEn">@Model.AnswerResult.ExplanationZhTW</p>
+                }
+            </section>
+        }
 
         <a class="quiz-next-link"
            href="@question.NextQuestionHref"

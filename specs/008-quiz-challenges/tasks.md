@@ -81,17 +81,17 @@
 
 ### Tests for User Story 2
 
-- [ ] T026 [P] [US2] Add unit tests for correct answer, wrong answer, unknown option, no selected option, and transient answer result behavior in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
-- [ ] T027 [P] [US2] Add integration tests for antiforgery answer post, feedback rendering, explanation rendering, no-selection prompt, and absence of score/progress UI in `StoryBook.Tests/Integration/QuizPagesTests.cs`
+- [X] T026 [P] [US2] Add unit tests for correct answer, wrong answer, unknown option, no selected option, and transient answer result behavior in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
+- [X] T027 [P] [US2] Add integration tests for antiforgery answer post, feedback rendering, explanation rendering, no-selection prompt, and absence of score/progress UI in `StoryBook.Tests/Integration/QuizPagesTests.cs`
 
 ### Implementation for User Story 2
 
-- [ ] T028 [US2] Add answer evaluation behavior that returns `QuizAnswerResult` without storing answer state in `StoryBook/Services/QuizCatalogService.cs`
-- [ ] T029 [US2] Implement `OnPostAnswer` with antiforgery model binding, no-selection handling, and no URL/session persistence in `StoryBook/Pages/Quiz/Index.cshtml.cs`
-- [ ] T030 [US2] Render semantic radio fieldset, submit button, live feedback region, explanation text, and next-question link in `StoryBook/Pages/Quiz/Index.cshtml`
-- [ ] T031 [US2] Add non-color-only feedback states and 44px minimum answer controls in `StoryBook/wwwroot/css/quiz.css`
-- [ ] T032 [US2] Add progressive submit guard and focus handling without correctness logic or storage usage in `StoryBook/wwwroot/js/quiz.js`
-- [ ] T033 [US2] Run US2 answer-flow tests, then record the result in `specs/008-quiz-challenges/quickstart.md`
+- [X] T028 [US2] Add answer evaluation behavior that returns `QuizAnswerResult` without storing answer state in `StoryBook/Services/QuizCatalogService.cs`
+- [X] T029 [US2] Implement `OnPostAnswer` with antiforgery model binding, no-selection handling, and no URL/session persistence in `StoryBook/Pages/Quiz/Index.cshtml.cs`
+- [X] T030 [US2] Render semantic radio fieldset, submit button, live feedback region, explanation text, and next-question link in `StoryBook/Pages/Quiz/Index.cshtml`
+- [X] T031 [US2] Add non-color-only feedback states and 44px minimum answer controls in `StoryBook/wwwroot/css/quiz.css`
+- [X] T032 [US2] Add progressive submit guard and focus handling without correctness logic or storage usage in `StoryBook/wwwroot/js/quiz.js`
+- [X] T033 [US2] Run US2 answer-flow tests, then record the result in `specs/008-quiz-challenges/quickstart.md`
 
 **Checkpoint**: User Story 2 is independently functional and testable.
 

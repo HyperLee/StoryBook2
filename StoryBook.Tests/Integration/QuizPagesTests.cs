@@ -1,6 +1,6 @@
 using System.Net;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using StoryBook.Tests.Support;
 
 namespace StoryBook.Tests.Integration;
 
@@ -59,6 +59,46 @@ public sealed class QuizPagesTests : IClassFixture<QuizPagesTests.QuizPageFixtur
         Assert.Contains("data-quiz-scope-fallback", invalidHtml);
     }
 
+    [Fact]
+    public async Task Quiz_answer_post_with_antiforgery_renders_correct_feedback_explanation_and_next_link()
+    {
+        string html = await _fixture.PostAnswerAsync(
+            "/quiz?scope=dinosaurs&questionId=tyrannosaurus-teeth",
+            "dinosaurs",
+            "tyrannosaurus-teeth",
+            "sharp-teeth");
+
+        Assert.Contains("data-quiz-feedback", html);
+        Assert.Contains("data-quiz-answer-state=\"correct\"", html);
+        Assert.Contains("答對了", html);
+        Assert.Contains("暴龍是肉食性恐龍", html);
+        Assert.Contains("data-quiz-next-question", html);
+        Assert.DoesNotContain("score", html, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("progress", html, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task Quiz_answer_post_renders_wrong_feedback_and_no_selection_prompt()
+    {
+        string wrongHtml = await _fixture.PostAnswerAsync(
+            "/quiz?scope=dinosaurs&questionId=tyrannosaurus-teeth",
+            "dinosaurs",
+            "tyrannosaurus-teeth",
+            "flat-shell");
+        string noSelectionHtml = await _fixture.PostAnswerAsync(
+            "/quiz?scope=dinosaurs&questionId=tyrannosaurus-teeth",
+            "dinosaurs",
+            "tyrannosaurus-teeth",
+            selectedOptionId: null);
+
+        Assert.Contains("data-quiz-answer-state=\"incorrect\"", wrongHtml);
+        Assert.Contains("再想想看", wrongHtml);
+        Assert.Contains("暴龍是肉食性恐龍", wrongHtml);
+        Assert.Contains("data-quiz-answer-state=\"needs-selection\"", noSelectionHtml);
+        Assert.Contains("請先選一個答案", noSelectionHtml);
+        Assert.DoesNotContain("data-quiz-answer-state=\"incorrect\"", noSelectionHtml);
+    }
+
     public sealed class QuizPageFixture : IAsyncLifetime
     {
         public WebApplicationFactory<Program> Factory { get; private set; } = null!;
@@ -90,11 +130,49 @@ public sealed class QuizPagesTests : IClassFixture<QuizPagesTests.QuizPageFixtur
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             return WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
         }
+
+        public async Task<string> PostAnswerAsync(
+            string getPath,
+            string scope,
+            string questionId,
+            string? selectedOptionId)
+        {
+            string formHtml = await GetOkHtmlAsync(getPath);
+            string token = ExtractHiddenValue(formHtml, "__RequestVerificationToken");
+            List<KeyValuePair<string, string>> fields =
+            [
+                new("__RequestVerificationToken", token),
+                new("scope", scope),
+                new("questionId", questionId)
+            ];
+
+            if (!string.IsNullOrWhiteSpace(selectedOptionId))
+            {
+                fields.Add(new KeyValuePair<string, string>("selectedOptionId", selectedOptionId));
+            }
+
+            using FormUrlEncodedContent content = new(fields);
+            using HttpResponseMessage response = await Client.PostAsync("/quiz?handler=Answer", content);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            return WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
+        }
     }
 
     private static bool HasLinkTo(string html, string href)
     {
         return html.Contains($"href=\"{href}\"", StringComparison.OrdinalIgnoreCase)
             || html.Contains($"href='{href}'", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string ExtractHiddenValue(string html, string name)
+    {
+        Match match = Regex.Match(
+            html,
+            $"<input[^>]*name=\"{Regex.Escape(name)}\"[^>]*value=\"(?<value>[^\"]+)\"",
+            RegexOptions.IgnoreCase);
+
+        Assert.True(match.Success, $"Expected hidden input named {name}.");
+        return match.Groups["value"].Value;
     }
 }
