@@ -37,6 +37,19 @@
 
 ## Manual Acceptance
 
+### Manual Acceptance Evidence Checklist
+
+- [ ] `/passport` route, shared navigation entry and home entry verified.
+- [ ] Dinosaur completion control saves, refreshes and avoids duplicates.
+- [ ] Aquarium completion control saves, refreshes and avoids duplicates.
+- [ ] Badge milestones verified for first story, 3 stories, all dinosaurs, all aquarium and all stories.
+- [ ] Clear passport confirmation resets only `storybook.passport`.
+- [ ] Invalid data and blocked storage fallbacks verified.
+- [ ] Language, theme, keyboard and responsive layout checks recorded.
+- [ ] SC-001 and SC-003 representative find-and-operate task evidence recorded.
+- [ ] Warm-load checks for `/passport`, `/dinosaurs/triceratops` and `/aquarium/sea-turtle` recorded.
+- [ ] Privacy/data inspection confirms only `{ version, completedStories: [{ source, slug }] }`.
+
 ### 1. Find Passport Entry
 
 1. Open `/`.

@@ -18,12 +18,12 @@
 
 **Purpose**: 先建立護照功能的測試與驗收入口，不加入 runtime 行為。
 
-- [ ] T001 [P] Create Passport integration fixture shell in `StoryBook.Tests/Integration/PassportPageTestFixture.cs`
-- [ ] T002 [P] Create Passport integration test class shell in `StoryBook.Tests/Integration/PassportPagesTests.cs`
-- [ ] T003 [P] Create Passport preference unit test class shell in `StoryBook.Tests/Unit/PassportPreferenceServiceTests.cs`
-- [ ] T004 [P] Create Passport catalog unit test class shell in `StoryBook.Tests/Unit/PassportCatalogServiceTests.cs`
-- [ ] T005 [P] Create Passport script contract test class shell in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
-- [ ] T006 [P] Add reading-passport manual acceptance evidence checklist placeholder in `specs/007-reading-passport/quickstart.md`
+- [X] T001 [P] Create Passport integration fixture shell in `StoryBook.Tests/Integration/PassportPageTestFixture.cs`
+- [X] T002 [P] Create Passport integration test class shell in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [X] T003 [P] Create Passport preference unit test class shell in `StoryBook.Tests/Unit/PassportPreferenceServiceTests.cs`
+- [X] T004 [P] Create Passport catalog unit test class shell in `StoryBook.Tests/Unit/PassportCatalogServiceTests.cs`
+- [X] T005 [P] Create Passport script contract test class shell in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [X] T006 [P] Add reading-passport manual acceptance evidence checklist placeholder in `specs/007-reading-passport/quickstart.md`
 
 ---
 
