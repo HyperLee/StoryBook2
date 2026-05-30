@@ -11,15 +11,15 @@
 
 ## Technical Context
 
-**Language/Version**: C# / .NET `net10.0`, ASP.NET Core Razor Pages, nullable enabled, implicit usings enabled; browser 端只使用原生 JavaScript 與 CSS。  
-**Primary Dependencies**: ASP.NET Core Razor Pages、Tag Helpers、Bootstrap 5、`System.Text.Json`、既有 `DinosaurCatalogService` / `AquariumCatalogService`、既有 `ExplorationSourceType` source metadata、`LanguagePreferenceService`、`ThemePreferenceService`、xUnit、`Microsoft.AspNetCore.Mvc.Testing`；不新增 NuGet、JavaScript 套件、jQuery dependency 或外部服務。  
-**Storage**: 新增本機 JSON catalog `StoryBook/Data/journeys.json` 作為學習旅程資料來源；旅程故事項目只保存來源故事書、slug 與排序。既有 `StoryBook/Data/dinosaurs.json`、`StoryBook/Data/aquarium.json` 繼續作為顯示名稱、摘要與詳情連結來源。不新增資料庫、cookie endpoint、server-side user preference、閱讀進度儲存或外部 CMS。  
-**Testing**: `dotnet test StoryBook2.sln`；新增/更新 xUnit 單元測試覆蓋旅程 JSON 載入、content validation、slug uniqueness、3-5 有效故事規則、來源/slug resolution、重複引用、排序、雙語 fallback、不可用狀態與非敏感診斷摘要；整合測試覆蓋 `/journeys`、`/journeys/{slug}`、首頁與 `/explore` 入口、HTML contract、theme selector absence、friendly not-found/unavailable/all-failed states 與一般 anchor 導覽。瀏覽器語言切換、主題套用、鍵盤操作與 375/768/1366px 視覺流程以 quickstart 手動驗收，除非後續 plan 明確新增 browser automation runner。  
-**Target Platform**: 單一 ASP.NET Core web application，開發 URL 以 `dotnet run --project StoryBook/StoryBook.csproj` 輸出為準；支援 Chrome、Firefox、Safari、Edge，並在 375px、768px、1366px 代表寬度維持無水平溢出、文字不重疊與可鍵盤操作。  
-**Project Type**: Razor Pages web app + xUnit test project。  
-**Performance Goals**: 完整資料情境下 `/journeys` 與 `/journeys/{slug}` 主要內容在一般本機開發環境 1 秒內可用；本機 JSON 載入與旅程 projection 使用 singleton cached catalog，查詢 p95 目標低於 200ms；語言切換與主題有效外觀同步沿用既有 2 秒內規則。  
-**Constraints**: `/journeys` 只顯示完整可出發旅程；有效故事項目少於 3 筆或超過 5 筆的旅程從列表隱藏，直接開啟詳情頁顯示友善不可用提示；旅程項目導覽使用一般 anchor 指向 `/dinosaurs/{slug}` 或 `/aquarium/{slug}`；不得建立重複故事詳情頁、JavaScript-only router、登入、收藏、評論、個人化推薦、閱讀進度、外部百科搜尋、即時翻譯或新故事書來源；旅程頁不得提供新的主題 selector；所有控制項至少 44x44 CSS px 且具 accessible name 與可見焦點。  
-**Scale/Scope**: 初始整合 2 個既有來源故事書、23 筆既有故事朋友、至少 3 條完整旅程、每條 3-5 筆有效故事項目、2 種語言、列表頁、詳情頁、開始閱讀動作、來源部分失敗/全部失敗/旅程不可用/找不到旅程狀態。  
+**Language/Version**: C# / .NET `net10.0`, ASP.NET Core Razor Pages, nullable enabled, implicit usings enabled; browser 端只使用原生 JavaScript 與 CSS。
+**Primary Dependencies**: ASP.NET Core Razor Pages、Tag Helpers、Bootstrap 5、`System.Text.Json`、既有 `DinosaurCatalogService` / `AquariumCatalogService`、既有 `ExplorationSourceType` source metadata、`LanguagePreferenceService`、`ThemePreferenceService`、xUnit、`Microsoft.AspNetCore.Mvc.Testing`；不新增 NuGet、JavaScript 套件、jQuery dependency 或外部服務。
+**Storage**: 新增本機 JSON catalog `StoryBook/Data/journeys.json` 作為學習旅程資料來源；旅程故事項目只保存來源故事書、slug 與排序。既有 `StoryBook/Data/dinosaurs.json`、`StoryBook/Data/aquarium.json` 繼續作為顯示名稱、摘要與詳情連結來源。不新增資料庫、cookie endpoint、server-side user preference、閱讀進度儲存或外部 CMS。
+**Testing**: `dotnet test StoryBook2.sln`；新增/更新 xUnit 單元測試覆蓋旅程 JSON 載入、content validation、slug uniqueness、3-5 有效故事規則、來源/slug resolution、重複引用、排序、雙語 fallback、不可用狀態與非敏感診斷摘要；整合測試覆蓋 `/journeys`、`/journeys/{slug}`、首頁與 `/explore` 入口、HTML contract、theme selector absence、friendly not-found/unavailable/all-failed states 與一般 anchor 導覽。瀏覽器語言切換、主題套用、鍵盤操作與 375/768/1366px 視覺流程以 quickstart 手動驗收，除非後續 plan 明確新增 browser automation runner。
+**Target Platform**: 單一 ASP.NET Core web application，開發 URL 以 `dotnet run --project StoryBook/StoryBook.csproj` 輸出為準；支援 Chrome、Firefox、Safari、Edge，並在 375px、768px、1366px 代表寬度維持無水平溢出、文字不重疊與可鍵盤操作。
+**Project Type**: Razor Pages web app + xUnit test project。
+**Performance Goals**: 完整資料情境下 `/journeys` 與 `/journeys/{slug}` 主要內容在一般本機開發環境 1 秒內可用；本機 JSON 載入與旅程 projection 使用 singleton cached catalog，查詢 p95 目標低於 200ms；語言切換與主題有效外觀同步沿用既有 2 秒內規則。
+**Constraints**: `/journeys` 只顯示完整可出發旅程；有效故事項目少於 3 筆或超過 5 筆的旅程從列表隱藏，直接開啟詳情頁顯示友善不可用提示；旅程項目導覽使用一般 anchor 指向 `/dinosaurs/{slug}` 或 `/aquarium/{slug}`；不得建立重複故事詳情頁、JavaScript-only router、登入、收藏、評論、個人化推薦、閱讀進度、外部百科搜尋、即時翻譯或新故事書來源；旅程頁不得提供新的主題 selector；所有控制項至少 44x44 CSS px 且具 accessible name 與可見焦點。
+**Scale/Scope**: 初始整合 2 個既有來源故事書、23 筆既有故事朋友、至少 3 條完整旅程、每條 3-5 筆有效故事項目、2 種語言、列表頁、詳情頁、開始閱讀動作、來源部分失敗/全部失敗/旅程不可用/找不到旅程狀態。
 **Observability/Logging**: 使用 `ILogger<LearningJourneyCatalogService>` 記錄旅程資料驗證失敗、旅程不可用原因、來源故事書解析失敗與未知旅程 slug 的非敏感摘要；旅程功能新增 log 不記錄檔案路徑、exception detail、stack trace、secret、個資或使用者閱讀狀態。
 
 ## Constitution Check
