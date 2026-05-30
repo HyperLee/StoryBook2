@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storybook.local/contracts/passport-state.schema.json",
+  "title": "StoryBook Reading Passport State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "completedStories"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Passport state schema version."
+    },
+    "completedStories": {
+      "type": "array",
+      "description": "Stories explicitly marked complete in this browser.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "slug"],
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": ["dinosaurs", "aquarium"]
+          },
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        }
+      },
+      "uniqueItems": true
+    }
+  },
+  "examples": [
+    {
+      "version": 1,
+      "completedStories": [
+        {
+          "source": "dinosaurs",
+          "slug": "triceratops"
+        },
+        {
+          "source": "aquarium",
+          "slug": "sea-turtle"
+        }
+      ]
+    }
+  ]
+}
