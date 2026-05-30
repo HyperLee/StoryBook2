@@ -31,21 +31,21 @@
 
 **Critical**: No user story work begins until these tasks compile.
 
-- [ ] T005 Add the `LearningJourneyCatalog` configuration section with `ContentPath` in `StoryBook/appsettings.json`
-- [ ] T006 [P] Create `LearningJourneyCatalogOptions` with XML docs and default `Data/journeys.json` path in `StoryBook/Services/LearningJourneyCatalogOptions.cs`
-- [ ] T007 [P] Create `JourneyText` with `zh-TW` fallback behavior and XML docs in `StoryBook/Models/JourneyText.cs`
-- [ ] T008 [P] Create `JourneyStoryReference` with source, slug, sort order fields, and XML docs in `StoryBook/Models/JourneyStoryReference.cs`
-- [ ] T009 [P] Create `LearningJourney` with slug, sort order, localized content, reading metadata, story references, and XML docs in `StoryBook/Models/LearningJourney.cs`
-- [ ] T010 [P] Create `JourneyCatalog` root model matching `contracts/learning-journeys.schema.json` with XML docs in `StoryBook/Models/JourneyCatalog.cs`
-- [ ] T011 [P] Create `JourneyDiagnosticSummary` with non-sensitive reason/source/reference fields and XML docs in `StoryBook/Models/JourneyDiagnosticSummary.cs`
-- [ ] T012 [P] Create `JourneyAvailabilityStatus` and availability state enum with XML docs in `StoryBook/Models/JourneyAvailabilityStatus.cs`
-- [ ] T013 [P] Create `JourneySourceStatus` for source availability summaries with XML docs in `StoryBook/Models/JourneySourceStatus.cs`
-- [ ] T014 [P] Create `JourneyStoryItem` projection with href, localized source/name/summary, image, stable id fields, and XML docs in `StoryBook/Models/JourneyStoryItem.cs`
-- [ ] T015 Create `JourneyCatalogSnapshot` with available journeys, unavailable statuses, source statuses, aggregate failure flags, and XML docs in `StoryBook/Models/JourneyCatalogSnapshot.cs`
-- [ ] T016 Create `LearningJourneyContentValidationResult` for errors and diagnostic summaries with XML docs in `StoryBook/Services/LearningJourneyContentValidationResult.cs`
-- [ ] T017 Create `LearningJourneyContentValidator` validation entry points and XML docs in `StoryBook/Services/LearningJourneyContentValidator.cs`
-- [ ] T018 Create `LearningJourneyCatalogService` compile-ready skeleton with snapshot/detail lookup methods and XML docs in `StoryBook/Services/LearningJourneyCatalogService.cs`
-- [ ] T019 Register journey options, validator, and catalog service in `StoryBook/Program.cs`
+- [X] T005 Add the `LearningJourneyCatalog` configuration section with `ContentPath` in `StoryBook/appsettings.json`
+- [X] T006 [P] Create `LearningJourneyCatalogOptions` with XML docs and default `Data/journeys.json` path in `StoryBook/Services/LearningJourneyCatalogOptions.cs`
+- [X] T007 [P] Create `JourneyText` with `zh-TW` fallback behavior and XML docs in `StoryBook/Models/JourneyText.cs`
+- [X] T008 [P] Create `JourneyStoryReference` with source, slug, sort order fields, and XML docs in `StoryBook/Models/JourneyStoryReference.cs`
+- [X] T009 [P] Create `LearningJourney` with slug, sort order, localized content, reading metadata, story references, and XML docs in `StoryBook/Models/LearningJourney.cs`
+- [X] T010 [P] Create `JourneyCatalog` root model matching `contracts/learning-journeys.schema.json` with XML docs in `StoryBook/Models/JourneyCatalog.cs`
+- [X] T011 [P] Create `JourneyDiagnosticSummary` with non-sensitive reason/source/reference fields and XML docs in `StoryBook/Models/JourneyDiagnosticSummary.cs`
+- [X] T012 [P] Create `JourneyAvailabilityStatus` and availability state enum with XML docs in `StoryBook/Models/JourneyAvailabilityStatus.cs`
+- [X] T013 [P] Create `JourneySourceStatus` for source availability summaries with XML docs in `StoryBook/Models/JourneySourceStatus.cs`
+- [X] T014 [P] Create `JourneyStoryItem` projection with href, localized source/name/summary, image, stable id fields, and XML docs in `StoryBook/Models/JourneyStoryItem.cs`
+- [X] T015 Create `JourneyCatalogSnapshot` with available journeys, unavailable statuses, source statuses, aggregate failure flags, and XML docs in `StoryBook/Models/JourneyCatalogSnapshot.cs`
+- [X] T016 Create `LearningJourneyContentValidationResult` for errors and diagnostic summaries with XML docs in `StoryBook/Services/LearningJourneyContentValidationResult.cs`
+- [X] T017 Create `LearningJourneyContentValidator` validation entry points and XML docs in `StoryBook/Services/LearningJourneyContentValidator.cs`
+- [X] T018 Create `LearningJourneyCatalogService` compile-ready skeleton with snapshot/detail lookup methods and XML docs in `StoryBook/Services/LearningJourneyCatalogService.cs`
+- [X] T019 Register journey options, validator, and catalog service in `StoryBook/Program.cs`
 
 **Checkpoint**: The solution compiles with journey types and service contracts available, but journey behavior is still expected to fail story tests.
 
