@@ -58,18 +58,18 @@
 
 > 先寫這些測試，確認在實作前失敗。
 
-- [ ] T017 [US1] Add failing integration tests for dinosaur and aquarium detail completion regions, valid source/slug attributes, passport link and no completion control on not-found/load-failure pages in `StoryBook.Tests/Integration/PassportPagesTests.cs`
-- [ ] T018 [P] [US1] Add failing script contract tests for explicit click-only completion, state version `1`, de-duplication and no auto-complete on page load/scroll/modal in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [X] T017 [US1] Add failing integration tests for dinosaur and aquarium detail completion regions, valid source/slug attributes, passport link and no completion control on not-found/load-failure pages in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [X] T018 [P] [US1] Add failing script contract tests for explicit click-only completion, state version `1`, de-duplication and no auto-complete on page load/scroll/modal in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
 
 ### Implementation for User Story 1
 
-- [ ] T019 [US1] Implement detail-page state read, normalize, save, de-duplicate and status update behavior in `StoryBook/wwwroot/js/passport.js`
-- [ ] T020 [US1] Add valid-story completion region, bilingual button text, status region and passport link to dinosaur details in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T021 [US1] Add valid-story completion region, bilingual button text, status region and passport link to aquarium details in `StoryBook/Pages/Aquarium/Details.cshtml`
-- [ ] T022 [US1] Set `UsePassportAssets` and include `~/js/passport.js` on dinosaur details without changing existing dinosaur script behavior in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T023 [US1] Set `UsePassportAssets` and include `~/js/passport.js` on aquarium details without changing existing aquarium script behavior in `StoryBook/Pages/Aquarium/Details.cshtml`
-- [ ] T024 [US1] Add completion control, read status and passport link styling with visible focus and 44px targets in `StoryBook/wwwroot/css/passport.css`
-- [ ] T025 [US1] Run targeted US1 integration and script contract checks in `StoryBook.Tests/Integration/PassportPagesTests.cs` and `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [X] T019 [US1] Implement detail-page state read, normalize, save, de-duplicate and status update behavior in `StoryBook/wwwroot/js/passport.js`
+- [X] T020 [US1] Add valid-story completion region, bilingual button text, status region and passport link to dinosaur details in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T021 [US1] Add valid-story completion region, bilingual button text, status region and passport link to aquarium details in `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T022 [US1] Set `UsePassportAssets` and include `~/js/passport.js` on dinosaur details without changing existing dinosaur script behavior in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T023 [US1] Set `UsePassportAssets` and include `~/js/passport.js` on aquarium details without changing existing aquarium script behavior in `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T024 [US1] Add completion control, read status and passport link styling with visible focus and 44px targets in `StoryBook/wwwroot/css/passport.css`
+- [X] T025 [US1] Run targeted US1 integration and script contract checks in `StoryBook.Tests/Integration/PassportPagesTests.cs` and `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
 
 **Checkpoint**: US1 可獨立示範；詳情頁完成標記可保存、重新整理後可讀回，且同一故事只計一次。
 

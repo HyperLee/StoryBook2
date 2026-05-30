@@ -34,6 +34,7 @@ public sealed class DetailsModel : PageModel
             if (_catalogService.TryGetBySlug(slug, out AquariumAnimalProfile? profile) && profile is not null)
             {
                 Profile = profile;
+                ViewData["UsePassportAssets"] = true;
                 PreviousProfile = _catalogService.GetPreviousProfile(slug);
                 NextProfile = _catalogService.GetNextProfile(slug);
                 HabitatCategory = _catalogService.GetHabitatCategories()

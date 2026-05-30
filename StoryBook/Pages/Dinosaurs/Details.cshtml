@@ -2,6 +2,10 @@
 @model StoryBook.Pages.Dinosaurs.DetailsModel
 @{
     ViewData["Title"] = Model.Profile?.Names.Get(LanguageCode.ZhTW) ?? "找不到恐龍";
+    if (Model.Profile is not null && !Model.IsNotFound)
+    {
+        ViewData["UsePassportAssets"] = true;
+    }
 }
 
 <section class="dino-page" aria-labelledby="dino-detail-title">
@@ -82,6 +86,45 @@
                         }
                     </figure>
                 </section>
+                <section class="passport-completion"
+                         data-passport-story
+                         data-passport-source="dinosaurs"
+                         data-passport-slug="@Model.Profile.Slug"
+                         data-passport-name-zh-tw="@Model.Profile.Names.Get(LanguageCode.ZhTW)"
+                         data-passport-name-en="@Model.Profile.Names.Get(LanguageCode.En)"
+                         data-passport-status-incomplete-zh-tw="讀完後可以把{0}蓋進你的探險護照。"
+                         data-passport-status-incomplete-en="When you finish, you can stamp {0} in your passport."
+                         data-passport-status-completed-zh-tw="已把{0}蓋進你的探險護照。"
+                         data-passport-status-completed-en="{0} is stamped in your passport."
+                         data-passport-status-already-completed-zh-tw="{0}已經在護照裡，不會重複計算。"
+                         data-passport-status-already-completed-en="{0} is already in your passport and will not count twice."
+                         data-passport-status-read-blocked-zh-tw="護照暫時打不開，但故事還可以繼續讀。"
+                         data-passport-status-read-blocked-en="The passport cannot open right now, but you can keep reading."
+                         data-passport-status-write-blocked-zh-tw="護照暫時不能蓋章，請稍後再試。"
+                         data-passport-status-write-blocked-en="The passport cannot save this stamp right now. Please try again later."
+                         data-passport-status-invalid-data-zh-tw="護照裡有看不懂的舊資料，下一次蓋章會整理好。"
+                         data-passport-status-invalid-data-en="The passport has old data it cannot read. The next stamp will tidy it up.">
+                    <h2 class="passport-completion__title" data-i18n-zh-tw="我的探險護照" data-i18n-en="My adventure passport">我的探險護照</h2>
+                    <div class="passport-completion__actions">
+                        <button class="passport-completion__button"
+                                type="button"
+                                data-passport-complete
+                                aria-label="@($"把{Model.Profile.Names.Get(LanguageCode.ZhTW)}蓋到我的探險護照")"
+                                data-aria-label-zh-tw="@($"把{Model.Profile.Names.Get(LanguageCode.ZhTW)}蓋到我的探險護照")"
+                                data-aria-label-en="@($"Stamp {Model.Profile.Names.Get(LanguageCode.En)} in my passport")"
+                                data-i18n-zh-tw="我讀完了"
+                                data-i18n-en="I finished reading">我讀完了</button>
+                        <a class="passport-completion__link"
+                           href="/passport"
+                           data-passport-link
+                           data-i18n-zh-tw="我的探險護照"
+                           data-i18n-en="My passport">我的探險護照</a>
+                    </div>
+                    <p class="passport-completion__status"
+                       data-passport-status
+                       role="status"
+                       aria-live="polite">讀完後可以把@(Model.Profile.Names.Get(LanguageCode.ZhTW))蓋進你的探險護照。</p>
+                </section>
                 <nav class="dino-pager" aria-label="恐龍換頁" data-aria-label-zh-tw="恐龍換頁" data-aria-label-en="Dinosaur navigation">
                     @if (Model.PreviousProfile is null)
                     {
@@ -144,4 +187,8 @@
 
 @section Scripts {
     <script src="~/js/dinosaurs.js" asp-append-version="true"></script>
+    @if (Model.Profile is not null && !Model.IsNotFound)
+    {
+        <script src="~/js/passport.js" asp-append-version="true"></script>
+    }
 }

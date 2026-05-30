@@ -28,6 +28,7 @@ public sealed class DetailsModel : PageModel
         if (_catalogService.TryGetBySlug(slug, out DinosaurProfile? profile))
         {
             Profile = profile;
+            ViewData["UsePassportAssets"] = true;
             PreviousProfile = _catalogService.GetPreviousProfile(slug);
             NextProfile = _catalogService.GetNextProfile(slug);
             return;
