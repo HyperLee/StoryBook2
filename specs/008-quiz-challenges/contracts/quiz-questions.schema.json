@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storybook.local/contracts/quiz-questions.schema.json",
+  "title": "StoryBook Quiz Questions Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "questions"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 12,
+      "items": { "$ref": "#/$defs/question" }
+    }
+  },
+  "$defs": {
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source",
+        "difficulty",
+        "sortOrder",
+        "prompt",
+        "options",
+        "correctOptionId",
+        "correctFeedback",
+        "incorrectFeedback",
+        "explanation",
+        "relatedStories"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "source": {
+          "type": "string",
+          "enum": ["dinosaurs", "aquarium"]
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["easy", "medium"]
+        },
+        "sortOrder": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "prompt": { "$ref": "#/$defs/localizedText" },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/answerOption" }
+        },
+        "correctOptionId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "correctFeedback": { "$ref": "#/$defs/localizedText" },
+        "incorrectFeedback": { "$ref": "#/$defs/localizedText" },
+        "explanation": { "$ref": "#/$defs/localizedText" },
+        "relatedStories": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/storyReference" }
+        }
+      }
+    },
+    "answerOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "sortOrder"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "text": { "$ref": "#/$defs/localizedText" },
+        "sortOrder": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["zhTW", "en"],
+      "properties": {
+        "zhTW": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "storyReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "slug", "sortOrder"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": ["dinosaurs", "aquarium"]
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "sortOrder": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

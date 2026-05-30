@@ -49,7 +49,7 @@
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information for the current feature, read
-`specs/007-reading-passport/plan.md`.
+`specs/008-quiz-challenges/plan.md`.
 <!-- SPECKIT END -->
 
 開始相關功能前，依變更範圍閱讀並對齊：
