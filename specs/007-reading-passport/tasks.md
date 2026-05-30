@@ -138,18 +138,18 @@
 
 > 先寫這些測試，確認在實作前失敗。
 
-- [ ] T043 [P] [US4] Add failing script contract tests for `try/catch` localStorage read/write/remove, invalid shape normalization, ignored item counting and no cookie/sessionStorage/fetch/history fallback in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
-- [ ] T044 [P] [US4] Add failing integration tests for storage warning DOM, invalid-data friendly text and readable detail/passport fallback regions in `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [X] T043 [P] [US4] Add failing script contract tests for `try/catch` localStorage read/write/remove, invalid shape normalization, ignored item counting and no cookie/sessionStorage/fetch/history fallback in `StoryBook.Tests/Unit/PassportScriptContractTests.cs`
+- [X] T044 [P] [US4] Add failing integration tests for storage warning DOM, invalid-data friendly text and readable detail/passport fallback regions in `StoryBook.Tests/Integration/PassportPagesTests.cs`
 
 ### Implementation for User Story 4
 
-- [ ] T045 [US4] Implement storage status state machine for `available`, `read-blocked`, `write-blocked` and `invalid-data` in `StoryBook/wwwroot/js/passport.js`
-- [ ] T046 [US4] Implement strict state normalization for version, allowed sources, kebab-case slug, known catalog items, duplicate removal and extra property dropping in `StoryBook/wwwroot/js/passport.js`
-- [ ] T047 [US4] Add passport page storage warning, invalid-data fallback and all-sources-failed friendly regions in `StoryBook/Pages/Passport/Index.cshtml`
-- [ ] T048 [US4] Add detail-page storage warning/status text attributes for dinosaur completion controls in `StoryBook/Pages/Dinosaurs/Details.cshtml`
-- [ ] T049 [US4] Add detail-page storage warning/status text attributes for aquarium completion controls in `StoryBook/Pages/Aquarium/Details.cshtml`
-- [ ] T050 [US4] Add degraded storage warning and invalid-data styles in `StoryBook/wwwroot/css/passport.css`
-- [ ] T051 [US4] Run targeted US4 fallback checks in `StoryBook.Tests/Unit/PassportScriptContractTests.cs` and `StoryBook.Tests/Integration/PassportPagesTests.cs`
+- [X] T045 [US4] Implement storage status state machine for `available`, `read-blocked`, `write-blocked` and `invalid-data` in `StoryBook/wwwroot/js/passport.js`
+- [X] T046 [US4] Implement strict state normalization for version, allowed sources, kebab-case slug, known catalog items, duplicate removal and extra property dropping in `StoryBook/wwwroot/js/passport.js`
+- [X] T047 [US4] Add passport page storage warning, invalid-data fallback and all-sources-failed friendly regions in `StoryBook/Pages/Passport/Index.cshtml`
+- [X] T048 [US4] Add detail-page storage warning/status text attributes for dinosaur completion controls in `StoryBook/Pages/Dinosaurs/Details.cshtml`
+- [X] T049 [US4] Add detail-page storage warning/status text attributes for aquarium completion controls in `StoryBook/Pages/Aquarium/Details.cshtml`
+- [X] T050 [US4] Add degraded storage warning and invalid-data styles in `StoryBook/wwwroot/css/passport.css`
+- [X] T051 [US4] Run targeted US4 fallback checks in `StoryBook.Tests/Unit/PassportScriptContractTests.cs` and `StoryBook.Tests/Integration/PassportPagesTests.cs`
 
 **Checkpoint**: US4 可獨立驗證；保存受限時不破壞既有閱讀流程，也不把護照資料移到網址、cookie、session 或外部服務。
 

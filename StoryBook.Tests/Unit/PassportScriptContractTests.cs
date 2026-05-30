@@ -53,4 +53,31 @@ public sealed class PassportScriptContractTests
         Assert.DoesNotContain("removeItem(\"storybook.language\"", script, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("storybook.theme", script, StringComparison.OrdinalIgnoreCase);
     }
+
+    [Fact]
+    public void Passport_script_handles_storage_blocking_invalid_data_and_forbidden_fallbacks()
+    {
+        string script = File.ReadAllText(Path.Combine(TestPaths.StoryBookRoot, "wwwroot", "js", "passport.js"));
+
+        Assert.Contains("try", script);
+        Assert.Contains("catch", script);
+        Assert.Contains("localStorage.getItem", script);
+        Assert.Contains("localStorage.setItem", script);
+        Assert.Contains("read-blocked", script);
+        Assert.Contains("write-blocked", script);
+        Assert.Contains("invalid-data", script);
+        Assert.Contains("ignoredItemCount", script);
+        Assert.Contains("normalizeCompletedItem", script);
+        Assert.Contains("knownStories instanceof Map", script);
+        Assert.Contains("allowedSources.includes", script);
+        Assert.Contains("slugPattern.test", script);
+        Assert.DoesNotContain("sessionStorage", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("document.cookie", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("fetch(", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("XMLHttpRequest", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("pushState", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("replaceState", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("location.search", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("removeItem", script, StringComparison.OrdinalIgnoreCase);
+    }
 }

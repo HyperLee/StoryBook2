@@ -151,6 +151,33 @@ public sealed class PassportPagesTests : IClassFixture<PassportPageTestFixture>
         Assert.Contains("Cancel", html);
     }
 
+    [Fact]
+    public async Task Passport_pages_render_storage_warning_and_invalid_data_friendly_contracts()
+    {
+        string passportHtml = await _fixture.GetOkHtmlAsync("/passport");
+        string dinosaurHtml = await _fixture.GetOkHtmlAsync("/dinosaurs/triceratops");
+        string aquariumHtml = await _fixture.GetOkHtmlAsync("/aquarium/sea-turtle");
+
+        Assert.Contains("data-passport-storage-warning", passportHtml);
+        Assert.Contains("data-passport-storage-warning-read-blocked-zh-tw", passportHtml);
+        Assert.Contains("data-passport-storage-warning-write-blocked-zh-tw", passportHtml);
+        Assert.Contains("data-passport-storage-warning-invalid-data-zh-tw", passportHtml);
+        Assert.Contains("護照裡有看不懂的舊資料", passportHtml);
+        Assert.Contains("護照暫時不能保存", passportHtml);
+        Assert.Contains("data-passport-empty", passportHtml);
+        Assert.True(PassportPageTestFixture.HasLinkTo(passportHtml, "/dinosaurs"));
+        Assert.True(PassportPageTestFixture.HasLinkTo(passportHtml, "/aquarium"));
+
+        Assert.Contains("data-passport-status-read-blocked-zh-tw", dinosaurHtml);
+        Assert.Contains("data-passport-status-write-blocked-zh-tw", dinosaurHtml);
+        Assert.Contains("data-passport-status-invalid-data-zh-tw", dinosaurHtml);
+        Assert.Contains("故事還可以繼續讀", dinosaurHtml);
+        Assert.Contains("data-passport-status-read-blocked-zh-tw", aquariumHtml);
+        Assert.Contains("data-passport-status-write-blocked-zh-tw", aquariumHtml);
+        Assert.Contains("data-passport-status-invalid-data-zh-tw", aquariumHtml);
+        Assert.Contains("故事還可以繼續讀", aquariumHtml);
+    }
+
     private static bool HasPassportStylesheet(string html)
     {
         return html.Contains("/css/passport.css", StringComparison.OrdinalIgnoreCase)
