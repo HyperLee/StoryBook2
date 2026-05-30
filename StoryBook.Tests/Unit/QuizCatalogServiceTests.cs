@@ -193,6 +193,36 @@ public sealed class QuizCatalogServiceTests
         Assert.DoesNotContain(logger.Entries, entry => entry.Message.Contains(TestPaths.StoryBookRoot, StringComparison.OrdinalIgnoreCase));
     }
 
+    [Fact]
+    public void Quiz_text_language_parser_and_projection_fallbacks_never_return_blank_display_text()
+    {
+        QuizText text = new()
+        {
+            ZhTW = "繁體中文",
+            En = ""
+        };
+        using QuizCatalogServiceTestContext context = CreateContext(CreateQuestion("fallback-question", "dinosaurs", 1, "triceratops"));
+
+        QuizQuestionView question = Assert.Single(context.Service.GetQuestionViews(QuizScope.Dinosaurs, LanguageCode.En));
+
+        Assert.Equal("繁體中文", text.Get(LanguageCode.En));
+        Assert.Equal(LanguageCode.ZhTW, LanguageCodeParser.ParseOrDefault("not-a-language"));
+        Assert.False(string.IsNullOrWhiteSpace(question.PromptZhTW));
+        Assert.False(string.IsNullOrWhiteSpace(question.PromptEn));
+        Assert.All(question.Options, option =>
+        {
+            Assert.False(string.IsNullOrWhiteSpace(option.TextZhTW));
+            Assert.False(string.IsNullOrWhiteSpace(option.TextEn));
+        });
+        Assert.Equal("恐龍", question.GetSourceLabel(LanguageCode.ZhTW));
+        Assert.Equal("Dinosaurs", question.GetSourceLabel(LanguageCode.En));
+        Assert.All(question.RelatedStories, story =>
+        {
+            Assert.False(string.IsNullOrWhiteSpace(story.GetSourceLabel(LanguageCode.ZhTW)));
+            Assert.False(string.IsNullOrWhiteSpace(story.GetSourceLabel(LanguageCode.En)));
+        });
+    }
+
     private static QuizCatalogServiceTestContext CreateContext(params QuizQuestion[] questions)
     {
         return CreateContextWithStoryPaths(questions);

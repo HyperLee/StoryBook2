@@ -197,6 +197,33 @@ public sealed class QuizPagesTests : IClassFixture<QuizPageTestFixture>
         Assert.Contains("data-quiz-current-question-id=\"tyrannosaurus-teeth\"", unknownQuestionHtml);
     }
 
+    [Fact]
+    public async Task Quiz_page_renders_language_theme_accessibility_and_live_feedback_contract()
+    {
+        string html = await _fixture.GetOkHtmlAsync("/quiz?scope=dinosaurs");
+        string answeredHtml = await _fixture.PostAnswerAsync(
+            "/quiz?scope=dinosaurs&questionId=tyrannosaurus-teeth",
+            "dinosaurs",
+            "tyrannosaurus-teeth",
+            "sharp-teeth");
+
+        Assert.Contains("data-i18n-zh-tw=\"問答挑戰\"", html);
+        Assert.Contains("data-i18n-en=\"Quiz challenge\"", html);
+        Assert.Contains("data-i18n-en=\"Submit answer\"", html);
+        Assert.Contains("data-aria-label-zh-tw=\"問答範圍\"", html);
+        Assert.Contains("data-aria-label-en=\"Quiz scope\"", html);
+        Assert.Contains("data-storybook-theme-boot", html);
+        Assert.Contains("data-storybook-theme-mode", html);
+        Assert.Contains("data-storybook-effective-theme", html);
+        Assert.DoesNotContain("data-theme-selector", html, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("data-quiz-preserve-state-on-theme-change=\"true\"", html);
+        Assert.Contains("<fieldset", html);
+        Assert.Contains("<legend", html);
+        Assert.Contains("role=\"status\"", answeredHtml);
+        Assert.Contains("aria-live=\"polite\"", answeredHtml);
+        Assert.Contains("tabindex=\"-1\"", answeredHtml);
+    }
+
     private static bool HasLinkTo(string html, string href)
     {
         return html.Contains($"href=\"{href}\"", StringComparison.OrdinalIgnoreCase)

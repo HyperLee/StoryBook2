@@ -44,6 +44,7 @@
 - 2026-05-30 US2 automated answer-flow checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after adding transient answer evaluation, antiforgery answer posts, correct/wrong/no-selection feedback, explanations, next-question links, and no score/progress UI.
 - 2026-05-30 US3 automated related-story checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after resolving related story references through existing story catalogs, rejecting duplicate/missing references, and rendering canonical review links with source/slug metadata.
 - 2026-05-30 US4 automated validation/fallback checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after adding full content validation, invalid-question filtering, source failure statuses, quiz fixture catalog replacement, friendly empty/error states, and sanitized output checks.
+- 2026-05-30 US5 automated language/theme/accessibility checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after adding fallback/unit coverage, quiz script contract checks, theme-preservation metadata, bilingual attributes, accessible labels, and live feedback metadata.
 
 ### Manual Acceptance Evidence Checklist
 

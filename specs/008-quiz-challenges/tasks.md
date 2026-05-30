@@ -153,18 +153,18 @@
 
 ### Tests for User Story 5
 
-- [ ] T050 [P] [US5] Add unit tests for quiz text fallback, invalid language fallback, no blank projection text, and bilingual source labels in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
-- [ ] T051 [P] [US5] Add script contract tests for no `localStorage`, `sessionStorage`, cookie, fetch, History API, jQuery, timer/countdown dependency, drag/drop dependency, precision gesture dependency, or client-side correctness calculation in `StoryBook.Tests/Unit/QuizScriptContractTests.cs`
-- [ ] T052 [P] [US5] Add integration tests for English rendering, zh-TW rendering, theme selector absence, layout theme attributes, accessible names, fieldset legend, and live feedback metadata in `StoryBook.Tests/Integration/QuizPagesTests.cs`
+- [X] T050 [P] [US5] Add unit tests for quiz text fallback, invalid language fallback, no blank projection text, and bilingual source labels in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
+- [X] T051 [P] [US5] Add script contract tests for no `localStorage`, `sessionStorage`, cookie, fetch, History API, jQuery, timer/countdown dependency, drag/drop dependency, precision gesture dependency, or client-side correctness calculation in `StoryBook.Tests/Unit/QuizScriptContractTests.cs`
+- [X] T052 [P] [US5] Add integration tests for English rendering, zh-TW rendering, theme selector absence, layout theme attributes, accessible names, fieldset legend, and live feedback metadata in `StoryBook.Tests/Integration/QuizPagesTests.cs`
 
 ### Implementation for User Story 5
 
-- [ ] T053 [US5] Apply existing language preference metadata and zh-TW fallback values in `StoryBook/Pages/Quiz/Index.cshtml.cs`
-- [ ] T054 [US5] Add bilingual `data-i18n-*`, aria labels, source labels, prompt text, option text, feedback text, and explanation text in `StoryBook/Pages/Quiz/Index.cshtml`
-- [ ] T055 [US5] Use existing site theme tokens, visible focus styles, and responsive constraints in `StoryBook/wwwroot/css/quiz.css`
-- [ ] T056 [US5] Finalize quiz progressive enhancement without storage, fetch, History API, jQuery, or correctness logic in `StoryBook/wwwroot/js/quiz.js`
-- [ ] T057 [US5] Ensure quiz CSS and script are referenced without inline event handlers in `StoryBook/Pages/Quiz/Index.cshtml`
-- [ ] T058 [US5] Run US5 language, theme, keyboard, responsive, no timer/countdown, no drag/drop, and no precision-gesture acceptance checks, then record the result in `specs/008-quiz-challenges/quickstart.md`
+- [X] T053 [US5] Apply existing language preference metadata and zh-TW fallback values in `StoryBook/Pages/Quiz/Index.cshtml.cs`
+- [X] T054 [US5] Add bilingual `data-i18n-*`, aria labels, source labels, prompt text, option text, feedback text, and explanation text in `StoryBook/Pages/Quiz/Index.cshtml`
+- [X] T055 [US5] Use existing site theme tokens, visible focus styles, and responsive constraints in `StoryBook/wwwroot/css/quiz.css`
+- [X] T056 [US5] Finalize quiz progressive enhancement without storage, fetch, History API, jQuery, or correctness logic in `StoryBook/wwwroot/js/quiz.js`
+- [X] T057 [US5] Ensure quiz CSS and script are referenced without inline event handlers in `StoryBook/Pages/Quiz/Index.cshtml`
+- [X] T058 [US5] Run US5 language, theme, keyboard, responsive, no timer/countdown, no drag/drop, and no precision-gesture acceptance checks, then record the result in `specs/008-quiz-challenges/quickstart.md`
 
 **Checkpoint**: User Story 5 is independently functional and testable.
 
