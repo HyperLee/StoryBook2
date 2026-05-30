@@ -33,16 +33,16 @@
 
 **CRITICAL**: 此階段完成前不要開始使用者故事實作。
 
-- [ ] T007 [P] Add failing storage metadata tests for key `storybook.passport`, version `1`, allowed sources and five badges in `StoryBook.Tests/Unit/PassportPreferenceServiceTests.cs`
-- [ ] T008 Implement `PassportPreferenceService` storage key, state version, allowed source codes and fixed badge metadata in `StoryBook/Services/PassportPreferenceService.cs`
-- [ ] T009 [P] Add `PassportBadgeMilestone` enum values `CompletedCountAtLeast`, `CompletedAllInSource` and `CompletedAllStories` in `StoryBook/Models/PassportBadgeMilestone.cs`
-- [ ] T010 [P] Add `PassportBadgeDefinition` model with XML documentation and bilingual label/description fields in `StoryBook/Models/PassportBadgeDefinition.cs`
-- [ ] T011 [P] Add `PassportStoryItem` model with source, route, ordering, bilingual text and image metadata in `StoryBook/Models/PassportStoryItem.cs`
-- [ ] T012 [P] Add `PassportSourceStatus` model with friendly failure messages and reason code in `StoryBook/Models/PassportSourceStatus.cs`
-- [ ] T013 [P] Add `PassportCatalogSnapshot` model with story totals and source failure flags in `StoryBook/Models/PassportCatalogSnapshot.cs`
-- [ ] T014 Register `PassportPreferenceService` in the service container in `StoryBook/Program.cs`
-- [ ] T015 Add `UsePassportAssets` stylesheet hook for `~/css/passport.css` in `StoryBook/Pages/Shared/_Layout.cshtml`
-- [ ] T016 Verify foundational tests fail before implementation and then pass after T008-T015 in `StoryBook.Tests/Unit/PassportPreferenceServiceTests.cs`
+- [X] T007 [P] Add failing storage metadata tests for key `storybook.passport`, version `1`, allowed sources and five badges in `StoryBook.Tests/Unit/PassportPreferenceServiceTests.cs`
+- [X] T008 Implement `PassportPreferenceService` storage key, state version, allowed source codes and fixed badge metadata in `StoryBook/Services/PassportPreferenceService.cs`
+- [X] T009 [P] Add `PassportBadgeMilestone` enum values `CompletedCountAtLeast`, `CompletedAllInSource` and `CompletedAllStories` in `StoryBook/Models/PassportBadgeMilestone.cs`
+- [X] T010 [P] Add `PassportBadgeDefinition` model with XML documentation and bilingual label/description fields in `StoryBook/Models/PassportBadgeDefinition.cs`
+- [X] T011 [P] Add `PassportStoryItem` model with source, route, ordering, bilingual text and image metadata in `StoryBook/Models/PassportStoryItem.cs`
+- [X] T012 [P] Add `PassportSourceStatus` model with friendly failure messages and reason code in `StoryBook/Models/PassportSourceStatus.cs`
+- [X] T013 [P] Add `PassportCatalogSnapshot` model with story totals and source failure flags in `StoryBook/Models/PassportCatalogSnapshot.cs`
+- [X] T014 Register `PassportPreferenceService` in the service container in `StoryBook/Program.cs`
+- [X] T015 Add `UsePassportAssets` stylesheet hook for `~/css/passport.css` in `StoryBook/Pages/Shared/_Layout.cshtml`
+- [X] T016 Verify foundational tests fail before implementation and then pass after T008-T015 in `StoryBook.Tests/Unit/PassportPreferenceServiceTests.cs`
 
 **Checkpoint**: Storage metadata, shared models, asset loading hook and DI baseline are ready.
 

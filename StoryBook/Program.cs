@@ -29,6 +29,7 @@ public partial class Program
         builder.Services.AddSingleton<ExplorationSearchService>();
         builder.Services.AddSingleton<LanguagePreferenceService>();
         builder.Services.AddSingleton<ThemePreferenceService>();
+        builder.Services.AddSingleton<PassportPreferenceService>();
 
         var app = builder.Build();
 
