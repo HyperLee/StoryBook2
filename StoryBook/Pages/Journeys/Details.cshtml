@@ -56,6 +56,9 @@
                     <a class="journeys-primary-action"
                        href="@Model.StartReadingHref"
                        data-journey-start-reading
+                       aria-label="開始閱讀 @journey.Title.Get(LanguageCode.ZhTW)"
+                       data-aria-label-zh-tw="開始閱讀 @journey.Title.Get(LanguageCode.ZhTW)"
+                       data-aria-label-en="Start @journey.Title.Get(LanguageCode.En)"
                        data-i18n-zh-tw="開始閱讀"
                        data-i18n-en="Start reading">開始閱讀</a>
                     <a class="journeys-action" asp-page="/Journeys/Index" data-i18n-zh-tw="回旅程列表" data-i18n-en="Back to journeys">回旅程列表</a>
@@ -88,7 +91,11 @@
                         <li class="journey-story-item"
                             data-journey-story-item
                             data-journey-story-id="@item.StableId">
-                            <a class="journey-story-item__link" href="@item.DetailHref">
+                            <a class="journey-story-item__link"
+                               href="@item.DetailHref"
+                               aria-label="閱讀 @item.GetName(LanguageCode.ZhTW)"
+                               data-aria-label-zh-tw="閱讀 @item.GetName(LanguageCode.ZhTW)"
+                               data-aria-label-en="Read @item.GetName(LanguageCode.En)">
                                 <span class="journey-story-item__source"
                                       data-i18n-zh-tw="@item.GetSourceLabel(LanguageCode.ZhTW)"
                                       data-i18n-en="@item.GetSourceLabel(LanguageCode.En)">@item.GetSourceLabel(LanguageCode.ZhTW)</span>

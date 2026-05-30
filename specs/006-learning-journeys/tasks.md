@@ -146,17 +146,17 @@ Write these tests first and confirm they fail before implementation.
 
 Write these tests first and confirm they fail before implementation.
 
-- [ ] T051 [P] [US4] Add unit tests for `JourneyText` fallback and no blank localized display values in `StoryBook.Tests/Unit/LearningJourneyContentValidationTests.cs`
-- [ ] T052 [P] [US4] Add integration tests for bilingual `data-i18n-*` attributes, localized accessible names, theme layout contract, and theme selector absence on journey pages in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
-- [ ] T053 [P] [US4] Add script contract tests for `storybook.language` usage, no journey storage writes, no history mutation, and no theme-selector behavior in `StoryBook.Tests/Unit/JourneysScriptContractTests.cs`
+- [X] T051 [P] [US4] Add unit tests for `JourneyText` fallback and no blank localized display values in `StoryBook.Tests/Unit/LearningJourneyContentValidationTests.cs`
+- [X] T052 [P] [US4] Add integration tests for bilingual `data-i18n-*` attributes, localized accessible names, theme layout contract, and theme selector absence on journey pages in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [X] T053 [P] [US4] Add script contract tests for `storybook.language` usage, no journey storage writes, no history mutation, and no theme-selector behavior in `StoryBook.Tests/Unit/JourneysScriptContractTests.cs`
 
 ### Implementation for User Story 4
 
-- [ ] T054 [US4] Add bilingual labels, `data-i18n-zh-tw`, `data-i18n-en`, localized aria labels, and fallback-safe text to the list page in `StoryBook/Pages/Journeys/Index.cshtml`
-- [ ] T055 [US4] Add bilingual labels, `data-i18n-zh-tw`, `data-i18n-en`, localized aria labels, and fallback-safe text to the detail page in `StoryBook/Pages/Journeys/Details.cshtml`
-- [ ] T056 [US4] Implement `journeys.js` language synchronization using only `storybook.language` and without writing journey state to storage or history in `StoryBook/wwwroot/js/journeys.js`
-- [ ] T057 [US4] Complete responsive, focus-visible, contrast-aware, and 44x44 target styling for 375px, 768px, and 1366px widths in `StoryBook/wwwroot/css/journeys.css`
-- [ ] T058 [US4] Run `dotnet test StoryBook2.sln` and address US4 failures in `StoryBook.Tests/Unit/JourneysScriptContractTests.cs`
+- [X] T054 [US4] Add bilingual labels, `data-i18n-zh-tw`, `data-i18n-en`, localized aria labels, and fallback-safe text to the list page in `StoryBook/Pages/Journeys/Index.cshtml`
+- [X] T055 [US4] Add bilingual labels, `data-i18n-zh-tw`, `data-i18n-en`, localized aria labels, and fallback-safe text to the detail page in `StoryBook/Pages/Journeys/Details.cshtml`
+- [X] T056 [US4] Implement `journeys.js` language synchronization using only `storybook.language` and without writing journey state to storage or history in `StoryBook/wwwroot/js/journeys.js`
+- [X] T057 [US4] Complete responsive, focus-visible, contrast-aware, and 44x44 target styling for 375px, 768px, and 1366px widths in `StoryBook/wwwroot/css/journeys.css`
+- [X] T058 [US4] Run `dotnet test StoryBook2.sln` and address US4 failures in `StoryBook.Tests/Unit/JourneysScriptContractTests.cs`
 
 **Checkpoint**: Journey pages match the existing bilingual, theme, keyboard, and responsive site experience.
 

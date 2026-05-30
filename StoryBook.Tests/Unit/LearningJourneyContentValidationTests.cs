@@ -42,6 +42,41 @@ public sealed class LearningJourneyContentValidationTests
         Assert.Contains(result.Errors, error => error.Contains("sortOrder", StringComparison.OrdinalIgnoreCase));
     }
 
+    [Fact]
+    public void JourneyText_falls_back_to_zhTW_for_missing_invalid_or_blank_localized_values()
+    {
+        JourneyText text = new()
+        {
+            ZhTW = "安全文字",
+            En = ""
+        };
+
+        Assert.Equal("安全文字", text.Get(LanguageCode.En));
+        Assert.Equal("安全文字", text.Get(LanguageCode.ZhTW));
+        Assert.Equal("安全文字", text.Get("not-a-language"));
+    }
+
+    [Fact]
+    public void JourneyStoryItem_localized_display_values_fall_back_without_blanks()
+    {
+        JourneyStoryItem item = new()
+        {
+            SourceLabelZhTW = "恐龍",
+            SourceLabelEn = "",
+            NameZhTW = "暴龍",
+            NameEn = "",
+            SummaryZhTW = "暴龍用大腳印帶朋友走到陽光下。",
+            SummaryEn = "",
+            ImageAltTextZhTW = "暴龍和小動物在大腳印旁",
+            ImageAltTextEn = ""
+        };
+
+        Assert.Equal("恐龍", item.GetSourceLabel(LanguageCode.En));
+        Assert.Equal("暴龍", item.GetName(LanguageCode.En));
+        Assert.False(string.IsNullOrWhiteSpace(item.GetSummary(LanguageCode.En)));
+        Assert.False(string.IsNullOrWhiteSpace(item.GetImageAltText(LanguageCode.En)));
+    }
+
     private static LearningJourney CreateJourney(
         string slug,
         int sortOrder = 1,

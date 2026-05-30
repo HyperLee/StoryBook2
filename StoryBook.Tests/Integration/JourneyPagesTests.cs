@@ -172,6 +172,33 @@ public sealed class JourneyPagesTests : IClassFixture<JourneyPageTestFixture>
         Assert.DoesNotContain("Data/", html, StringComparison.OrdinalIgnoreCase);
     }
 
+    [Fact]
+    public async Task Journey_pages_render_bilingual_accessibility_theme_contract_and_no_theme_selector()
+    {
+        string listHtml = await _fixture.GetOkHtmlAsync("/journeys");
+        string detailHtml = await _fixture.GetOkHtmlAsync("/journeys/clever-hunters");
+
+        Assert.Contains("data-i18n-zh-tw=\"學習旅程\"", listHtml);
+        Assert.Contains("data-i18n-en=\"Learning journeys\"", listHtml);
+        Assert.Contains("data-aria-label-zh-tw=\"開啟 溫柔巨人小路\"", listHtml);
+        Assert.Contains("data-aria-label-en=\"Open Gentle Giants Trail\"", listHtml);
+        Assert.Contains("data-storybook-theme-boot", listHtml);
+        Assert.Contains("data-storybook-theme-mode", listHtml);
+        Assert.Contains("data-storybook-effective-theme", listHtml);
+        Assert.DoesNotContain("data-theme-selector", listHtml, StringComparison.OrdinalIgnoreCase);
+
+        Assert.Contains("data-i18n-zh-tw=\"聰明獵手觀察隊\"", detailHtml);
+        Assert.Contains("data-i18n-en=\"Clever Hunters Watch\"", detailHtml);
+        Assert.Contains("data-aria-label-zh-tw=\"開始閱讀 聰明獵手觀察隊\"", detailHtml);
+        Assert.Contains("data-aria-label-en=\"Start Clever Hunters Watch\"", detailHtml);
+        Assert.Contains("data-aria-label-zh-tw=\"閱讀 暴龍\"", detailHtml);
+        Assert.Contains("data-aria-label-en=\"Read Tyrannosaurus Rex\"", detailHtml);
+        Assert.Contains("data-storybook-theme-boot", detailHtml);
+        Assert.Contains("data-storybook-theme-mode", detailHtml);
+        Assert.Contains("data-storybook-effective-theme", detailHtml);
+        Assert.DoesNotContain("data-theme-selector", detailHtml, StringComparison.OrdinalIgnoreCase);
+    }
+
     private static string WriteCatalog(params LearningJourney[] journeys)
     {
         string json = JsonSerializer.Serialize(
