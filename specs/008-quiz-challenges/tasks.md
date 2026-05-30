@@ -30,17 +30,17 @@
 
 **CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T004 [P] Create localized quiz text model with zh-TW fallback behavior contract in `StoryBook/Models/QuizText.cs`
-- [ ] T005 [P] Create quiz difficulty enum/parser for `easy` and `medium` in `StoryBook/Models/QuizDifficulty.cs`
-- [ ] T006 [P] Create quiz scope enum/parser for `all`, `dinosaurs`, and `aquarium` in `StoryBook/Models/QuizScope.cs`
-- [ ] T007 [P] Create answer option model in `StoryBook/Models/QuizAnswerOption.cs`
-- [ ] T008 [P] Create related story reference model in `StoryBook/Models/QuizStoryReference.cs`
-- [ ] T009 Create quiz question and root catalog models in `StoryBook/Models/QuizQuestion.cs` and `StoryBook/Models/QuizCatalog.cs`
-- [ ] T010 [P] Create safe display projection models in `StoryBook/Models/QuizQuestionView.cs`
-- [ ] T011 [P] Create transient answer result model in `StoryBook/Models/QuizAnswerResult.cs`
-- [ ] T012 [P] Create quiz catalog snapshot and source status models in `StoryBook/Models/QuizCatalogSnapshot.cs` and `StoryBook/Models/QuizSourceStatus.cs`
-- [ ] T013 Create quiz catalog options with default `Data/quiz-questions.json` path in `StoryBook/Services/QuizCatalogOptions.cs`
-- [ ] T014 Create quiz validation result type for invalid-question and source diagnostics in `StoryBook/Services/QuizContentValidationResult.cs`
+- [X] T004 [P] Create localized quiz text model with zh-TW fallback behavior contract in `StoryBook/Models/QuizText.cs`
+- [X] T005 [P] Create quiz difficulty enum/parser for `easy` and `medium` in `StoryBook/Models/QuizDifficulty.cs`
+- [X] T006 [P] Create quiz scope enum/parser for `all`, `dinosaurs`, and `aquarium` in `StoryBook/Models/QuizScope.cs`
+- [X] T007 [P] Create answer option model in `StoryBook/Models/QuizAnswerOption.cs`
+- [X] T008 [P] Create related story reference model in `StoryBook/Models/QuizStoryReference.cs`
+- [X] T009 Create quiz question and root catalog models in `StoryBook/Models/QuizQuestion.cs` and `StoryBook/Models/QuizCatalog.cs`
+- [X] T010 [P] Create safe display projection models in `StoryBook/Models/QuizQuestionView.cs`
+- [X] T011 [P] Create transient answer result model in `StoryBook/Models/QuizAnswerResult.cs`
+- [X] T012 [P] Create quiz catalog snapshot and source status models in `StoryBook/Models/QuizCatalogSnapshot.cs` and `StoryBook/Models/QuizSourceStatus.cs`
+- [X] T013 Create quiz catalog options with default `Data/quiz-questions.json` path in `StoryBook/Services/QuizCatalogOptions.cs`
+- [X] T014 Create quiz validation result type for invalid-question and source diagnostics in `StoryBook/Services/QuizContentValidationResult.cs`
 
 **Checkpoint**: Quiz domain model is ready for test-first story implementation.
 
