@@ -76,6 +76,10 @@
     {
         <link rel="stylesheet" href="~/css/passport.css" asp-append-version="true" />
     }
+    @if (ViewData["UseQuizAssets"] as bool? == true)
+    {
+        <link rel="stylesheet" href="~/css/quiz.css" asp-append-version="true" />
+    }
     <link rel="stylesheet" href="~/StoryBook.styles.css" asp-append-version="true" />
 </head>
 <body>

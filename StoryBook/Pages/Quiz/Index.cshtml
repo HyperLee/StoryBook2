@@ -1,10 +1,16 @@
 @page "/quiz"
+@using StoryBook.Models
 @model StoryBook.Pages.Quiz.IndexModel
 @{
     ViewData["Title"] = "問答挑戰";
 }
 
-<section class="quiz-page" aria-labelledby="quiz-title" data-quiz-page>
+<section class="quiz-page"
+         aria-labelledby="quiz-title"
+         data-quiz-page
+         data-quiz-scope="@Model.ScopeCode"
+         data-quiz-current-question-id="@Model.CurrentQuestion?.Id"
+         data-quiz-language-storage-key="@Model.LanguageStorageKey">
     <div class="quiz-page__header">
         <div>
             <p class="quiz-kicker" data-i18n-zh-tw="故事小挑戰" data-i18n-en="Story challenge">故事小挑戰</p>
@@ -13,10 +19,100 @@
         <a class="quiz-home-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
     </div>
 
-    <div class="quiz-empty" role="status" data-quiz-scaffold>
-        <h2 data-i18n-zh-tw="問答題目正在準備中" data-i18n-en="Quiz questions are being prepared">問答題目正在準備中</h2>
-        <p data-i18n-zh-tw="故事朋友很快就會帶著題目來。" data-i18n-en="The story friends will bring questions soon.">故事朋友很快就會帶著題目來。</p>
-    </div>
+    <nav class="quiz-scope-nav" data-quiz-scope-nav aria-label="問答範圍" data-aria-label-zh-tw="問答範圍" data-aria-label-en="Quiz scope">
+        <a class="quiz-scope-link"
+           href="/quiz?scope=all"
+           data-quiz-scope-option="all"
+           aria-current="@(Model.Scope == QuizScope.All ? "page" : null)"
+           data-i18n-zh-tw="全部故事"
+           data-i18n-en="All stories">全部故事</a>
+        <a class="quiz-scope-link"
+           href="/quiz?scope=dinosaurs"
+           data-quiz-scope-option="dinosaurs"
+           aria-current="@(Model.Scope == QuizScope.Dinosaurs ? "page" : null)"
+           data-i18n-zh-tw="恐龍"
+           data-i18n-en="Dinosaurs">恐龍</a>
+        <a class="quiz-scope-link"
+           href="/quiz?scope=aquarium"
+           data-quiz-scope-option="aquarium"
+           aria-current="@(Model.Scope == QuizScope.Aquarium ? "page" : null)"
+           data-i18n-zh-tw="水族館"
+           data-i18n-en="Aquarium">水族館</a>
+    </nav>
+
+    @if (Model.HasScopeFallback)
+    {
+        <div class="quiz-alert" role="status" data-quiz-scope-fallback>
+            <p data-i18n-zh-tw="這個範圍還不存在，先帶你看全部故事題目。" data-i18n-en="That scope is not ready, so all story questions are shown.">這個範圍還不存在，先帶你看全部故事題目。</p>
+        </div>
+    }
+
+    @if (Model.HasQuestionFallback)
+    {
+        <div class="quiz-alert" role="status" data-quiz-question-fallback>
+            <p data-i18n-zh-tw="這題暫時找不到，先帶你看這個範圍的第一題。" data-i18n-en="That question is not here right now, so the first question in this scope is shown.">這題暫時找不到，先帶你看這個範圍的第一題。</p>
+        </div>
+    }
+
+    @if (Model.CurrentQuestion is null)
+    {
+        <div class="quiz-empty" role="status" data-quiz-empty>
+            <h2 data-i18n-zh-tw="問答題目正在準備中" data-i18n-en="Quiz questions are being prepared">問答題目正在準備中</h2>
+            <p data-i18n-zh-tw="故事朋友很快就會帶著題目來，先回首頁或探索故事吧。" data-i18n-en="The story friends will bring questions soon. Visit home or explore stories for now.">故事朋友很快就會帶著題目來，先回首頁或探索故事吧。</p>
+            <div class="quiz-actions">
+                <a class="quiz-action-link" asp-page="/Index" data-i18n-zh-tw="回首頁" data-i18n-en="Home">回首頁</a>
+                <a class="quiz-action-link" asp-page="/Explore/Index" data-i18n-zh-tw="探索故事" data-i18n-en="Explore stories">探索故事</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        QuizQuestionView question = Model.CurrentQuestion;
+        <section class="quiz-question"
+                 aria-labelledby="quiz-question-prompt"
+                 data-quiz-question
+                 data-quiz-question-id="@question.Id"
+                 data-quiz-source="@question.SourceCode"
+                 data-quiz-difficulty="@question.DifficultyCode">
+            <p class="quiz-source"
+               data-quiz-source-label
+               data-i18n-zh-tw="@question.SourceLabelZhTW"
+               data-i18n-en="@question.SourceLabelEn">@question.SourceLabelZhTW</p>
+            <h2 id="quiz-question-prompt"
+                class="quiz-prompt"
+                data-quiz-prompt
+                data-i18n-zh-tw="@question.PromptZhTW"
+                data-i18n-en="@question.PromptEn">@question.PromptZhTW</h2>
+
+            <form class="quiz-answer-form" method="post" asp-page-handler="Answer" data-quiz-answer-form>
+                <input type="hidden" name="scope" value="@question.ScopeCode" />
+                <input type="hidden" name="questionId" value="@question.Id" />
+                <fieldset class="quiz-options">
+                    <legend data-i18n-zh-tw="選一個答案" data-i18n-en="Choose one answer">選一個答案</legend>
+                    @foreach (QuizAnswerOptionView option in question.Options)
+                    {
+                        string optionId = $"quiz-option-{question.Id}-{option.Id}";
+                        <label class="quiz-option" for="@optionId">
+                            <input id="@optionId"
+                                   type="radio"
+                                   name="selectedOptionId"
+                                   value="@option.Id" />
+                            <span data-i18n-zh-tw="@option.TextZhTW" data-i18n-en="@option.TextEn">@option.TextZhTW</span>
+                        </label>
+                    }
+                </fieldset>
+                <button class="quiz-submit" type="submit" data-quiz-submit data-i18n-zh-tw="送出答案" data-i18n-en="Submit answer">送出答案</button>
+            </form>
+        </section>
+
+        <section class="quiz-feedback" data-quiz-feedback role="status" aria-live="polite"></section>
+
+        <a class="quiz-next-link"
+           href="@question.NextQuestionHref"
+           data-quiz-next-question
+           data-i18n-zh-tw="下一題"
+           data-i18n-en="Next question">下一題</a>
+    }
 </section>
 
 @section Scripts {

@@ -54,20 +54,20 @@
 
 ### Tests for User Story 1
 
-- [ ] T015 [P] [US1] Add unit tests for scope parsing, stable question ordering, scope filtering, invalid scope fallback, and next-question id selection in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
-- [ ] T016 [P] [US1] Add integration tests for `/quiz`, home entry, explore entry, scope links, invalid scope fallback, and initial question DOM metadata in `StoryBook.Tests/Integration/QuizPagesTests.cs`
+- [X] T015 [P] [US1] Add unit tests for scope parsing, stable question ordering, scope filtering, invalid scope fallback, and next-question id selection in `StoryBook.Tests/Unit/QuizCatalogServiceTests.cs`
+- [X] T016 [P] [US1] Add integration tests for `/quiz`, home entry, explore entry, scope links, invalid scope fallback, and initial question DOM metadata in `StoryBook.Tests/Integration/QuizPagesTests.cs`
 
 ### Implementation for User Story 1
 
-- [ ] T017 [US1] Implement quiz JSON load/cache, scope filtering, stable sorting, and next-question href projection in `StoryBook/Services/QuizCatalogService.cs`
-- [ ] T018 [US1] Seed at least 12 complete starter questions with at least 5 dinosaur and 5 aquarium questions in `StoryBook/Data/quiz-questions.json`
-- [ ] T019 [US1] Register `QuizCatalogOptions`, `QuizContentValidator`, and `QuizCatalogService` in `StoryBook/Program.cs`
-- [ ] T020 [US1] Implement `OnGet` scope and question selection for `/quiz` in `StoryBook/Pages/Quiz/Index.cshtml.cs`
-- [ ] T021 [US1] Render quiz title, scope nav, current question, answer options shell, and data attributes in `StoryBook/Pages/Quiz/Index.cshtml`
-- [ ] T022 [P] [US1] Add a normal anchor quiz entry on the home page in `StoryBook/Pages/Index.cshtml`
-- [ ] T023 [P] [US1] Add a normal anchor quiz entry on the explore page in `StoryBook/Pages/Explore/Index.cshtml`
-- [ ] T024 [US1] Add responsive scope and question layout styles in `StoryBook/wwwroot/css/quiz.css`
-- [ ] T025 [US1] Run US1 route and scope tests, then record the result in `specs/008-quiz-challenges/quickstart.md`
+- [X] T017 [US1] Implement quiz JSON load/cache, scope filtering, stable sorting, and next-question href projection in `StoryBook/Services/QuizCatalogService.cs`
+- [X] T018 [US1] Seed at least 12 complete starter questions with at least 5 dinosaur and 5 aquarium questions in `StoryBook/Data/quiz-questions.json`
+- [X] T019 [US1] Register `QuizCatalogOptions`, `QuizContentValidator`, and `QuizCatalogService` in `StoryBook/Program.cs`
+- [X] T020 [US1] Implement `OnGet` scope and question selection for `/quiz` in `StoryBook/Pages/Quiz/Index.cshtml.cs`
+- [X] T021 [US1] Render quiz title, scope nav, current question, answer options shell, and data attributes in `StoryBook/Pages/Quiz/Index.cshtml`
+- [X] T022 [P] [US1] Add a normal anchor quiz entry on the home page in `StoryBook/Pages/Index.cshtml`
+- [X] T023 [P] [US1] Add a normal anchor quiz entry on the explore page in `StoryBook/Pages/Explore/Index.cshtml`
+- [X] T024 [US1] Add responsive scope and question layout styles in `StoryBook/wwwroot/css/quiz.css`
+- [X] T025 [US1] Run US1 route and scope tests, then record the result in `specs/008-quiz-challenges/quickstart.md`
 
 **Checkpoint**: User Story 1 is independently functional and testable.
 

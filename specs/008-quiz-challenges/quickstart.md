@@ -38,6 +38,10 @@
 
 ## Manual Acceptance
 
+## Implementation Evidence
+
+- 2026-05-30 US1 automated route and scope checkpoint: `dotnet test StoryBook.Tests/StoryBook.Tests.csproj --filter "FullyQualifiedName~Quiz"` passed after adding the `/quiz` service, route, starter catalog, home entry, explore entry, scope links, question DOM metadata, and next-question projection.
+
 ### Manual Acceptance Evidence Checklist
 
 - [ ] `/quiz` route, home entry and explore/shared entry verified.

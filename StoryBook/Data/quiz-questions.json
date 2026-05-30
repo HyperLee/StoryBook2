@@ -1,4 +1,677 @@
 {
   "version": 1,
-  "questions": []
+  "questions": [
+    {
+      "id": "tyrannosaurus-teeth",
+      "source": "dinosaurs",
+      "difficulty": "easy",
+      "sortOrder": 1,
+      "prompt": {
+        "zhTW": "暴龍有什麼幫助牠咬住食物？",
+        "en": "What helped Tyrannosaurus bite its food?"
+      },
+      "options": [
+        {
+          "id": "sharp-teeth",
+          "text": {
+            "zhTW": "又大又尖的牙齒",
+            "en": "Big sharp teeth"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "flat-shell",
+          "text": {
+            "zhTW": "扁扁的龜殼",
+            "en": "A flat shell"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "long-tentacles",
+          "text": {
+            "zhTW": "長長的觸手",
+            "en": "Long tentacles"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "sharp-teeth",
+      "correctFeedback": {
+        "zhTW": "答對了！暴龍的尖牙很適合咬住食物。",
+        "en": "Correct! Tyrannosaurus had sharp teeth for biting food."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再想想看，暴龍最有名的是大嘴巴和尖牙。",
+        "en": "Try again. Tyrannosaurus is famous for its big mouth and teeth."
+      },
+      "explanation": {
+        "zhTW": "暴龍是肉食性恐龍，強壯的嘴巴和尖牙能幫助牠進食。",
+        "en": "Tyrannosaurus was a meat eater, and its strong jaws and sharp teeth helped it eat."
+      },
+      "relatedStories": [
+        {
+          "source": "dinosaurs",
+          "slug": "tyrannosaurus-rex",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "triceratops-horns",
+      "source": "dinosaurs",
+      "difficulty": "easy",
+      "sortOrder": 2,
+      "prompt": {
+        "zhTW": "三角龍頭上有什麼特別的地方？",
+        "en": "What is special on a Triceratops head?"
+      },
+      "options": [
+        {
+          "id": "three-horns",
+          "text": {
+            "zhTW": "三根角和大頭盾",
+            "en": "Three horns and a large frill"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "soft-bell",
+          "text": {
+            "zhTW": "會發亮的小鈴鐺",
+            "en": "A glowing little bell"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "eight-arms",
+          "text": {
+            "zhTW": "八隻手臂",
+            "en": "Eight arms"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "three-horns",
+      "correctFeedback": {
+        "zhTW": "答對了！三角龍有三根角和漂亮的大頭盾。",
+        "en": "Correct! Triceratops had three horns and a large frill."
+      },
+      "incorrectFeedback": {
+        "zhTW": "很接近了，看看三角龍的名字和頭部線索。",
+        "en": "Close. Look at the name and the clues on its head."
+      },
+      "explanation": {
+        "zhTW": "三角龍的角和頭盾讓牠很容易被認出來。",
+        "en": "The horns and frill make Triceratops easy to recognize."
+      },
+      "relatedStories": [
+        {
+          "source": "dinosaurs",
+          "slug": "triceratops",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "stegosaurus-plates",
+      "source": "dinosaurs",
+      "difficulty": "medium",
+      "sortOrder": 3,
+      "prompt": {
+        "zhTW": "劍龍背上排著什麼？",
+        "en": "What lined the back of Stegosaurus?"
+      },
+      "options": [
+        {
+          "id": "back-plates",
+          "text": {
+            "zhTW": "一排大骨板",
+            "en": "A row of large plates"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "tiny-wings",
+          "text": {
+            "zhTW": "小小翅膀",
+            "en": "Tiny wings"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "fish-scales",
+          "text": {
+            "zhTW": "魚鱗",
+            "en": "Fish scales"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "back-plates",
+      "correctFeedback": {
+        "zhTW": "答對了！劍龍背上有一排醒目的骨板。",
+        "en": "Correct! Stegosaurus had a row of noticeable plates."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再看看劍龍背上的形狀，答案就在那裡。",
+        "en": "Look at the shapes on its back; the answer is there."
+      },
+      "explanation": {
+        "zhTW": "劍龍的背板是牠最容易辨認的特徵之一。",
+        "en": "The back plates are one of the easiest Stegosaurus features to spot."
+      },
+      "relatedStories": [
+        {
+          "source": "dinosaurs",
+          "slug": "stegosaurus",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "brachiosaurus-neck",
+      "source": "dinosaurs",
+      "difficulty": "easy",
+      "sortOrder": 4,
+      "prompt": {
+        "zhTW": "腕龍長長的脖子可以幫牠做什麼？",
+        "en": "What could Brachiosaurus do with its long neck?"
+      },
+      "options": [
+        {
+          "id": "reach-leaves",
+          "text": {
+            "zhTW": "吃到高處的樹葉",
+            "en": "Reach leaves high in trees"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "dig-tunnels",
+          "text": {
+            "zhTW": "挖很深的地洞",
+            "en": "Dig deep tunnels"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "carry-shell",
+          "text": {
+            "zhTW": "背著硬殼游泳",
+            "en": "Swim with a hard shell"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "reach-leaves",
+      "correctFeedback": {
+        "zhTW": "答對了！長脖子能幫腕龍吃到高高的植物。",
+        "en": "Correct! The long neck helped Brachiosaurus reach tall plants."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再想想牠的脖子可以伸到哪裡。",
+        "en": "Think about where its neck could reach."
+      },
+      "explanation": {
+        "zhTW": "腕龍是草食性恐龍，長脖子很適合吃高處葉子。",
+        "en": "Brachiosaurus ate plants, and its long neck helped it reach high leaves."
+      },
+      "relatedStories": [
+        {
+          "source": "dinosaurs",
+          "slug": "brachiosaurus",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "velociraptor-body",
+      "source": "dinosaurs",
+      "difficulty": "medium",
+      "sortOrder": 5,
+      "prompt": {
+        "zhTW": "迅猛龍的身體給人什麼感覺？",
+        "en": "What was Velociraptor's body like?"
+      },
+      "options": [
+        {
+          "id": "small-quick",
+          "text": {
+            "zhTW": "小巧又靈活",
+            "en": "Small and quick"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "giant-heavy",
+          "text": {
+            "zhTW": "巨大又很重",
+            "en": "Huge and heavy"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "round-shell",
+          "text": {
+            "zhTW": "圓圓硬殼",
+            "en": "Round with a hard shell"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "small-quick",
+      "correctFeedback": {
+        "zhTW": "答對了！迅猛龍是小巧靈活的獵手。",
+        "en": "Correct! Velociraptor was a small, quick hunter."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再想想牠的名字和靈活的動作。",
+        "en": "Think about its name and quick movements."
+      },
+      "explanation": {
+        "zhTW": "迅猛龍不像最大型恐龍那樣巨大，牠更以靈活聞名。",
+        "en": "Velociraptor was not one of the biggest dinosaurs; it is known for being quick."
+      },
+      "relatedStories": [
+        {
+          "source": "dinosaurs",
+          "slug": "velociraptor",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "pteranodon-kind",
+      "source": "dinosaurs",
+      "difficulty": "medium",
+      "sortOrder": 6,
+      "prompt": {
+        "zhTW": "翼龍故事提醒我們，翼龍其實是哪一類動物？",
+        "en": "The Pteranodon story reminds us it belongs to which group?"
+      },
+      "options": [
+        {
+          "id": "flying-reptile",
+          "text": {
+            "zhTW": "史前飛行爬行動物",
+            "en": "A prehistoric flying reptile"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "true-dinosaur",
+          "text": {
+            "zhTW": "真正的恐龍",
+            "en": "A true dinosaur"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "modern-fish",
+          "text": {
+            "zhTW": "現代魚類",
+            "en": "A modern fish"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "flying-reptile",
+      "correctFeedback": {
+        "zhTW": "答對了！翼龍會飛，但不是真正的恐龍。",
+        "en": "Correct! Pteranodon could fly, but it was not a true dinosaur."
+      },
+      "incorrectFeedback": {
+        "zhTW": "這題有一點小陷阱，翼龍會飛但不是恐龍。",
+        "en": "This one has a small twist: Pteranodon flew but was not a dinosaur."
+      },
+      "explanation": {
+        "zhTW": "翼龍屬於史前飛行爬行動物，常和恐龍一起被介紹。",
+        "en": "Pteranodon was a prehistoric flying reptile often introduced with dinosaurs."
+      },
+      "relatedStories": [
+        {
+          "source": "dinosaurs",
+          "slug": "pteranodon",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "clownfish-home",
+      "source": "aquarium",
+      "difficulty": "easy",
+      "sortOrder": 1,
+      "prompt": {
+        "zhTW": "小丑魚常和哪一種海洋動物住在一起？",
+        "en": "Which sea animal often lives with clownfish?"
+      },
+      "options": [
+        {
+          "id": "sea-anemone",
+          "text": {
+            "zhTW": "海葵",
+            "en": "Sea anemone"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "tall-tree",
+          "text": {
+            "zhTW": "高高的樹",
+            "en": "A tall tree"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "snow-cave",
+          "text": {
+            "zhTW": "雪洞",
+            "en": "A snow cave"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "sea-anemone",
+      "correctFeedback": {
+        "zhTW": "答對了！小丑魚和海葵是很有名的好鄰居。",
+        "en": "Correct! Clownfish and sea anemones are famous neighbors."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再想想小丑魚在珊瑚礁裡的好朋友。",
+        "en": "Think about the clownfish's reef neighbor."
+      },
+      "explanation": {
+        "zhTW": "海葵能提供小丑魚躲藏的地方，小丑魚也能幫海葵吸引注意。",
+        "en": "Sea anemones give clownfish places to hide, and clownfish can help anemones too."
+      },
+      "relatedStories": [
+        {
+          "source": "aquarium",
+          "slug": "clownfish",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "seahorse-dad",
+      "source": "aquarium",
+      "difficulty": "medium",
+      "sortOrder": 2,
+      "prompt": {
+        "zhTW": "海馬故事裡，哪一個親子線索很特別？",
+        "en": "What family clue is special in the seahorse story?"
+      },
+      "options": [
+        {
+          "id": "dad-carries-babies",
+          "text": {
+            "zhTW": "海馬爸爸會照顧育兒袋裡的小寶寶",
+            "en": "Seahorse dads carry babies in a pouch"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "mom-builds-nest",
+          "text": {
+            "zhTW": "海馬媽媽蓋樹屋",
+            "en": "Seahorse moms build treehouses"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "baby-has-wings",
+          "text": {
+            "zhTW": "海馬寶寶有翅膀",
+            "en": "Baby seahorses have wings"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "dad-carries-babies",
+      "correctFeedback": {
+        "zhTW": "答對了！海馬爸爸照顧育兒袋裡的小寶寶。",
+        "en": "Correct! Seahorse dads carry babies in a pouch."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再想想海馬爸爸有什麼特別任務。",
+        "en": "Think about the special job seahorse dads have."
+      },
+      "explanation": {
+        "zhTW": "海馬的育兒方式很特別，爸爸會用育兒袋保護小寶寶。",
+        "en": "Seahorses have a special family pattern: dads protect babies in a pouch."
+      },
+      "relatedStories": [
+        {
+          "source": "aquarium",
+          "slug": "seahorse",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "sea-turtle-shell",
+      "source": "aquarium",
+      "difficulty": "easy",
+      "sortOrder": 3,
+      "prompt": {
+        "zhTW": "海龜身上有什麼能保護牠？",
+        "en": "What helps protect a sea turtle?"
+      },
+      "options": [
+        {
+          "id": "hard-shell",
+          "text": {
+            "zhTW": "硬硬的龜殼",
+            "en": "A hard shell"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "three-horns",
+          "text": {
+            "zhTW": "三根角",
+            "en": "Three horns"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "long-neck-plant",
+          "text": {
+            "zhTW": "能吃樹葉的長脖子",
+            "en": "A long neck for leaves"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "hard-shell",
+      "correctFeedback": {
+        "zhTW": "答對了！海龜的龜殼能保護牠。",
+        "en": "Correct! A sea turtle's shell helps protect it."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再想想海龜背上最明顯的東西。",
+        "en": "Think about the most visible thing on a sea turtle's back."
+      },
+      "explanation": {
+        "zhTW": "龜殼像堅固的家，能幫海龜保護身體。",
+        "en": "The shell is like a sturdy home that protects the sea turtle's body."
+      },
+      "relatedStories": [
+        {
+          "source": "aquarium",
+          "slug": "sea-turtle",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "jellyfish-body",
+      "source": "aquarium",
+      "difficulty": "easy",
+      "sortOrder": 4,
+      "prompt": {
+        "zhTW": "水母的身體看起來常像什麼？",
+        "en": "What does a jellyfish body often look like?"
+      },
+      "options": [
+        {
+          "id": "soft-umbrella",
+          "text": {
+            "zhTW": "柔軟的小雨傘",
+            "en": "A soft little umbrella"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "stone-wall",
+          "text": {
+            "zhTW": "石頭牆",
+            "en": "A stone wall"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "dinosaur-tail",
+          "text": {
+            "zhTW": "恐龍尾巴",
+            "en": "A dinosaur tail"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "soft-umbrella",
+      "correctFeedback": {
+        "zhTW": "答對了！水母常像漂浮的小雨傘。",
+        "en": "Correct! Jellyfish often look like floating umbrellas."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再想想水母柔柔地漂在水中的樣子。",
+        "en": "Think about how softly jellyfish float in the water."
+      },
+      "explanation": {
+        "zhTW": "水母身體柔軟透明，會在水中慢慢漂動。",
+        "en": "Jellyfish have soft, often clear bodies that drift through water."
+      },
+      "relatedStories": [
+        {
+          "source": "aquarium",
+          "slug": "jellyfish",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "octopus-arms",
+      "source": "aquarium",
+      "difficulty": "medium",
+      "sortOrder": 5,
+      "prompt": {
+        "zhTW": "章魚有幾隻靈活的手臂？",
+        "en": "How many flexible arms does an octopus have?"
+      },
+      "options": [
+        {
+          "id": "eight",
+          "text": {
+            "zhTW": "八隻",
+            "en": "Eight"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "two",
+          "text": {
+            "zhTW": "兩隻",
+            "en": "Two"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "three",
+          "text": {
+            "zhTW": "三隻",
+            "en": "Three"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "eight",
+      "correctFeedback": {
+        "zhTW": "答對了！章魚有八隻靈活的手臂。",
+        "en": "Correct! An octopus has eight flexible arms."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再數一數章魚最有名的手臂數量。",
+        "en": "Count the arms octopuses are famous for."
+      },
+      "explanation": {
+        "zhTW": "章魚用八隻手臂探索、抓取，也能很聰明地解決問題。",
+        "en": "Octopuses use eight arms to explore, grab, and solve problems cleverly."
+      },
+      "relatedStories": [
+        {
+          "source": "aquarium",
+          "slug": "octopus",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "shark-sense",
+      "source": "aquarium",
+      "difficulty": "medium",
+      "sortOrder": 6,
+      "prompt": {
+        "zhTW": "鯊魚在水中常給人什麼印象？",
+        "en": "What impression do sharks often give in the water?"
+      },
+      "options": [
+        {
+          "id": "strong-swimmer",
+          "text": {
+            "zhTW": "強壯又敏銳的游泳高手",
+            "en": "A strong and alert swimmer"
+          },
+          "sortOrder": 1
+        },
+        {
+          "id": "plant-eater-tree",
+          "text": {
+            "zhTW": "只吃高樹葉的動物",
+            "en": "An animal that only eats tall leaves"
+          },
+          "sortOrder": 2
+        },
+        {
+          "id": "slow-flyer",
+          "text": {
+            "zhTW": "慢慢飛的鳥",
+            "en": "A slow flying bird"
+          },
+          "sortOrder": 3
+        }
+      ],
+      "correctOptionId": "strong-swimmer",
+      "correctFeedback": {
+        "zhTW": "答對了！鯊魚是強壯又敏銳的海中游泳高手。",
+        "en": "Correct! Sharks are strong, alert swimmers."
+      },
+      "incorrectFeedback": {
+        "zhTW": "再想想鯊魚在海裡游動的樣子。",
+        "en": "Think about how sharks move through the sea."
+      },
+      "explanation": {
+        "zhTW": "鯊魚的身體適合游泳，也有敏銳的感覺幫牠探索海洋。",
+        "en": "Sharks are built for swimming and use sharp senses to explore the ocean."
+      },
+      "relatedStories": [
+        {
+          "source": "aquarium",
+          "slug": "shark",
+          "sortOrder": 1
+        }
+      ]
+    }
+  ]
 }

@@ -16,12 +16,16 @@ public partial class Program
             builder.Configuration.GetSection(AquariumCatalogOptions.SectionName));
         builder.Services.Configure<LearningJourneyCatalogOptions>(
             builder.Configuration.GetSection(LearningJourneyCatalogOptions.SectionName));
+        builder.Services.Configure<QuizCatalogOptions>(
+            builder.Configuration.GetSection(QuizCatalogOptions.SectionName));
         builder.Services.AddSingleton<DinosaurContentValidator>();
         builder.Services.AddSingleton<DinosaurCatalogService>();
         builder.Services.AddSingleton<AquariumContentValidator>();
         builder.Services.AddSingleton<AquariumCatalogService>();
         builder.Services.AddSingleton<LearningJourneyContentValidator>();
         builder.Services.AddSingleton<LearningJourneyCatalogService>();
+        builder.Services.AddSingleton<QuizContentValidator>();
+        builder.Services.AddSingleton<QuizCatalogService>();
         builder.Services.AddSingleton<ExplorationCatalogService>();
         builder.Services.AddSingleton<ComparisonCatalogService>();
         builder.Services.AddSingleton<IComparisonCatalogService>(provider =>
