@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using StoryBook.Models;
+using StoryBook.Tests.Support;
 
 namespace StoryBook.Tests.Integration;
 
@@ -197,6 +198,32 @@ public sealed class JourneyPagesTests : IClassFixture<JourneyPageTestFixture>
         Assert.Contains("data-storybook-theme-mode", detailHtml);
         Assert.Contains("data-storybook-effective-theme", detailHtml);
         Assert.DoesNotContain("data-theme-selector", detailHtml, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task Journey_feature_does_not_add_login_external_api_progress_storage_or_journey_story_routes()
+    {
+        string listHtml = await _fixture.GetOkHtmlAsync("/journeys");
+        string detailHtml = await _fixture.GetOkHtmlAsync("/journeys/clever-hunters");
+        string script = File.ReadAllText(Path.Combine(TestPaths.StoryBookRoot, "wwwroot", "js", "journeys.js"));
+
+        Assert.DoesNotContain("type=\"password\"", listHtml, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("login", listHtml, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("fetch(", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("XMLHttpRequest", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("journeyProgress", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("storybook.journey", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("sessionStorage", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("document.cookie", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("data-journey-progress", detailHtml, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("href=\"http", listHtml, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("href=\"http", detailHtml, StringComparison.OrdinalIgnoreCase);
+
+        using HttpResponseMessage journeyStoryRoute = await _fixture.Client.GetAsync("/journeys/story/tyrannosaurus-rex");
+        using HttpResponseMessage nestedStoryRoute = await _fixture.Client.GetAsync("/journeys/clever-hunters/tyrannosaurus-rex");
+
+        Assert.Equal(HttpStatusCode.NotFound, journeyStoryRoute.StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, nestedStoryRoute.StatusCode);
     }
 
     private static string WriteCatalog(params LearningJourney[] journeys)

@@ -34,6 +34,12 @@ dotnet run --project StoryBook/StoryBook.csproj
 6. Activate the entry and confirm the browser navigates to `/journeys`.
 7. Confirm `/journeys` shows at least 3 available learning journeys in the full catalog state.
 
+目前完整 catalog 的代表旅程 slug:
+
+- `gentle-giants`
+- `clever-hunters`
+- `hide-and-protect`
+
 ## 代表性可用性紀錄
 
 用於驗證 SC-001 與 SC-010；可由人工可用性驗收或同等瀏覽器任務紀錄完成。紀錄不可包含兒童個資、帳號、token、secret 或可識別個人的資料。
@@ -65,7 +71,7 @@ dotnet run --project StoryBook/StoryBook.csproj
 
 ## 旅程詳情驗證
 
-1. Open a known available `/journeys/{slug}`.
+1. Open a known available `/journeys/clever-hunters`.
 2. Confirm the page shows journey title, summary, learning goals, suggested reading time, age guidance, story item list, start-reading action, and back-to-list action.
 3. Confirm "開始閱讀" opens the first valid story item in journey order.
 4. Confirm dinosaur story items open `/dinosaurs/{slug}`.
@@ -79,16 +85,16 @@ dotnet run --project StoryBook/StoryBook.csproj
 
 | Route | Attempt | Main Content Available Within 1s? | Measurement Method | Non-sensitive Notes |
 |-------|---------|-----------------------------------|--------------------|---------------------|
-| `/journeys` | 1 | | | |
-| `/journeys` | 2 | | | |
-| `/journeys` | 3 | | | |
-| `/journeys` | 4 | | | |
-| `/journeys` | 5 | | | |
-| `/journeys/{slug}` | 1 | | | |
-| `/journeys/{slug}` | 2 | | | |
-| `/journeys/{slug}` | 3 | | | |
-| `/journeys/{slug}` | 4 | | | |
-| `/journeys/{slug}` | 5 | | | |
+| `/journeys` | 1 | Yes (0.002933s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
+| `/journeys` | 2 | Yes (0.002455s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
+| `/journeys` | 3 | Yes (0.001751s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
+| `/journeys` | 4 | Yes (0.002228s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
+| `/journeys` | 5 | Yes (0.002186s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
+| `/journeys/clever-hunters` | 1 | Yes (0.003155s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
+| `/journeys/clever-hunters` | 2 | Yes (0.002022s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
+| `/journeys/clever-hunters` | 3 | Yes (0.002326s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
+| `/journeys/clever-hunters` | 4 | Yes (0.001791s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
+| `/journeys/clever-hunters` | 5 | Yes (0.002294s) | `curl -w %{time_total}` against local `dotnet run` | Warmed route on `http://127.0.0.1:5059`; no sensitive data |
 
 ## 語言與主題驗證
 
@@ -134,7 +140,7 @@ dotnet run --project StoryBook/StoryBook.csproj
 
 ## 來源失敗驗證
 
-1. Simulate aquarium source unavailable using test fixture or development configuration.
+1. Simulate aquarium source unavailable using `JourneyPageTestFixture.CreateClientWithCatalogPaths(aquariumContentPath: "Data/not-found-aquarium.json")` or equivalent development configuration.
 2. Open `/journeys`.
 3. Confirm journeys that remain complete are visible and a child-friendly partial failure message appears.
 4. Open a journey whose missing source makes it incomplete.
@@ -142,6 +148,12 @@ dotnet run --project StoryBook/StoryBook.csproj
 6. Simulate all sources unavailable.
 7. Confirm `/journeys` shows a child-friendly error state and a home link within 1 second.
 8. Confirm rendered HTML and journey-level logs do not include file paths, exception details, stack traces, internal configuration, secrets, or personal data.
+
+代表性部分來源失敗 fixture:
+
+- Use a temporary `journeys.json` containing one dinosaur-only journey with `tyrannosaurus-rex`, `triceratops`, and `stegosaurus`.
+- Set `AquariumCatalog:ContentPath` to `Data/not-found-aquarium.json`.
+- Expected result: `/journeys` shows the dinosaur-only journey, hides mixed dinosaur/aquarium journeys that no longer have 3 valid items, renders `data-journeys-partial-failure`, and does not expose the missing file name or exception details.
 
 ## 狀態保存驗證
 
@@ -161,3 +173,9 @@ dotnet run --project StoryBook/StoryBook.csproj
 - Journey pages do not add real-time translation; they only use maintained bilingual content and `zh-TW` fallback rules.
 - Journey pages do not add journey progress URL query state, server-side state, cookies, `localStorage`, or `sessionStorage` writes.
 - Story item detail actions remain normal anchors to `/dinosaurs/{slug}` or `/aquarium/{slug}` and do not introduce journey-specific story detail routes.
+
+## Phase 7 驗收紀錄
+
+- 2026-05-30: Local `dotnet run` served `http://127.0.0.1:5059`; `/`, `/explore`, `/journeys`, and `/journeys/clever-hunters` returned `200 OK` with `text/html; charset=utf-8`.
+- 2026-05-30: `dotnet test StoryBook2.sln --no-restore -m:1 -v:minimal` passed 155/155 tests, covering journey route contracts, bilingual attributes, theme selector absence, language script contract, friendly unavailable states, and negative-scope assertions.
+- 2026-05-30: In-app Browser connector was unavailable in this session, so visual browser screenshots were not captured. Responsive, keyboard, focus, 44x44 target, and no-overflow requirements were checked through CSS review plus integration/script contracts.

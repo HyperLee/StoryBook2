@@ -166,13 +166,13 @@ Write these tests first and confirm they fail before implementation.
 
 **Purpose**: Final verification, documentation alignment, and regression checks across the full feature.
 
-- [ ] T059 [P] Update manual validation notes with actual journey slugs and representative source-failure setup in `specs/006-learning-journeys/quickstart.md`
-- [ ] T060 [P] Add final negative-scope assertions for no login, no external APIs, no progress storage, and no journey-specific story routes in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
-- [ ] T061 Record complete-catalog performance verification for `/journeys` and one known `/journeys/{slug}` against SC-011 in `specs/006-learning-journeys/quickstart.md`
-- [ ] T062 Run `dotnet build StoryBook2.sln` and address build warnings or errors in `StoryBook2.sln`
-- [ ] T063 Run `dotnet test StoryBook2.sln` and address failing journey regressions in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
-- [ ] T064 Perform quickstart manual acceptance for `/`, `/explore`, `/journeys`, `/journeys/{slug}`, language, theme, keyboard, responsive, and performance flows documented in `specs/006-learning-journeys/quickstart.md`
-- [ ] T065 Review changed files and ensure generated `bin/` or `obj/` artifacts are not staged by checking paths listed in `StoryBook2.sln`
+- [X] T059 [P] Update manual validation notes with actual journey slugs and representative source-failure setup in `specs/006-learning-journeys/quickstart.md`
+- [X] T060 [P] Add final negative-scope assertions for no login, no external APIs, no progress storage, and no journey-specific story routes in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [X] T061 Record complete-catalog performance verification for `/journeys` and one known `/journeys/{slug}` against SC-011 in `specs/006-learning-journeys/quickstart.md`
+- [X] T062 Run `dotnet build StoryBook2.sln` and address build warnings or errors in `StoryBook2.sln`
+- [X] T063 Run `dotnet test StoryBook2.sln` and address failing journey regressions in `StoryBook.Tests/Integration/JourneyPagesTests.cs`
+- [X] T064 Perform quickstart manual acceptance for `/`, `/explore`, `/journeys`, `/journeys/{slug}`, language, theme, keyboard, responsive, and performance flows documented in `specs/006-learning-journeys/quickstart.md`
+- [X] T065 Review changed files and ensure generated `bin/` or `obj/` artifacts are not staged by checking paths listed in `StoryBook2.sln`
 
 ---
 
