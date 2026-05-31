@@ -25,6 +25,14 @@ $repoRoot = Find-ProjectRoot -StartDir $PSScriptRoot
 if (-not $repoRoot) { $repoRoot = Get-Location }
 Set-Location $repoRoot
 
+$SpecKitStagePaths = @('.specify', 'specs')
+
+function Get-SpecKitStagePaths {
+    param([string]$Root)
+
+    return @($SpecKitStagePaths | Where-Object { Test-Path (Join-Path $Root $_) })
+}
+
 # Read commit message from extension config, fall back to default
 $commitMsg = "[Spec Kit] Initial commit"
 $configFile = Join-Path $repoRoot ".specify/extensions/git/git-config.yml"
@@ -57,10 +65,16 @@ try {
 try {
     $out = git init -q 2>&1 | Out-String
     if ($LASTEXITCODE -ne 0) { throw "git init failed: $out" }
-    $out = git add . 2>&1 | Out-String
-    if ($LASTEXITCODE -ne 0) { throw "git add failed: $out" }
-    $out = git commit --allow-empty -q -m $commitMsg 2>&1 | Out-String
-    if ($LASTEXITCODE -ne 0) { throw "git commit failed: $out" }
+    $stagePaths = @(Get-SpecKitStagePaths -Root $repoRoot)
+    if ($stagePaths.Count -gt 0) {
+        $out = git add -- @stagePaths 2>&1 | Out-String
+        if ($LASTEXITCODE -ne 0) { throw "git add failed: $out" }
+        $out = git commit --allow-empty -q -m $commitMsg -- @stagePaths 2>&1 | Out-String
+        if ($LASTEXITCODE -ne 0) { throw "git commit failed: $out" }
+    } else {
+        $out = git commit --allow-empty -q -m $commitMsg 2>&1 | Out-String
+        if ($LASTEXITCODE -ne 0) { throw "git commit failed: $out" }
+    }
 } catch {
     Write-Warning "[specify] Error: $_"
     exit 1

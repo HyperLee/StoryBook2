@@ -30,6 +30,34 @@ $repoRoot = Find-ProjectRoot -StartDir $PSScriptRoot
 if (-not $repoRoot) { $repoRoot = Get-Location }
 Set-Location $repoRoot
 
+$SpecKitStagePaths = @('.specify', 'specs')
+
+function Get-SpecKitStagePaths {
+    param([string]$Root)
+
+    return @($SpecKitStagePaths | Where-Object { Test-Path (Join-Path $Root $_) })
+}
+
+function Test-SpecKitChanges {
+    param([string[]]$StagePaths)
+
+    if (-not $StagePaths -or $StagePaths.Count -eq 0) {
+        return $false
+    }
+
+    $savedEAP = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        git diff --quiet -- @StagePaths 2>$null; $workTreeStatus = $LASTEXITCODE
+        git diff --cached --quiet -- @StagePaths 2>$null; $cachedStatus = $LASTEXITCODE
+        $untracked = git ls-files --others --exclude-standard -- @StagePaths 2>$null
+    } finally {
+        $ErrorActionPreference = $savedEAP
+    }
+
+    return $workTreeStatus -ne 0 -or $cachedStatus -ne 0 -or [bool]$untracked
+}
+
 # Check if git is available
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
     Write-Warning "[specify] Warning: Git not found; skipped auto-commit"
@@ -123,20 +151,10 @@ if (-not $enabled) {
     exit 0
 }
 
-# Check if there are changes to commit
-# Relax ErrorActionPreference so CRLF warnings on stderr do not terminate.
-$savedEAP = $ErrorActionPreference
-$ErrorActionPreference = 'Continue'
-try {
-    git diff --quiet HEAD 2>$null; $d1 = $LASTEXITCODE
-    git diff --cached --quiet 2>$null; $d2 = $LASTEXITCODE
-    $untracked = git ls-files --others --exclude-standard 2>$null
-} finally {
-    $ErrorActionPreference = $savedEAP
-}
-
-if ($d1 -eq 0 -and $d2 -eq 0 -and -not $untracked) {
-    Write-Host "[specify] No changes to commit after $EventName" -ForegroundColor DarkGray
+# Check if there are Spec Kit-owned changes to commit.
+$stagePaths = @(Get-SpecKitStagePaths -Root $repoRoot)
+if (-not (Test-SpecKitChanges -StagePaths $stagePaths)) {
+    Write-Host "[specify] No Spec Kit changes to commit after $EventName" -ForegroundColor DarkGray
     exit 0
 }
 
@@ -155,9 +173,9 @@ if (-not $commitMsg) {
 $savedEAP = $ErrorActionPreference
 $ErrorActionPreference = 'Continue'
 try {
-    $out = git add . 2>&1 | Out-String
+    $out = git add -- @stagePaths 2>&1 | Out-String
     if ($LASTEXITCODE -ne 0) { throw "git add failed: $out" }
-    $out = git commit -q -m $commitMsg 2>&1 | Out-String
+    $out = git commit -q -m $commitMsg -- @stagePaths 2>&1 | Out-String
     if ($LASTEXITCODE -ne 0) { throw "git commit failed: $out" }
 } catch {
     Write-Warning "[specify] Error: $_"

@@ -24,6 +24,20 @@ _find_project_root() {
 REPO_ROOT=$(_find_project_root "$SCRIPT_DIR") || REPO_ROOT="$(pwd)"
 cd "$REPO_ROOT"
 
+SPEC_KIT_STAGE_PATHS=(".specify" "specs")
+STAGE_PATHS=()
+
+_collect_spec_kit_stage_paths() {
+    local _path
+    STAGE_PATHS=()
+
+    for _path in "${SPEC_KIT_STAGE_PATHS[@]}"; do
+        if [ -e "$REPO_ROOT/$_path" ]; then
+            STAGE_PATHS+=("$_path")
+        fi
+    done
+}
+
 # Read commit message from extension config, fall back to default
 COMMIT_MSG="[Spec Kit] Initial commit"
 _config_file="$REPO_ROOT/.specify/extensions/git/git-config.yml"
@@ -48,7 +62,12 @@ fi
 
 # Initialize
 _git_out=$(git init -q 2>&1) || { echo "[specify] Error: git init failed: $_git_out" >&2; exit 1; }
-_git_out=$(git add . 2>&1) || { echo "[specify] Error: git add failed: $_git_out" >&2; exit 1; }
-_git_out=$(git commit --allow-empty -q -m "$COMMIT_MSG" 2>&1) || { echo "[specify] Error: git commit failed: $_git_out" >&2; exit 1; }
+_collect_spec_kit_stage_paths
+if [ "${#STAGE_PATHS[@]}" -gt 0 ]; then
+    _git_out=$(git add -- "${STAGE_PATHS[@]}" 2>&1) || { echo "[specify] Error: git add failed: $_git_out" >&2; exit 1; }
+    _git_out=$(git commit --allow-empty -q -m "$COMMIT_MSG" -- "${STAGE_PATHS[@]}" 2>&1) || { echo "[specify] Error: git commit failed: $_git_out" >&2; exit 1; }
+else
+    _git_out=$(git commit --allow-empty -q -m "$COMMIT_MSG" 2>&1) || { echo "[specify] Error: git commit failed: $_git_out" >&2; exit 1; }
+fi
 
 echo "✓ Git repository initialized" >&2

@@ -31,6 +31,40 @@ _find_project_root() {
 REPO_ROOT=$(_find_project_root "$SCRIPT_DIR") || REPO_ROOT="$(pwd)"
 cd "$REPO_ROOT"
 
+SPEC_KIT_STAGE_PATHS=(".specify" "specs")
+STAGE_PATHS=()
+
+_collect_spec_kit_stage_paths() {
+    local _path
+    STAGE_PATHS=()
+
+    for _path in "${SPEC_KIT_STAGE_PATHS[@]}"; do
+        if [ -e "$REPO_ROOT/$_path" ]; then
+            STAGE_PATHS+=("$_path")
+        fi
+    done
+}
+
+_has_spec_kit_changes() {
+    if [ "${#STAGE_PATHS[@]}" -eq 0 ]; then
+        return 1
+    fi
+
+    if ! git diff --quiet -- "${STAGE_PATHS[@]}" 2>/dev/null; then
+        return 0
+    fi
+
+    if ! git diff --cached --quiet -- "${STAGE_PATHS[@]}" 2>/dev/null; then
+        return 0
+    fi
+
+    if [ -n "$(git ls-files --others --exclude-standard -- "${STAGE_PATHS[@]}" 2>/dev/null)" ]; then
+        return 0
+    fi
+
+    return 1
+}
+
 # Check if git is available
 if ! command -v git >/dev/null 2>&1; then
     echo "[specify] Warning: Git not found; skipped auto-commit" >&2
@@ -117,9 +151,10 @@ if [ "$_enabled" != "true" ]; then
     exit 0
 fi
 
-# Check if there are changes to commit
-if git diff --quiet HEAD 2>/dev/null && git diff --cached --quiet 2>/dev/null && [ -z "$(git ls-files --others --exclude-standard 2>/dev/null)" ]; then
-    echo "[specify] No changes to commit after $EVENT_NAME" >&2
+# Check if there are Spec Kit-owned changes to commit.
+_collect_spec_kit_stage_paths
+if ! _has_spec_kit_changes; then
+    echo "[specify] No Spec Kit changes to commit after $EVENT_NAME" >&2
     exit 0
 fi
 
@@ -133,8 +168,8 @@ if [ -z "$_commit_msg" ]; then
     _commit_msg="[Spec Kit] Auto-commit ${_phase} ${_command_name}"
 fi
 
-# Stage and commit
-_git_out=$(git add . 2>&1) || { echo "[specify] Error: git add failed: $_git_out" >&2; exit 1; }
-_git_out=$(git commit -q -m "$_commit_msg" 2>&1) || { echo "[specify] Error: git commit failed: $_git_out" >&2; exit 1; }
+# Stage and commit only Spec Kit-owned paths.
+_git_out=$(git add -- "${STAGE_PATHS[@]}" 2>&1) || { echo "[specify] Error: git add failed: $_git_out" >&2; exit 1; }
+_git_out=$(git commit -q -m "$_commit_msg" -- "${STAGE_PATHS[@]}" 2>&1) || { echo "[specify] Error: git commit failed: $_git_out" >&2; exit 1; }
 
 echo "[OK] Changes committed ${_phase} ${_command_name}" >&2

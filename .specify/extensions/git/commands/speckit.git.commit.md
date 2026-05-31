@@ -4,7 +4,7 @@ description: "Auto-commit changes after a Spec Kit command completes"
 
 # Auto-Commit Changes
 
-Automatically stage and commit all changes after a Spec Kit command completes.
+Automatically stage and commit Spec Kit-owned changes after a Spec Kit command completes.
 
 ## Behavior
 
@@ -15,7 +15,7 @@ This command is invoked as a hook after (or before) core commands. It:
 3. Looks up the specific event key to see if auto-commit is enabled
 4. Falls back to `auto_commit.default` if no event-specific key exists
 5. Uses the per-command `message` if configured, otherwise a default message
-6. If enabled and there are uncommitted changes, runs `git add .` + `git commit`
+6. If enabled and there are changes under Spec Kit-owned paths such as `.specify/` or `specs/`, runs scoped staging and commit commands for only those paths
 
 ## Execution
 
