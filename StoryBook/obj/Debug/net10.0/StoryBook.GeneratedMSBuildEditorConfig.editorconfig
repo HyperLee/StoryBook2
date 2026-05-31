@@ -54,8 +54,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/qiuzili/StoryBook2/StoryBook/Pages/Journeys/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSm91cm5leXMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/qiuzili/StoryBook2/StoryBook/Pages/Journeys/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSm91cm5leXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/qiuzili/StoryBook2/StoryBook/Pages/Passport/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGFzc3BvcnQvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/qiuzili/StoryBook2/StoryBook/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/qiuzili/StoryBook2/StoryBook/Pages/Quiz/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUXVpei9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/qiuzili/StoryBook2/StoryBook/Pages/Shared/_ValidationScriptsPartial.cshtml]
